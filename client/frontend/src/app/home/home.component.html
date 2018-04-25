@@ -1,0 +1,502 @@
+<section class="banner">
+  <div class="loading text-center" *ngIf="slideLoading">
+    <div class="row">
+      <div class="col-sm-12">
+        <i class="fa fa-spinner fa-pulse fa-3x"></i>
+      </div>
+      <!--/.col-->
+    </div>
+  </div>
+  <div *ngIf="!slideLoading">
+    <carousel [interval]="myInterval" [noWrap]="noWrapSlides" *ngIf="banner?.length > 0">
+      <slide *ngFor="let slidez of banner | orderBy:'order':'asc'">
+        <img [src]="'../..'+slidez.imageUrl" style="margin:auto;" class="img-responsive">
+      </slide>
+    </carousel>
+  </div>
+</section>
+
+<app-search></app-search>
+<div class="container">
+  <!--.hotPosition-->
+  <section class="hotPosition">
+    <div class="header">
+      <div class="row">
+        <div class="col-sm-9 col-xs-8 headerLeft">
+          <h4>
+            <i class="fa fa-navicon"></i> {{'article.hot_position' | translate}}
+          </h4>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-3 col-xs-4 text-right headerRight">
+          <a [routerLink]="['/position-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'position.show_more_position'
+            | translate}}</a>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <div class="hotPositionContent">
+      <div class="loading text-center" *ngIf="positionLoading">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotPositionContentList" *ngIf="!positionLoading">
+        <div class="noPosition text-center" *ngIf="hotPosition.length === 0">
+          <img src="../../assets/img/no_position.png">
+          {{'message.company_no_publish_positions' | translate}}
+        </div>
+        <div [hidden]="hotPosition.length < 0" class="List text-center pull-left"
+             *ngFor="let item of hotPosition;let i = index;">
+          <img src="../../assets/img/JobInvitation.png" *ngIf="item.isJobInvitation" class="JobInvitation">
+          <a [routerLink]="['/positions',item.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+            <fieldset>
+              <div *ngIf="item.company?.icon !== null" class="imgContent">
+                <img class="vip-icon img-responsive JobInvitation imgWidth" src="../../assets/img/featured.png"
+                     *ngIf="item.company?.isVIP"/>
+                <img [src]="item.company?.icon?.url['100']" class="img-responsive Img">
+              </div>
+              <div *ngIf="item.company?.icon === null" class="imgContent">
+                <img class="vip-icon img-responsive JobInvitation imgWidth" src="../../assets/img/featured.png"
+                     *ngIf="item.company?.isVIP"/>
+                <img src="../../assets/img/default_company_icon.png" class="img-responsive">
+              </div>
+            </fieldset>
+            <h4 class="positionName">
+              {{item.name}}
+            </h4>
+            <ul class="list-inline detail text-left">
+              <li>
+                <p>
+                  <i class="fa fa-star-half-full"></i>
+                  {{item.experience}} {{'global.year' | translate}}
+                </p>
+                <p *ngIf="item.maxSalary > 0">
+                  <i class="fa fa-dollar"></i>
+                  {{item.minSalary/1000}}K - {{item.maxSalary/1000}}K
+                </p>
+                <p *ngIf="item.minSalary === 0 && item.maxSalary === 0">
+                  <i class="fa fa-dollar"></i>
+                  {{'position.negotiation' | translate}}
+                </p>
+              </li>
+              <li>
+                <p>
+                  <i class="fa fa-suitcase"></i>
+                  {{item.type}}
+                </p>
+                <p>
+                  <i class="fa fa-graduation-cap"></i>
+                  {{item?.educationLevel?.name}}
+                </p>
+              </li>
+            </ul>
+          </a>
+        </div>
+        <div class="clearfix"></div>
+        <p class="showMore text-center" *ngIf="hotPosition.length > 0 && !positionLoading">
+          <a [routerLink]="['/position-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+             class="btn btn-success">
+            {{'position.show_more_position' | translate}}
+          </a>
+        </p>
+      </div>
+    </div>
+
+  </section>
+  <!--.hotPosition-->
+
+  <!--Article-->
+  <section class="hotDiscuss">
+    <div class="header">
+      <div class="row">
+        <div class="col-sm-3 col-xs-12 headerLeft">
+          <h4>
+            <i class="fa fa-star"></i> {{'article.position_article' | translate}}
+          </h4>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-9 col-xs-12 headerRight">
+          <ul class="list-inline">
+            <li *ngFor="let tab of articleTabs" (click)="changeTab('hotArticle',tab.id)"
+                [ngClass]="{'active': tab.id === hotArticleIndex}">
+              {{tab.name | translate}}
+            </li>
+          </ul>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+
+    <div class="hotDiscussContent">
+      <div class="loading text-center" *ngIf="articleLoading">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <!--/.col-->
+        </div>
+      </div>
+
+      <div class="noPosition text-center" *ngIf="!articleLoading && article.length === 0">
+        <img src="../../assets/img/no_position.png" alt="">
+        {{'message.company_no_publish_articles' | translate}}
+      </div>
+
+      <div class="articleContent row" *ngIf="!articleLoading && article.length > 0">
+        <div class="col-md-7 col-sm-12 col-xs-12 articleLeft">
+          <div class="img">
+            <a [routerLink]="['/articles',featuredArticle?.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+               class="image"
+               [ngStyle]="{'background-image': 'url('+ featuredArticle?.cover?.url['1024']+')'}"
+               *ngIf="featuredArticle?.cover !== null">
+            </a>
+
+            <a [routerLink]="['/articles',featuredArticle?.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+               class="image"
+               style="background-image: url('../../assets/img/650x420.png')"
+               *ngIf="featuredArticle?.cover === null">
+            </a>
+
+            <p class="title">
+              <a [routerLink]="['/articles',featuredArticle?.id]" pageScroll href="#awesomePart"
+                 [pageScrollDuration]="0">{{featuredArticle?.title}}</a>
+            </p>
+          </div>
+        </div>
+        <!--/.col-->
+        <div class="col-md-5 col-sm-12 col-xs-12 articleRight">
+          <ul class="list-unstyled">
+            <li class="row mainList" *ngFor="let item of article">
+              <div class="col-md-5 col-sm-4 col-xs-4 img">
+
+                <a [routerLink]="['/articles',item.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+                   [ngStyle]="{'background-image': 'url(' + item?.cover?.url['240'] + ')'}"
+                   *ngIf="item?.cover !== null">
+                </a>
+
+                <a [routerLink]="['/articles',item.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+                   class="image"
+                   style="background-image: url('../../assets/img/240x160.png')"
+                   *ngIf="item?.cover === null">
+                </a>
+
+              </div>
+              <!--/.col-->
+              <div class="col-md-7 col-sm-8 col-xs-8 content">
+                <h5>
+                  <a [routerLink]="['/articles',item.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                    {{item.title}}
+                  </a>
+                </h5>
+                <p class="text">
+                  <a [routerLink]="['/articles',item.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                    {{item.content | htmlToPlaintext: 20}} <span *ngIf="item.content.length > 20">...</span>
+                  </a>
+                </p>
+                <ul class="tag list-inline">
+                  <li *ngFor="let tag of item?.tags; let i = index;">
+                    <span (click)="searchArticle(tag.name)" *ngIf="i < 3">{{tag.name}}</span>
+                  </li>
+                </ul>
+              </div>
+              <!--/.col-->
+            </li>
+          </ul>
+        </div>
+        <!--/.col-->
+      </div>
+      <p class="showMore text-center" *ngIf="!articleLoading && article.length > 0">
+        <a [routerLink]="['/article-list','2']" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+           class="btn btn-success">{{'article.moreInfo' | translate}}</a>
+      </p>
+    </div>
+
+  </section>
+  <!--Article-->
+
+
+  <!--activity-->
+  <section class="hotActive">
+    <div class="header">
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <h4>
+            <i class="fa fa-cart-plus"></i> {{'article.hot_active'| translate}}
+          </h4>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-9 col-xs-12">
+          <ul class="list-inline">
+            <li *ngFor="let tab of activityTabs" (click)="changeTab('hotActivity',tab.id)"
+                [ngClass]="{'active': tab.id === hotActivityIndex}">
+              {{tab.name | translate}}
+            </li>
+          </ul>
+
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+
+    <article class="hotActiveContent clearfix">
+      <div class="loading text-center" *ngIf="activityLoading">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <!--/.col-->
+        </div>
+      </div>
+      <div class="noPosition text-center" *ngIf="!activityLoading && activity.length === 0">
+        <img src="../../assets/img/no_position.png">
+        {{'message.company_no_publish_activity' | translate}}
+      </div>
+
+      <div class="articleContent row" *ngIf="!activityLoading && activity.length > 0">
+        <div class="col-md-7 col-sm-12 col-xs-12 activityLeft">
+          <div class="activityImg">
+            <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+              <slide *ngFor="let list of featuredActivity; let index=index">
+                <div [routerLink]="['/activity',list.id]">
+                  <img [src]="list?.cover?.url['1024']" *ngIf="list?.cover!==null">
+                  <img src="https://placehold.it/650x420" class="img-responsive" *ngIf="list?.cover===null">
+                  <a pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                    <span class="textTitle">{{list?.title | htmlToPlaintext: 40}}</span>
+                    <p class="textModel"></p>
+                  </a>
+                </div>
+              </slide>
+            </carousel>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-12 col-xs-12  activityRight">
+          <div class="interlocutionContenRight">
+            <h4 class="title">{{'activity.hot_activity' | translate}}</h4>
+            <div class="list" *ngFor="let list of activity">
+              <a [routerLink]="['/activity',list.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                <i class="icon-pillar pull-left"></i>
+                <p class=" activityTitle">
+                  {{list.title | htmlToPlaintext : 40}}
+                </p>
+                <p class="activityTime" [innerHtml]="list.content | htmlToPlaintext: 80">
+                </p>
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <p class="showMore col-xs-12 text-center" *ngIf="!activityLoading && activity.length > 0">
+          <a [routerLink]="['/activity-list','8']" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+             class="btn btn-success">{{'activity.moreInfo' | translate}}</a>
+        </p>
+      </div>
+    </article>
+  </section>
+  <!--activity-->
+
+  <!--<QA>-->
+  <section class="hotActive">
+    <!--header-->
+    <div class="header">
+      <div class="row">
+        <div class="col-sm-3 col-xs-8 headerLeft">
+          <h4>
+            <i class="fa fa-comments"></i>
+            {{'article.position_qa' | translate}}
+          </h4>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-9 col-xs-12">
+          <ul class="list-inline">
+            <li *ngFor="let tab of qATabs" (click)="changeTab('hotQA',tab.id)"
+                [ngClass]="{'active': tab.id === hotQAIndex}">
+              {{tab.name | translate}}
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <!--header-->
+
+    <article class="hotActiveContent clearfix">
+      <div class="col-md-12 col-sm-12 col-xs-12 interlocutionContentListLeft" style="border: none;padding: 0">
+        <!--/.col-->
+        <div class="loading text-center" *ngIf="qaLoading">
+          <div class="row">
+            <div class="col-sm-12">
+              <i class="fa fa-spinner fa-pulse fa-3x"></i>
+            </div>
+
+          </div>
+        </div>
+        <!--/.col-->
+        <!--/.col-->
+        <div class="noPosition text-center" *ngIf="!qaLoading && qa.length === 0">
+          <img src="../../assets/img/no_position.png">
+          {{'message.company_no_publish_qa' | translate}}
+        </div>
+        <!--/.col-->
+
+        <div *ngIf="qa.length > 0 && !qaLoading">
+          <div class="replyList" *ngFor="let list of qa">
+            <div class="media">
+              <div class="media-left">
+                <img *ngIf="list?.user?.icon !== null" [src]="list?.user?.icon?.url['100']"
+                     class="img-circle pull-left user_icon" width="44" height="44">
+                <img *ngIf="list?.user?.icon === null" src="../../assets/img/user_default_icon.png"
+                     class="img-circle pull-left user_icon" width="44" height="44"/>
+              </div>
+              <div class="media-body">
+                    <span class="media-heading nameContent" (mouseenter)="showUser(list?.user?.id)">
+                      <span class="name">{{list?.user?.firstName}}</span>
+                      <span class="companyName" *ngIf="list?.user?.companies[0]?.name !== undefined">from&nbsp; {{list?.user?.companies[0]?.name}}</span>
+                       <div class="user_card_float">
+                                  <div class="user_card_float_box">
+                                      <p class="pull-left">
+                                        <img *ngIf="list?.user?.icon !== null" [src]="list?.user?.icon?.url['200']"
+                                             class="img-circle pull-left user_icon" width="44" height="44">
+                                        <img *ngIf="list?.user?.icon === null"
+                                             src="../../assets/img/user_default_icon.png"
+                                             class="img-circle pull-left user_icon" width="44" height="44"/>
+                                      </p>
+                                      <p class="userinfo_base">{{list?.user?.firstName}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name !== undefined">{{list?.user?.companies[0]?.name}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name === undefined">{{'article.no_application_to_join_the_company_msg' | translate}}</p>
+                                      <p class="userinfo_intro" *ngIf="list?.user?.selfDescription !== null">{{list?.user?.selfDescription | htmlToPlaintext : 20}}</p>
+                                      <p class="userinfo_intro"
+                                         *ngIf="list?.user?.selfDescription === null">{{'article.no_personal_introduction' | translate}}</p>
+
+                                       <ul class="list-unstyled  user_problem">
+                                        <li class="text-center col-xs-4 item">
+                                          {{articleNumber}}<br/>
+                                          <span class="article_text">{{'global.articles' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{qaNumber}}<br/>
+                                          <span class="article_text">{{'article.q_and_a' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{commentsNumber}}<br/>
+                                          <span class="article_text">{{'article.reply' | translate}}</span>
+                                        </li>
+                                      </ul>
+                                      <span class="deck_in"><em></em></span>
+                                  </div>
+                       </div>
+                    </span>
+                <h4 class="issueTitle" [routerLink]="['/interlocution',list?.id]" pageScroll href="#awesomePart"
+                    [pageScrollDuration]="0">{{list?.title}}</h4>
+                <ul class="tags list-inline">
+                  <li class="tag" *ngFor="let tag of list?.tags"><span>{{tag?.name}}</span></li>
+                </ul>
+
+                <p class="textContent" [routerLink]="['/interlocution',list?.id]" pageScroll href="#awesomePart"
+                   [pageScrollDuration]="0" [innerHtml]="list?.content | htmlToPlaintext: 200">
+                  <span *ngIf="list?.content.length > 200">...</span>
+                </p>
+                <span class="pull-right likes" [routerLink]="['/interlocution',list?.id]" pageScroll href="#awesomePart"
+                      [pageScrollDuration]="0">{{'article.comment' | translate}} ({{list?.totalComment}})</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="showMore text-center" *ngIf="!qaLoading && qa.length > 0">
+          <a [routerLink]="['/qa-list','12']" class="btn btn-success" pageScroll href="#awesomePart"
+             [pageScrollDuration]="0">{{'article.moreQa' | translate}}</a>
+        </p>
+
+      </div>
+    </article>
+  </section>
+  <!--<QA>-->
+
+
+  <!--partner-->
+  <div class="cooperation">
+    <div class="row text-center cooperationTitle">
+      <a href="javascript:;"><span class="col-md-4 col-xs-12 col-sm-4" (click)="active =1"
+                                   [ngClass]="{'active':active===1}">{{'article.home_bot_title2'| translate}}
+        <i class="left"></i></span>
+      </a>
+      <a href="javascript:;"><span class="col-md-4 col-xs-12 col-sm-4" (click)="active = 2"
+                                   [ngClass]="{'active': active === 2}">{{'article.home_bot_title'| translate}}
+        <i class="left"></i></span>
+      </a>
+      <a href="javascript:;"><span class="col-md-4 col-xs-12 col-sm-4" (click)="active = 3"
+                                   [ngClass]="{'active': active === 3}">{{'article.home_bot_title1'| translate}}
+        <i class="left"></i></span>
+      </a>
+    </div>
+    <tabset>
+      <tab [active]="active===1">
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg1.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg2.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg4.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg7.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg8.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg9.png" class="img-responsive"></li>
+        </ul>
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg10.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg11.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg13.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg14.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg15.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg19.png" class="img-responsive"></li>
+        </ul>
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg20.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg21.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg22.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg25.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg30.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg29.png" class="img-responsive"></li>
+        </ul>
+      </tab>
+      <tab [active]="active===2">
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg32.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg33.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg23.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg35.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg37.png" class="img-responsive"></li>
+        </ul>
+      </tab>
+      <tab [active]="active===3">
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti1.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti2.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti3.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti4.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti5.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti6.png" class="img-responsive">
+          </li>
+        </ul>
+        <ul class="row list-inline">
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homeimg32.png" class="img-responsive"></li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti8.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti9.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti10.png" class="img-responsive">
+          </li>
+          <li class="col-sm-2 col-xs-4"><img src="../../assets/img/homemeiti12.png" class="img-responsive">
+          </li>
+        </ul>
+      </tab>
+    </tabset>
+  </div>
+  <!--partner-->
+
+</div>

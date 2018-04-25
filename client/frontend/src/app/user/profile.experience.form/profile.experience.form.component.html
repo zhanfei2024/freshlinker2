@@ -1,0 +1,128 @@
+<div class="dialog">
+  <div class="container">
+    <div class="row">
+       <div class="col-xs-10 clearFloat">
+         <form class="form-horizontal expect"  #PostForm="ngForm" name="Form" (ngSubmit)="save()">
+           <div class="modal-header">
+             <button type="button" class="close" aria-label="Close" [routerLink]="['/user','profile']" (click)="dp.closeCalendar(); dp1.closeCalendar(); $event.stopPropagation()"><span aria-hidden="true">&times;</span>
+             </button>
+             <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i>{{ 'user.profile.experience' | translate }}</h4>
+           </div>
+           <div class="modal-body">
+             <div class="row">
+               <div class="col-md-10 clearFloat">
+
+                 <div class="form-group">
+                   <label for="companyName" class="col-sm-2 col-xs-12 control-label"><span class="text-danger">*</span>{{'user.profile.experience_company_name'
+                     | translate}}:</label>
+                   <!--/.col-->
+                   <div class="col-sm-10 col-xs-12">
+                     <input type="text" class="form-control" required
+                            name="companyName" id="companyName" [(ngModel)]="experience.companyName"
+                            placeholder="{{'user.profile.experience_company_name_input' | translate}}">
+                   </div>
+                   <!--/.col-->
+                 </div>
+                 <!-- /.form-group -->
+
+
+                 <div class="form-group">
+                   <label for="experienceTitle" class="col-sm-2 col-xs-12 control-label"><span class="text-danger">*</span>{{'position.positions' |
+                     translate}}:</label>
+
+                   <!--/.col-->
+                   <div class="col-sm-10 col-xs-12">
+                     <input type="text" id="experienceTitle" name="experienceTitle" [(ngModel)]="experience.title" required
+                            class="form-control"
+                            placeholder="{{'message.position_name_input' | translate}}">
+                   </div>
+                   <!--/.col-->
+                 </div>
+                 <!-- /.form-group -->
+
+                 <div class="form-group">
+                   <label class="col-sm-2 col-xs-12 control-label">{{'user.profile.experience_time' | translate}}:</label>
+                   <div class="col-sm-4 experienceTime">
+                     <div class="input-group">
+                       <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker
+                              name="startedDate"
+                              disabled
+                              [(ngModel)]="experience.startedDate" [options]="myOptions" #dp="ngx-mydatepicker"
+                              (dateChanged)="onDateChanged($event,'awards')"/>
+                       <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" style="padding: 6px 20px;"  (click)="dp.toggleCalendar()">
+                              <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                     </div>
+                   </div>
+                   <div class="experienceTo hidden-xs">{{'global.to' | translate}}</div>
+                   <div class="col-sm-4 experienceTime">
+                     <div class="input-group">
+                       <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker
+                              name="endedDate"
+                              disabled
+                              [(ngModel)]="experience.endedDate" [options]="myOptions" #dp1="ngx-mydatepicker"
+                              (dateChanged)="onDateChanged($event,'awards')"/>
+                       <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" style="padding: 6px 20px;"  (click)="dp1.toggleCalendar()">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                     </div>
+                   </div>
+                   <div class="toDate">
+                     <label for="toDate">
+                       <input type="checkbox" value="toDate" name="toDate" id="toDate" [(ngModel)]="toDate">
+                       {{'global.toDate' | translate}}
+                     </label>
+                   </div>
+                   <div class="tips col-xs-12 col-sm-10 col-sm-offset-2">
+                     {{'global.tips' | translate}}: {{'position.date' | translate}}
+                   </div>
+                 </div>
+                 <!--/.col-->
+                 <!--/.form-group -->
+
+                 <div class="form-group">
+                   <label for="description" class="col-sm-2 col-xs-12 control-label"><span class="text-danger">*</span>{{'user.profile.experience_description'
+                     | translate}}:</label>
+                   <!--/.col-->
+                   <div class="col-sm-10 col-xs-12">
+              <textarea style="width: 100%;height: 250px;" id="description" name="description" required
+                        [(ngModel)]="experience.description">
+
+              </textarea>
+                   </div>
+                   <div class="tips col-xs-12 text-right">
+                     {{'message.text_input_255_words_message' | translate}}
+                   </div>
+                   <!--/.col-->
+                 </div>
+                 <!-- /.form-group -->
+
+
+               </div>
+               <!-- /.col -->
+             </div>
+             <!-- /.row -->
+           </div>
+           <!-- /.model-body -->
+
+           <div class="modal-footer">
+             <button type="submit" class="btn btn-success" [disabled]="!PostForm.form.valid || saveLoading">
+               <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+               <span *ngIf="!saveLoading">{{ 'button.save' | translate }}</span>
+             </button>
+           </div>
+           <!-- /.model-footer -->
+         </form>
+
+       </div>
+    </div>
+
+  </div>
+
+</div>
+
+

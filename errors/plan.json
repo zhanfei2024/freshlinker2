@@ -1,0 +1,12 @@
+{
+  "disallowRepeatBuy": {
+    "statusCode": 400,
+    "message": "Do not allow to buy twice.",
+    "code": 40021
+  },
+  "chooseEffectivePlan": {
+    "statusCode": 400,
+    "message": "Please choose an effective plan.",
+    "code": 40022
+  }
+}

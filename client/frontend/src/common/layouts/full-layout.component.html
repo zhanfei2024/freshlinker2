@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<iToaster></iToaster>
+<router-outlet></router-outlet>
+<!--.brokeNew-->
+<div class="brokeNew">
+  <ul class="list-unstyled">
+    <li class="brokeNewBox">
+      <a href="https://docs.google.com/forms/d/1pGL-S0JvoZ-sB2_ATUAoYzZtPKgxuzmVshFFFMH1eO0/viewform?edit_requested=true" target=_blank>
+        <i></i>
+        <p><span>{{'article.brokeNew' | translate}}</span></p>
+      </a>
+    </li>
+    <li class="brokeNewBox">
+      <a pageScroll href="#awesomePart" [pageScrollDuration]="800">
+        <i class="icon-top"></i>
+        <p><span>TOP</span></p>
+      </a>
+    </li>
+  </ul>
+</div>
+<app-root *ngIf="isLogin"></app-root>
+
+<!--/.brokeNew-->
+<app-footer></app-footer>
+

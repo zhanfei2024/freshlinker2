@@ -1,0 +1,10 @@
+<div class="row">
+    <ol class="breadcrumb col-sm-12" id="awesomePart">
+        <li *ngFor="let item of breadcrumb">
+            <span *ngIf="item.router !== null">
+                <a routerLink="{{item.router}}">{{ item.title | translate}}</a>
+            </span>
+            <span *ngIf="item.router === null">{{ item.title }}</span>
+        </li>
+    </ol>
+</div>

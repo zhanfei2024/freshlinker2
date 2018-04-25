@@ -1,0 +1,50 @@
+
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <div class="row companyPicture">
+    <div class="col-md-3 col-sm-12 col-xs-12 companyPictureLeft">
+      <div class="content">
+        <div class="button">
+          <a  (click)="uploadFiles()" class="btn btn-success canel">{{'button.save' | translate}}</a>
+        </div>
+        <div class="button">
+          <a [routerLink]="['/company',companyId,'dashboard']" type="button" class="btn btn-default canel" >
+            {{'enterprise.dashboard' | translate}}
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <div class="col-md-9 col-sm-12 col-xs-12 companyPictureRight">
+      <div class="loading text-center" *ngIf="pictureLoading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!pictureLoading">
+        <div class="col-sm-3 col-xs-6 list" *ngFor="let picture of pictures">
+          <div class="listBg">
+            <a ng-click="openLightboxModal($index)">
+              <img [src]="picture.url['200']" alt="" class="img-responsive">
+            </a>
+            <span class="remove" (click)="deletePicture(picture.id)">
+                          <i class="fa fa-close"></i>
+                        </span>
+          </div>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-3 col-xs-6 upload">
+          <div class="text-left">
+            <button >
+              <input type="file" ng2FileSelect [uploader]="uploader" class="uploaderFile"/>
+              <p>{{filesName}}</p>
+              <i class="fa fa-plus fa-3x"></i>
+              {{'enterprise.upload_picture' | translate}}
+            </button>
+          </div>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

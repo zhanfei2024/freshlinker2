@@ -1,0 +1,1148 @@
+.uploader{
+  position: relative;
+  .file{
+    position: absolute;
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+  }
+}
+.dateActive{
+  display: block!important;
+}
+hr.userHr {
+  margin: 0;
+  border-bottom: 2px solid #eeeeee;
+  border-top: 0;
+}
+
+// userPositions
+div.userPositions,
+div.userBookmarks,
+div.userDashboard,
+div.userJobOffer {
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+  background-color: #fbfbfb;
+  div.userPositionsLeft,
+  div.userBookmarksLeft,
+  div.userJobOfferLeft {
+    padding: 0;
+    ul.editList {
+      border-bottom: 1px solid $gray-light-2x;
+      padding: 20px 0;
+      li.list {
+        text-align: center;
+        padding: 15px 0;
+        position: relative;
+        a {
+          color: $brand-danger;
+        }
+      }
+
+      li.active {
+        a {
+          color: $brand-success;
+        }
+      }
+
+      li.list:before {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+        background: url('./~/assets/img/icon.png')  -65px 0px no-repeat;
+        left: 15%;
+      }
+
+      li.active:nth-of-type(1):before {
+        background: url('./~/assets/img/icon.png')  -200px 0px no-repeat;
+      }
+
+      li.list:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png')  -65px -60px no-repeat;
+      }
+
+      li.active:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png')  -200px -60px no-repeat;
+      }
+
+    }
+
+    div.searchForm {
+      padding: 20px;
+      border-bottom: 1px solid $gray-light-2x;
+      h5 {
+        font-weight: normal;
+        padding-bottom: 10px;
+        font-size: $font-size-base;
+      }
+      input[type='text'] {
+        display: block;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 4px;
+        border: 1px solid $gray-light-2x;
+        padding-left: 5px;
+      }
+      button {
+        border: 1px solid $brand-success;
+        color: $brand-success;
+        background-color: $body-bg;
+        padding: 3px 28px;
+      }
+    }
+
+    div.other {
+      padding: 20px;
+      color: $gray-light;
+      line-height: 1.8;
+      border-bottom: 1px solid $gray-light-2x;
+      span.btn {
+        color: $body-bg;
+        background-color: $brand-success;
+        padding: 1px 3px;
+        border-radius: 4px;
+        font-size: $font-size-small;
+      }
+    }
+
+  }
+
+  div.userPositionsRight,
+  div.userBookmarksRight,
+  div.userDashboardRight,
+  div.userJobOfferRight {
+    background-color: $body-bg;
+    min-height: 600px;
+    padding: 0;
+    div.loading {
+      line-height: 480px;
+      text-align: center;
+      color: $brand-danger;
+    }
+    div.content {
+      div.item {
+        margin: 0;
+        padding: 30px 20px;
+        border-bottom: 1px solid $gray-light-2x;
+        div.img {
+          a, img {
+            display: block;
+          }
+          img {
+            margin: 0 auto;
+          }
+        }
+
+        div.positions, div.company {
+          padding: 10px;
+          margin-top: 10px;
+          a {
+            font-size: $font-size-large;
+            color: $gray-dark;
+            padding-bottom: 10px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          p.positionName {
+            span {
+              padding: 2px 5px;
+              background-color: $gray-light-2x;
+              color: $gray-light;
+              border-radius: 4px;
+              font-size: 13px;
+            }
+          }
+          div.time, address {
+            color: $brand-danger;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+        }
+
+        div.positions {
+          a.companyName {
+            font-size: $font-size-base;
+            color: $brand-danger;
+          }
+        }
+
+        div.checkList {
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          a {
+            color: $brand-danger;
+          }
+          p.icon {
+            span {
+              display: block;
+              margin: 0 auto;
+            }
+            span.check {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -135px -180px;
+            }
+
+            span.unprocessed {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -200px 0;
+            }
+
+            span.shortlist {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -200px -60px;
+            }
+
+            span.not-suitable {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -200px -240px;
+            }
+
+            span.complete {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -200px -120px;
+            }
+
+            span.success {
+              width: 24px;
+              height: 24px;
+              background: url('./~/assets/img/icon.png')  -200px -180px;
+            }
+
+          }
+
+          p.star {
+            i {
+              color: $brand-success;
+            }
+          }
+
+          p.text {
+            color: $brand-danger;
+          }
+        }
+
+        div.border {
+          border-right: 1px solid $gray-light-2x;
+        }
+      }
+    }
+  }
+
+  div.userPositionsRight,
+  div.userBookmarksRight,
+  div.userJobOfferRight {
+    div.noPosition {
+      padding: 100px 0;
+    }
+  }
+
+}
+
+// userDashboard
+div.userDashboard {
+  div.userDashboardRight {
+    min-height: 980px;
+  }
+  div.userDashboardLeft {
+    padding: 0;
+    div.img {
+      a, img {
+        display: block;
+      }
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    p.edit {
+      padding: 20px 0 0 20px;
+      font-size: $font-size-large;
+      a {
+        color: $brand-success;
+      }
+    }
+
+    div.userInformation,
+    div.baseInformation,
+    div.aboutMe {
+      h4 {
+        font-weight: 400;
+      }
+      padding: 20px 0;
+      border-bottom: 1px solid $gray-light-2x;
+    }
+
+    div.uploadResume, div.resume_content {
+      padding: 20px 0;
+      border-bottom: 1px solid $gray-light-2x;
+    }
+
+    div.userInformation {
+      h4.position {
+        color: $gray;
+      }
+    }
+    div.baseInformation,
+    div.aboutMe {
+      padding-left: 15px;
+      padding-right: 15px;
+      h4 {
+        padding-bottom: 10px;
+      }
+    }
+
+    div.baseInformation {
+      div.text {
+        padding-bottom: 15px;
+        margin: 0;
+        color: $gray;
+        div.content {
+          padding-right: 0;
+        }
+      }
+    }
+
+    div.aboutMe {
+      border-bottom: 0;
+    }
+  }
+
+  div.userDashboardRight {
+    div.appliedPosition,
+    div.invitationPosiiton,
+    div.article {
+      margin-bottom: 40px;
+      div.loading {
+        line-height: 100px;
+        padding: 50px 0;
+        text-align: center;
+        color: $brand-danger;
+      }
+
+      h4.title {
+        font-size: $font-size-base;
+        font-weight: normal;
+        margin: 0;
+        padding: 0 40px;
+        border-bottom: 1px solid #d9d9d9;
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+      }
+      h4.title:before {
+        position: absolute;
+        left: 20px;
+        border-left: 3px solid #3f96e3;
+        content: '';
+        width: 4px;
+        height: 16px;
+        top: 12px;
+      }
+      p.more {
+        padding: 0 20px;
+      }
+
+      ul.positionList {
+        li {
+          margin: 0;
+          padding: 20px 10px;
+          border-bottom: 1px solid $gray-light-2x;
+          div.img {
+            a, img {
+              display: block;
+            }
+            img {
+              margin: 0 auto;
+            }
+          }
+
+          div.content,
+          div.status,
+          div.other,
+          div.button {
+            padding: 15px 0;
+          }
+
+          div.content {
+            p.company,
+            p.position {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            p.company {
+              a {
+                color: $gray;
+              }
+            }
+          }
+
+          div.status,
+          div.other {
+            color: $gray-light;
+          }
+
+          div.other {
+            border-right: 1px solid $gray-light-2x;
+          }
+
+          div.other {
+            text-align: center;
+            p.num {
+              font-size: $font-size-large;
+              color: $brand-info;
+            }
+          }
+
+          div.button {
+            padding-top: 25px;
+            text-align: center;
+            button, p {
+              padding: 3px 10px;
+              color: $body-bg;
+              border: 0;
+              font-weight: 500;
+            }
+          }
+
+        }
+      }
+
+    }
+
+    div.appliedPosition {
+      ul.positionList {
+        li {
+
+          div.status {
+            border-right: 1px solid $gray-light-2x;
+            color: $gray-light;
+            p.time {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+
+          div.button {
+            button.btn-bg-c {
+              background-color: #ccc;
+            }
+          }
+
+        }
+      }
+    }
+
+    div.invitationPosiiton,
+    div.article {
+      border-top: 1px solid $gray-light-2x;
+    }
+
+    div.invitationPosiiton {
+      div.button {
+        div.reject,
+        div.accepted {
+          padding-top: 10px;
+          a {
+            color: $brand-success;
+          }
+          button {
+            background-color: #ccc;
+            color: $body-bg;
+          }
+        }
+      }
+    }
+
+    div.article {
+      ul.articleList {
+        li.article {
+          margin: 0;
+          padding: 15px;
+          border-bottom: 1px solid $gray-light-2x;
+          div.title {
+            font-size: 15px;
+            padding-bottom: 10px;
+          }
+          p.text {
+            color: $gray-light;
+            line-height: 1.8;
+          }
+
+          ul.checkList {
+            text-align: right;
+          }
+        }
+      }
+
+      p.more {
+        padding-top: 20px;
+      }
+
+    }
+
+  }
+}
+
+// userJobOffer
+div.userJobOffer {
+  div.userJobOfferLeft {
+    padding: 0;
+    ul.editList {
+      border-bottom: 1px solid $gray-light-2x;
+      padding: 20px 0;
+      li.list {
+        text-align: center;
+        padding: 15px 0;
+        position: relative;
+        a {
+          color: $brand-danger;
+        }
+      }
+
+      li.active {
+        a {
+          color: $brand-success;
+        }
+      }
+
+      li.list:before {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+        background: url('./~/assets/img/icon.png')  -65px 0px no-repeat;
+        left: 15%;
+      }
+
+      li.active:nth-of-type(1):before {
+        background: url('./~/assets/img/icon.png')  -200px 0px no-repeat;
+      }
+
+      li.list:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png')  -65px -180px no-repeat;
+      }
+
+      li.active:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png')  -200px -180px no-repeat;
+      }
+
+      li.list:nth-of-type(3):before {
+        background: url('./~/assets/img/icon.png')  -65px -423px no-repeat;
+      }
+
+      li.active:nth-of-type(3):before {
+        background: url('./~/assets/img/icon.png')  -200px -423px no-repeat;
+      }
+
+    }
+
+    div.other {
+      padding: 20px;
+      color: $gray-light;
+      line-height: 1.8;
+      border-bottom: 1px solid $gray-light-2x;
+      span.btn {
+        color: $body-bg;
+        background-color: $brand-success;
+        padding: 1px 3px;
+        border-radius: 4px;
+        font-size: $font-size-small;
+      }
+    }
+
+  }
+  div.userJobOfferRight {
+    div.item {
+      margin: 0;
+      padding: 20px 10px;
+      border-bottom: 1px solid $gray-light-2x;
+      div.img {
+        a, img {
+          display: block;
+        }
+        a {
+          img {
+            margin: 0 auto;
+          }
+        }
+      }
+
+      div.content {
+        p.position,
+        p.company {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        p.position {
+          color: $gray-dark;
+          font-size: $font-size-large;
+          a {
+            color: $gray-dark;
+          }
+        }
+
+        p.company {
+          color: $brand-danger;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          a {
+            color: $brand-danger;
+          }
+        }
+
+      }
+
+      div.address {
+        color: $brand-danger;
+        i {
+          color: $brand-success;
+          font-size: $font-size-large;
+        }
+      }
+
+      div.applier {
+        border-left: 1px solid $gray-light-2x;
+        border-right: 1px solid $gray-light-2x;
+        p.num {
+          color: $brand-info;
+          font-size: $font-size-large;
+        }
+        p.text {
+          color: $brand-danger;
+        }
+      }
+
+      div.button {
+        button.btn {
+          padding: 3px 10px;
+          color: $body-bg;
+          font-weight: bold;
+        }
+        p {
+          padding-top: 5px;
+          a {
+            color: $brand-success;
+          }
+        }
+      }
+
+      div.reject {
+        padding-top: 15px;
+      }
+
+    }
+  }
+}
+
+div.resume {
+  margin: 20px auto;
+  div.profileLeft {
+    div.content {
+      padding: 10px 0;
+      div.button {
+        padding: 20px 30px;
+        border-bottom: 1px solid $gray-light-2x;
+        .sub {
+          display: block;
+          width: 100%;
+        }
+        .dashboard {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+// bookmark
+section.bookmarkContent {
+  section.Loading {
+    text-align: center;
+    padding: 100px 0;
+    color: $brand-danger;
+    border: 1px solid $gray-light-2x;
+  }
+}
+
+div.bookmark {
+  border: 1px solid $gray-light-2x;
+  margin-bottom: 20px;
+  div.bookmarkList {
+    padding: 20px 0;
+    margin: 0 20px;
+    border-bottom: 1px solid $gray-light-2x;
+    a.img {
+      padding-bottom: 10px;
+      display: block;
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+    div.content {
+      margin-bottom: 10px;
+      padding-left: 10px;
+      p.salary {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: $gray-light;
+        a {
+          font-size: $font-size-large;
+        }
+        span {
+          color: $gray-dark;
+          padding-left: 10px;
+        }
+      }
+      p.company {
+        span {
+          color: $gray-dark;
+        }
+      }
+      p.time {
+        color: $gray-light;
+      }
+    }
+
+    div.message {
+      text-align: center;
+      padding-top: 20px;
+      a.preview {
+        padding: 5px 20px;
+        color: $body-bg;
+        background-color: $brand-info;
+      }
+      a.link {
+        color: $brand-danger;
+        display: block;
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+div.similarPosition {
+  div.head {
+    padding: 15px 20px;
+    font-size: $font-size-large;
+    border-bottom: 1px solid $gray-light-2x;
+  }
+  div.main {
+    padding: 15px 0;
+    margin: 0 10px;
+    border-bottom: 1px solid $gray-light-2x;
+    a.img {
+      display: block;
+    }
+    div.content {
+      p {
+        span.name {
+          padding-right: 10px;
+          font-size: $font-size-large;
+        }
+        span.salary {
+          color: $brand-danger;
+          font-size: $font-size-large;
+        }
+      }
+      p.address {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+  }
+  div.main:last-child {
+    border-bottom: 0;
+  }
+}
+
+div.similarPositionLoading {
+  border: 1px solid $gray-light-2x;
+  padding: 100px 0;
+  color: $brand-danger;
+}
+
+div.expectJobsCategory,
+div.expectJobsLocation {
+  .locationContent {
+    padding-top: 7px;
+    i.add {
+      background-color: $brand-success;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      text-align: center;
+      color: #fff;
+      line-height: 25px;
+      font-weight: normal;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .breadList ul.breadRight {
+    text-align: left;
+  }
+
+  .resumeContent {
+    article.resumeDetail {
+      ul.expectList, ul.skillList {
+        text-align: left;
+      }
+
+      ul.expectList {
+        li {
+          span.name {
+            margin-bottom: 10px;
+          }
+        }
+      }
+
+      ul.skillList {
+        li.list {
+          margin-bottom: 10px;
+        }
+      }
+
+      ul.List {
+        li.list {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  div.jobInvite {
+    div.inviteList {
+      a.img {
+        display: block;
+        padding-bottom: 10px;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  // public
+  div.userPositions,
+  div.userBookmarks,
+  div.userDashboard {
+    div.userPositionsRight,
+    div.userBookmarksRight,
+    div.userDashboardRight {
+      border-left: 0;
+    }
+
+    div.userDashboardRight {
+      div.invitationPosiiton {
+
+        ul.positionList {
+          li {
+            div.content {
+              padding: 0;
+            }
+
+            div.button {
+              padding-top: 0;
+
+            }
+          }
+        }
+
+      }
+
+      div.article {
+        ul.articleList {
+          li.article {
+            ul.checkList {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  .breadList ul.breadRight {
+    text-align: left;
+  }
+  .resumeContent {
+    article.resumeDetail {
+      ul.List {
+        li.list {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  // public
+  div.userPositions,
+  div.userBookmarks,
+  div.userDashboard {
+    div.userPositionsRight,
+    div.userBookmarksRight,
+    div.userDashboardRight {
+      border-left: 0;
+    }
+
+    div.userDashboardRight {
+      div.appliedPosition {
+
+        ul.positionList {
+          li {
+            div.other {
+              border-right: 0;
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+  div.userPositionsRight,
+  div.userBookmarksRight,
+  div.userDashboardRight,
+  div.userJobOfferRight,
+  div.userResumeRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+
+  .myResume {
+    .resumeContent {
+      article.resumeDetail {
+        padding: 20px 40px;
+        ul.List {
+          li.list {
+            p.time {
+              text-align: right;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  // section.jobInvite
+
+  div.jobInvite {
+    article.jobInviteContent {
+      div.content {
+        ul.inviteList {
+          li {
+            fieldset {
+              a {
+                display: block;
+                img {
+                  margin: 0 auto;
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // similarPosition
+  div.similarPosition {
+    div.main {
+      a.img {
+        float: left;
+      }
+      div.main {
+        float: left;
+        div.content {
+          padding-left: 10px;
+        }
+      }
+
+    }
+  }
+
+  // userJobOffer
+  div.userJobOffer {
+    div.userJobOfferRight {
+      div.item {
+        div.content,
+        div.address,
+        div.list {
+          padding-top: 15px;
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: $screen-lg-min) {
+ .news-right{
+   max-height: 1003px;
+ }
+  div.userPositionsRight,
+  div.userBookmarksRight,
+  div.userDashboardRight,
+  div.userJobOfferRight,
+  div.userResumeRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+
+  .myResume {
+    .resumeContent {
+      article.resumeDetail {
+        padding: 20px 60px;
+        ul.List {
+          li.list {
+            p.time {
+              text-align: right;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  // section.jobInvite
+
+  section.jobInvite {
+    article.jobInviteContent {
+      div.content {
+        ul.inviteList {
+          li {
+            fieldset {
+              a {
+                display: block;
+                img {
+                  margin: 0 auto;
+                }
+              }
+
+            }
+            div.inviteLeft {
+              padding: 10px 0;
+              a.btn {
+                float: right;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // similarPosition
+  div.similarPosition {
+    div.main {
+      a.img {
+        float: left;
+      }
+
+      div.content {
+        padding-left: 10px;
+        float: left;
+      }
+    }
+  }
+
+  // userJobOffer
+  div.userJobOffer {
+    div.userJobOfferRight {
+      div.item {
+        div.content,
+        div.address,
+        div.list {
+          padding-top: 15px;
+        }
+      }
+    }
+  }
+}
+
+//news-center
+h4, p {margin: 0}
+.news-center {border: 1px solid #dcdcdc;}
+.news-left {border-bottom: 1px solid #dcdcdc; background-color: #fafafa;}
+.news-left ul {padding: 20px 0 20px 80px; list-style: none;}
+.news-left ul li {padding: 15px 0;}
+.news-left ul a.active i, .news-left ul a.active span {color:rgb(0, 178, 22)}
+.news-left ul li i {padding-right:20px; font-size: 20px}
+
+.news-right {border-left: 1px solid #dcdcdc; padding: 0; overflow-y: scroll}
+.no-news-right {border-left: 1px solid #dcdcdc; padding: 0;}
+.news-right .news-article {background-color: #fafafa; padding: 40px;}
+.news-right .news-article .article-title {font: 20px "PingFang SC"; color: #646464; padding-bottom: 10px;cursor:pointer;}
+.news-right .news-article .article-time {padding-bottom: 20px; color: #A0A0A0;}
+.news-right .news-article .article-short {font: 14px "PingFang SC"; color: #A0A0A0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.news-right .news-article .article-short a {color: #646464;}
+.news-right .news-article .article-longe {font: 14px "PingFang SC"; color: #A0A0A0;}
+.news-right .news-article .article-longe a {color: #646464;}
+
+.news-right .news-article .article-debag {color: #A0A0A0;}
+.news-right .news-article .article-debag span:first-child {padding-right: 20px;color: #A0A0A0;}
+.news-right .news-article .article-debag span:last-child {padding-left: 20px;color: #A0A0A0;}
+.news-right .news-article .article-debag span:first-child i {padding-right: 10px;color: #A0A0A0;}
+.news-right .news-article .article-debag span:last-child i {padding-right: 10px;color: #A0A0A0;}
+
+.news-right .comment {padding: 20px 40px}
+.news-right .comment .comment-head {position: relative}
+.news-right .comment .comment-head .comment-avatar {padding-right: 10px}
+.news-right .comment .comment-head .comment-msg .comment-user-name {color: #646464; padding-bottom: 10px;}
+.news-right .comment .comment-head .comment-msg .comment-time span {color: #A0A0A0}
+.news-right .comment .comment-head .article-debag {position: absolute; right: 0; top: 0px; color: #A0A0A0}
+.news-right .comment .comment-head .article-debag span {color: #A0A0A0}
+.news-right .comment .comment-head .article-debag i {padding-right: 10px}
+
+
+.myself-comment {font: 14px "PingFang SC"; color: #646464; padding: 20px 0}
+.other-comment {background-color: #fafafa; padding: 20px 48px; position: relative;border-bottom: 1px solid #ddd; }
+
+.other-comment .other-comment-list .other-comment-name {padding-bottom: 10px; color: #646464;}
+.other-comment .other-comment-list .other-comment-content {font: 14px "PingFang SC"; color: #A0A0A0;}
+/*.other-comment .other-comment-list .other-comment-time {position: absolute; right: 40px; top: 20px;}*/
+.other-comment .other-comment-list .other-comment-time span {padding-right: 20px;color: #A0A0A0;}
+.other-comment .ql-toolbar {display: none; border-top: 1px solid #dcdcdc}
+
+#myself {background-color: #FFFFFF;}
+.form-control {padding-bottom: 10px}
+.btn_content {padding-bottom: 20px}

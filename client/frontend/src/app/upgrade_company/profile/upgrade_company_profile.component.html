@@ -1,0 +1,648 @@
+<div class="container">
+  <!--company-->
+  <section class="companyHeader">
+    <div>
+      <div class="backgroundImg">
+        <img src="../../../assets/img/default_company_cover.png" class="img-responsive" *ngIf="company?.cover === null">
+        <p class="text-center companyName" *ngIf="company?.cover ===null"> {{company?.name }}</p>
+        <img [src]="company?.cover?.url['1024']" alt="" class="img-responsive img-rounded"
+             *ngIf="company?.cover !== null">
+
+      </div>
+      <div class="row">
+        <div class="col-sm-3 col-xs-4">
+          <fieldset>
+            <img class="vip-icon img-responsive" src="../../assets/img/featured.png" *ngIf="company?.isVIP"/>
+            <a>
+              <img src="../../../../assets/img/default_company_icon.png" class="img-responsive img-rounded"
+                   *ngIf="company?.icon === null">
+              <img [src]="company?.icon?.url['160']" alt="" class="img-responsive img-rounded"
+                   *ngIf="company?.icon !== null">
+            </a>
+          </fieldset>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-9 col-xs-12">
+          <div class="row">
+            <h4 class="companyName col-sm-9 col-xs-12">
+              <span>
+                {{company?.name}}
+              </span>
+              <a class="contact" (click)="contact()" *ngIf="!isEnterpriseLogin">
+                <img src="../../../assets/img/contact_us.png"/>
+                <span>{{'about_us.contact_us' | translate}}</span>
+              </a>
+            </h4>
+
+            <p class="companyBrowse col-sm-3 col-xs-12"><i class="fa fa-eye"></i><span
+              class="browse">{{'global.people_num' | translate}}</span><span>{{company?.view}}</span></p>
+
+            <!--/.col-->
+            <ul class="list-inline companyHeaderList col-xs-12 col-sm-12">
+              <li class="List" [ngClass]="{'active': item.id === headIndex}" *ngFor="let item of headList"
+                  (click)="changeTab(item.id)">
+                {{item.name | translate}}
+              </li>
+            </ul>
+            <!--/.col-->
+          </div>
+
+        </div>
+        <!--/.col-->
+
+      </div>
+    </div>
+  </section>
+  <!--/.companyHeader-->
+</div>
+<div class="container companyPageContent">
+  <div class="row companyPage">
+    <div class="col-md-8 col-sm-12 col-xs-12 companyPageLeft clearPaddingRight">
+      <div *ngIf="changeTabLoading" class="loading text-center">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <tabset>
+        <!--about-->
+        <tab [active]="headIndex === 1">
+          <div *ngIf="!changeTabLoading">
+            <div class="companyAbout">
+              <div>
+                <div class="head">
+                  <i class="fa  fa-file-text"></i>
+                  <span>{{'global.base_infomartion' | translate}}</span>
+                </div>
+                <div class="row content">
+                  <div class="col-xs-12" *ngIf="company?.field!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.industry' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      {{company?.field}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" *ngIf="company?.stage!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.company_stage' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      {{company?.stage}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" *ngIf="company?.scale!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.scale' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      {{company?.scale}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" *ngIf="company?.foundingTime!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.founding_time' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      {{company?.foundingTime}}
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" *ngIf="company?.url!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.url' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      <a class="companyAboutLink" href={{company?.url}} target="_blank">
+                        {{company?.url}}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12" *ngIf="company?.address!==null">
+                    <div class="col-sm-2 col-xs-3 labels">
+                      {{'company.address' | translate}}
+                    </div>
+                    <div class="col-sm-10 col-xs-9 text">
+                      {{company?.address}}
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="subhead" *ngIf="company?.background !== null">
+                  {{'company.background' | translate}}
+                </div>
+
+                <p class="background" *ngIf="company?.background !== null">
+                    <span>
+                      {{company.background | htmlToPlaintext : 255}}
+                    <span *ngIf="!backgroundShow && company?.background?.length > 255">...</span>
+                    <a (click)="backgroundShow = !backgroundShow"
+                       *ngIf="!backgroundShow && company?.background?.length > 255">{{'global.expand' | translate}}</a>
+                  </span>
+                  <span *ngIf="backgroundShow">
+                    {{company?.background | htmlToPlaintext}}
+                    <a (click)="backgroundShow = !backgroundShow" *ngIf="backgroundShow">{{'global.put_away' | translate}}</a>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <!--/.companyAbout-->
+
+
+            <div class="companyPosition  upgrade_companyPosition clearfix" *ngIf="!changeTabLoading">
+              <div class="head clearfix headBorder">
+                <i class="fa fa-free-code-camp"></i>
+                <span>{{'enterprise.company_dynamic' | translate}}</span>
+              </div>
+
+              <div class="loading text-center" [hidden]="!dynamicLoading">
+                <i class="fa fa-2x fa-spinner fa-spin"></i>
+              </div>
+
+              <div class="noPosition text-center" [hidden]="!(!dynamicLoading && dynamic?.length === 0)">
+                {{'message.no_publish_company_dynamic' | translate}}
+              </div>
+
+              <ul class="companyDynamic list-unstyled clearfix" [hidden]="!(!dynamicLoading && dynamic?.length > 0)">
+                <li class="dynamicPositionList clearfix" *ngFor="let list of dynamic;let i =index;">
+                  <div class="col-xs-12 dynamicPosition">
+                    <div class="col-xs-10 title">
+                      <h5 class="positionName">
+                        {{company?.name}}
+                        <span *ngIf="list?.positionId !==null">{{'enterprise.Issue_a_position' | translate}}</span>
+                        <span *ngIf="list?.content !==null && list?.review ===null">{{'company.post_dynamic' | translate}}</span>
+                        <span *ngIf="list?.content !==null && list?.review !==null">{{'company.post_evaluate' | translate}}</span>
+                      </h5>
+                    </div>
+                    <div class="col-xs-2 text-right clearPadding"><span
+                      class="time">{{list.updatedAt | date: 'MM-dd'}}</span></div>
+                  </div>
+                  <div class="col-xs-12 bg" *ngIf="list?.position !==null && list?.review ===null">
+                    <div class="close"
+                         *ngIf="removeDynamicShow"
+                         (click)="removeCompanyDynamic(list.id, $event); $event.stopPropagation() ">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-12 PositionContent">
+                      <div class="item">
+                        <p class="marginLeft" [routerLink]="['/positions',list?.position?.id]">
+                          {{list?.position?.name}}</p>
+                        <span class="position">City: {{list?.position?.address}}</span>
+                        <span class="position" *ngIf="list?.position?.minSalary === 0 && list?.position?.maxSalary === 0">{{'position.negotiation' | translate}}</span>
+                        <span class="text-danger" *ngIf="list?.position?.maxSalary > 0">{{list?.position?.minSalary/1000}}K - {{list?.position?.maxSalary/1000}}K </span>
+                        <span class="position" *ngIf="list?.position?.maxSalary > 0">/month</span>
+                        <span class="position">category: <span *ngFor="let item of list?.position?.categories">{{item.name}}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--面试分享-->
+                  <div class="col-xs-12 bg" *ngIf="list?.position !==null && list?.review !==null">
+                    <div class="close"
+                         *ngIf="removeDynamicShow"
+                         (click)="removeCompanyDynamic(list.id, $event); $event.stopPropagation() ">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-12 PositionContent">
+                      <div class="item">
+                        <p *ngIf="!reviewShow[i]" class="textColor">{{list?.review?.content | htmlToPlaintext: 80}}
+                          <span *ngIf="!reviewShow[i] && list?.review?.content?.length > 80">...
+                            <span>
+                              <a (click)="reviewShow[i] = !reviewShow[i]"
+                                 *ngIf="!reviewShow[i] && list?.review?.content?.length > 80">
+                                {{'global.expand' | translate}}
+                              </a>
+                            </span>
+                          </span>
+                        </p>
+                        <span *ngIf="reviewShow[i]">
+                          <p [innerHtml]="list?.review?.content"></p>
+                          <a (click)="reviewShow[i] = !reviewShow[i]" *ngIf="reviewShow[i]">{{'global.put_away' | translate}}</a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--公司动态-->
+                  <div class="col-xs-12 bg" *ngIf="list?.pictures?.length > 0">
+                    <div class="close"
+                         *ngIf="removeDynamicShow"
+                         (click)="removeCompanyDynamic(list.id, $event); $event.stopPropagation() ">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-10 PositionContent">
+                      <div class="col-xs-3" *ngFor="let pictures of list?.pictures" style="padding-right: 10px">
+                        <img [src]="pictures?.url['200']" class="img-responsive"/>
+                      </div>
+                      <div class="col-xs-8" style="padding-left: 10px">
+                        <p>{{list?.title}}</p>
+                        <p class="textColor" *ngIf="open">{{list?.content | htmlToPlaintext: 100}}</p>
+                        <p class="textColor" *ngIf="!open" [innerHtml]="list?.content"></p>
+                      </div>
+                    </div>
+                    <div class="col-xs-2" *ngIf="list?.content?.length > 100">
+                      <button class="btn btnBg" (click)="open = !open">View all</button>
+                    </div>
+                  </div>
+                  <!--文章-->
+                  <div class="col-xs-12 bg" *ngIf="list?.post !== null">
+                    <div class="close"
+                         *ngIf="removeDynamicShow"
+                         (click)="removeCompanyDynamic(list.id, $event); $event.stopPropagation() ">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-10 PositionContent">
+                      <div class="col-xs-3">
+                        <img [src]="list?.post?.cover?.url['200']" class="img-responsive"/>
+                      </div>
+                      <div class="col-xs-9">
+                        <p>{{list?.post?.title}}</p>
+                        <p>{{list?.post?.content | htmlToPlaintext: 30}}</p>
+                      </div>
+                    </div>
+                    <div class="col-xs-2">
+                      <button class="btn btnBg" [routerLink]="['/articles',list?.post?.id]">View details</button>
+                    </div>
+                  </div>
+                  <!--面试分享-->
+                  <div class="col-xs-12 bg"
+                       *ngIf="list?.pictures?.length === 0 && list?.position ===null && list?.post ===null">
+                    <div class="close"
+                         *ngIf="removeDynamicShow"
+                         (click)="removeCompanyDynamic(list.id, $event); $event.stopPropagation() ">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-12 PositionContent">
+                      <div class="item">
+                        <p *ngIf="!list.show">{{list?.content | htmlToPlaintext: 80}}
+                          <span *ngIf="!list.show && list?.content?.length > 80">...
+                            <span>
+                              <a (click)="toggleShare(list)"
+                                 *ngIf="!list.show && list?.content?.length > 80">
+                                {{'global.expand' | translate}}
+                              </a>
+                            </span>
+                          </span>
+                        </p>
+                        <span *ngIf="list.show">
+                          <p [innerHtml]="list?.content"></p>
+                          <a (click)="list.show = !list.show" *ngIf="list.show">{{'global.put_away' | translate}}</a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="text-center">
+                <pager [maxSize]="50"
+                       [itemsPerPage]="dynamicPageNum.limit" [totalItems]="dynamicMeta.pagination.totalCount"
+                       [(ngModel)]="dynamicPageNum.page" (pageChanged)="changeDynamiPage($event)"
+                       pageBtnClass="btn btn-link">
+                </pager>
+              </div>
+            </div>
+
+
+
+            <div class="companyPicture upgrade_companyPicture">
+              <div class="head clearfix">
+                <i class="fa fa-picture-o"></i>
+                <span>{{'enterprise.picture' | translate}}</span>
+              </div>
+
+              <div class="col-xs-12 clearPadding carousel">
+                <ngx-gallery [options]="galleryOptions2" [images]="galleryImages"
+                             *ngIf="company?.pictures?.length > 0"></ngx-gallery>
+                <div class="noPosition noPicture text-center" *ngIf="company?.pictures?.length === 0">
+                  {{'message.no_publish_company_picture' | translate}}
+                </div>
+              </div>
+
+            </div>
+            <!--/.companyPicture-->
+          </div>
+        </tab>
+        <!--about-->
+
+        <!--position-->
+        <tab [active]="headIndex ===2">
+          <div class="companyPosition upgrade_companyPosition clearfix" *ngIf="!changeTabLoading">
+            <div class="head clearfix headBorder">
+              <i class="fa fa-star"></i>
+              <span>{{'enterprise.offer_job' | translate}}</span>
+            </div>
+            <div class="loading text-center" [hidden]="!positionLoading">
+              <i class="fa fa-2x fa-spinner fa-spin"></i>
+            </div>
+            <div class="noPosition noPositionBorder  text-center"
+                 [hidden]="!(!positionLoading && position?.length === 0)">
+              {{'message.company_no_publish_positions' | translate}}
+            </div>
+            <ul class="positionListContent list-unstyled clearfix"
+                [hidden]="!(!positionLoading && position?.length > 0)">
+              <li class="positionList clearfix" *ngFor="let position of position">
+                <a [routerLink]="['/positions',position.id]">
+                  <div class="col-xs-12 upgradePosition clearPaddingRight">
+                    <div class="col-xs-5 title"><i></i> <h4 class="positionName">{{position.name}}</h4></div>
+                    <div class="col-xs-5 clearPaddingLeft">
+                      <span *ngIf="position.minSalary === 0 && position.maxSalary === 0">{{'position.negotiation' | translate}}</span>
+                      <span class="text-danger" *ngIf="position.maxSalary > 0">{{position.minSalary/1000}}K - {{position.maxSalary/1000}}K </span>
+                      <span *ngIf="position.maxSalary > 0">/month</span>
+                    </div>
+                    <div class="col-xs-2 text-right clearPaddingRight">
+                      <span class="time">{{position.createdAt | date: 'yyyy-MM-dd'}}</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 experience clearPaddingRight">
+                    <div class="col-xs-5">
+                      {{'user.profile.experience' | translate}}: {{position.experience}}{{'global.year' | translate}}
+                    </div>
+                    <div class="col-xs-5">
+                      {{'user.profile.education' | translate}}: {{position?.educationLevel?.name}}
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <p class="address">{{position.address}}</p>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="text-center">
+            <pager [maxSize]="50"
+                   [itemsPerPage]="positionPageNum.limit" [totalItems]="meta.pagination.totalCount"
+                   [(ngModel)]="positionPageNum.page" (pageChanged)="changePage($event)"
+                   pageBtnClass="btn btn-link"></pager>
+          </div>
+        </tab>
+        <!--position-->
+
+
+        <!--share_interview-->
+        <tab [active]="headIndex ===4" *ngIf="!changeTabLoading">
+          <div class="companyPosition upgrade_companyPosition clearfix">
+            <div class="head clearfix headBorder">
+              <i class="fa fa-male"></i>
+              <span>{{'enterprise.company_share_interview' | translate}}</span>
+            </div>
+            <div class="loading text-center" [hidden]="!reviewsLoading">
+              <i class="fa fa-2x fa-spinner fa-spin"></i>
+            </div>
+
+            <div class="noPosition noPositionBorder text-center" [hidden]="!(!reviewsLoading && reviews?.length === 0)">
+              {{'message.no_publish_company_share_interview' | translate}}
+            </div>
+            <ul class="share_interviewContent list-unstyled clearfix"
+                [hidden]="!(!reviewsLoading && reviews?.length > 0)">
+              <li class="share_list clearfix" *ngFor="let list of reviews">
+                <div class="col-xs-2 clearPaddingRight">
+                  <div class="imgContent">
+                    <img src="../../../assets/img/default_company_icon.png" class="img-responsive img-circle"
+                         *ngIf="list?.user?.icon === null">
+                    <img [src]="list?.user?.icon?.url['100']" class="img-responsive img-circle"
+                         *ngIf="list?.user?.icon !== null">
+                  </div>
+                </div>
+                <div class="col-xs-9">
+                  <div>
+                    <span class="userName"
+                          *ngIf="!list?.isAnonymous">{{list?.user?.lastName}} {{list?.user?.firstName}}</span>
+                    <span class="userName" *ngIf="list?.isAnonymous">{{'company.anonymous_user' | translate}}</span>
+                    <span class="time">{{list?.updatedAt | date: 'yyyy-MM-dd'}}</span>
+                  </div>
+                  <div class="content">
+                    <!--收起状态-->
+                    <p *ngIf="!list.experiencesShow">{{list?.content | htmlToPlaintext: 80}}
+                      <span *ngIf="!list.experiencesShow && list?.content?.length > 80">...
+                        <span>
+                          <a (click)="toggleSpread(list)"
+                             *ngIf="!list.experiencesShow && list?.content?.length > 80">
+                            {{'global.expand' | translate}}
+                          </a>
+                        </span>
+                      </span>
+                    </p>
+                    <!--展开状态-->
+                    <span *ngIf="list.experiencesShow">
+                      <p [innerHtml]="list?.content"></p>
+                      <a (click)="list.experiencesShow = !list.experiencesShow" *ngIf="list.experiencesShow">{{'global.put_away' | translate}}</a>
+                    </span>
+                  </div>
+                </div>
+                <!--<div class="col-xs-1 clearPaddingRight">-->
+                <!--<div class="comment">-->
+                <!--<p class="text-right">-->
+                <!--<img src="../../../assets/img/like.png" alt=""><span class="number">(50)</span></p>-->
+                <!--<p class="text-right">comtent</p>-->
+                <!--</div>-->
+                <!--</div>-->
+              </li>
+            </ul>
+
+
+            <div class="col-xs-12 clearPadding editorContent" *ngIf="isShow">
+              <!--<h4>Ask quesings about Tenent and ask somenoe to help you</h4>-->
+              <div class="col-md-9 col-sm-8 col-xs-12 clearPaddingLeft editor clearPaddingRight">
+                <quill-editor [(ngModel)]="editorContent"
+                              name="text"
+                              [options]="editorConfig"></quill-editor>
+              </div>
+              <div class="col-md-3 col-sm-4 col-xs-12  clearPaddingRight text-right">
+                <div class="col-xs-12">
+                  <div class="col-sm-12 col-xs-6">
+                    <a class="btn btn-success" (click)="postAnwer()">{{'company.post_share' | translate}}</a>
+                  </div>
+                  <div class="col-sm-12 col-xs-6">
+                    <div class="anonymous text-center">
+                      <input type="checkbox" name="anonymous" id="anonymous" [(ngModel)]="anonymous">
+                      <label for="anonymous">{{'company.anonymous' | translate}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <pager [maxSize]="50"
+                     [itemsPerPage]="pageNum.limit" [totalItems]="shareMeta.pagination.totalCount"
+                     [(ngModel)]="pageNum.page" (pageChanged)="changeReviewsPage($event)"
+                     pageBtnClass="btn btn-link"></pager>
+            </div>
+          </div>
+
+
+        </tab>
+        <!--share_interview-->
+
+        <tab [active]="headIndex ===5" *ngIf="!changeTabLoading">
+          <div class="companyPosition upgrade_companyPosition clearfix">
+            <div class="head clearfix headBorder">
+              <i class="fa fa-picture-o"></i>
+              <span>{{'enterprise.picture' | translate}}</span>
+            </div>
+            <div class="loading text-center" *ngIf="pictureLoading">
+              <i class="fa fa-2x fa-spinner fa-spin"></i>
+            </div>
+
+            <div class="noPosition noPositionBorder text-center" *ngIf="!pictureLoading && pictures?.length === 0">
+              {{'message.no_publish_company_picture' | translate}}
+            </div>
+            <div *ngIf="!pictureLoading && pictures?.length > 0">
+              <div class="col-xs-12 clearPadding">
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+              </div>
+            </div>
+          </div>
+
+          <div class="companyPicture clearfix marginTop upgrade_companyPicture">
+            <div class="head clearfix">
+              <i class="fa fa-video-camera"></i>
+              <span>{{'company.company_video' | translate}}</span>
+            </div>
+            <div class="loading text-center" *ngIf="videoLoading">
+              <i class="fa fa-2x fa-spinner fa-spin"></i>
+            </div>
+            <div class="noPosition noPositionBorder text-center" *ngIf="!videoLoading && video===undefined">
+              {{'message.no_publish_company_video' | translate}}
+            </div>
+
+            <div class="col-xs-12 clearPadding">
+              <div class="col-xs-12 clearPaddingRight clearPaddingLeft" *ngIf="!videoLoading && video!==undefined">
+                <iframe width="100%" height="420px" [src]="iframe" frameborder="0"></iframe>
+              </div>
+            </div>
+
+          </div>
+
+        </tab>
+      </tabset>
+
+
+    </div>
+
+
+    <div class="col-md-4 col-sm-12 col-xs-12 companyPageRight">
+      <div class="companyArticle relatedActivity">
+        <div class="head">
+          <i></i>
+          <span>{{'company.company_welfare' | translate}}</span>
+        </div>
+        <div class="text-center loading" *ngIf="welfareLoading">
+          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+        <div class="noPosition text-center" *ngIf="!welfareLoading && welfare?.length === 0">
+          {{'message.company_no_publish_welfare' | translate}}
+        </div>
+        <ul class="list-unstyled tagList" *ngIf="!welfareLoading && welfare?.length > 0">
+          <li class="tag" *ngFor="let item of welfare">{{item}}</li>
+        </ul>
+      </div>
+      <!--/.companyArticle-->
+
+      <div class="awardsContent">
+        <div class="head">
+          <i></i>
+          <span>{{'company.company_prize' | translate}}</span>
+        </div>
+        <div class="text-center loading" *ngIf="awardsLoading">
+          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+        <div class="noPosition text-center" *ngIf="!awardsLoading && awards?.length === 0">
+          {{'message.company_no_publish_awards' | translate}}
+        </div>
+        <ul class="list-unstyled awards" *ngIf="!awardsLoading && awards?.length > 0">
+          <li class="list" *ngFor="let list of awards">
+            <img src="../../../assets/img/形状 5.png" height="12" width="13"/>
+            <span class="name">{{list.name}}</span>
+            <span class="pull-right time">{{list.date | date: 'yyyy-MM'}}</span>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="companyArticle relatedActivity">
+        <div class="head">
+          <i></i>
+          <span>{{'article.newest_article' | translate}}</span>
+        </div>
+        <div class="loading text-center" *ngIf="articleLoading">
+          <i class="fa fa-2x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!articleLoading">
+          <div class="noPosition text-center" *ngIf="articles?.length === 0">
+            {{'message.company_no_publish_articles' | translate}}
+          </div>
+          <ul *ngIf="articles?.length > 0" class="list-unstyled newArticle">
+            <li class="row" *ngFor="let article of articles">
+              <div class="col-sm-5 col-xs-5 img">
+                <a [routerLink]="['/articles',article.id]">
+                  <img src="https://placehold.it/240x160" class="img-responsive" *ngIf="article.cover === null">
+                  <img src="{{article.cover.url['240']}}" class="img-responsive" *ngIf="article.cover !== null">
+                </a>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-7 col-xs-7 content">
+                <h4 class="title">
+                  <a [routerLink]="['/articles',article.id]">
+                    {{article.title}}
+                  </a>
+                </h4>
+                <p class="time">
+                  {{article.createdAt | date: 'yyyy-MM-dd'}}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--/.companyArticle-->
+
+      <div class="otherPosition">
+        <div class="head">
+          <i></i>
+          <span>{{'enterprise.newest_position' | translate}}</span>
+        </div>
+        <div class="loading text-center" *ngIf="otherPositionLoading">
+          <i class="fa fa-2x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!otherPositionLoading">
+          <ul class="list-unstyled relatedPosition" *ngIf="otherPosition?.length > 0">
+            <li class="list row" *ngFor="let other of otherPosition">
+              <div class="img col-sm-3 col-xs-4">
+                <a [routerLink]="['/positions',other.id]">
+                  <div class="postImgContent">
+                    <img class="vip img-responsive imgWidth" src="../../assets/img/featured.png"
+                         *ngIf="other.company?.isVIP"/>
+                    <img src="../../../../assets/img/default_company_icon.png" alt="" class="img-responsive"
+                         *ngIf="other.company.icon === null">
+                    <img [src]="other.company.icon.url['100']" class="img-responsive"
+                         *ngIf="other.company.icon !== null">
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-9 col-xs-8 content">
+                <p class="name">
+                  <a [routerLink]="['/positions',other.id]">
+                    {{other.name}}
+                  </a>
+                </p>
+                <p class="salary" *ngIf="other.maxSalary > 0">
+                  <i class="fa fa-dollar"></i>
+                  {{other.minSalary/1000}}K - {{other.maxSalary/1000}}K
+                </p>
+                <p class="salary" *ngIf="other.maxSalary === 0 && other.minSalary === 0">
+                  <i class="fa fa-dollar"></i>
+                  {{'position.negotiation' | translate}}
+                </p>
+              </div>
+            </li>
+          </ul>
+          <div class="noPosition text-center" *ngIf="otherPosition?.length === 0">
+            {{'message.no_related_position_message' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

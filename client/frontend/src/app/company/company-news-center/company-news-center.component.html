@@ -1,0 +1,57 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <div class="row news-center">
+    <div class="col-sm-3 col-md-3 news-left">
+      <ul>
+        <li class="list">
+          <a class="active" href="javascript:;"><i class="fa fa-commenting-o fa-1x" aria-hidden="true"></i><span>{{'user.news.not_read_message' | translate }}</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-9 news-right">
+      <div *ngFor="let new of news">
+        <div class="comment">
+          <div class="comment-head">
+            <div class="comment-avatar">
+              <img src="../../../assets/img/user_default_icon.png" *ngIf="new.user?.icon == null"
+                   class="img-circle pull-left"
+                   width="40" height="40"/>
+              <img [src]="new.user?.icon?.url['100']" *ngIf="new.user?.icon !== null"
+                   class="img-circle pull-left"
+                   width="40" height="40"/>
+            </div>
+            <div class="comment-msg">
+              <p class="comment-user-name">{{new.user.lastName}}{{new.user.firstName}}
+                <span *ngIf="new?.positionId === null">{{'global.news_message' | translate}}</span>
+              </p>
+              <p class="comment-time"><span>{{new?.createdAt | date:'M月 d日 H:m'}}</span></p>
+            </div>
+          </div>
+          <div class="myself-comment" *ngIf="new?.positionId === null" [innerHTML]="new.content">
+          </div>
+
+          <a class="text-success"
+             *ngIf="new?.positionId === null &&  !new?.company?.isVIP"
+             (click)="commentState('company-list'); $event.stopPropagation()"
+             [routerLink]="['/company',companyId,'company-list']">{{'user.news.view_details' | translate }}</a>
+          <a class="text-success"
+             *ngIf="new?.positionId === null &&  new?.company?.isVIP"
+             (click)="commentState('profile'); $event.stopPropagation()"
+             [routerLink]="['/upgrade_company',companyId,'profile']">{{'user.news.view_details' | translate }}</a>
+
+          <div class="myself-comment" *ngIf="new?.positionId !== null">
+            {{'global.applied_position' | translate}} <a>{{new?.position?.name}}</a> {{'position.positions' | translate}}
+            <a class="text-success"
+               [routerLink]="['/company',companyId,'interview']"
+                (click)="commentState(new.positionId, 'interview')">{{'user.news.view_details' | translate }}</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

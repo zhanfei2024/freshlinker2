@@ -1,0 +1,53 @@
+SELECT MAX("id")+1 as max FROM "Admin";
+
+ALTER SEQUENCE "Admin_id_seq" RESTART 20;
+
+
+
+SELECT MAX("id")+1 as max FROM "AdminSession";
+
+ALTER SEQUENCE "AdminSession_id_seq" RESTART 20;
+
+
+SELECT MAX("id")+1 as max FROM "AuthenticationProviderType";
+
+ALTER SEQUENCE "AuthenticationProviderType_id_seq" RESTART 20;
+
+
+SELECT MAX("id")+1 as max FROM "Bills";
+
+ALTER SEQUENCE "Bills_id_seq" RESTART 20;
+
+
+SELECT MAX("id")+1 as max FROM "Bookmark";
+
+ALTER SEQUENCE "Bookmark_id_seq" RESTART 20;
+
+
+SELECT MAX("id")+1 as max FROM "Candidate";
+
+ALTER SEQUENCE "Candidate_id_seq" RESTART 20;
+
+
+
+SELECT MAX("id")+1 as max FROM "CandidateQuestion";
+
+ALTER SEQUENCE "CandidateQuestion_id_seq" RESTART 20;
+
+
+
+SELECT MAX("id")+1 as max FROM "CandidateQuestionAttachment";
+
+ALTER SEQUENCE "CandidateQuestionAttachment_id_seq" RESTART 20;
+
+
+
+SELECT MAX("id")+1 as max FROM "CandidateStatus";
+
+ALTER SEQUENCE "CandidateStatus_id_seq" RESTART 20;
+
+
+
+SELECT MAX("id")+1 as max FROM "Comment";
+
+ALTER SEQUENCE "Comment_id_seq" RESTART 20;

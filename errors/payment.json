@@ -1,0 +1,17 @@
+{
+  "invalidPayment": {
+    "statusCode": 400,
+    "message": "Payment invalid",
+    "code": 70000
+  },
+  "invalidCard": {
+    "statusCode": 400,
+    "message": "You do not have active card",
+    "code": 70001
+  },
+  "maxCard": {
+    "statusCode": 400,
+    "message": "You do not have active card",
+    "code": 70001
+  }
+}

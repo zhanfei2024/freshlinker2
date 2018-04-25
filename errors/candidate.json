@@ -1,0 +1,22 @@
+{
+  "appliedAlready": {
+    "statusCode": 400,
+    "message": "You have applied already.",
+    "code": 50000
+  },
+  "answerRequired": {
+    "statusCode": 400,
+    "message": "Answer is required.",
+    "code": 50001
+  },
+  "attachmentRequired": {
+    "statusCode": 400,
+    "message": "Attachment is required.",
+    "code": 50002
+  },
+  "invitationNotFound": {
+    "statusCode": 400,
+    "message": "Invitation not found.",
+    "code": 50003
+  }
+}

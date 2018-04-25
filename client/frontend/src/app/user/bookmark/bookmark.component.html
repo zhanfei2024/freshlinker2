@@ -1,0 +1,110 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form action="">
+    <div class="row userPositions">
+      <div class="col-md-3 col-sm-12 col-xs-12 userPositionsLeft">
+        <ul class="editList list-unstyled">
+          <li class="list">
+            <a [routerLink]="['/user','user-positions']">{{'user.profile.applied_position' | translate}}</a>
+          </li>
+          <li class="list active">
+            <a [routerLink]="['/user','bookmark']">{{'user.profile.bookmark' | translate}}</a>
+          </li>
+        </ul>
+        <div class="searchForm">
+          <h5>{{'search.dashboard_search_position' | translate}}</h5>
+          <div class="form-group">
+            <input type="text" name="text" placeholder="{{'message.position_name_input' | translate}}" required   [(ngModel)]="filter.search">
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn" (click)="searchPosition()">{{'button.determine' | translate}}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9 col-sm-12 col-xs-12 userPositionsRight">
+        <div class="userAppliedPosition" *ngIf="!changeLoading">
+          <div class="loading text-center" *ngIf="tableLoading && positionLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!tableLoading">
+            <div  class="noPosition row" *ngIf="positions.length === 0 && !positionLoading">
+              <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+                <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+              </div>
+              <!--/.col-->
+              <div class="col-md-5 col-sm-5 col-xs-12 text">
+                <p>
+                  {{'message.no_user_applied_position' | translate}}
+                  <br>
+                  {{'message.user_applied_position' | translate}}!
+                  <br>
+                  <span>{{'global.go_ahead' | translate}}</span>
+                  <a href="" ui-sref="main.position-list">
+                    {{ 'position.position_list' | translate }}
+                  </a>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+            <div *ngIf="positions.length > 0 && !positionLoading" class="content">
+              <div class="item row" *ngFor="let position of positions" [routerLink]="['/positions', position.id]">
+                <div class="col-md-2 col-sm-2 col-xs-4 img">
+                  <a  ui-sref="main.show-position({id: position.positionId})" class="img">
+                    <img src="https://placehold.it/100x100" alt="" class="img-responsive" *ngIf="position?.company?.icon === null">
+                    <img [src]="position?.company?.icon?.url['100']" alt="" class="img-responsive" *ngIf="position?.company?.icon !== null">
+                  </a>
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-3 col-xs-8 positions">
+                  <a  class="positionName">
+                    {{position?.name}}
+                  </a>
+                  <div class="time">{{'position.position_publish' | translate}} {{position.createdAt | date: 'yyyy-MM-dd'}}</div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-3 col-xs-9 company">
+                  <a ui-sref="enterprise.company({companyId: position.companyId})" class="companyName">
+                    {{position?.company?.name}}
+                  </a>
+                  <address>{{position?.address}}</address>
+                </div>
+                <!--/.col-->
+
+                <div class="checkList col-sm-2 col-xs-3 col-sm-offset-1">
+                  <a (click)="removeCollectPosition(position?.id, $event); $event.stopPropagation()" *ngIf="position?.bookmarkStatus === true">
+                    <p class="icon star">
+                      <i class="fa fa-star fa-2x"></i>
+                    </p>
+                  </a>
+
+                  <a (click)="collectBookMark(position?.id, $event); $event.stopPropagation()" *ngIf="position?.bookmarkStatus === false">
+                    <p class="icon star">
+                      <i class="fa fa-star-o fa-2x"></i>
+                    </p>
+                  </a>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <pager itemsPerPage="10"
+                 name="page"
+                 [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                 [(ngModel)]="filter.page"
+                 (pageChanged)="changePage($event)"
+                 pageBtnClass="btn btn-link"></pager>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>

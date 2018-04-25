@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    #page {
+      position: relative;
+      font-size: 12px;
+      height: auto;
+      padding: 12px;
+      z-index: 1;
+      zoom: 1;
+      line-height: 1.7;
+    }
+
+    #body {
+      width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border: 1px solid #dedede;
+      border-radius: 3px;
+      overflow: hidden;
+      font-family: 'Hiragino Sans GB', 'Microsoft Yahei', 'SimSun', Arial, 'Helvetica Neue', Helvetica;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    #header {
+      width: 800px;
+      display: flex;
+      flex-flow: wrap;
+    }
+
+    #logo {
+      display: inline-block;
+      height: 85px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 30px;
+      font-size: 60px;
+      font-weight: normal;
+    }
+
+    #content {
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    #position,
+    #post {
+      border-top: 2px solid #dedede;
+    }
+
+    .positions {
+      display: flex;
+    }
+
+    .position {
+      box-sizing: border-box;
+      width: 33%;
+      text-align: center;
+      border-right: 1px solid #dedede;
+      margin: 24px 0;
+    }
+
+    .position:nth-child(3),
+    .position:nth-child(6) {
+      border: none;
+    }
+
+    .logo {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+    }
+
+    h5,
+    ul {
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+    }
+
+    ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    li {
+      width: 50%;
+      text-align: center;
+      height: 20px;
+      overflow: hidden;
+    }
+
+    i {
+      padding-right: 5px;
+      color: #2e7e97;
+      font-size: 12px;
+    }
+
+    b {
+      color: #999;
+    }
+
+    .post {
+      display: flex;
+      padding-top: 14px;
+    }
+
+    .cover {
+      display: inline-block;
+      width: 300px;
+    }
+
+    .msg {
+      margin: auto 24px;
+    }
+
+    h3,
+    h5 {
+      margin: 0 0 0 38px;
+      word-wrap: break-word;
+      width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    h5 {
+      height: 40px;
+    }
+
+    p {
+      width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    span {
+      padding: 1px 13px;
+      border-radius: 4px;
+      background-color: #d9d9d9;
+      color: #666;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 50px;
+      font-size: 12px;
+      font-weight: 200;
+    }
+
+    .footer {
+      margin: 0 auto;
+      width: 600px;
+      color: #b5b5b5;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div id="page">
+  <div id="body">
+    <div id="header">
+      <a href="https://freshlinker.com/">
+        <img id="logo" src="https://freshlinker.com/assets/img/logo.png" alt="">
+      </a>
+      <h1>每週精選</h1>
+    </div>
+
+    <div id="content">
+
+      <!--position-->
+      <div id="position">
+        <div class="positions">
+          {{#positions1}}
+            <div class="position">
+              <a href="https://freshlinker.com/positions/{{id}}">
+                {{#if company.icon}}
+                  <img
+                      src="https://a.freshlinker.com/files/w600-h600/company/{{company.id}}/picture/{{urlKey}}/original.{{company.icon.extension}}"
+                      alt="{{company.name}}" class="logo">
+                {{else}}
+                  <img src="https://freshlinker.com/assets/img/default_company_icon.png" alt="{{company.name}}"
+                       class="logo">
+                {{/if}}
+              </a>
+              <h5><a href="https://freshlinker.com/positions/{{id}}" target="_blank">{{name}}</a></h5>
+              <ul>
+                <li class="year">
+                  <i class="fa fa-star-half-full"></i>
+                  <b>{{experience}}年</b>
+                </li>
+                <li class="suitcase"><i class="fa fa-suitcase"></i>
+                  <b>{{type}}</b>
+                </li>
+              </ul>
+              <ul>
+                <li class="salary"><i class="fa fa-dollar"></i>
+                  <b>{{# if maxSalary}}
+                    {{minSalary}}-{{maxSalary}}
+                  {{else}}
+                    面議
+                  {{/if}}
+                  </b>
+                </li>
+                <li class="edu"><i class="fa fa-graduation-cap"></i>
+                  <b>{{educationLevel.name}}</b>
+                </li>
+              </ul>
+            </div>
+          {{/positions1}}
+        </div>
+        <div class="positions">
+          {{#positions2}}
+            <div class="position">
+              <a href="https://freshlinker.com/positions/{{id}}">
+                {{#if company.icon}}
+                  <img
+                      src="https://a.freshlinker.com/files/w600-h600/company/{{company.id}}/picture/{{urlKey}}/original.{{company.icon.extension}}"
+                      alt="{{company.name}}" class="logo">
+                {{else}}
+                  <img src="https://freshlinker.com/assets/img/default_company_icon.png" alt="{{company.name}}"
+                       class="logo">
+                {{/if}}
+              </a>
+              <h5><a href="https://freshlinker.com/positions/{{id}}" target="_blank">{{name}}</a></h5>
+              <ul>
+                <li class="year">
+                  <i class="fa fa-star-half-full"></i>
+                  <b>{{experience}}年</b>
+                </li>
+                <li class="suitcase"><i class="fa fa-suitcase"></i>
+                  <b>{{type}}</b>
+                </li>
+              </ul>
+              <ul>
+                <li class="salary"><i class="fa fa-dollar"></i>
+                  <b>{{# if maxSalary}}
+                    {{minSalary}}-{{maxSalary}}
+                  {{else}}
+                    面議
+                  {{/if}}
+                  </b>
+                </li>
+                <li class="edu"><i class="fa fa-graduation-cap"></i>
+                  <b>{{educationLevel.name}}</b>
+                </li>
+              </ul>
+            </div>
+          {{/positions2}}
+        </div>
+      </div>
+      <!--position-->
+
+      <!--post-->
+      <div id="post">
+        {{#posts}}
+          <div class="post">
+            <a href="https://freshlinker.com/articles/{{id}}">
+              {{#if cover}}
+                <img class="cover"
+                     src="https://a.freshlinker.com/files/w600-h600/post/{{id}}/image/{{urlKey}}/original.{{cover.extension}}"
+                     alt="{{title}}">
+              {{else}}
+                <img src="https://freshlinker.com/assets/img/idea_1.png" alt="{{title}}" class="cover">
+              {{/if}}
+            </a>
+            <div class="msg">
+              <a href="https://freshlinker.com/articles/{{id}}"><strong>{{title}}</strong></a>
+              {{#if user.firstName}}
+                <p>作者：{{user.firstName}}</p>
+              {{else}}
+                <p>作者：{{company.name}}</p>
+              {{/if}}
+              <p class="tag">
+                {{#tags}}
+                  <span>{{name}}</span>
+                {{/tags}}
+              </p>
+              <p>{{text}}</p>
+            </div>
+          </div>
+        {{/posts}}
+      </div>
+      <!--post-->
+
+    </div>
+  </div>
+
+
+  <!---->
+  <div class="footer">
+    ·FreshLinker團隊·
+  </div>
+  <br><br>
+  <!---->
+  <div class="footer" style="border-top: 1px solid #ddd;">
+    退订请发送unsubscribe至hello@freshlinker.com
+  </div>
+
+  <!--追蹤用戶信息-->
+  <div style="width:1px;height:0;overflow:hidden">
+    <img style="width:0;height:0" src="">
+  </div>
+
+</div>
+</body>
+
+</html>
+
+
+

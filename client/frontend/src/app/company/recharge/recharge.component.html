@@ -1,0 +1,166 @@
+<div class="container">
+  <form class="form-horizontal" name="Form" (ngSubmit)="save()">
+    <div class="row recharge">
+      <div class="head">
+        <h3 class="title">
+          {{'credit.recharge' | translate}}
+        </h3>
+        <p class="content">
+          FreshLinker {{'message.credit_card_each_account_ensure_absolute_security' | translate}}
+          <a [routerLink]="['/about','contact']">{{'message.credit_card_contact_us' | translate}}</a>
+        </p>
+      </div>
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="rechargeLeft col-md-7 col-sm-12 col-xs-12">
+          <h4 class="title">{{'credit.transaction_information' | translate}}</h4>
+          <p class="subTitle">
+            {{'message.credit_card_provide_payment_details' | translate}}
+          </p>
+          <div>
+            <ul class="title list-inline">
+              <li class="active">
+                <img src="../../assets/img/Credit_Card.png" alt="" class="img-responsive">
+                Credit Card
+              </li>
+            </ul>
+            <div class="form-group item">
+              <div class="col-xs-12 content">
+                <label for="name" class="col-xs-12 control-label">
+                  Name on Card
+                </label>
+                <!--/.col-->
+                <div class="col-xs-12">
+                  <input id="name" name="name" type="text" class="form-control"
+                         [(ngModel)]="defaultCredit.name" placeholder="required">
+                </div>
+                <!--/.col-->
+
+              </div>
+              <!--/.col-->
+
+              <div class="col-xs-12 content">
+                <label for="number" class="col-xs-12 control-label">
+                  last4 on Card
+                </label>
+                <!--/.col-->
+                <div class="col-xs-12">
+                  <input id="number" name="number" type="text" class="form-control"
+                         [(ngModel)]="defaultCredit.last4" placeholder="required">
+                </div>
+                <!--/.col-->
+
+              </div>
+              <!--/.col-->
+
+              <div class="col-xs-6 content">
+                <label for="brand" class="col-xs-12 control-label">
+                  Brand
+                </label>
+                <!--/.col-->
+                <div class="col-xs-12">
+                  <input id="brand" name="brand" type="text" class="form-control"
+                         [(ngModel)]="defaultCredit.brand" placeholder="required">
+                </div>
+                <!--/.col-->
+
+
+
+              </div>
+              <!--/.col-->
+
+              <div class="col-xs-6 content">
+                <label for="country" class="col-xs-12 control-label">
+                  Country
+                </label>
+                <!--/.col-->
+                <div class="col-xs-12">
+                  <input id="country" name="country" type="text" class="form-control"
+                         [(ngModel)]="defaultCredit.country" placeholder="required">
+                </div>
+                <!--/.col-->
+
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+        <div class="rechargeRight col-md-5 col-sm-12 col-xs-12">
+          <div class="rechargeRightContent">
+            <h4 class="title">{{'credit.order_details' | translate}}</h4>
+            <p class="subTitle">
+              {{'message.credit_card_confirm_amount_recharge' | translate}}
+            </p>
+            <div class="itemMoney row">
+              <div class="col-xs-12 content">
+                <div class="col-md-9 col-sm-8 col-xs-6 paddingLeft">
+                  {{'credit.current_balance' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 col-sm-4 col-xs-6 paddingLeft">
+                  <div class="loading text-center" *ngIf="tableLoading">
+                    <i class="fa fa-3x fa-spinner fa-spin"></i>
+                  </div>
+                  <div *ngIf="!tableLoading">
+                    HKD {{enterprise.balance}}
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+              <!--/.col-->
+              <div class="col-xs-12 content">
+                <label for="money" class="col-xs-12 control-label paddingLeft text-left">
+                  {{'credit.recharge_amount' | translate}}
+                </label>
+                <!--/.col-->
+                <div class="col-xs-12 paddingLeft">
+                  <input id="money" name="money" type="number" class="form-control"
+                         [(ngModel)]="money" placeholder="required" min="27">
+                </div>
+                <!--/.col-->
+
+              </div>
+              <!--/.col-->
+            </div>
+
+            <div class="itemTotal row">
+              <div class="content col-xs-12">
+                <p class="other col-xs-12 paddingLeft">
+                  {{'message.credit_card_will_charged' | translate}} <span>HKD {{money}}</span> {{'message.credit_card_to_recharge_current_account' | translate}}<span>{{myDate | date: 'yyyy-MM-dd'}}</span>{{'message.credit_card_with_immediate_effect' | translate}}。
+                </p>
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+          <div class="row button text-center">
+            <div class="col-sm-6 col-xs-12">
+              <a [routerLink]="['/company',companyId,'dashboard']" type="button" class=" btn btn-default">
+                {{'button.return' | translate}}
+              </a>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-xs-12">
+              <button type="submit" class="btn btn-success">
+                            <span *ngIf="saveLoading">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                <span *ngIf="!saveLoading">
+                                {{'credit.confirm_payment' | translate}}
+                            </span>
+              </button>
+            </div>
+            <!--/.col-->
+          </div>
+        </div>
+        <!--/.col-->
+      </div>
+
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,1280 @@
+.intercom-mobile-messenger-active {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: fixed
+}
+
+.intercom-conversation-body, .intercom-conversations-body, .intercom-messenger, .intercom-scrollable {
+  -webkit-overflow-scrolling: touch
+}
+
+@font-face {
+  font-family: intercom-font;
+  src: url(https://js.intercomcdn.com/fonts/proximanova-regular.a7942249.woff) format("woff")
+}
+
+@font-face {
+  font-family: intercom-font;
+  src: url(https://js.intercomcdn.com/fonts/proximanova-semibold.46e3f047.woff) format("woff");
+  font-weight: 700
+}
+
+@font-face {
+  font-family: intercom-font;
+  src: url(https://js.intercomcdn.com/fonts/proximanova-regular-italic.053a1112.woff) format("woff");
+  font-style: italic
+}
+
+@font-face {
+  font-family: intercom-font;
+  src: url(https://js.intercomcdn.com/fonts/proximanova-semibold-italic.660bf63e.woff) format("woff");
+  font-weight: 700;
+  font-style: italic
+}
+
+#intercom-container a, #intercom-container abbr, #intercom-container acronym, #intercom-container address, #intercom-container applet, #intercom-container article, #intercom-container aside, #intercom-container audio, #intercom-container b, #intercom-container big, #intercom-container blockquote, #intercom-container button, #intercom-container canvas, #intercom-container caption, #intercom-container center, #intercom-container cite, #intercom-container code, #intercom-container dd, #intercom-container del, #intercom-container details, #intercom-container dfn, #intercom-container div, #intercom-container div.form, #intercom-container dl, #intercom-container dt, #intercom-container em, #intercom-container fieldset, #intercom-container figcaption, #intercom-container figure, #intercom-container footer, #intercom-container form, #intercom-container h1, #intercom-container h2, #intercom-container h3, #intercom-container h4, #intercom-container h5, #intercom-container h6, #intercom-container header, #intercom-container hgroup, #intercom-container i, #intercom-container iframe, #intercom-container img, #intercom-container input, #intercom-container input[type], #intercom-container ins, #intercom-container kbd, #intercom-container label, #intercom-container legend, #intercom-container li, #intercom-container mark, #intercom-container menu, #intercom-container nav, #intercom-container object, #intercom-container ol, #intercom-container p, #intercom-container pre, #intercom-container q, #intercom-container s, #intercom-container samp, #intercom-container section, #intercom-container small, #intercom-container span, #intercom-container strike, #intercom-container strong, #intercom-container sub, #intercom-container summary, #intercom-container sup, #intercom-container table, #intercom-container tbody, #intercom-container td, #intercom-container textarea, #intercom-container tfoot, #intercom-container th, #intercom-container thead, #intercom-container time, #intercom-container tr, #intercom-container tt, #intercom-container u, #intercom-container ul, #intercom-container var, #intercom-container video {
+  font-family: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size-adjust: none;
+  font-size: 100%;
+  font-style: normal;
+  letter-spacing: normal;
+  font-stretch: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font: normal normal 100% "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  text-align-last: auto;
+  text-decoration: none;
+  -webkit-text-emphasis: none;
+  text-emphasis: none;
+  text-height: auto;
+  text-indent: 0;
+  text-justify: auto;
+  text-outline: none;
+  text-shadow: none;
+  text-transform: none;
+  text-wrap: normal;
+  alignment-adjust: auto;
+  alignment-baseline: baseline;
+  -webkit-animation: none 0 ease 0 1 normal;
+  animation: none 0 ease 0 1 normal;
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+  -webkit-appearance: normal;
+  -moz-appearance: normal;
+  appearance: normal;
+  azimuth: center;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  background: none 0 0 auto repeat scroll padding-box transparent;
+  background-color: transparent;
+  background-image: none;
+  baseline-shift: baseline;
+  binding: none;
+  bleed: 6pt;
+  bookmark-label: content();
+  bookmark-level: none;
+  bookmark-state: open;
+  bookmark-target: none;
+  border: 0 none transparent;
+  border-radius: 0;
+  bottom: auto;
+  box-align: stretch;
+  -webkit-box-decoration-break: slice;
+  box-decoration-break: slice;
+  box-direction: normal;
+  box-flex: 0.0;
+  box-flex-group: 1;
+  box-lines: single;
+  box-ordinal-group: 1;
+  box-orient: inline-axis;
+  box-pack: start;
+  box-shadow: none;
+  box-sizing: content-box;
+  -webkit-column-break-after: auto;
+  break-after: auto;
+  -webkit-column-break-before: auto;
+  break-before: auto;
+  -webkit-column-break-inside: auto;
+  break-inside: auto;
+  caption-side: top;
+  clear: none;
+  clip: auto;
+  color: inherit;
+  color-profile: auto;
+  -webkit-column-count: auto;
+  -moz-column-count: auto;
+  column-count: auto;
+  -webkit-column-fill: balance;
+  -moz-column-fill: balance;
+  column-fill: balance;
+  -webkit-column-gap: normal;
+  -moz-column-gap: normal;
+  column-gap: normal;
+  -webkit-column-rule: medium medium #1f1f1f;
+  -moz-column-rule: medium medium #1f1f1f;
+  column-rule: medium medium #1f1f1f;
+  -webkit-column-span: 1;
+  -moz-column-span: 1;
+  column-span: 1;
+  -webkit-column-width: auto;
+  -moz-column-width: auto;
+  column-width: auto;
+  -webkit-columns: auto auto;
+  -moz-columns: auto auto;
+  columns: auto auto;
+  content: normal;
+  counter-increment: none;
+  counter-reset: none;
+  crop: auto;
+  cursor: auto;
+  direction: ltr;
+  display: inline;
+  dominant-baseline: auto;
+  drop-initial-after-adjust: text-after-edge;
+  drop-initial-after-align: baseline;
+  drop-initial-before-adjust: text-before-edge;
+  drop-initial-before-align: caps-height;
+  drop-initial-size: auto;
+  drop-initial-value: initial;
+  elevation: level;
+  empty-cells: show;
+  fit: fill;
+  fit-position: 0 0;
+  float: none;
+  float-offset: 0 0;
+  grid-columns: none;
+  grid-rows: none;
+  hanging-punctuation: none;
+  height: auto;
+  hyphenate-after: auto;
+  hyphenate-before: auto;
+  hyphenate-character: auto;
+  hyphenate-lines: no-limit;
+  hyphenate-resource: none;
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+  icon: auto;
+  image-orientation: auto;
+  image-rendering: auto;
+  image-resolution: normal;
+  inline-box-align: last;
+  left: auto;
+  line-height: inherit;
+  line-stacking: inline-line-height exclude-ruby consider-shifts;
+  list-style: disc outside none;
+  margin: 0;
+  marks: none;
+  marquee-direction: forward;
+  marquee-loop: 1;
+  marquee-play-count: 1;
+  marquee-speed: normal;
+  marquee-style: scroll;
+  max-height: none;
+  max-width: none;
+  min-height: 0;
+  min-width: 0;
+  move-to: normal;
+  nav-down: auto;
+  nav-index: auto;
+  nav-left: auto;
+  nav-right: auto;
+  nav-up: auto;
+  opacity: 1;
+  orphans: 2;
+  outline: medium none invert;
+  outline-offset: 0;
+  overflow: visible;
+  overflow-style: auto;
+  padding: 0;
+  page: auto;
+  page-break-after: auto;
+  page-break-before: auto;
+  page-break-inside: auto;
+  page-policy: start;
+  -webkit-perspective: none;
+  perspective: none;
+  -webkit-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+  pointer-events: auto;
+  position: static;
+  presentation-level: 0;
+  punctuation-trim: none;
+  quotes: none;
+  rendering-intent: auto;
+  resize: none;
+  right: auto;
+  rotation: 0;
+  rotation-point: 50% 50%;
+  ruby-align: auto;
+  ruby-overhang: none;
+  ruby-position: before;
+  ruby-span: none;
+  size: auto;
+  string-set: none;
+  table-layout: auto;
+  top: auto;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  -webkit-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  -webkit-transform-style: flat;
+  transform-style: flat;
+  transition: all 0 ease 0;
+  unicode-bidi: normal;
+  vertical-align: baseline;
+  white-space: normal;
+  white-space-collapse: collapse;
+  widows: 2;
+  width: auto;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  z-index: auto;
+  text-align: start;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+#intercom-container address, #intercom-container article, #intercom-container aside, #intercom-container blockquote, #intercom-container canvas, #intercom-container center, #intercom-container dd, #intercom-container details, #intercom-container dir, #intercom-container div, #intercom-container div.form, #intercom-container dl, #intercom-container dt, #intercom-container fieldset, #intercom-container figcaption, #intercom-container figure, #intercom-container footer, #intercom-container form, #intercom-container frame, #intercom-container frameset, #intercom-container h1, #intercom-container h2, #intercom-container h3, #intercom-container h4, #intercom-container h5, #intercom-container h6, #intercom-container header, #intercom-container hgroup, #intercom-container hr, #intercom-container menu, #intercom-container nav, #intercom-container noframes, #intercom-container ol, #intercom-container p, #intercom-container pre, #intercom-container section, #intercom-container summary, #intercom-container ul {
+  display: block
+}
+
+#intercom-container li {
+  display: list-item
+}
+
+#intercom-container table {
+  display: table
+}
+
+#intercom-container tr {
+  display: table-row
+}
+
+#intercom-container thead {
+  display: table-header-group
+}
+
+#intercom-container tbody {
+  display: table-row-group
+}
+
+#intercom-container tfoot {
+  display: table-footer-group
+}
+
+#intercom-container col {
+  display: table-column
+}
+
+#intercom-container colgroup {
+  display: table-column-group
+}
+
+#intercom-container td, #intercom-container th {
+  display: table-cell
+}
+
+#intercom-container caption {
+  display: table-caption
+}
+
+#intercom-container input, #intercom-container select {
+  display: inline-block
+}
+
+#intercom-container b, #intercom-container strong {
+  font-weight: 700
+}
+
+#intercom-container em, #intercom-container i {
+  font-style: italic
+}
+
+#intercom-container b > em, #intercom-container b > i, #intercom-container em > b, #intercom-container em > strong, #intercom-container i > b, #intercom-container i > strong, #intercom-container strong > em, #intercom-container strong > i {
+  font-weight: 700;
+  font-style: italic
+}
+
+#intercom-container input, #intercom-container textarea {
+  cursor: text
+}
+
+#intercom-container input::-moz-selection, #intercom-container textarea::-moz-selection {
+  background-color: #b3d4fc
+}
+
+#intercom-container input::selection, #intercom-container textarea::selection {
+  background-color: #b3d4fc
+}
+
+#intercom-container input::-webkit-input-placeholder, #intercom-container textarea::-webkit-input-placeholder {
+  font-family: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size-adjust: none;
+  font-size: 100%;
+  font-style: normal;
+  letter-spacing: normal;
+  font-stretch: normal;
+  font-variant: normal;
+  font-weight: 400;
+  font: normal normal 100% "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  text-align-last: auto;
+
+  text-decoration:none}
+#intercom-container-body {
+  overflow: hidden;
+}
+
+#intercom-container {
+  line-height: 1;
+}
+
+#intercom-container .intercom-messenger {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#intercom-container .intercom-messenger-background {
+  position: absolute;
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+#intercom-container .intercom-conversations {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#intercom-container .intercom-conversations-header {
+  z-index: 2147483001;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 75px;
+  background-color: #4a80bc;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+
+#intercom-container .intercom-header-buttons-close {
+  z-index: 2147483000;
+  background-image: url(https://js.intercomcdn.com/images/messenger-close.c30463a5.png);
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
+#intercom-container .intercom-header-buttons-back-contents, #intercom-container .intercom-header-buttons-close-contents {
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  margin: 13px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+#intercom-container .intercom-conversations-header-title {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.1em;
+}
+#intercom-container .intercom-conversations-header-app-name {
+  color: hsla(0,0%,100%,.8);
+  font-size: 13px;
+  line-height: 1.1em;
+}
+
+#intercom-container .intercom-conversations-body {
+  position: absolute;
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+}
+#intercom-container .intercom-conversations-body-conversations {
+  padding-bottom: 105px;
+}
+
+#intercom-container .intercom-conversation-summary {
+  padding: 32px 30px;
+  border-top: 1px solid #f3f4f5;
+  position: relative;
+}
+#intercom-container .intercom-conversation-summary-avatar {
+  position: absolute;
+  left: 30px;
+  top: calc(50% - 17.5px);
+}
+#intercom-container .intercom-conversation-summary * {
+  cursor: pointer;
+}
+#intercom-container .intercom-conversation-summary:hover .intercom-conversation-summary-footer {
+  display: block;
+}
+#intercom-container .intercom-conversation-summary-avatar .intercom-avatar {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 17.5px;
+}
+
+#intercom-container .intercom-conversation-summary-body {
+  position: relative;
+  margin-left: 50px;
+  width: 70%;
+}
+#intercom-container .intercom-conversation-summary-meta {
+  margin-bottom: 2px;
+}
+#intercom-container .intercom-conversation-summary-body-author {
+  float: left;
+  color: rgba(73,76,93,.7);
+}
+#intercom-container .intercom-conversation-summary-footer {
+  width: 14px;
+  height: 14px;
+  z-index: 0;
+  display: none;
+  background-image: url(../../assets/img/closeItem.png);
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 30px;
+  top: 32px;
+}
+#intercom-container .intercom-conversation-summary-body-author, #intercom-container .intercom-conversation-summary-timestamp {
+  font-size: 13px;
+  max-width: 49%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#intercom-container .intercom-conversation-summary-timestamp {
+  float: right;
+  text-align: right;
+  color: rgba(73,76,93,.7);
+}
+#intercom-container .intercom-conversation-summary-content {
+  position: relative;
+}
+#intercom-container .intercom-conversation-summary-content-container {
+  margin-right: 25px;
+  color: #3a3c4c;
+  font-size: 13px;
+  line-height: 19px;
+}
+#intercom-container .intercom-conversation-summary-content-container span {
+  display: inline-block;
+}
+#intercom-container .intercom-conversation-summary-content-author-prefix {
+  float: left;
+  color: rgba(73,76,93,.7);
+  white-space: pre;
+}
+#intercom-container .intercom-conversation-summary-content-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}
+#intercom-container .intercom-conversation-summary-user-icon {
+  background-size: 16px 14px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background: red;
+  width: 30px;
+  height: 15px;
+  text-align: center;
+  border-radius: 20px;
+  color: #ffffff;
+  position: absolute;
+  top: -15px;
+  font-size: 14px;
+  bottom: 0;
+  right: 0;
+}
+#intercom-container .intercom-admin-profile-compact-avatar .intercom-avatar {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+}
+#intercom-container .intercom-admin-profile-compact-avatar .intercom-avatar img {
+  width: 32px;
+  height: 32px;
+}
+
+#intercom-container .sk-circle {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+#intercom-container .sk-circle .sk-child {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#intercom-container .sk-circle .sk-child:before {
+  content: '';
+  display: block;
+  margin: 0 auto;
+  width: 15%;
+  height: 15%;
+  background-color: #dddddd;
+  border-radius: 100%;
+  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+}
+#intercom-container .sk-circle .sk-circle2 {
+  -webkit-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  transform: rotate(30deg); }
+#intercom-container .sk-circle .sk-circle3 {
+  -webkit-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  transform: rotate(60deg); }
+#intercom-container .sk-circle .sk-circle4 {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+#intercom-container .sk-circle .sk-circle5 {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg); }
+#intercom-container .sk-circle .sk-circle6 {
+  -webkit-transform: rotate(150deg);
+  -ms-transform: rotate(150deg);
+  transform: rotate(150deg); }
+#intercom-container .sk-circle .sk-circle7 {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+#intercom-container .sk-circle .sk-circle8 {
+  -webkit-transform: rotate(210deg);
+  -ms-transform: rotate(210deg);
+  transform: rotate(210deg); }
+#intercom-container .sk-circle .sk-circle9 {
+  -webkit-transform: rotate(240deg);
+  -ms-transform: rotate(240deg);
+  transform: rotate(240deg); }
+#intercom-container .sk-circle .sk-circle10 {
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+#intercom-container .sk-circle .sk-circle11 {
+  -webkit-transform: rotate(300deg);
+  -ms-transform: rotate(300deg);
+  transform: rotate(300deg); }
+#intercom-container .sk-circle .sk-circle12 {
+  -webkit-transform: rotate(330deg);
+  -ms-transform: rotate(330deg);
+  transform: rotate(330deg); }
+#intercom-container .sk-circle .sk-circle2:before {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s; }
+#intercom-container .sk-circle .sk-circle3:before {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s; }
+#intercom-container .sk-circle .sk-circle4:before {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+#intercom-container .sk-circle .sk-circle5:before {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s; }
+#intercom-container .sk-circle .sk-circle6:before {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s; }
+#intercom-container .sk-circle .sk-circle7:before {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s; }
+#intercom-container .sk-circle .sk-circle8:before {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s; }
+#intercom-container .sk-circle .sk-circle9:before {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s; }
+#intercom-container .sk-circle .sk-circle10:before {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s; }
+#intercom-container .sk-circle .sk-circle11:before {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s; }
+#intercom-container .sk-circle .sk-circle12:before {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s; }
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+}
+
+@keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+}
+#intercom-container .intercom-admin-profile-compact-avatar {
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  float: left;
+  padding-right: 10px;
+  position: relative;
+}
+
+#intercom-container .intercom-conversations-footer {
+  z-index: 2147483001;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 6px 6px;
+  height: 90px;
+  pointer-events: none;
+  display: none;
+  background: linear-gradient(0deg,#fff,hsla(0,0%,100%,0));
+}
+#intercom-container .intercom-conversations-new-conversation-button {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  height: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 45px;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  border-radius: 40px;
+  background-color: #7e93af;
+  text-align: center;
+  transition: all .12s;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#intercom-container .intercom-conversations-new-conversation-button span {
+  background-image: url(https://js.intercomcdn.com/images/new-conversation.40b12105.png);
+  background-repeat: no-repeat;
+  background-position: 0;
+  background-size: 15px 14px;
+  padding-left: 24px;
+  white-space: nowrap;
+}
+#intercom-container .intercom-app-launcher-enabled .intercom-messenger-frame {
+  height: calc(100% - 20px - 75px - 20px)!important;
+  bottom: calc(20px + 75px)!important;
+}
+#intercom-container .intercom-messenger-frame {
+  z-index: 2147483000!important;
+  position: fixed!important;
+  bottom: 20px!important;
+  right: 20px!important;
+  height: calc(100% - 20px - 20px)!important;
+  width: 370px!important;
+  min-height: 250px!important;
+  max-height: 590px!important;
+  box-shadow: 0 5px 40px rgba(0,0,0,.16)!important;
+  border-radius: 8px!important;
+  overflow: hidden!important;
+  opacity: 1!important;
+}
+#intercom-container .intercom-conversation-summary-avatar .intercom-avatar img {
+  width: 35px;
+  height: 35px;
+}
+#intercom-container .intercom-avatar img {
+  border-radius: 50%;
+}
+#intercom-container .intercom-conversations-header-body {
+  padding: 20px 0 0 80px;
+}
+
+
+
+
+
+
+#intercom-container .intercom-launcher-frame {
+  z-index: 2147483000!important;
+  position: fixed!important;
+  bottom: 20px!important;
+  right: 20px!important;
+  width: 60px!important;
+  height: 60px!important;
+  border-radius: 50%!important;
+  transition: box-shadow 80ms ease-in-out!important;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06),0 2px 32px rgba(0,0,0,.16)!important;
+}
+#intercom-container .intercom-launcher-frame .news{
+  position: absolute;
+  top: -6px;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  z-index: 999;
+}
+#intercom-container .intercom-launcher-frame .circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #f30808;
+  box-shadow: 0px 0px 5px #404040;
+  text-align: center;
+  color: #fff;
+  line-height: 20px;
+  font-weight: bold;
+}
+#intercom-container .intercom-launcher-frame {
+  -webkit-animation: intercom-launcher-frame-appear .25s ease!important;
+  animation: intercom-launcher-frame-appear .25s ease!important;
+}
+#intercom-container .intercom-launcher {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background: #4a80bc;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  font-family: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#intercom-container .intercom-launcher-open-icon {
+  background-image: url('./../../assets/img/chat_1.png');
+  background-size: 32px 36px;
+  background-repeat: no-repeat;
+  background-position: center 14px;
+  opacity: 1;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+}
+#intercom-container .intercom-launcher-close-icon {
+  background-image: url('./../../assets/img/chat.png');
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  opacity: 1;
+  -webkit-transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  transform: rotate(-30deg);
+}
+#intercom-container .intercom-launcher-close-icon, #intercom-container .intercom-launcher-open-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  transition: opacity .08s linear,-webkit-transform .16s linear;
+  transition: transform .16s linear,opacity .08s linear;
+  transition: transform .16s linear,opacity .08s linear,-webkit-transform .16s linear;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+#intercom-container  .companyChat{
+  display: none;
+}
+/*#intercom-container  .userChat{*/
+/*display: none;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+#intercom-container .intercom-conversation {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+#intercom-container .active{
+  display: block!important;
+}
+
+#intercom-container .intercom-header-buttons-back {
+  background-image: url(https://js.intercomcdn.com/images/back-icon.d97c845a.png);
+  background-size: 8px 13px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3147483000;
+  background-position: 50%;
+  width: 75px;
+  height: 75px;
+  cursor: pointer;
+}
+#intercom-container .intercom-header-buttons-back-contents, #intercom-container .intercom-header-buttons-close-contents {
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  margin: 13px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+#intercom-container .intercom-header-buttons-close {
+  z-index: 3147483000;
+  background-image: url(https://js.intercomcdn.com/images/messenger-close.c30463a5.png);
+  background-size: 14px 14px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  position: absolute;
+  cursor: pointer;
+  display: block;
+  top: 0;
+  right: 0;
+}
+#intercom-container .intercom-header-buttons-close-contents {
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+  margin: 13px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+#intercom-container .intercom-conversation-body-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#intercom-container .intercom-conversation .intercom-conversation-backgrounds, #intercom-container .intercom-conversation .intercom-link {
+  opacity: 1;
+  -webkit-animation-name: intercom-messenger-view-fade-in;
+  animation-name: intercom-messenger-view-fade-in;
+  -webkit-animation-duration: .32s;
+  animation-duration: .32s;
+  -webkit-animation-timing-function: cubic-bezier(.23,1,.32,1);
+  animation-timing-function: cubic-bezier(.23,1,.32,1);
+  -webkit-animation-delay: 80ms;
+  animation-delay: 80ms;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+}
+#intercom-container .intercom-conversation-background {
+  position: absolute;
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  opacity: .8;
+}
+#intercom-container .intercom-conversation-body-snapped {
+  transition: -webkit-transform .15s ease-out;
+  transition: transform .15s ease-out;
+  transition: transform .15s ease-out,-webkit-transform .15s ease-out;
+}
+#intercom-container .intercom-conversation-body {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#intercom-container .intercom-conversation-body-profile {
+  background-color: #4a80bc;
+  position: absolute;
+  width: 100%;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  z-index: 2147483001;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-full {
+  padding-bottom: 0;
+}
+#intercom-container .intercom-team-profile-full {
+  padding: 18px 0 30px;
+  box-sizing: border-box;
+}
+#intercom-container .intercom-team-profile-full-team-name {
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.1em;
+  white-space: nowrap;
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-full-avatar-container {
+  padding-top: 45px;
+}
+
+#intercom-container .intercom-team-profile-full-avatar-container {
+  width: 100%;
+  text-align: center;
+  padding-top: 22px;
+  padding-bottom: 18px;
+}
+#intercom-container .intercom-team-profile-full-avatar {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: top;
+  text-align: center;
+}
+#intercom-container .intercom-team-profile-full-avatar .intercom-avatar {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 25px;
+}
+#intercom-container .intercom-avatar {
+  margin: 0 auto;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-full-intro {
+  margin-bottom: 30px;
+}
+#intercom-container .intercom-team-profile-full-intro {
+  color: hsla(0,0%,100%,.8);
+  font-size: 13px;
+  width: 240px;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+#intercom-container .intercom-team-profile-full-intro span {
+  word-break: break-word;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-response-delay {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #fff;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-response-delay-wrapper {
+  text-align: center;
+  margin: 15px;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-response-delay-wrapper {
+  text-align: center;
+  margin: 15px;
+}
+#intercom-container .intercom-team-profile-response-delay-text {
+  white-space: nowrap;
+  text-align: center;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-response-delay-help-center-link-wrapper {
+  text-align: center;
+  margin: 12px;
+}
+#intercom-container .intercom-team-profile-office-hours .intercom-team-profile-response-delay-help-center-link {
+  text-decoration: underline;
+}
+#intercom-container a:link, #intercom-container a:visited {
+  color: inherit;
+  background: transparent;
+  text-shadow: none;
+}
+#intercom-container .intercom-conversation-body-parts {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+}
+#intercom-container .intercom-conversation-body-parts-wrapper {
+  overflow: hidden;
+}
+
+#intercom-container .intercom-conversation .intercom-conversation-parts {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-animation-name: intercom-messenger-view-slide-left-in;
+  animation-name: intercom-messenger-view-slide-left-in;
+  -webkit-animation-duration: .32s;
+  animation-duration: .32s;
+  -webkit-animation-timing-function: cubic-bezier(.23,1,.32,1);
+  animation-timing-function: cubic-bezier(.23,1,.32,1);
+  -webkit-animation-delay: .23s;
+  animation-delay: .23s;
+  -webkit-animation-fill-mode: backwards;
+  animation-fill-mode: backwards;
+}
+#intercom-container .intercom-conversation-parts {
+  padding: 30px 35px 40px;
+}
+#intercom-container .intercom-conversation-parts {
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s,-webkit-transform .2s;
+}
+#intercom-container .intercom-conversation-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0 0 6px 6px;
+}
+#intercom-container .intercom-conversation .intercom-conversation-footer {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-animation-name: intercom-composer-slide-in;
+  animation-name: intercom-composer-slide-in;
+  -webkit-animation-duration: .32s;
+  animation-duration: .32s;
+  -webkit-animation-timing-function: cubic-bezier(.23,1,.32,1);
+  animation-timing-function: cubic-bezier(.23,1,.32,1);
+  -webkit-animation-delay: 80ms;
+  animation-delay: 80ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+#intercom-container .intercom-composer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 55px;
+  max-height: 200px;
+}
+#intercom-container .intercom-composer pre {
+  visibility: hidden;
+}
+#intercom-container .intercom-composer pre, #intercom-container .intercom-composer textarea {
+  box-sizing: border-box;
+  padding: 18px;
+  padding-right: 100px;
+  padding-left: 30px;
+  width: 100%;
+  height: 100%;
+  font-family: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.33;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+#intercom-container .intercom-composer textarea {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #565867;
+  background-color: #f4f7f9;
+  resize: none;
+  border: none;
+  transition: background-color .2s ease,box-shadow .2s ease;
+}
+#intercom-container .intercom-composer pre, #intercom-container .intercom-composer textarea {
+  box-sizing: border-box;
+  padding: 18px;
+  padding-right: 100px;
+  padding-left: 30px;
+  width: 100%;
+  height: 100%;
+  font-family: "intercom-font", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.33;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+#intercom-container .intercom-composer-buttons {
+  position: absolute;
+  top: 0;
+  right: 30px;
+}
+#intercom-container .intercom-composer-gif-button {
+  width: 40px;
+}
+#intercom-container .intercom-composer-gif-button:before {
+  background-image: url(https://js.intercomcdn.com/images/gif-button.0eaa0461.png);
+  background-size: 30px 18px;
+  background-repeat: no-repeat;
+  content: " ";
+  width: 30px;
+  height: 18px;
+  left: 5px;
+  border-radius: 10px;
+}
+#intercom-container .intercom-team-profile-full-avatar .intercom-avatar img {
+  width: 50px;
+  height: 50px;
+}
+#intercom-container .intercom-avatar img {
+  border-radius: 50%;
+}
+
+#intercom-container .intercom-conversation-part {
+  padding-bottom: 10px;
+}
+#intercom-container .intercom-comment-container-user {
+  float: right;
+}
+#intercom-container .intercom-comment-container, #intercom-container .intercom-comment-container-borderless-single {
+  position: relative;
+  max-width: 75%;
+}
+#intercom-container .intercom-comment-container-user .intercom-comment {
+  color: #fff;
+  background-color: #4a80bc;
+}
+#intercom-container .intercom-comment {
+  padding: 17px 20px;
+  border-radius: 6px;
+  position: relative;
+}
+#intercom-container .intercom-conversation-part-user .intercom-conversation-part-metadata, #intercom-container .intercom-conversation-part-user .intercom-conversation-part-metadata-save-state {
+  float: right;
+}
+#intercom-container .intercom-conversation-part-metadata {
+  clear: both;
+  color: #b8c3ca;
+  font-size: 13px;
+  padding-top: 5px;
+  width: 75%;
+}
+#intercom-container .intercom-conversation-part-user .intercom-conversation-part-metadata-save-state {
+  float: right;
+}
+#intercom-container .intercom-conversation-part-metadata-save-state {
+  white-space: nowrap;
+}
+#intercom-container .intercom-conversation-part-grouped, #intercom-container .intercom-conversation-part-last {
+  padding-bottom: 3px;
+}
+#intercom-container .intercom-comment-container-admin, #intercom-container .intercom-comment-container-other-user {
+  float: left;
+  padding-left: 45px;
+}
+#intercom-container .intercom-comment-container, #intercom-container .intercom-comment-container-borderless-single {
+  position: relative;
+  max-width: 75%;
+}
+#intercom-container .intercom-comment-container-admin .intercom-comment {
+  color: #263238;
+  background-color: #f4f7f9;
+}
+#intercom-container .intercom-comment {
+  padding: 17px 20px;
+  border-radius: 6px;
+  position: relative;
+}
+#intercom-container .intercom-chat-card .intercom-block-paragraph, #intercom-container .intercom-chat .intercom-block-paragraph, #intercom-container .intercom-comment .intercom-block-paragraph, #intercom-container .intercom-note-card .intercom-block-paragraph, #intercom-container .intercom-post-card .intercom-block-paragraph {
+  font-size: 14px;
+  line-height: 1.4;
+}
+#intercom-container .intercom-conversation-part {
+  padding-bottom: 10px;
+}
+#intercom-container .intercom-conversation-part:after, #intercom-container .intercom-conversation-part:before {
+  content: " ";
+  display: table;
+}
+
+#intercom-container .intercom-conversation-part:after {
+  clear: both;
+}
+#intercom-container .intercom-comment-container-admin-avatar {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+}
+#intercom-container .intercom-comment-container-admin-avatar .intercom-avatar {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 15px;
+}
+#intercom-container .intercom-avatar {
+  margin: 0 auto;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+#intercom-container .intercom-comment-container-admin-avatar .intercom-avatar img {
+  width: 30px;
+  height: 30px;
+}
+#intercom-container .intercom-avatar img {
+  border-radius: 50%;
+}
+
+#intercom-container .intercom-composer-buttons {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+#intercom-container .intercom-composer-buttons .intercom-composer-gif-button {
+  padding: 10px 20px;
+  background: #1abc9c;
+  color: #fff;
+  border-radius: 5px;
+}
+#intercom-container .intercom-conversation-parts-date-divider:first-child {
+  padding-top: 0;
+}
+#intercom-container .intercom-conversation-parts-date-divider {
+  text-align: center;
+  color: #b8c3ca;
+  font-size: 13px;
+  clear: both;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+

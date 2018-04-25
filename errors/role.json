@@ -1,0 +1,12 @@
+{
+  "existsRole": {
+    "statusCode": 400,
+    "message": "User already exists.",
+    "code": 4001
+  },
+  "chooseRole": {
+    "statusCode": 400,
+    "message": "Please choose one plan.",
+    "code": 4002
+  }
+}

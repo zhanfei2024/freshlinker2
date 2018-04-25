@@ -1,0 +1,1041 @@
+<div id="element-id"></div>
+<div class="pricing">
+  <div class="container">
+
+    <div class="upgrade" style="margin-bottom: 20px">
+      <h2 class="title text-center">
+        Pricing Guide
+      </h2>
+      <p class="subTitle text-center">
+        {{'pricing.subtitle' | translate}}
+      </p>
+      <div class="row content">
+        <div class="item lite">
+          <div class="loading text-center" *ngIf="oneLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!oneLoading">
+            <div class="itemContent">
+              <div class="content">
+                <h3>{{one.displayName}}</h3>
+                <p class="price" *ngIf="one.price !== 0">
+									<span class="currency">
+										$
+									</span>
+                  {{one.price}}
+                </p>
+                <p class="price" *ngIf="one.price === 0">
+                  FREE!
+                </p>
+                <div class="tip">
+                  {{'credit.list' | translate}}:
+                  <em class="currency">
+                    ${{one.oldPrice}}
+                  </em>
+
+                </div>
+              </div>
+              <a (click)="goPositonState('0')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+              </a>
+            </div>
+            <div class="itemMain">
+              <div class="itemAbout">
+                <h3><strong>{{one.displayName}}</strong> {{'price.includes' | translate}}</h3>
+                <p>
+                  {{'price.features' | translate}}
+                </p>
+              </div>
+              <ul class="itemList">
+                <li>
+									<span>
+										<strong>{{one.positionQuota}}</strong> {{'price.active_jobs_advertisements' | translate}}
+									</span>
+                </li>
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.complementary_company_page' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.applicant_tracking' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <li>
+									<span>
+										{{'price.support' | translate}}: {{'price.standard' | translate}}
+									</span>
+                </li>
+                <li>
+									<span>
+										{{'price.validity' | translate}}: <strong>{{one.positionEffectiveDay}}</strong> {{'price.days' | translate}}
+									</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+
+        <div class="item standard">
+          <div class="loading text-center" *ngIf="threeLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!threeLoading">
+            <div class="itemContent">
+              <div class="content">
+                <h3>{{three.displayName}}</h3>
+                <p class="price">
+								<span class="currency">
+									$
+								</span>
+                  {{three.price}}
+                </p>
+                <div class="tip">
+                  {{'credit.list' | translate}}:
+                  <em class="currency">
+                    ${{three.oldPrice}}
+                  </em>
+                </div>
+              </div>
+              <a (click)="goPositonState('1')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+              </a>
+            </div>
+            <div class="itemMain">
+              <div class="itemAbout">
+                <h3>{{three.displayName}} {{'price.includes' | translate}}</h3>
+                <p>
+                  {{'price.features' | translate}}
+                </p>
+              </div>
+              <ul class="itemList">
+                <li>
+									<span>
+										<strong>{{three.positionQuota}}</strong> {{'price.active_jobs_advertisements' | translate}}
+									</span>
+                </li>
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.complementary_company_page' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.applicant_tracking' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <li>
+									<span>
+										{{'price.support' | translate}}: {{'price.standard' | translate}}
+									</span>
+                </li>
+                <li>
+									<span>
+										{{'price.validity' | translate}}: <strong>{{three.positionEffectiveDay}}</strong> {{'price.days' | translate}}
+									</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+
+        <div class="item professional">
+          <div class="loading text-center" *ngIf="sixLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!sixLoading">
+            <div class="itemContent">
+              <div class="priceIcon"></div>
+              <div class="content">
+                <h3>{{six.displayName}}</h3>
+                <p class="price">
+								<span class="currency">
+									$
+								</span>
+                  {{six.price}}
+                </p>
+                <div class="tip">
+                  {{'credit.list' | translate}}:
+                  <em class="currency">
+                    ${{six.oldPrice}}
+                  </em>
+
+                </div>
+              </div>
+              <a (click)="goPositonState('2')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+              </a>
+            </div>
+            <div class="itemMain">
+              <div class="itemAbout">
+                <h3>{{six.displayName}} {{'price.includes' | translate}}</h3>
+                <p>
+                  {{'price.features' | translate}}
+                </p>
+              </div>
+              <ul class="itemList">
+                <li>
+									<span>
+										<strong>{{six.positionQuota}}</strong> {{'price.active_jobs_advertisements' | translate}}
+									</span>
+                </li>
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.complementary_company_page' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.applicant_tracking' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--<strong>{{six.facebookPage}}</strong> {{'price.featured_job_slots' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--<strong>{{six.interview}}</strong> {{'price.interview' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <li>
+									<span>
+										{{'price.support' | translate}}: {{'price.priority' | translate}}
+									</span>
+                </li>
+                <li>
+									<span>
+										{{'price.validity' | translate}}: <strong>{{six.positionEffectiveDay}}</strong> {{'price.days' | translate}}
+									</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+
+        <div class="item premium">
+          <div class="loading text-center" *ngIf="annualLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!annualLoading">
+            <div class="itemContent">
+              <div class="content">
+                <h3>{{annual.displayName}}</h3>
+                <p class="price">
+								<span class="currency">
+									$
+								</span>
+                  {{annual.price}}
+                </p>
+                <div class="tip">
+                  {{'credit.list' | translate}}:
+                  <em class="currency">
+                    ${{annual.oldPrice}}
+                  </em>
+                </div>
+              </div>
+              <a (click)="goPositonState('3')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+              </a>
+            </div>
+            <div class="itemMain">
+              <div class="itemAbout">
+                <h3>{{annual.displayName}} {{'price.includes' | translate}}</h3>
+                <p>
+                  {{'price.features' | translate}}
+                </p>
+              </div>
+              <ul class="itemList">
+                <li>
+									<span>
+										<strong>{{annual.positionQuota}}</strong> {{'price.active_jobs_advertisements' | translate}}
+									</span>
+                </li>
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.complementary_company_page' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--{{'price.applicant_tracking' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--<strong>{{annual.facebookPage}}</strong> {{'price.featured_job_slots' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <!--<li>-->
+									<!--<span>-->
+										<!--<strong>{{annual.interview}}</strong> {{'price.interview' | translate}}-->
+									<!--</span>-->
+                <!--</li>-->
+                <li>
+									<span>
+										{{'price.support' | translate}}: {{'price.priority' | translate}}
+									</span>
+                </li>
+                <li>
+									<span>
+										{{'price.validity' | translate}}: <strong>{{annual.positionEffectiveDay}}</strong> {{'price.days' | translate}}
+									</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+
+        <div class="item enterprise">
+          <div class="loading text-center" *ngIf="enterpriseLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!enterpriseLoading">
+            <div class="itemContent">
+              <div class="content">
+                <h3>{{enterprise.displayName}}</h3>
+                <p class="text enterpriseText">
+                  {{enterprise.description}}
+                </p>
+              </div>
+              <a href="mailto:hello@freshlinker.com" class="btn itemBtn">
+                {{'about_us.contact_us' | translate}}
+              </a>
+            </div>
+            <div class="itemMain">
+              <div class="itemAbout">
+                <h3>{{enterprise.displayName}} {{'price.includes' | translate}}</h3>
+                <p>
+                  {{'price.features' | translate}}
+                </p>
+              </div>
+              <ul class="itemList">
+                <li>
+									<span>
+										{{'price.active_jobs_fit_needs' | translate}}
+									</span>
+                </li>
+                <li>
+									<span>
+										{{'price.highest_level_recruitment_support' | translate}}
+									</span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </div>
+        <!--/.col-->
+      </div>
+
+    </div>
+  </div>
+
+  <!--.contentOne-->
+  <div class="contentOne">
+    <div class="container">
+      <h3 class="text-center title">{{'pricing.content_one_title' | translate}}</h3>
+      <p class="subtitle">
+        {{'pricing.content_one_text' | translate}}
+      </p>
+      <div class="row contentOneContent">
+        <div class="col-md-4 col-sm-12 col-xs-12 contentOneLeft">
+          <img src="../../../assets/img/pricing_oneicon.png" width="70%" height="auto" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+        <div class="contentOneText col-md-7 col-sm-12 col-xs-12 col-md-offset-1">
+          <div class="row list">
+            <div class="icon col-sm-1 hidden-xs img">
+              <img src="../../../assets/img/pricing_right.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 content col-xs-12">
+              <h3 class="title">{{'pricing.content_one_content_1_title'| translate}} <span
+                class="btn btn-success submit" pageScroll href="#contentPrice" [pageScrollDuration]="0">{{'footer.coming_soon' | translate}}</span></h3>
+              <p class="text">{{'pricing.content_one_content_1_text' | translate}}</p>
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="row list">
+            <div class="icon col-sm-1 hidden-xs">
+              <img src="../../../assets/img/pricing_right.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 col-xs-12 content">
+              <h3 class="title">{{'pricing.content_one_content_2_title' | translate}}</h3>
+              <p class="text">{{'pricing.content_one_content_2_text' | translate}}</p>
+            </div>
+            <!--/.col-->
+          </div>
+
+        </div>
+        <!--/.col-->
+      </div>
+      <div class="contentOne_bot">
+        {{'pricing.content_one_content_4_text' | translate}} <a (click)="gotoSignUp()">{{'pricing.register' |
+        translate}}</a> {{'pricing.content_one_content_5_text' | translate}}
+      </div>
+    </div>
+  </div>
+  <!--/.contentOne-->
+  <!--.contentTwo-->
+  <div class="contentTwo container">
+    <div class="rp">
+      <h4 class="subtitle text-center">{{'pricing.content_two_subtitle' | translate}}</h4>
+      <h3 class="title text-center">{{'pricing.content_two_title' | translate}}</h3>
+      <p class="btn-block text-center contentTwoBtn">{{'pricing.content_two_button' | translate}}</p>
+
+      <div class="row contentTwoContent">
+        <div class="col-md-10 col-sm-12 col-xs-12 contentTwoContentLeft">
+          <div class="contentTwoContentLeftText row">
+            <div class="icon col-sm-1 hidden-xs">
+              <i class="fa fa-circle"></i>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 col-xs-12 content">
+              <h4 class="title">{{'pricing.content_two_content_1_title' | translate}}</h4>
+              <p class="text">{{'pricing.content_two_content_1_text' | translate}}</p>
+            </div>
+            <!--/.col-->
+          </div>
+
+          <div class="contentTwoContentLeftText row">
+            <div class="icon col-sm-1 hidden-xs">
+              <i class="fa fa-circle"></i>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 col-xs-12 content">
+              <h4 class="title">{{'pricing.content_two_content_2_title' | translate}} <span
+                class="btn btn-success submit" pageScroll href="#contentPrice" [pageScrollDuration]="0">{{'footer.coming_soon' | translate}}</span></h4>
+              <p class="text">
+                {{'pricing.content_two_content_2_text' | translate}}
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+
+          <div class="contentTwoContentLeftText row">
+            <div class="icon col-sm-1 hidden-xs">
+              <i class="fa fa-circle"></i>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 col-xs-12 content">
+              <h4 class="title">{{'pricing.content_two_content_3_title' | translate}}</h4>
+              <p class="text">
+                {{'pricing.content_two_content_3_text' | translate}}
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+
+          <div class="contentTwoContentLeftText row">
+            <div class="icon col-sm-1 hidden-xs">
+              <i class="fa fa-circle"></i>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-11 col-xs-12 content">
+              <h4 class="title">{{'pricing.content_two_content_4_title' | translate}} <span
+                class="btn btn-success submit" pageScroll href="#contentPrice" [pageScrollDuration]="0">{{'footer.coming_soon' | translate}}</span></h4>
+              <p class="text">
+                {{'pricing.content_two_content_4_text' | translate}}
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+
+        </div>
+        <!--/.col-->
+        <div class="contentTwoContentRight col-md-2 hidden-sm hidden-xs">
+          <img src="../../assets/img/pricing_Two.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+
+  </div>
+  <!--/.contentTwo-->
+  <!--.contentThree-->
+  <div class="contentThree">
+    <div class="container contentThreeContent">
+      <div class="row contentThreeContentHead">
+        <div class="col-sm-3 hidden-xs contentThreeContentHeadLeft">
+          <img src="../../assets/img/pricing_left.png" alt="" class="img-responsive contentThreeImg pull-left">
+        </div>
+        <!--/.col-->
+        <h3 class="col-sm-6 col-xs-12 text-center title">{{'pricing.content_three_title' | translate}}</h3>
+        <!--/.col-->
+        <div class="col-sm-3 hidden-xs contentThreeContentHeadRight">
+          <img src="../../assets/img/pricing_threeright.png" alt="" class="img-responsive contentThreeImg pull-right">
+        </div>
+        <!--/.col-->
+      </div>
+      <p class="contentThreeText">
+        {{'pricing.content_three_text' | translate}}
+      </p>
+    </div>
+  </div>
+  <!--/.contentThree-->
+  <!--.contentFour-->
+  <div class="contentFour">
+    <div class="container">
+      <div class="row contentFourOne">
+        <div class="col-md-3 col-sm-12 col-xs-12 contentFourOneLeft">
+          <img src="../../../assets/img/pricing_four1.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+        <div class="col-md-9 col-sm-12 col-xs-12 contentFourOneRight">
+          <h3 class="title">{{'pricing.content_four_content_1_title' | translate}}</h3>
+          <p class="text">{{'pricing.content_four_content_1_text' | translate}} <a
+            href="https://www.facebook.com/freshlinker">{{'global.hit' | translate}}</a></p>
+        </div>
+        <!--/.col-->
+      </div>
+      <div class="row contentFourTwo">
+        <div class="col-md-9 col-sm-12 col-xs-12 contentFourTwoLeft">
+          <h3 class="title">{{'pricing.content_four_content_2_title' | translate}}</h3>
+          <p class="text">{{'pricing.content_four_content_2_text' | translate}}</p>
+        </div>
+        <!--/.col-->
+        <div class="col-md-3 col-sm-12 col-xs-12 contentFourTwoRight">
+          <img src="../../../assets/img/pricing_Four2.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+  </div>
+  <!--/.contentFour-->
+  <!--/.contentFive-->
+  <div class="contentFive">
+    <div class="container contentFiveContent">
+      <div class="row">
+        <div class="col-md-8 col-sm-7 col-md-offset-1 text-center">
+          <p class="contentFivep">{{'pricing.contentFive_title_p_1' | translate}}</p>
+          <h2 class="contentFiveh3">{{'pricing.contentFive_title_h3' | translate}}  </h2>
+          <p class="contentFivep">{{'pricing.contentFive_title_p_1' | translate}}</p>
+        </div>
+        <div class="col-md-2 col-sm-3">
+          <img src="../../assets/img/pricing_five.png" alt="" class="img-responsive">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--/.contentSix-->
+  <div class="contentSix">
+    <div class="container">
+      <h4 class="text-center title">{{'pricing.contentSix_title_h4' | translate}}</h4>
+      <h1 class="text-center contentSixTitle">{{'pricing.contentSix_title_h1' | translate}}</h1>
+      <div class="row contentSixContent">
+       <p class="content">
+         {{'pricing.contentSix_content_1' | translate}}
+       </p>
+        <h1 class="text-center contentSevenTitle" id="contentSevenTitle" #contentSevenTitle>{{'pricing.contentSeven_title_h1' | translate}}</h1>
+      </div>
+    </div>
+  </div>
+  <!--/.contentSeven-->
+  <div >
+    <img src="../../assets/img/pricing_Seven.png" alt="" class="img-responsive">
+  </div>
+  <div class="contentSeven" id="contentPrice">
+    <div class="container contentSevenContent">
+      <div class="row contentSevenContentRow">
+
+        <div class="col-sm-6"></div>
+        <div class="col-sm-3 text-center contentSevenContentTitle">{{'pricing.contentSeven_row_title_1' | translate}}</div>
+        <div class="col-sm-3 text-center contentSevenContentTitle">{{'pricing.contentSeven_row_title_2' | translate}}</div>
+      </div>
+      <div class="row contentSevenContentRow">
+        <div class="col-sm-6">
+          <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_1' | translate}}</p>
+        </div>
+        <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+        <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="row contentSevenContentRow">
+        <div class="col-sm-6">
+          <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_2' | translate}}</p>
+        </div>
+        <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+        <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="row contentSevenContentRow">
+          <div class="col-sm-6">
+            <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_3' | translate}}</p>
+          </div>
+          <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+          <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="row contentSevenContentRow">
+          <div class="col-sm-6">
+            <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_4' | translate}}</p>
+          </div>
+          <div class="col-sm-3 text-center contentSevenContentNo">NO</div>
+          <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="row contentSevenContentRow">
+          <div class="col-sm-6">
+            <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_5' | translate}}</p>
+          </div>
+          <div class="col-sm-3 text-center contentSevenContentNo">NO</div>
+          <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="row contentSevenContentRow">
+          <div class="col-sm-6">
+            <p class="contentSevenTxt">{{'pricing.contentSeven_row_content_6' | translate}}</p>
+          </div>
+          <div class="col-sm-3 text-center contentSevenContentNo">NO</div>
+          <div class="col-sm-3 text-center contentSevenContentYes">YES</div>
+      </div>
+      <div class="col-sm-2 col-md-offset-5 text-center contentSevenContentBtn" href="#contentPrice" pageScroll [pageScrollDuration]="800">Learn More</div>
+    </div>
+  </div>
+
+  <div class="contentPrice">
+    <div class="container contentSevenPrice">
+      <h1 class="text-center contentSevenPriceTitle">{{'pricing.contentEight_row_title_1' | translate}}</h1>
+      <div class="row">
+        <div class="loading text-center" *ngIf="liteLoading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div class="col-sm-3 text-center contentSevenPriceText" *ngIf="!liteLoading">
+          <p class="title">{{lite.displayName}}</p>
+          <div class="col-sm-8 col-md-offset-2 contentSevenPriceMidden">
+            <span class="blueBig">$ {{lite.oldPrice}}</span><br/>
+            <!--<span class="blueSmall">{{lite.description}}</span>-->
+          </div>
+          <div class="col-sm-10 col-md-offset-1">
+            <span class="redBig">$ {{lite.price}}</span><br/>
+            <span class="redSmall">{{lite.features}}</span>
+          </div>
+          <div class="col-xs-12">
+            <a (click)="goState('1')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+            </a>
+          </div>
+        </div>
+        <div class="loading text-center" *ngIf="standardLoading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div class="col-sm-3 text-center contentSevenPriceText" *ngIf="!standardLoading">
+          <p class="title">{{standard.displayName}}</p>
+          <div class="col-sm-8 col-md-offset-2 contentSevenPriceMidden">
+            <span class="blueBig">$ {{standard.oldPrice}}</span><br/>
+            <!--<span class="blueSmall">{{standard.description}}</span>-->
+          </div>
+          <div class="col-sm-10 col-md-offset-1">
+            <span class="redBig">$ {{standard.price}}</span><br/>
+            <span class="redSmall">{{standard.features}}</span>
+          </div>
+          <div class="col-xs-12">
+            <a (click)="goState('2')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+            </a>
+          </div>
+        </div>
+        <div class="loading text-center" *ngIf="professionLoading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div class="col-sm-3 text-center contentSevenPriceText" *ngIf="!professionLoading">
+          <p class="title">{{profession.displayName}}</p>
+          <div class="col-sm-8 col-md-offset-2 contentSevenPriceMidden">
+            <span class="blueBig">$ {{profession.oldPrice}}</span><br/>
+            <!--<span class="blueSmall">{{profession.description}}</span>-->
+          </div>
+          <div class="col-sm-10 col-md-offset-1">
+            <span class="redBig">$ {{profession.price}}</span><br/>
+            <span class="redSmall">{{profession.features}}</span>
+          </div>
+          <div class="col-xs-12">
+            <a (click)="goState('3')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+            </a>
+          </div>
+        </div>
+        <div class="loading text-center" *ngIf="premiumLoading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div class="col-sm-3 text-center contentSevenPriceTextLast">
+          <p class="title">{{premium.displayName}}</p>
+          <div class="col-sm-8 col-md-offset-2 contentSevenPriceMidden">
+            <span class="blueBig">$ {{premium.oldPrice}}</span><br/>
+            <!--<span class="blueSmall">{{premium.description}}</span>-->
+          </div>
+          <div class="col-sm-10 col-md-offset-1">
+            <span class="redBig">$ {{premium.price}}</span><br/>
+            <span class="redSmall">{{premium.features}}</span>
+          </div>
+          <div class="col-xs-12">
+            <a (click)="goState('4')" class="btn itemBtn">
+								<span>
+									{{'global.go_buy' | translate}}
+								</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center priceTitle"><span class="bold" [routerLink]="['/about/contact']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'about_us.contact_us' | translate}}</span>{{'pricing.contentEight_row_title_2' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--.contentEight-->
+  <div class="contentEight" id="easyboost">
+    <div class="container">
+      <div class="row contentEightContent">
+        <div class="col-md-9 col-sm-12 col-sx-12 contentEightContentLeft">
+          <h3 class="title"><em class="yellow">{{'enterprise.send_position_offer' | translate}}</em>.{{'pricing.content_eight_content_1_title'
+            | translate}}</h3>
+          <p class="text">
+            {{'pricing.content_eight_content_1_text_1' | translate}} <em class="yellow">EasyBoost</em>.
+          </p>
+          <p class="text">{{'pricing.content_eight_content_1_text_2' | translate}} <em class="yellow">EasyBoost</em>
+            {{'pricing.content_eight_content_1_text_3' | translate}}</p>
+          <p class="text">{{'pricing.content_eight_content_1_text_4' | translate}}</p>
+          <span (click)="nineOpen = !nineOpen" class="contentEightBtn">{{'pricing.learn_more' | translate}}</span>
+        </div>
+        <!--/.col-->
+        <div class="col-md-3 hidden-xs hidden-sm contentEightContentRight">
+          <img src="../../assets/img/pricing_eight.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+  </div>
+  <!--/.contentEight-->
+  <!--.contentNine-->
+  <div *ngIf="nineOpen" class="contentNine">
+    <div class="container contentNineContent">
+      <h3 class="text-center title">PRICING</h3>
+      <h4 class="text-center subtitle">Price per applicant = $8 per filter * Number of filters</h4>
+      <div class="row contentNineContentRow">
+        <h4 class="title">{{'pricing.content_nine_filter' | translate}}</h4>
+        <ul class="col-sm-4 col-xs-12">
+          <li class="list">{{'pricing.content_nine_filter_1' | translate}}</li>
+          <li class="list">{{'pricing.content_nine_filter_2' | translate}}</li>
+        </ul>
+        <!--/.col-->
+        <ul class="col-sm-4 col-xs-12">
+          <li class="list">{{'pricing.content_nine_filter_3' | translate}}</li>
+          <li class="list">{{'pricing.content_nine_filter_4' | translate}}</li>
+        </ul>
+        <!--/.col-->
+        <ul class="col-sm-4 col-xs-12">
+          <li class="list">{{'pricing.content_nine_filter_5' | translate}}</li>
+          <li class="list">{{'pricing.content_nine_filter_6' | translate}}</li>
+        </ul>
+        <!--/.col-->
+      </div>
+
+      <h4 class="text">
+        {{'pricing.content_nine_text_1' | translate}}
+      </h4>
+      <div class="text-center">
+        <a (click)="postJob()" class="contentNineContentBtn">
+          {{'pricing.content_nine_link' | translate}}
+        </a>
+      </div>
+
+      <div class="contentNineContentText">
+        <p *ngIf="false">* {{'pricing.content_nine_text_2' | translate}}</p>
+        <p>* {{'pricing.content_nine_text_3' | translate}}</p>
+      </div>
+
+    </div>
+  </div>
+  <!--/.contentNine-->
+  <!--.contentTen-->
+  <div class="contentTen">
+    <div class="container-fuild contentTenContent">
+      <h3 class="text-center title">{{'pricing.content_ten_title_1' | translate}}:</h3>
+      <div class="row contentTenImg">
+        <div class="col-xs-12">
+          <img src="../../assets/img/pricing_ten1.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <div class="container ">
+      <div class="row contentTenText">
+        <div class="col-md-3 col-sm-12 col-xs-12 contentTenTextLeft">
+          <img src="../../assets/img/pricing_ten2.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+        <div class="col-md-8 col-md-offset-1 col-sm-12 col-xs-12 contentTenTextRight">
+          <h3 class="title">{{'pricing.content_ten_title_2' | translate}}</h3>
+          <p class="text">{{'pricing.content_ten_text_1' | translate}}</p>
+          <p class="text">{{'pricing.content_ten_text_2' | translate}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.contentTen-->
+  <!--.contentEleven-->
+  <div class="contentEleven">
+    <div class="container">
+      <div class="row contentElevenContent">
+        <div class="col-md-8 col-sm-12 col-xs-12 contentElevenLeft">
+          <h3 class="title">{{'pricing.content_eleven_title' | translate}}</h3>
+          <p class="text">{{'pricing.content_eleven_text_1' | translate}}</p>
+          <p class="text">{{'pricing.content_eleven_text_2' | translate}}</p>
+          <a class="btn link" ui-sref="main.contact" [routerLink]="['/about/contact']">{{'pricing.content_eleven_text_3' | translate}}</a>
+        </div>
+        <!--/.col-->
+        <div class="col-md-3 col-md-offset-1 col-sm-12 col-xs-12 contentElevenRight">
+          <img src="../../assets/img/pricing_eleven.png" alt="" class="img-responsive">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.contentEleven-->
+  <!--.contentTwelve-->
+  <div class="contentTwelve">
+    <div class="container contentTwelveContent">
+      <h3 class="title text-center">{{'pricing.content_twelve_title' | translate}}</h3>
+      <tabset type="pills">
+        <tab heading="{{'global.product' | translate}}" class="btn-lg">
+          <accordion close-others="closeOther">
+            <accordion-group #group class="contentTwelveContentList" [isOpen]="group.isFirstOpen">
+              <div class="row heading" accordion-heading>
+
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_1_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">{{'pricing.content_twelve_content_1_text' | translate}}</li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_2_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">{{'pricing.content_twelve_content_2_text_1' | translate}}</li>
+                <li class="list">{{'pricing.content_twelve_content_2_text_2' | translate}}</li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_3_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">{{'pricing.content_twelve_content_3_text_1' | translate}}</li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_4_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">{{'pricing.content_twelve_content_4_text_1' | translate}}</li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_5_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">{{'pricing.content_twelve_content_5_text_1' | translate}}</li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_6_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">
+                  {{'pricing.content_twelve_content_6_text_1' | translate}} <span><a [routerLink]="['/about/contact']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'about_us.contact_us' | translate}}</a> </span>{{'pricing.content_twelve_content_6_text_2'
+                  | translate}}-->
+                </li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </tab>
+        <tab heading="{{'pricing.content_twelve_title_2' | translate}}" class="btn-lg">
+          <accordion close-others="closeOther">
+            <accordion-group #group1 class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_2_content_1_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group1?.isOpen, 'fa-minus-square': group1?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">
+                  {{'pricing.content_twelve_content_2_content_1_text_1' | translate}}
+                </li>
+                <li class="list">
+                  {{'pricing.content_twelve_content_2_content_1_text_2' | translate}}
+                </li>
+                <li class="list">
+                  {{'pricing.content_twelve_content_2_content_1_text_3' | translate}}
+                </li>
+              </ul>
+            </accordion-group>
+
+            <accordion-group #group2 class="contentTwelveContentList">
+              <div class="row heading" accordion-heading>
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_2_content_2_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group2?.isOpen, 'fa-minus-square': group2?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">
+                  {{'pricing.content_twelve_content_2_content_2_text_1' | translate}}
+                </li>
+              </ul>
+            </accordion-group>
+          </accordion>
+        </tab>
+        <tab heading="{{'pricing.content_twelve_title_3' | translate}}" classes="btn-lg">
+          <accordion close-others="closeOther">
+            <accordion-group #group class="contentTwelveContentList" [isOpen]="group.isFirstOpen">
+              <div class="row heading" accordion-heading>
+
+                <div class="col-md-11 col-sm-10 col-xs-10 title">
+                  {{'pricing.content_twelve_content_3_content_1_title' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-1 col-sm-2 col-xs-2 text-right">
+                  <i class="fa fa-2x"
+                     [ngClass]="{'fa-plus-square': !group?.isOpen, 'fa-minus-square': group?.isOpen}"></i>
+                </div>
+              </div>
+              <ul class="text">
+                <li class="list">
+                  {{'pricing.content_twelve_content_3_content_1_text_1' | translate}}
+                  <a [routerLink]="['/about/contact']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'pricing.content_twelve_content_3_content_1_text_2' |
+                    translate}}</a>
+                </li>
+              </ul>
+            </accordion-group>
+
+          </accordion>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+  <!--/.contentTwelve-->
+  <!--.contentThirteen-->
+  <div class="contentThirteen container">
+    <div class="text-center">
+      <a (click)="goPrice()" class="text-center contentThirteenBtn">
+        {{'pricing.content_thirteen_title' | translate}}
+      </a>
+      <h3 class="text-center title">{{'pricing.content_thirteen_help' | translate}}</h3>
+      <h3 class="text-center contact">
+        <a ui-sref="main.contact" [routerLink]="['/about/contact']">{{'about_us.contact_us' | translate}} →</a>
+      </h3>
+    </div>
+
+    <div class="contentThirteenContent">
+      <h3 class="title">{{'pricing.content_thirteen_title_2' | translate}}:</h3>
+      <div class="row content">
+        <div class="col-sm-4 text-center list">
+          <img src="../../assets/img/pricing_thirteen.png" alt="" class="img-responsive">
+          <a target="_blank"
+             (click)="downLoad('/assets/pdf/employer_ebook-01_How_to_Write_a_Job_Description_for_Generation-Y_Jobseekers.pdf')"
+             class="btn btn-success">
+            <span>{{'global.download' | translate}}</span>
+          </a>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-4 text-center list">
+          <img src="../../assets/img/pricing_thirteen2.png" alt="" class="img-responsive">
+          <a target="_blank" (click)="downLoad('/assets/pdf/employer_ebook-02Content_Marketing_for_talent_brand_.pdf')"
+             class="btn btn-success">
+            <span>{{'global.download' | translate}}</span>
+          </a>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-4 text-center list">
+          <img src="../../assets/img/pricing_thirteen3.png" alt="" class="img-responsive">
+          <a target="_blank"
+             (click)="downLoad('/assets/pdf/employer_ebook-03_How_to_recruit_generation_Y_candidate_.pdf')"
+             class="btn btn-success">
+            <span>{{'global.download' | translate}}</span>
+          </a>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+  </div>
+</div>

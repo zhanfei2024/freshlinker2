@@ -1,0 +1,421 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <div class="row userDashboard">
+    <div class="col-md-3 col-sm-12 col-xs-12 userDashboardLeft">
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+
+      <div class="content" *ngIf="!loading">
+        <p class="edit text-left">
+          <a [routerLink]="['/user','user-information']">
+            <i class="fa fa-edit"></i>
+            {{'button.edit' | translate}}
+          </a>
+        </p>
+        <div class="img">
+          <a >
+            <div *ngIf="user?.icon !== null">
+              <img [src]="user?.icon?.url['200']" class="img-responsive img-circle">
+            </div>
+            <div *ngIf="user?.icon === null">
+              <img  *ngIf="user?.gender === 'F'" src="../../assets/img/user_default_icon_female.jpeg" class="img-responsive img-circle">
+              <img *ngIf="user?.gender === null || user?.gender === 'M'" src="../../assets/img/user_default_icon_male.jpeg" class="img-responsive img-circle">
+            </div>
+          </a>
+        </div>
+
+        <!--/.img-->
+        <div class="userInformation text-center">
+          <h4 class="name">{{user?.firstName}} {{user?.lastName}}</h4>
+          <h4 class="position">{{user?.experiences[0]?.title}}</h4>
+        </div>
+        <div class="resume_content text-center" *ngIf="user?.resume !== null">
+          <a href="{{user?.resume?.url}}"> {{'user.profile.enclosure' | translate}}: {{user?.resume?.name}}.{{user?.resume?.extension}}</a>
+        </div>
+        <div class="uploadResume text-center">
+          <a (click)="RsumeModal.show()" class="btn btn-success"><i class="fa fa-upload"></i>{{'button.upload_resume' | translate}}</a>
+        </div>
+        <div class="baseInformation">
+          <h4>{{'user.profile.base_information' | translate}}</h4>
+          <div class="row text">
+            <div class="col-sm-5 col-xs-6 title">
+              {{'user.profile.education' | translate}}
+            </div>
+            <!--/.col-->
+            <div class="col-sm-7 col-xs-6 content">
+              {{user?.educations[user?.educations?.length - 1]?.educationLevel?.name}}
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="row text">
+            <div class="col-sm-5 col-xs-6 title">
+              {{'user.profile.experience' | translate}}
+            </div>
+            <!--/.col-->
+            <div class="col-sm-7 col-xs-6 content">
+              {{user?.yearOfExperience}} <span *ngIf="user?.yearOfExperience !== null">{{'global.year' | translate}}</span>
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="row text">
+            <div class="col-sm-5 col-xs-6 title">
+              {{'user.profile.tel' | translate}}
+            </div>
+            <!--/.col-->
+            <div class="col-sm-7 col-xs-6 content">
+              {{user?.phone}}
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="row text">
+            <div class="col-sm-5 col-xs-6 title">
+              {{'user.profile.email' | translate}}
+            </div>
+            <!--/.col-->
+            <div class="col-sm-7 col-xs-6 content">
+              {{user?.email}}
+            </div>
+            <!--/.col-->
+          </div>
+        </div>
+        <div class="aboutMe"  *ngIf="user?.selfDescription !== null">
+          <h4>{{'user.profile.self_description' | translate}}</h4>
+          <p *ngIf="!descriptionShow">{{user?.selfDescription |htmlToPlaintext :80}}</p>
+          <span *ngIf="!descriptionShow && user?.selfDescription.length > 80">...
+                          <span>
+                            <a (click)="descriptionShow = !descriptionShow" *ngIf="!descriptionShow && user?.selfDescription.length > 80">
+                                {{'global.expand' | translate}}
+                            </a>
+                          </span>
+              </span>
+          <span *ngIf="descriptionShow">
+                            <p [innerHtml]="user.selfDescription"></p>
+                            <a (click)="descriptionShow = !descriptionShow"  *ngIf="descriptionShow">{{'global.put_away' | translate}}</a>
+                      </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!--/.col-->
+    <div class="col-md-9 col-sm-12 col-xs-12 userDashboardRight">
+      <div class="appliedPosition">
+        <h4 class="title">{{'user.profile.applied_position' | translate}}</h4>
+        <div class="loading text-center" *ngIf="loading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!loading">
+          <div class="loading text-center" *ngIf="positionLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div class="noPosition row" *ngIf="!positionLoading && appliedPositions.length === 0">
+            <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+              <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="col-md-5 col-sm-5 col-xs-12 text">
+              <p>
+                {{'message.no_user_applied_position' | translate}}
+                <br>
+                {{'message.user_applied_position' | translate}}!
+                <br>
+                <span>{{'global.go_ahead' | translate}}</span>
+                <a [routerLink]="['/position-list']">
+                  {{ 'position.position_list' | translate }}
+                </a>
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+          <div *ngIf="!positionLoading && appliedPositions.length > 0">
+            <ul class="list-unstyled positionList">
+              <li class="row" *ngFor="let position of appliedPositions">
+                <div class="img  col-md-2 col-sm-2 col-xs-6">
+                  <a [routerLink]="['/positions',position.position.id]">
+                    <img src="https://placehold.it/100x100" alt="" class="img-responsive" *ngIf="position.company.icon === null">
+                    <img [src]="position.company.icon.url['100']" alt="" class="img-responsive" *ngIf="position.company.icon !== null">
+                  </a>
+                </div>
+                <!--/.col-->
+                <div class="content col-md-4 col-sm-4 col-xs-6">
+                  <p class="name">
+                    <a [routerLink]="['/positions',position.position.id]">{{position.position.name}}</a>
+                  </p>
+                  <p class="company">
+                    <a [routerLink]="['/company-position',position.company.id,'position']">{{position.company?.name}}</a>
+                  </p>
+                </div>
+                <!--/.col-->
+                <div class="status col-md-2 col-sm-3 hidden-xs">
+                  <p class="text">{{position.candidateStatus?.name | translate}}</p>
+                  <p class="time">{{position.appliedAt | date: 'yyyy-MM-dd'}}{{'position.apply' | translate}}</p>
+                </div>
+                <!--/.col-->
+                <div class="other col-md-2 hidden-xs col-sm-3">
+                  <p class="num">{{position.candidateNum}}</p>
+                  <p class="text">{{'position.have_applier' | translate}}</p>
+                </div>
+                <!--/.col-->
+                <div class="button col-md-2 hidden-xs hidden-sm">
+                  <button class="btn btn-default btn-bg-c">{{'global.applied_position' | translate}}</button>
+                </div>
+                <!--/.col-->
+              </li>
+            </ul>
+            <p class="text-right more">
+              <a [routerLink]="['/position-list']">
+                {{'global.check' | translate}}{{'global.more' | translate}}{{'position.positions' | translate}}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/.appliedPosition-->
+
+      <div class="invitationPosiiton">
+        <h4 class="title">{{'user.profile.job_invitation' | translate}}</h4>
+        <div class="loading text-center" *ngIf="invitationPositonLoading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!invitationPositonLoading">
+          <div class="noPosition row" *ngIf="invitationPositons.length === 0">
+            <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+              <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="col-md-5 col-sm-5 col-xs-12 text">
+              <p>
+                {{'message.no_job_offer_message' | translate}}
+                <br>
+                {{'message.user_improve_personal_information' | translate}}!
+                <br>
+                <span>{{'global.go_ahead' | translate}}</span>
+                <a [routerLink]="['/user','profile']">
+                  {{ 'user.profile.my_profile' | translate }}
+                </a>
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+          <div *ngIf="invitationPositons.length > 0">
+            <ul class="list-unstyled positionList">
+              <li class="row" *ngFor="let position of invitationPositons">
+                <div class="img  col-md-2 col-sm-2 col-xs-3">
+                  <a [routerLink]="['/positions',position.position.id]">
+                    <img src="https://placehold.it/100x100" alt="" class="img-responsive" *ngIf="position.company.icon === null">
+                    <img [src]="position.company.icon.url['100']" alt="" class="img-responsive" *ngIf="position.company.icon !== null">
+                  </a>
+                </div>
+                <!--/.col-->
+                <div class="content col-md-6 col-sm-4 col-xs-5">
+                  <p class="name">
+                    <a [routerLink]="['/positions',position.position.id]">
+                      {{position.position.name}}
+                    </a>
+                  </p>
+                  <p class="company">
+                    <a [routerLink]="['/company-position',position.company.id,'position']">
+                      {{position.company.name}}
+                    </a>
+                  </p>
+                </div>
+                <!--/.col-->
+                <div class="other col-md-2 hidden-xs col-sm-3">
+                  <p class="num">
+                    {{position.candidateNum}}
+                  </p>
+                  <p class="text">
+                    {{'position.have_applier' | translate}}
+                  </p>
+                </div>
+                <!--/.col-->
+                <div class="button col-md-2 col-sm-3 col-xs-4 text-center" [ngClass]="{'reject': position.status === 'rejected' || position.status === 'accepted'}">
+                  <button type="button" class="btn" (click)="setCandidate(position.position.id, position.id)" [ngClass]="{'btn-success': position.status === 'pending'}" *ngIf="position.status === 'pending'">{{'position.accept_job_interview' | translate}}</button>
+                  <div class="text-center reject" *ngIf="position.status === 'pending' ">
+                    <a (click)="rejectPositionInvite(position.id)">{{'position.reject_job_interview' | translate}}</a>
+                  </div>
+
+                  <button type="button" class="btn"  *ngIf="position.status === 'accepted'" [ngClass]="{'accepted': position.status === 'accepted'}">{{'position.posted_job_invite' | translate}}</button>
+
+                  <div class="text-center reject" *ngIf="position.status === 'rejected'">
+                    <button  class="btn btn-default">{{'position.rejected' | translate}}</button>
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </li>
+
+            </ul>
+            <p class="text-right more">
+              <a [routerLink]="['/user','job-invite']">
+                {{'global.check' | translate}}{{'global.more' | translate}}{{'position.invite' | translate}}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+           tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <form class="form-horizontal education" name="Form" (ngSubmit)="checkApply()">
+          <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="staticModal.hide()"><span
+              aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i>{{'position.apply_position' | translate}}</h4>
+          </div>
+          <!-- /.model-header -->
+          <div class="modal-body positionAnswer">
+            <div class="row">
+              <div class="col-md-12 text-center" >
+                <p class="head">{{'position.applied_position_title' | translate}}</p>
+              </div>
+              <!-- /.col -->
+              <div *ngIf="position?.positionQuestion?.length > 0" class="col-md-12">
+                <p class="text-center title">{{'position.applied_position_title' | translate}}----{{'position.answer_question' | translate}}</p>
+                <div class="content">
+                  <div *ngFor="let item of position?.positionQuestion">
+                    <div class="row">
+                      <span class="col-sm-12 questionTitle">{{item.question}}</span>
+                      <textarea name="answer" id="" cols="30" rows="2" [required]="item.isRequired" class="answer" [(ngModel)]="item.answer"></textarea>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.model-body -->
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">
+              <span><i class="fa fa-check"></i> {{ 'button.yes' | translate }}</span>
+            </button>
+            <button type="button" class="btn btn-default" (click)="staticModal.hide()"><i
+              class="fa fa-close"></i>
+              {{ 'button.no' | translate }}
+            </button>
+          </div>
+          <!-- /.model-footer -->
+        </form>
+      </div>
+
+
+
+      <!--/.article-->
+    </div>
+    <!--/.col-->
+  </div>
+</div>
+
+<div bsModal #RsumeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form (ngSubmit)="save()" name="mainForm" #mainForm="ngForm">
+        <div class="modal-header clearfix">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="RsumeModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>{{'button.upload_resume' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="col-sm-12 col-xs-12">
+                  <div class="text-center file">
+                    <div class="uploader">
+                      <input class="uploaderFile" type="file" ng2FileSelect [uploader]="uploader">
+                        <span class="text-muted">
+                          <i class="fa fa-cloud-upload fa-5x "></i>
+                          <div >
+                              <br>
+                              <h4>{{'file.Drop_here_to_upload_(or click)' | translate}}</h4>
+                              <div class="tips">
+                                {{'file.Support' | translate}}
+                                  <p class="text-danger">{{'file.file_size'| translate}}</p>
+                              </div>
+                              <div class="error" *ngIf="isError">
+                                  <i class="fa fa-times-circle"></i>{{iconError}}
+                              </div>
+                          </div>
+                        </span>
+                    </div>
+                    <div *ngIf="filesName !== undefined">{{filesName}}</div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <div class="modal-footer">
+          <button type="submit" [disabled]="!mainForm.form.valid || saveLoading"
+                  class="btn btn-success">
+            <span [hidden]="!saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+            <span [hidden]="saveLoading">{{ 'button.save' | translate }}</span>
+          </button>
+          <button type="button" class="btn btn-default" (click)="RsumeModal.hide()">
+            {{ 'button.close' | translate }}
+          </button>
+        </div>
+        <!-- /.model-footer -->
+      </form>
+    </div>
+  </div>
+</div>
+
+<div bsModal #childApplyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <form class="modal-dialog modal-lg" (ngSubmit)="checkApply()">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="childApplyModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>{{'position.apply_position' | translate}}</h4>
+      </div>
+      <div class="modal-body positionAnswer">
+        <div class="row" *ngIf="!questionLoading">
+          <div class="col-md-12 text-center" *ngIf="position?.positionQuestion?.length === 0">
+            <p class="head">{{'position.applied_position_title' | translate}}</p>
+          </div>
+          <!--/.col-->
+          <div *ngIf="position?.positionQuestion?.length > 0" class="col-md-12">
+            <p class="text-center title">{{'position.applied_position_title' | translate}}----{{'position.answer_question' | translate}}</p>
+            <div class="content">
+              <div *ngFor="let item of position?.positionQuestion">
+                <div class="row">
+                  <span class="col-sm-12 questionTitle">{{item.question}}</span>
+                  <textarea name="answer" id="answer" cols="30" rows="2" required="{{item.isRequired}}" class="answer" [(ngModel)]="item.answer"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!--/.col-->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.model-body -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">
+          <span><i class="fa fa-check"></i> {{ 'button.yes' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-default" (click)="childApplyModal.hide()"><i
+          class="fa fa-close"></i>
+          {{ 'button.no' | translate }}
+        </button>
+      </div>
+      <!-- /.model-footer -->
+    </div>
+  </form>
+</div>
+

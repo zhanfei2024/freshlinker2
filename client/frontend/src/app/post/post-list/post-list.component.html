@@ -1,0 +1,375 @@
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- .article -->
+  <div class="article">
+    <div class="articleContent row">
+      <ul class="list-unstyled categoryTab">
+        <li class="col-xs-4" *ngFor="let item of cateGoryTab"><a href="javascript" routerLink="{{item.router}}"><img
+          [ngClass]="{'active':item.id === categoryIndex}" class="img-responsive"
+          [src]="'../../../../assets/img/'+item.src" height="200" width="367"/></a></li>
+      </ul>
+    </div>
+
+
+    <!-- .articleContentList -->
+    <div class="articleContentList row">
+      <div class="col-md-8 col-sm-12 col-xs-12 articleContentListLeft">
+        <div class="articleContentListLeftContent">
+          <tabset>
+            <!--<文章>-->
+            <tab [active]="categoryIndex === 2">
+              <ul class="tab list-inline">
+                <li (click)="articleTab(item.id)"
+                    *ngFor="let item of tabs">
+                  <a href="javascript:;" [ngClass]="{'active': item.id === index}">
+                    {{item.name | translate}}
+                  </a>
+                </li>
+              </ul>
+
+              <div class="loading text-center" *ngIf="articleLoading">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+                  <!--/.col-->
+                </div>
+              </div>
+              <div>
+                <div class="noArticle text-center" *ngIf="!articleLoading && article.length === 0">
+                  <img src="../../../assets/img/no_position.png">
+                  {{'message.company_no_publish_articles' | translate}}
+                </div>
+                <ul class="list list-unstyled" *ngIf="article.length > 0 && !articleLoading">
+                  <li class="row item" *ngFor="let list of article">
+                    <div class="col-sm-4 col-xs-12 img">
+                      <a [routerLink]="['/articles',list.id]"  pageScroll href="#awesomePart" [pageScrollDuration]="0"
+                         [ngStyle]="{'background-image': 'url('+list?.cover?.url['240']+')'}"
+                         *ngIf="list.cover !== null">
+                      </a>
+                      <a [routerLink]="['/articles',list.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+                         *ngIf="list.cover === null"
+                         style="background-image: url(https://placehold.it/240x160);">
+                      </a>
+                    </div>
+                    <!--/.img-->
+                    <div class="content col-sm-8 col-xs-12">
+                      <p class="title">
+                        <a [routerLink]="['/articles',list.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                          {{list.title}}
+                        </a>
+                      </p>
+                      <p class="other">
+                                              <span class="author">
+                                                {{'article.author' | translate}}: {{list.userName}}
+                                              </span>
+                        <span class="time">
+                                                {{list.createdAt | date: 'yyyy-MM-dd'}} {{'button.publish' | translate}}
+                                              </span>
+                      </p>
+                      <ul class="tags list-inline">
+                        <li class="tag" *ngFor="let tag of list.tags">
+                          <span (click)="searchArticle(tag.name)">{{tag.name}}</span>
+                        </li>
+                      </ul>
+                      <p class="text">{{list.content | htmlToPlaintext: 50}}</p>
+                      <p class="enroll">
+                        <a class="pull-right likes" target="_blank" [routerLink]="['/articles',list.id]">{{'article.comment' |
+                          translate}} ({{list.totalComment}})</a>
+                      </p>
+                    </div>
+                    <!--/.content-->
+                  </li>
+                </ul>
+              </div>
+            </tab>
+            <!--<文章>-->
+
+            <!--<活动>-->
+            <tab [active]="categoryIndex === 8">
+              <ul class="tab list-inline">
+                <li (click)="articleTab(item.id)" *ngFor="let item of activityTabs">
+                  <a href="javascript:;" [ngClass]="{'active': item.id === index}">
+                    {{item.name | translate}}
+                  </a>
+                </li>
+              </ul>
+
+              <div class="loading text-center" *ngIf="articleLoading">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+                  <!--/.col-->
+                </div>
+              </div>
+              <div>
+                <div class="noArticle text-center" *ngIf="!articleLoading && article.length === 0">
+                  <img src="../../assets/img/no_position.png">
+                  {{'message.company_no_publish_articles' | translate}}
+                </div>
+                <ul class="list list-unstyled" *ngIf="article.length > 0 && !articleLoading">
+                  <li class="row item" *ngFor="let list of article">
+                    <div class="col-sm-4 col-xs-12 img">
+                      <a href="javascript:;" [routerLink]="['/activity',list.id]"
+                         [ngStyle]="{'background-image': 'url('+list?.cover?.url['240']+')'}"
+                         *ngIf="list.cover !== null">
+                      </a>
+                      <a href="javascript:;" [routerLink]="['/activity',list.id]"
+                         *ngIf="list.cover === null"
+                         style="background-image: url(https://placehold.it/240x160);">
+                      </a>
+                    </div>
+                    <!--/.img-->
+                    <div class="content col-sm-8 col-xs-12">
+                      <p class="title">
+                        <a href="javascript:;" [routerLink]="['/activity',list.id]">
+                          {{list.title}}
+                        </a>
+                      </p>
+
+                      <ul class="tags list-inline">
+                        <li class="tag" *ngFor="let tag of list.tags">
+                          <span>{{tag.name}}</span>
+                        </li>
+                      </ul>
+
+                      <p class="text">{{list.content | htmlToPlaintext: 50}}</p>
+                      <p class="enroll">
+                        <a class="btn btn-success" target="_blank" [routerLink]="['/activity',list.id]">{{'activity.sign_up_immediately'
+                          | translate}}</a>
+                        <a class="pull-right likes" target="_blank" [routerLink]="['/activity',list.id]">{{'article.comment' |
+                          translate}} ({{list.totalComment}})</a>
+                      </p>
+                    </div>
+                    <!--/.content-->
+                  </li>
+                </ul>
+              </div>
+            </tab>
+            <!--<活动>-->
+
+            <!--<问答>-->
+            <tab [active]="categoryIndex === 12">
+              <ul class="tab list-inline">
+                <li (click)="articleTab(item.id)"
+                    *ngFor="let item of QATabs">
+                  <a href="javascript:;" [ngClass]="{'active': item.id === index}">
+                    {{item.name | translate}}
+                  </a>
+                </li>
+
+              </ul>
+
+              <div class="loading text-center" *ngIf="articleLoading">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+                  <!--/.col-->
+                </div>
+              </div>
+
+              <div>
+                <div class="noArticle text-center" *ngIf="!articleLoading && article.length === 0">
+                  <img src="../../assets/img/no_position.png">
+                  {{'message.company_no_publish_articles' | translate}}
+                </div>
+                <ul class="list list-unstyled" *ngIf="!articleLoading && article.length > 0">
+                  <li class="row item" *ngFor="let list of article">
+                    <div class="media">
+                      <div class="media-left">
+                        <img *ngIf="list?.user?.icon !== null" [src]="list?.user?.icon?.url['100']"
+                             class="img-circle pull-left user_icon" width="44" height="44">
+                        <img *ngIf="list?.user?.icon === null"
+                             src="../../assets/img/user_default_icon.png"
+                             class="img-circle pull-left user_icon" alt="" height="44"
+                             width="44">
+                      </div>
+                      <div class="media-body">
+                        <span class="media-heading nameContent" (mouseenter)="showUser(list?.user.id)">
+                      <span class="name">{{list?.user?.firstName}}</span>
+                      <span class="companyName" *ngIf="list?.user?.companies[0]?.name !== undefined">from&nbsp; {{list?.user?.companies[0]?.name}}</span>
+                       <div class="user_card_float">
+                                  <div class="user_card_float_box">
+                                      <p class="pull-left">
+                                        <img *ngIf="list?.user?.icon !== null" [src]="list?.user?.icon?.url['200']"
+                                             class="img-circle pull-left user_icon" width="44" height="44">
+                                        <img *ngIf="list?.user?.icon === null"
+                                             src="../../assets/img/user_default_icon.png"
+                                             class="img-circle pull-left user_icon" width="44" height="44"/>
+                                      </p>
+                                      <p class="userinfo_base">{{list?.user?.firstName}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name !== undefined">{{list?.user?.companies[0]?.name}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name === undefined">{{'article.no_application_to_join_the_company_msg' | translate}}</p>
+                                      <p class="userinfo_intro" *ngIf="list?.user?.selfDescription !== null">{{list?.user.selfDescription | htmlToPlaintext : 20}}</p>
+                                      <p class="userinfo_intro" *ngIf="list?.user?.selfDescription === null">{{'article.no_personal_introduction' | translate}}</p>
+
+                                       <ul class="list-unstyled  user_problem">
+                                        <li class="text-center col-xs-4 item">
+                                          {{articleNumber}}<br/>
+                                          <span class="article_text">{{'global.articles' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{commentsNumber}}<br/>
+                                          <span class="article_text">{{'article.q_and_a' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{qaNumber}}<br/>
+                                          <span class="article_text">{{'article.reply' | translate}}</span>
+                                        </li>
+                                      </ul>
+                                      <span class="deck_in"><em></em></span>
+                                  </div>
+                       </div>
+                    </span>
+                        <p class="title">
+                          <a class="issueTitle" [routerLink]="['/interlocution',list.id]" target="_blank">{{list.title}}</a>
+                        </p>
+                        <ul class="tags list-inline">
+                          <li class="tag" *ngFor="let tag of list.tags">
+                            <span>{{tag.name}}</span></li>
+                        </ul>
+                        <p class="textContent">
+                          <a target="_blank"  [routerLink]="['/interlocution',list.id]">
+                            {{list.content | htmlToPlaintext : 200}}
+                            <span *ngIf="list.content.length > 200">...</span>
+                          </a>
+                        </p>
+                        <a class="pull-right likes" target="_blank" [routerLink]="['/interlocution',list.id]">{{'article.comment' |
+                          translate}} ({{list.totalComment}})</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+              </div>
+            </tab>
+            <!--<问答>-->
+            <div class="text-center">
+              <pager [maxSize]="50"
+                     [itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"
+                     [(ngModel)]="pageNum.page" (pageChanged)="changePage($event, index)"
+                     pageBtnClass="btn btn-link"></pager>
+            </div>
+
+          </tabset>
+        </div>
+      </div>
+
+
+      <!--/.articleContentListLeft-->
+      <div class="col-md-4 col-sm-12 col-xs-12 articleContentListRight">
+        <div class="userContent" *ngIf="!isUserLogin">
+          <div class="row">
+            <div class="img_content">
+              <img src="../../../assets/img/user_default_icon_male.png" height="100" width="100"  class="img-circle">
+            </div>
+            <h4 class="text-center" >{{'article.hello' | translate}}</h4>
+            <h6 class="text-center" >{{'article.questions' | translate}}</h6>
+            <div class="row btn_container">
+              <div class="btn_content col-xs-6 text-center" >
+                <a [routerLink]="['/auth','login']" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-success">{{'article.login' | translate}}</a>
+              </div>
+              <div class="btn_content col-xs-6 text-center" >
+                <a [routerLink]="['/auth','signup']" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-default">{{'article.register'|translate}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="userContent" *ngIf="isUserLogin">
+          <div class="row">
+            <div class="img_content" [routerLink]="['/user','dashboard']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+              <img class="img-circle" src="../../../assets/img/user_default_icon_male.png" height="100" width="100"  *ngIf="user?.gender=== null && user?.icon===null">
+              <img class="img-circle" src="../../../assets/img/user_default_icon_male.png" height="100" width="100"  *ngIf="user?.gender==='M' && user?.icon===null">
+              <img class="img-circle" src="../../../assets/img/user_default_icon_female.png" height="100" width="100"  *ngIf="user?.gender==='F' && user?.icon===null">
+              <img class="img-circle" src="{{user?.icon?.url['100']}}" height="100" width="100" *ngIf="user?.icon!==null">
+
+            </div>
+            <h4 class="text-center" *ngIf="user?.lastName!==null">{{user.lastName}}</h4>
+            <!--<h6 class="text-center" *ngIf="user?.companies[0]?.name !== null">{{user?.companies[0]?.name}}</h6>-->
+            <h6 class="text-center content" *ngIf="user?.selfDescription!==null" >{{user.selfDescription | htmlToPlaintext : 40}}</h6>
+            <ul class="list-unstyled col-xs-12 user_problem">
+              <li class="col-xs-4 text-center list" [routerLink]="['/user','article']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                {{userArticleNumber}}<br/>
+                <span>{{'enterprise.article_published' | translate}}</span>
+              </li>
+              <li class="col-xs-4 text-center list" [routerLink]="['/user','activity']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                {{userCommentsNumber}}<br/>
+                <span>{{'enterprise.activity_published' | translate }}</span>
+              </li>
+              <li class="col-xs-4 text-center list" [routerLink]="['/user','qa']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                {{userQaNumber}}<br/>
+                <span>{{'enterprise.qa_published' | translate}}</span>
+              </li>
+            </ul>
+            <div class="btn_qa" >
+              <a (click)="gotoPageCurrent()" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-success">{{'article.raise_a_question' |translate}}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="positions">
+          <div class="head">
+            <i></i>
+            <span>{{'enterprise.newest_position' | translate}}</span>
+          </div>
+          <div class="loading text-center" *ngIf="relatedPositionsLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div class="noPosition text-center" *ngIf="!relatedPositionsLoading && relatedPositions.length === 0">
+            <img src="../../assets/img/no_position.png">
+            {{'message.no_related_position_message' | translate}}
+          </div>
+          <ul class="list-unstyled relatedPosition" *ngIf="!relatedPositionsLoading && relatedPositions.length > 0">
+            <li class="list row" *ngFor="let position of relatedPositions">
+              <div class="img col-sm-3 col-xs-4">
+                <a [routerLink]="['/positions',position.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                  <div class="postImgContent">
+                    <img class="vip img-responsive imgWidth" src="../../assets/img/featured.png" *ngIf="position.company?.isVIP"/>
+                    <img src="../../../assets/img/default_company_icon.png" alt="" class="img-responsive" *ngIf="position.company?.icon === null">
+                    <img [src]="position.company?.icon?.url['100']" alt="" class="img-responsive" *ngIf="position.company?.icon !== null">
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-9 col-xs-8 content">
+                <p class="name">
+                  <a [routerLink]="['/positions',position.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                    {{position.name}}
+                  </a>
+                </p>
+                <p class="salary" *ngIf="position.maxSalary > 0">
+                  <i class="fa fa-dollar"></i>
+                  {{position.minSalary/1000}}K - {{position.maxSalary/1000}}K
+                </p>
+                <p class="salary" *ngIf="position.maxSalary === 0 && position.minSalary === 0">
+                  <i class="fa fa-dollar"></i>
+                  {{'position.negotiation' | translate}}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--/.articleContentListRight-->
+
+        <div class="articleContentListRightTag">
+          <div class="head">
+            <i></i>
+            <span>{{'article.hostTags' | translate}}</span>
+          </div>
+
+          <ul class="tags list-inline">
+            <li *ngFor="let tag of hotTags">
+              <a (click)="searchArticle(tag.name)">{{tag.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!-- /.articleContentList -->
+  </div>
+  <!--/.article-->
+</div>
+

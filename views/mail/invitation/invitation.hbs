@@ -1,0 +1,58 @@
+{{#extend "mail/layouts/main"}}
+  {{#content "headerTitle"}}
+      【FreshLinker】【{{company.name}}】 company invited you to apply【{{position.name}}】position.<br/>
+      【FreshLinker】【{{company.name}}】 公司邀請你申請【{{position.name}}】職位.
+  {{/content}}
+
+  {{#content "content"}}
+      <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+              <td class="aligncenter content-block">
+                  <h2 style="text-align: left;">Hi {{email}} user:</h2>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <span style="margin: 0 20px 0 0px; display: inline-block;">
+                  Congrats! Your profile has a very high matching score with the position of 【{{position.name}}】 position at 【{{company.name}}】
+                      Company, and they have invited you to apply for this job! <br/>
+                  你好！你的資料和 【{{company.name}}】公司 的 【{{position.name}}】職位 的匹配度非常高，特邀你申請這個職位！
+                  </span>
+              </td>
+          </tr>
+          <tr style="display:block; margin-top: 35px; margin-bottom: 35px;">
+              <td>
+                  <a href="{{sourceUrl}}/user/dashboard"
+                     class="btn-primary"
+                     style="display: inline-block; padding: 0 30px; line-height: 1em;" target="_blank">
+                    登录查看详情 Login to view details
+                  </a>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <span style="margin: 0 20px 0 0px; display: inline-block;">
+                  Need help along the way? Please feel free to contact us at +852 3547 2513 or email us at support@freshlinker.com.<br/>
+                  如果你有任何問題，請立即致電+852 3547 2513或電郵至support@freshlinker.com聯絡我們。
+                  </span>
+
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <span style="margin: 35px 20px 0 0px; display: inline-block;">
+                    Cheers,<br/>
+                    FreshLinker
+                  </span>
+              </td>
+          </tr>
+
+          <tr>
+              <td class="content-block" style="display: inline-block; margin-top: 40px;">
+                  *This is an automatically generated email, please do not reply.<br/>
+                  *此為系統自動發送的電郵，請勿直接回覆。
+              </td>
+          </tr>
+      </table>
+  {{/content}}
+{{/extend}}

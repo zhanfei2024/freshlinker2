@@ -1,0 +1,279 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <div class="row profile userProfile">
+    <div class="col-xs-12 profileRight">
+      <div class="language">
+        <div class="row heading">
+          <div class="col-sm-11 col-xs-10 img clearfix">
+            <i class="welfare">
+              <u class="fa fa-users icon"></u>
+            </i>
+            <span class="text">{{'company.company_welfare' | translate}}</span>
+          </div>
+          <div class="icon col-sm-1 col-xs-2">
+            <a (click)="skillShow = !skillShow">
+              <i class="fa fa-plus-square  fa-2x"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-11">
+            <div class="profileContent row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12 col-sm-offset-1">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="List row">
+                      <ul class="keyList list-inline">
+                        <li class="List clearfix profileSpecial" *ngFor="let item of selectWefare">
+                          <a href="javascript:;">{{item}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!--/.col-->
+
+                  <div class="skillShow row" *ngIf="skillShow" style="margin-bottom: 20px">
+                    <div class="col-md-9 col-sm-8 col-xs-12  skillInput">
+                      <div class="col-sm-2 text-right">
+                        <label class="control-label">{{'article.tag' | translate}}</label>
+                      </div>
+                      <div class=" col-sm-10">
+                        <ng-select [multiple]="true"
+                                   id="temptation"
+                                   [active]="selectWefare"
+                                   [items]="temptation"
+                                   (data)="refreshValue($event)"
+                                   [disabled]="disabled"
+                                   [placeholder]="'article.welfare_tag_input' | translate">
+                        </ng-select>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-md-3 col-sm-4 col-xs-12 skillBtn">
+                      <button class="btn btn-success" (click)="saveWelfare(); skillShow = !skillShow">
+                        {{'button.save' | translate}}
+                      </button>
+                      <button class="btn btn-default" (click)="skillShow = !skillShow">
+                        {{'button.cancel' | translate}}
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="line">
+      <div class="language">
+        <div class="row heading">
+          <div class="col-sm-11 col-xs-10 img clearfix">
+            <i class="video">
+              <u class="fa fa-video-camera icon"></u>
+            </i>
+            <span class="text">{{'company.company_video' | translate}}<a class="inner-add" (click)="lgModal.show()">如何添加?</a></span>
+          </div>
+          <div class="icon col-sm-1 col-xs-2">
+            <a (click)="skillShow1 = !skillShow1">
+              <i class="fa fa-plus-square  fa-2x"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-11">
+            <div class="profileContent row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12 col-sm-offset-1">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="List row">
+                      <a>{{ video?.url }}</a>
+                    </div>
+                  </div>
+                  <!--/.col-->
+
+                  <div class="skillShow row" *ngIf="skillShow1" style="padding-bottom: 20px">
+                    <div class="col-md-9 col-sm-8 col-xs-12  skillInput">
+                      <div class="col-sm-2 text-right">
+                        <label class="control-label">{{'company.url' | translate}}</label>
+                      </div>
+                      <div class="col-sm-10">
+                        <input type="url" name="url" class="form-control"
+                               #inputUrl="ngModel"
+                               [(ngModel)]="url"
+                               placeholder="{{'message.input_url' | translate}}"/>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-md-3 col-sm-4 col-xs-12 skillBtn">
+                      <button class="btn btn-success" (click)="uploadFiles();">
+                        {{'button.save' | translate}}
+                      </button>
+                      <button class="btn btn-default" (click)="skillShow1 = !skillShow1">
+                        {{'button.cancel' | translate}}
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="line">
+      <div class="expectJobs">
+        <div class="row heading">
+          <div class="col-sm-11 col-xs-10 img clearfix">
+            <i></i>
+            <span class="text">{{'enterprise.company_dynamic' | translate}}</span>
+          </div>
+          <div class="icon col-sm-1 col-xs-2">
+            <a (click)="openModal(template)">
+              <i class="fa fa-plus-square  fa-2x"></i>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="line">
+      <div class="language">
+        <div class="row heading">
+          <div class="col-sm-11 col-xs-10 img clearfix">
+            <i class="prize">
+              <u class="icon fa fa-trophy"></u>
+            </i>
+            <span class="text">{{'company.company_prize' | translate}}</span>
+          </div>
+          <div class="icon col-sm-1 col-xs-2">
+            <a (click)="skillShow3 = !skillShow3">
+              <i class="fa fa-plus-square  fa-2x"></i>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-11">
+            <div class="profileContent row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12 col-sm-offset-1">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="awards-list-content" style="padding: 20px;">
+                      <ul class="list-unstyled awards" *ngIf="awards?.length > 0">
+                        <li class="list" *ngFor="let list of awards">
+                          <img src="../../../assets/img/形状 5.png" height="12" width="13"/>
+                          <span class="name">{{list.name}}</span>
+                          <a class="pull-right" (click)="deleteAwards(list.id)" style="margin-left: 20px">{{'button.remove'
+                            | translate}}</a>
+                          <span class="pull-right time">{{list.date | date: 'yyyy-MM'}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!--/.col-->
+
+
+                  <div class="skillShow row" *ngIf="skillShow3">
+                    <div class="col-md-9 col-sm-8 col-xs-12  skillInput">
+                      <div class="form-group clearfix">
+                        <div class="col-sm-2 text-right">
+                          <label class="control-label">{{'global.awards_date' | translate}}</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <app-date [date]="date" (change)="countChange($event)"></app-date>
+                        </div>
+                      </div>
+                      <div class="form-group clearfix">
+                        <div class="col-sm-2 text-right">
+                          <label class="control-label">{{'global.awards_title' | translate}}</label>
+                        </div>
+                        <div class="col-sm-10">
+                          <input class="form-control" type="text" name="title" [(ngModel)]="award.name" #awardName>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-md-3 col-sm-4 col-xs-12 skillBtn">
+                      <button class="btn btn-success" (click)="saveAwards()">
+                        {{'button.save' | translate}}
+                      </button>
+                      <button class="btn btn-default" (click)="skillShow3 = !skillShow3">
+                        {{'button.cancel' | translate}}
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header" style="border-bottom: none;">
+    <h4 class="modal-title pull-left">{{'enterprise.company_dynamic' | translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+     <textarea  required class="form-control" placeholder="{{'message.dynamic_input_msg' | translate}}"  type="text" name="title" [(ngModel)]="content"
+               maxlength="3000" style="min-height: 150px;border:none;box-shadow:none;" #inputDynamic>
+
+     </textarea>
+  </div>
+  <div class="modal-footer" style="padding: 8px">
+    <div class="icon">
+      <i class="fa fa-camera" aria-hidden="true"></i>
+      <input type="file" required ng2FileSelect [uploader]="uploader" class="file-icon"/>
+      {{'global.dynamic_image' | translate}}
+      <span>{{filesName}}</span>
+    </div>
+    <button class="btn btn-success float-right" (click)="saveDynamic();">
+      {{'button.release' | translate}}
+    </button>
+  </div>
+</ng-template>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="../../../../assets/img/fl-youtube_1024.jpg" class="img-responsive">
+      </div>
+
+    </div>
+  </div>
+</div>
+

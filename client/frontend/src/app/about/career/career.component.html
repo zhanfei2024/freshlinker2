@@ -1,0 +1,236 @@
+<div class="career container">
+  <h2 class="careerTitle">
+    {{'about_us.job' | translate}}
+  </h2>
+  <p class="subTitle">
+    {{'career.title' | translate}} <a href="mailto:career@freshlinker.com">career@freshlinker.com</a> !
+  </p>
+  <div class="careerList header">
+    <div class="row">
+      <div class="col-md-10 col-sm-10 col-xs-8 careerListName">
+        position
+      </div>
+      <!--/.col-->
+      <div class="col-md-2 col-sm-2 col-xs-4 careerListName text-right">
+        operation
+      </div>
+      <!--/.col-->
+    </div>
+  </div>
+  <div class="careerList">
+    <accordion>
+      <accordion-group  #group  (click)="one = !one">
+        <div class="heading row" accordion-heading>
+          <div class="col-md-10 col-sm-10 col-xs-10 title">
+            Recruitment Consultant / Recruiter /Researcher
+          </div>
+          <!--/.col-->
+          <div class="col-md-2 col-sm-2 col-xs-2 text-right icon">
+            <i class="fa fa-2x" [ngClass]="{'fa-chevron-up': one, 'fa-chevron-down': !one}"></i>
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="careerListContent">
+          <p class="title">
+            We’re looking for attentive recruiters with an entrepreneurial mentality to join our team and help grow FreshLinker.
+          </p>
+          <ul class="list list-unstyled">
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What is the role?</p>
+              <p class="text">
+                At FreshLinker, recruiters push the boundaries of what’s possible in helping our clients to reach their goals. They are not constrained by the past, choosing to embrace new technologies and methods, instead of laboring over inefficient, old fashioned methods.
+              </p>
+              <p class="text">
+                The primary responsibility of this role is simple: help our clients to recruit the possible candidate they can have. To do this, recruiters engage with our clients to explore their recruiting needs through constant communication and translate them into a talent pool for our clients to choose from.
+              </p>
+              <p class="text">
+                We’re looking for recruiters that are excellent communicators, results-driven and extremely attentive.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What skills do you need?</p>
+              <p class="text">
+                At FreshLinker, our clients come from a diverse range of industries. So it’s fine if you come from a recruiting background of a specific niche, in fact, we encourage it. You should be an excellent communicator and you’ll collaborate with your team on how your recruiting methods can be improved using FreshLinker’s technologies. You will also be expected to provide meaningful feedback on the FreshLinker platform and how it can help recruiters and employers to enhance their recruiting efforts.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What kind of people are hired in this role?</p>
+              <p class="text">
+                We want recruiters who think strategically and execute quickly; passionate people who are driven by their performance.
+              </p>
+              <p class="text">
+                You’ll be working with and supported by a team of recruiters and engineers. Your teammates on the recruiting team will include consultants who previously have a strong track record.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </accordion-group>
+
+      <accordion-group  #group  (click)="two = !two">
+        <div class="heading row" accordion-heading>
+          <div class="col-md-10 col-sm-10 col-xs-10 title">
+            Sales / Business Development
+          </div>
+          <!--/.col-->
+          <div class="col-md-2 col-sm-2 col-xs-2 text-right icon">
+            <i class="fa" [ngClass]="{'fa-chevron-up': two, 'fa-chevron-down': !two}"></i>
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="careerListContent">
+          <p class="title">
+            We’re looking for confident business development representatives with a tactical mindset to join our team and help grow FreshLinker.
+          </p>
+          <ul class="list list-unstyled">
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What is the role?</p>
+              <p class="text">
+                At FreshLinker, business development representatives push the boundaries of what’s possible in helping our clients to reach their recruiting goals. They are not constrained by the past, choosing to embrace FreshLinker’s platform and new technologies to help companies find and hire talent across all industries and functions.
+              </p>
+              <p class="text">
+                The primary responsibility of this role is simple: provide our clients the recruiting tool they need in order to succeed, leveraging the FreshLinker platform and technology. To do this, business development executives engage with our clients to explore their recruiting needs through constant communication and translate them into tailor-make recruiting packages of tools and solutions for our clients.
+              </p>
+              <p class="text">
+                We’re looking for business development executives that are excellent communicators, results-driven and extremely attentive.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What skills do you need?
+              </p>
+              <p class="text">
+                The FreshLinker platform is what drives the company forward, and it is absolutely essential that you fully understand how our platform works. You should be an excellent communicator and you’ll be expected to provide meaningful feedback on how we can improve the FreshLinker platform. We encourage anyone with a startup mentality to apply.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What kind of people are hired in this role?
+              </p>
+              <p class="text">
+                We want individuals who are up for a challenge and can execute quickly; passionate people with a growth mindset.
+              </p>
+              <p class="text">
+                Your teammates will include recruitment consultants, engineers and marketers who are all obsessed with the recruiting startup world.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </accordion-group>
+
+      <accordion-group  #group (click)="three = !three">
+        <div class="heading row"  accordion-heading>
+          <div class="col-md-10 col-sm-10 col-xs-10 title">
+            UI/UX designers
+          </div>
+          <!--/.col-->
+          <div class="col-md-2 col-sm-2 col-xs-2 text-right icon">
+            <i class="fa" [ngClass]="{'fa-chevron-up': three, 'fa-chevron-down': !three}"></i>
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="careerListContent">
+          <p class="title">
+            We’re looking for thoughtful designers with an eye for quality to join our team and help grow FreshLinker while keeping it beautiful and delightful.
+          </p>
+          <ul class="list list-unstyled">
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What is the role?</p>
+              <p class="text">
+                At FreshLinker, designers push the boundaries of what’s possible in web client applications. They are not constrained by the past, choosing to embrace new design capabilities instead of laboring over old-fashioned design tools.
+              </p>
+              <p class="text">
+                The primary responsibility of this role is simple: create the best possible user interface & design for features on desktop and mobile web. To do this, designers collaborate with front-end engineers to explore potentials through visual and interactive mocks and then translate them into beautiful designs.
+              </p>
+              <p class="text">
+                We’re looking for designers that do product-driven, simple, application-level designs.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What skills do you need?</p>
+              <p class="text">
+                A creative mindset is all you need. We’re flexible with the tools you use as long as you create beautiful designs that stun our users and align with our vision. You’ll collaborate with a team of designers and will be expected to provide meaningful feedback to others.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What kind of people are hired in this role?
+              </p>
+              <p class="text">
+                We want designers who innovate eagerly and keep things simple.
+              </p>
+              <p class="text">
+                You’ll be working with and supported by a team of passionate designers and engineers of whom all are obsessed with simple, application-level designs.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What kind of people are hired in this role?
+              </p>
+              <p class="text">
+                We want individuals who are up for a challenge and can execute quickly; passionate people with a growth mindset.
+              </p>
+              <p class="text">
+                Your teammates will include recruitment consultants, engineers and marketers who are all obsessed with the recruiting startup world.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </accordion-group>
+
+      <accordion-group  #group (click)="four = !four">
+        <div class="heading row" accordion-heading>
+          <div class="col-md-10 col-sm-10 col-xs-10 title">
+            Editors / Content Contributors
+          </div>
+          <!--/.col-->
+          <div class="col-md-2 col-sm-2 col-xs-2 text-right icon">
+            <i class="fa" [ngClass]="{'fa-chevron-up': four, 'fa-chevron-down': !four}"></i>
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="careerListContent">
+          <p class="title">
+            We’re looking for content contributors who have something to share about today’s job seeking/recruiting environment.
+          </p>
+          <ul class="list list-unstyled">
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What is the role?</p>
+              <p class="text">
+                Career Content is a big thing here at FreshLinker. We believe the significant mismatch between employers and job seekers is due to imperfect information. If only young talent job seekers are more informed about their career paths, they wouldn't be so lost when it comes to their turn to apply for jobs and they wouldn't apply for jobs recklessly - which in turns save employers a lot of screening time.
+              </p>
+              <p class="text">
+                The primary responsibility of this role is simple: create thought-provoking and engaging career content that entices our young talent users and/or our employer users.
+              </p>
+              <p class="text">
+                We’re looking for content creators who have something to share about the job seeking & recruiting environment and are brilliant writers.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle"><i class="fa fa-circle-o"></i> What skills do you need?</p>
+              <p class="text">
+                You should have authentic insights about the job seeking and/or recruiting environment and would love to share them to a wide audience. You will be expected to contribute content on a regular basis and collaborate with recruiters, employers and industry leaders, in order to generate authentic, beautiful career content.
+              </p>
+            </li>
+            <li class="item">
+              <p class="subtitle">
+                <i class="fa fa-circle-o"></i>
+                What kind of people are hired in this role?
+              </p>
+              <p class="text">
+                We want content creators who are not afraid to speak their minds and have a constant thirst for knowledge.
+              </p>
+
+            </li>
+          </ul>
+        </div>
+      </accordion-group>
+
+    </accordion>
+  </div>
+</div>

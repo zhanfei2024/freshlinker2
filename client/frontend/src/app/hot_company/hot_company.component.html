@@ -1,0 +1,64 @@
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="row hotCompanyContent">
+    <div class="loading text-center" [hidden]="!companyLoading">
+      <i class="fa fa-3x fa-spinner fa-spin"></i>
+    </div>
+    <div class="noPosition text-center" [hidden]="!(!companyLoading && hotCompany?.length === 0)">
+      <img src="../../assets/img/no_position.png">
+      {{'message.company_no_company' | translate}}
+    </div>
+
+    <div [hidden]="!(!companyLoading && hotCompany?.length > 0)">
+      <div class="col-md-3 col-sm-4" *ngFor="let list of hotCompany">
+        <div class="hotCompanyList">
+          <a routerLink="{{list.vipUrl}}" pageScroll  href="#awesomePart" [pageScrollDuration]="0">
+            <fieldset>
+              <div class="imgContent">
+                <div class="img-bg">
+                  <img class="vip-icon img-responsive" src="../../assets/img/featured.png" *ngIf="list.isVIP"/>
+                  <img src="../../assets/img/default_company_icon.png" class="img-rounded" *ngIf="list.icon === null"/>
+                  <img [src]="list.icon?.url['100']"  class="img-rounded" *ngIf="list.icon !== null"/>
+                </div>
+              </div>
+              <h4 class="text-center companyName">{{list.name}}</h4>
+              <p class="text-center text">
+                <span class="icon" [ngClass]="{'icon': list.isVIP}" (click)="contact(list.id)">{{list.field | htmlToPlaintext : 15}}</span>
+                <span *ngIf=" list.field?.length >15" >...</span>
+              </p>
+              <p class="text-center textContent" title="{{list.background}}">{{list.background}}</p>
+              <ul class="list-unstyled companyProfile clearfix">
+                <li class="list listIcon col-sm-4">
+                  <p class="text-center" title="{{list.scale}}">{{list.scale}}</p>
+                  <p class="text-center">scale</p>
+                </li>
+                <li class="list listIcon col-sm-4">
+                  <p class="text-center" title="{{list.stage}}">{{list.stage}}</p>
+                  <p class="text-center">stage</p>
+                </li>
+                <li class="list  col-sm-4 clearPadding">
+                  <p class="text-center"><i class="fa fa-map-marker"></i></p>
+                  <p class="text-center" title="{{list.address}}">{{list.address}}</p>
+                </li>
+              </ul>
+            </fieldset>
+          </a>
+        </div>
+      </div>
+
+     <div class="col-xs-12">
+       <div class="text-center">
+         <pager [maxSize]="50"
+                [itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"
+                [(ngModel)]="pageNum.page" (pageChanged)="changePage($event)"
+                pageBtnClass="btn btn-link"></pager>
+       </div>
+     </div>
+
+    </div>
+
+
+  </div>
+
+</div>

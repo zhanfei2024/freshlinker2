@@ -1,0 +1,662 @@
+<iToaster></iToaster>
+
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="row position">
+    <div>
+      <div [hidden]="!(positions.length === 0 && !tableLoading)" class="positionMain">
+        <div class="noPosition text-center">
+          <img src="../../assets/img/no_position.png">
+          {{'message.company_no_publish_positions' | translate}}
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 positionLeft" *ngIf="positions.length > 0">
+        <ul class="list-unstyled positionLeftList" style="height: 1030px;overflow-y: scroll"
+            infinite-scroll
+            [infiniteScrollDistance]="10"
+            [infiniteScrollUpDistance]="2"
+            [infiniteScrollThrottle]="300"
+            [infiniteScrollDisabled]="meta.pagination.nextPage === null"
+            [scrollWindow]="false"
+            (scrolled)="onScrollDown()">
+          <div class="loading text-center" [hidden]="!positionLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div [hidden]="positionLoading">
+            <li role="button" class="list row" *ngFor="let position of positions; let i = index"
+                [ngClass]="{'active': position.id === firstPosition.id}" (click)="changePosition(i)">
+              <div class="col-sm-3 img clearPaddingRight">
+                <div class="imgContent">
+                  <img class="vip-icon img-responsive" src="../../../assets/img/featured.png" *ngIf="position.company?.isVIP"/>
+                  <img [src]="position.company?.icon?.url['100']" class="img-responsive img-rounded" *ngIf="position.company?.icon !== null">
+                  <img src="../../../assets/img/default_company_icon.png" class="img-responsive img-rounded" *ngIf="position.company?.icon === null">
+                </div>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 content clearPaddingRight">
+                <h4 class="jobName">
+                  {{position.name | htmlToPlaintext: 30}}
+                  <span *ngIf="position.name?.length > 30">...</span>
+                </h4>
+                <h4 class="companyName">
+                  {{position?.company?.name | htmlToPlaintext: 30}}
+                  <span *ngIf="position?.company?.name?.length > 30">...</span>
+                </h4>
+              </div>
+              <!--/.col-->
+              <div class="col-md-12 col-sm-12 hidden-xs text-center other">
+                <i class="fa fa-star fa-2x pull-right" *ngIf="position.bookmarkStatus" (click)="removeCollectPosition(position.id)"></i>
+                <i class="fa fa-star-o fa-2x pull-right" *ngIf="!position.bookmarkStatus" (click)="collectPosition(position.id)"></i>
+                <time class="pull-right">{{position.updatedAt | date: 'MM-dd'}}</time>
+              </div>
+              <!--/.col-->
+            </li>
+            <!-- page -->
+            <div class="loading text-center" [hidden]="!positionLoading2">
+              <i class="fa fa-3x fa-spinner fa-spin"></i>
+            </div>
+          </div>
+        </ul>
+        <!--<div class="text-center">-->
+        <!--<pager [maxSize]="50"-->
+        <!--[itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"-->
+        <!--[(ngModel)]="pageNum.page" (pageChanged)="changePage($event)"-->
+        <!--pageBtnClass="btn btn-link"></pager>-->
+        <!--</div>-->
+
+      </div>
+      <!--/.col-->
+      <div class="col-md-9 col-sm-12 col-xs-12 positionRight" *ngIf="positions.length > 0"
+           infinite-scroll
+           [infiniteScrollDistance]="10"
+           [infiniteScrollUpDistance]="2"
+           [infiniteScrollThrottle]="300"
+           [scrollWindow]="false">
+        <div class="row breadList">
+          <div class="col-md-8 col-sm-12 col-xs-12">
+            <ul class="list-inline breadLeft">
+              <li class="breadlist">
+                <a *ngIf="firstPosition.bookmarkStatus" (click)="removeCollectPosition(firstPosition.id)">
+                  <i class="fa fa-star"></i>
+                  {{'global.saved' | translate}}
+                </a>
+                <a *ngIf="!firstPosition.bookmarkStatus" (click)="collectPosition(firstPosition.id)">
+                  <i class="fa fa-star-o"></i>
+                  {{'global.save' | translate}}
+                </a>
+
+              </li>
+              <li class="breadlist" *ngIf="false">
+                <a>
+                  {{'position.share' | translate}}
+                </a>
+
+              </li>
+              <li class="breadlist" *ngIf="false">
+                <a href="">
+                  <i class="fa fa-print"></i>
+                  {{'position.print' | translate}}
+                </a>
+              </li>
+              <li class="breadlist click">
+                <i class="fa fa-eye"></i>
+                <strong>{{firstPosition.view}}</strong> {{'button.preview' | translate}}
+              </li>
+              <li class="breadlist">
+                <a target="_blank" [routerLink]="['/positions',firstPosition.id]">
+                  <i class="fa fa-window-restore"></i>
+                  {{'global.view_in_new_tab' | translate}}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!--/.col-->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <ul class="breadRight list-inline">
+              <li class="breadlist">
+                <i class="fa fa-clock-o"></i> {{firstPosition.createdAt | date: 'yyyy-MM-dd'}}
+              </li>
+              <!--<li class="breadlist" *ngIf="false">-->
+              <!--Employer Ref.MAP2016-->
+              <!--</li>-->
+            </ul>
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="wrapper">
+          <div class="backgroundImg">
+            <p class="text-center companyName" *ngIf="firstPosition?.company?.cover === null">{{firstPosition.company?.name}}</p>
+            <img src="../../../assets/img/default_company_cover.png" alt="" class="img-responsive" *ngIf="firstPosition.company?.cover === null">
+            <img [src]="firstPosition.company?.cover?.url['1024']" alt="" class="img-responsive" *ngIf="firstPosition.company?.cover !== null">
+          </div>
+          <div class="positionTitle row">
+            <div class="col-md-3 col-sm-3 col-xs-4">
+              <fieldset class="positionTitleImg">
+                <a>
+                  <img class="vip-icon img-responsive" src="../../../assets/img/featured.png" *ngIf="firstPosition.company?.isVIP"/>
+                  <img [src]="firstPosition.company?.icon?.url['160']" class="img-responsive img-rounded" *ngIf="firstPosition.company?.icon !== null">
+                  <img src="../../../assets/img/default_company_icon.png" class="img-responsive img-rounded" *ngIf="firstPosition.company?.icon === null">
+                </a>
+              </fieldset>
+            </div>
+            <!--/.col-->
+            <div class="col-md-5 col-sm-5 col-xs-12">
+              <ul class="positionTitleList list-inline">
+                <li *ngFor="let nav of positionTab" [ngClass]="{'active': positionIndex === nav.id}" (click)="changeTab(nav.id)">
+                  <a href="javascript:;">{{nav.name | translate}}</a>
+                </li>
+                <li>
+                  <a [routerLink]="['/company',firstPosition.company.id,'company-list']"  *ngIf="!firstPosition.company?.isVIP">{{'enterprise.company_page' | translate}}</a>
+                  <a [routerLink]="['/upgrade_company',firstPosition.company.id,'profile']"  *ngIf="firstPosition.company?.isVIP">{{'enterprise.company_page' | translate}}</a>
+                </li>
+              </ul>
+            </div>
+            <!--/.col-->
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12 apply">
+              <a class="contact" (click)="contact()" *ngIf="firstPosition.company?.isVIP">
+                <img src="../../../assets/img/contact_us.png"/>
+                <span>{{'about_us.contact_us' | translate}}</span>
+              </a>
+              <button class="btn" [ngClass]="{'btn-success': !firstPosition.isApplied,'btn-default': firstPosition.isApplied}"
+                      [disabled]="firstPosition.isApplied"
+                      (click)="setCandidate(firstPosition.id)">
+                {{ (firstPosition.isApplied ? 'global.applied_position' : 'global.apply') | translate}}
+              </button>
+            </div>
+            <!--/.col-->
+
+          </div>
+          <!--/.col-->
+
+          <div class="row positionContent">
+            <div class="col-xs-12">
+              <h4 class="positionName">
+                {{firstPosition.name}}
+              </h4>
+
+              <tabset>
+                <div class="row" *ngIf="Loading">
+                  <div class="col-sm-12 loading text-center">
+                    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <tab [active]="positionIndex === 1" *ngIf="!Loading">
+                  <article class="skills" *ngIf="firstPosition?.skills?.length > 0">
+                    <p class="title">
+                      {{'position.skillCompare' | translate}} <span>{{'position.skillMatch' | translate}}:</span>
+                    </p>
+
+                    <p class="title" *ngIf="!isLogin">
+                      {{'position.tags' | translate}} :
+                    </p>
+
+                    <ul class="keyList list-inline">
+                      <li class="list" *ngFor="let skill of firstPosition.skills" [ngClass]="{'active': skill.match && isLogin}">
+                        <span role="button">{{skill.name}}</span>
+                      </li>
+                    </ul>
+                  </article>
+                  <article class="positionDetail">
+                    <ul class="positionDetailOne list-inline">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <li class="list">
+                            <dl class="category">
+                              <div class="row">
+                                <div class="col-sm-2 col-xs-12">
+                                  <dt>
+                                    {{'position.category' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-10 col-xs-12">
+                                  <ul class="list-unstyled">
+                                    <li>
+   <!--                             <span role="button" *ngFor="let category of firstPosition.categories" (click)="searchPosition('categoryIds',category.id)">
+                                  {{category.categoriesName}} > {{category.name}}  <br />
+                                </span>-->
+                                <span role="button" *ngFor="let category of firstPosition.categories">
+                                  {{category.categoriesName}} > {{category.name}}  <br />
+                                </span>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+                            <dl class="experience">
+                              <div class="row">
+                                <div class="col-sm-2 col-xs-12  print-sm-2">
+                                  <dt>
+                                    {{'company.url' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>{{firstPosition.company?.url}}</dd>
+                                </div>
+                                <!--/.col-->
+
+                                <div class="col-sm-2 col-xs-12  print-sm-2">
+                                  <dt>
+                                    {{'user.profile.email' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>{{firstPosition.email}}</dd>
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+                            <dl class="experience">
+                              <div class="row">
+                                <div class="col-sm-2 col-xs-12  print-sm-2">
+                                  <dt>
+                                    {{'user.profile.experience' | translate}}：
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>{{firstPosition.experience}} {{'global.year' | translate}}</dd>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-2 col-xs-12  print-sm-2">
+                                  <dt>
+                                    {{'user.profile.education' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>{{firstPosition.educationLevel?.name}}</dd>
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+
+                            <dl class="money">
+                              <div class="row">
+                                <div class="col-sm-2 col-s-12  print-sm-2">
+                                  <dt>
+                                    {{'position.jobNature' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>
+                                    {{firstPosition.jobNatures?.name}}
+                                  </dd>
+                                </div>
+                                <!--/.col-->
+
+                                <div class="col-sm-2 col-s-12  print-sm-2">
+                                  <dt>
+                                    {{'position.pay_type' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-4 col-xs-12  print-sm-10">
+                                  <dd>{{firstPosition.type}}</dd>
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+                            <dl class="money">
+                              <div class="row">
+                                <div class="col-sm-2 col-s-12  print-sm-2">
+                                  <dt>
+                                    {{'position.salary' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-10 col-xs-12  print-sm-10">
+                                  <dd *ngIf="firstPosition.minSalary === 0 && firstPosition.maxSalary === 0">
+                                    {{'position.negotiation' | translate}}
+                                  </dd>
+                                  <dd *ngIf="firstPosition.minSalary !== 0 && firstPosition.maxSalary !== 0">
+                                    {{firstPosition.minSalary}}-{{firstPosition.maxSalary}}
+                                    {{'global.money'|translate}}/{{firstPosition.salaryType}}
+                                  </dd>
+
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+                            <dl class="address">
+                              <div class="row">
+                                <div class="col-sm-2 col-s-12  print-sm-2">
+                                  <dt>
+                                    {{'position.workplace' | translate}}
+                                  </dt>
+                                </div>
+                                <!--/.col-->
+                                <div class="col-sm-10 col-xs-12  print-sm-10">
+                                  <dd>{{parentLocations}}<span *ngIf="firstPosition.locations!==null"> - {{firstPosition.locations.name}}</span>
+                                    <span *ngIf="firstPosition.address!==null"> - {{firstPosition.address}}</span>
+                                  </dd>
+                                </div>
+                                <!--/.col-->
+                              </div>
+                            </dl>
+
+
+                          </li>
+                        </div>
+                        <!--/.col-->
+                      </div>
+
+                    </ul>
+                  </article>
+
+                  <article class="positionAbout">
+                    <h4 class="head">{{'position.job_requirements' | translate}}</h4>
+                    <p class="content" [innerHtml]="firstPosition.description"></p>
+                  </article>
+
+                  <div class="temptation" *ngIf="selftemptation.length > 0">
+                    <h4 class="head">{{ 'position.treatment' | translate}}</h4>
+                    <ol class="list-unstyled listContent">
+                      <li *ngFor="let list of selftemptation"><i class="icon"></i> <span>{{list}}</span></li>
+                    </ol>
+                  </div>
+
+                  <div class="temptation" *ngIf="firstPosition?.questions?.length > 0">
+                    <h4 class="head">{{'position.problem' | translate}}</h4>
+                    <ol class="list-unstyled listContent">
+                      <li *ngFor="let problem of firstPosition?.questions"><i class="icon"></i> <span>{{problem.question}}</span></li>
+                    </ol>
+                  </div>
+
+                  <article class="positionSkills" *ngIf="false">
+                    <h4>Skills</h4>
+                    <p class="content">
+                      AVA后台系统的框架、公共组件、公共模块的实现；
+                      2、对新技术、新方案进行预演和评估；
+                      3、负责JAVA后台系统的问题定位和排查；
+                      4、进行技术难点的攻关；
+                    </p>
+                  </article>
+
+
+                  <article class="positionKeyList" *ngIf="firstPosition?.tags?.length > 0">
+                    <p>{{'position.tags' | translate}}:</p>
+                    <ul CLASS="list-inline keyList">
+                      <li class="workList" *ngFor="let tag of firstPosition.tags">
+                        <span (click)="searchPosition('tags',tag.name)">{{tag.name}}</span>
+                      </li>
+                    </ul>
+                  </article>
+
+
+                  <article class="positionChart" *ngIf="candidateNum > 0">
+                    <div class="loading text-center" *ngIf="chartLoading">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                    </div>
+                    <div *ngIf="!chartLoading">
+                      <hr/>
+                      <div class="row">
+                        <div class="col-sm-4 col-xs-12">
+                          <h4 class="positionChartTitle">
+                            {{'position.apply_position_text_left' | translate}}
+                            <span>{{candidateNum}}</span>
+                            {{'position.apply_position_text_right' | translate}}
+                          </h4>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                      <div class="popup" *ngIf="!isLogin">
+                        {{'message.position_chart_message' | translate}}
+                      </div>
+
+                      <div class="row" [ngClass]="{'box-shadow': !isLogin}">
+                        <div class="col-sm-12 itemList">
+                          <carousel>
+                            <slide>
+                              <div class="positionChartContent">
+                                <div class="row">
+                                  <div class="col-sm-4 col-xs-12">
+                                    <h5 class="text-left positionChartSubTitle">
+                                      {{'position.apply_position_num_other' | translate}}<span>{{'user.profile.education' | translate}}</span>
+                                    </h5>
+                                  </div>
+                                  <!--/.col-->
+                                </div>
+
+                                <div class="row educationChart">
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                    <div class="positionChartContentLeft text-center">
+                                      <strong>{{candidateNum}}</strong>
+                                      {{'position.apply_position_num' | translate }}
+                                    </div>
+                                  </div>
+                                  <!--/.col-->
+                                  <div class="col-sm-6 col-xs-12 chartContent">
+                                    <div class="chart-pie">
+                                      <canvas baseChart  class="chart chart-pie"
+                                              [data]="educationChartData"
+                                              [labels]="educationChartLabels"
+                                              [colors]="backgroundColor"
+                                              [legend]="polarAreaLegend"
+                                              [options]="options"
+                                              [chartType]="pieChartType"></canvas>
+                                    </div>
+                                  </div>
+                                  <!--/.col-->
+                                </div>
+                              </div>
+                            </slide>
+                            <slide>
+                              <div class="positionChartContent">
+                                <div class="row">
+                                  <div class="col-sm-4 col-xs-12">
+                                    <h5 class="text-left positionChartSubTitle">
+                                      {{'position.apply_position_num_other' | translate}}<span>{{'user.profile.experience' | translate}}</span>
+                                    </h5>
+                                  </div>
+                                  <!--/.col-->
+                                </div>
+
+                                <div class="row educationChart">
+                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                    <div class="positionChartContentLeft text-center">
+                                      <strong>{{candidateNum}}</strong>
+                                      {{'position.apply_position_num' | translate }}
+                                    </div>
+                                  </div>
+                                  <!--/.col-->
+                                  <div class="col-sm-6 col-xs-12 chartContent">
+                                    <div class="chart-pie">
+                                      <canvas baseChart  class="chart chart-pie"
+                                              [data]="experienceChartData"
+                                              [labels]="experienceChartLabels"
+                                              [colors]="backgroundColor"
+                                              [legend]="polarAreaLegend"
+                                              [options]="options"
+                                              [chartType]="pieChartType"></canvas>
+                                    </div>
+                                  </div>
+                                  <!--/.col-->
+                                </div>
+                              </div>
+                            </slide>
+                          </carousel>
+
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="morePosition" *ngIf="otherPositions.length > 0">
+                    <div class="row">
+                      <div class="col-sm-10 col-xs-12">
+                        <h4>
+                          {{'position.more_position' | translate}}
+                        </h4>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-2 col-xs-12">
+                        <a [routerLink]="['/company-position',firstPosition.companyId,'position']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'global.show_more' | translate}}</a>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-12 List" *ngFor="let position of otherPositions">
+                        <p class="title">
+                          <a [routerLink]="['/positions', position.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                            {{position.name}}
+                          </a>
+                        </p>
+                        <p class="time">
+                          {{position.experience}} {{'global.year' | translate}} / {{position.educationLevel.name}} / {{position.type}}
+                        </p>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </article>
+                </tab>
+                <tab [active]="positionIndex === 2" *ngIf="!Loading">
+                  <div class="article">
+                    <h4 class="title">{{'position.related_news' | translate}}</h4>
+                    <div class="loading text-center" *ngIf="relatedLoading">
+                      <i class="fa fa-3x fa-spinner fa-spin"></i>
+                    </div>
+                    <div *ngIf="!relatedLoading">
+                      <div class="noPosition text-center" *ngIf="relatedPosts.length === 0">
+                        <img src="../../assets/img/no_position.png">
+                        {{'message.no_related_article_msg' | translate}}
+                      </div>
+                      <div class="row item" *ngIf="relatedPosts.length > 0">
+                        <div class="col-md-6 col-sm-6 col-xs-12 itemContent" *ngFor="let article of relatedPosts">
+                          <div class="row content">
+                            <div class="col-md-5 col-sm-5 col-xs-12 img">
+                              <a [routerLink]="['/articles',article.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                                <img src="../../assets/img/200x120.png" alt="" class="img-responsive img-rounded" *ngIf="article?.cover === null">
+                                <img [src]="article?.cover?.url['200']" alt="" class="img-responsive img-rounded " *ngIf="article?.cover !== null">
+                              </a>
+                            </div>
+                            <!--/.col-->
+                            <div class="col-md-7 col-sm-7 col-xs-12 text">
+                              <p class="title">
+                                <a [routerLink]="['/articles',article.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{article.title | htmlToPlaintext: 25}}<span
+                                  *ngIf="article.title.length > 25">...</span></a>
+                              </p>
+                              <p class="author">
+                                {{'article.author' | translate}}: {{article.userName}}
+                              </p>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                    </div>
+
+                  </div>
+                </tab>
+              </tabset>
+
+            </div>
+            <!--/.col-->
+          </div>
+        </div>
+
+      </div>
+      <!--/.col-->
+      <div bsModal #childRemoveModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header clearfix">
+              <button type="button" class="close pull-right" aria-label="Close" (click)="hideChildModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>{{'position.remove_save_position' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <p>{{'position.confirm_remove_save_position' | translate}}</p>
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" (click)="deleteCollectPosition()"
+                      class="btn btn-primary">
+                <span><i class="fa fa-check"></i> {{ 'button.yes' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-default" (click)="hideChildModal()"><i
+                class="fa fa-close"></i>
+                {{ 'button.no' | translate }}
+              </button>
+            </div>
+            <!-- /.model-footer -->
+          </div>
+        </div>
+      </div>
+
+      <div bsModal #childApplyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <form class="modal-dialog modal-lg" (ngSubmit)="checkApply()">
+          <div class="modal-content">
+            <div class="modal-header clearfix">
+              <button type="button" class="close pull-right" aria-label="Close" (click)="hideApplyModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>{{'position.apply_position' | translate}}</h4>
+            </div>
+            <div class="modal-body positionAnswer">
+              <div class="row" *ngIf="!questionLoading">
+                <div class="col-md-12 text-center" *ngIf="firstPosition?.positionQuestion?.length === 0">
+                  <p class="head">{{'position.applied_position_title' | translate}}</p>
+                </div>
+                <!--/.col-->
+                <div *ngIf="firstPosition?.positionQuestion?.length > 0" class="col-md-12">
+                  <p class="text-center title">{{'position.applied_position_title' | translate}}----{{'position.answer_question' | translate}}</p>
+                  <div class="content">
+                    <div *ngFor="let item of firstPosition?.positionQuestion">
+                      <div class="row">
+                        <span class="col-sm-12 questionTitle">{{item.question}}</span>
+                        <textarea name="answer" id="" cols="30" rows="2" required="{{item.isRequired}}" class="answer" [(ngModel)]="item.answer"></textarea>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.model-body -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">
+                <span><i class="fa fa-check"></i> {{ 'button.yes' | translate }}</span>
+              </button>
+              <button type="button" class="btn btn-default" (click)="hideApplyModal()"><i
+                class="fa fa-close"></i>
+                {{ 'button.no' | translate }}
+              </button>
+            </div>
+            <!-- /.model-footer -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

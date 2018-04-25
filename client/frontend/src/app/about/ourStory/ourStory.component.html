@@ -1,0 +1,30 @@
+<img src="../../assets/img/our_story_banner_{{'global.lang' | translate}}.png" alt="" class="img-responsive">
+<div class="ourStory">
+    <div class="container">
+        <div class="row contentOne">
+            <div class="col-sm-12 col-xs-12 main">
+                <h3>{{'our_story.content_two_title' | translate}}</h3>
+                <p>{{'our_story.content_first' | translate}}</p>
+                <p>{{'our_story.content_second' | translate}}</p>
+                <p>{{'our_story.content_third' | translate}}</p>
+                <p>{{'our_story.content_fourth' | translate}}</p>
+                <p>{{'our_story.content_fifth' | translate}}</p>
+                <p>{{'our_story.content_sixth' | translate}}</p>
+            </div>
+        </div>
+        <!--/.contentOne-->
+        <div class="contentTwo">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 img">
+                    <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+                        <slide *ngFor="let slidez of slides; let index=index">
+                            <img [src]="slidez.image" style="margin:auto;" class="img-responsive">
+                        </slide>
+                    </carousel>
+                </div>
+                <!--/.col-->
+            </div>
+        </div>
+        <!--/.contentTwo-->
+    </div>
+</div>

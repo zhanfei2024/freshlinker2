@@ -1,0 +1,7 @@
+{
+  "commentNotEdit": {
+    "statusCode": 400,
+    "message": "comment can not allow to edit",
+    "code": 16000
+  }
+}

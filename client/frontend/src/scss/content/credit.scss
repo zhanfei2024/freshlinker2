@@ -1,0 +1,152 @@
+div.credit {
+  margin: 0;
+
+  div.creditLeft {
+    padding: 0;
+  }
+
+
+  div.creditLeft,
+  div.creditRightContent {
+    background-color: #fbfbfb;
+    border: 1px solid $gray-light-2x;
+    h4.title,
+    p.subTitle {
+      padding: 15px 20px;
+      margin: 0;
+    }
+
+    h4.title {
+      font-weight: 400;
+      padding-bottom: 5px;
+    }
+
+    p.subTitle {
+      padding-top: 5px;
+      color: $gray-light;
+      border-bottom: 1px solid $gray-light-2x;
+    }
+  }
+
+  div.head {
+    border-bottom: 1px solid $gray-light-2x;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    h3.title {
+      color: $brand-info;
+      font-weight: 400;
+    }
+
+    p.content {
+      font-size: $font-size-large;
+      color: $gray;
+    }
+
+  }
+
+  div.creditLeft {
+    ul.creditLeftList {
+      li.list {
+        margin: 0;
+        padding: 20px 10px;
+        border-bottom: 1px solid $gray-light-2x;
+        div.text {
+          strong {
+            font-size: $font-size-h4;
+            font-weight: 400;
+          }
+          div.time {
+            color: $gray-light;
+          }
+        }
+
+        div.button,
+        div.closed {
+          a.btn {
+            padding: 3px 15px;
+          }
+        }
+
+        div.closed {
+          a.btn {
+            border: 1px solid $gray-light-2x;
+            border-radius: 4px;
+            i {
+              color: $gray-light;
+            }
+          }
+        }
+
+      }
+
+      li.button {
+        padding: 20px 10px;
+      }
+
+      li.list:last-child {
+        border-bottom: 0;
+      }
+
+    }
+
+
+  }
+
+  div.creditRight {
+    div.creditRightContent {
+      div.item {
+        margin: 0;
+        div.content {
+          padding: 20px 10px 0 10px;
+          label {
+            font-weight: 400;
+            padding-bottom: 5px;
+            text-align: left;
+          }
+
+          div.tips {
+            padding-top: 10px;
+            color: $brand-danger;
+          }
+
+        }
+      }
+
+      div.button {
+        padding: 10px 20px;
+        margin-top: 20px;
+      }
+
+    }
+  }
+
+}
+
+
+
+
+@media (max-width: $screen-xs-max) {
+  div.creditRight {
+    margin-top: 20px;
+    padding: 0;
+  }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  div.creditRight {
+    margin-top: 20px;
+    padding: 0;
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  div.creditRight {
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  div.creditRight {
+    padding-left: 20px;
+  }
+}

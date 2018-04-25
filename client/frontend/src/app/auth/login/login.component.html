@@ -1,0 +1,115 @@
+<header class="navbar navbar-default  navbar-inner headerBorder">
+  <div class="container">
+    <div class="clearfix"></div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3"
+              (click)="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand visible-xs" routerLink="/">
+        <img src="../../../assets/img/logo.png" class="img-responsive">
+      </a>
+    </div>
+    <nav class="hidden-xs col-md-7 pull-left">
+      <ul class="nav navbar-nav">
+        <a role="button" class="navbar-brand" routerLink="/">
+          <img src="../../../assets/img/logo.png" class="img-responsive">
+        </a>
+      </ul>
+    </nav>
+    <nav class="hidden-xs col-md-5 ">
+      <ul class="loginNav">
+        <li routerLinkActive="active"><a [routerLink]="['/auth','login']">{{'auth.login_user' | translate}}</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/auth','enterprise_login']">{{'auth.login_enterprise' | translate}}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="container d-table clearfix">
+  <div class="d-100vh-va-middle clearfix">
+    <div class="row clearfix">
+      <div class="col-md-12 inputBg">
+        <div class="card-group clearfix">
+          <div class="card p-2">
+            <div class="card-block">
+              <form (ngSubmit)="login()" name="mainForm" #mainForm="ngForm">
+                <div class="col-md-7 border-left">
+                  <div class="liginInputLeft">
+                    <img src="../../../assets/img/user_login_bg.png" class="img-responsive"/>
+                  </div>
+                </div>
+
+                <div class="col-md-5">
+                  <div class="liginInputRight">
+                    <div class="borderRight">
+                      <label for="email" class="login-label label">{{'auth.login_user' | translate}}</label>
+                      <div class="contentInput">
+                        <div class="input-group">
+                          <input [(ngModel)]="email" id="email" required #emailHandler="ngModel" type="text"
+                                 name="email"
+                                 class="form-control" placeholder="Email">
+                        </div>
+                        <div *ngIf="emailHandler.errors && (emailHandler.dirty || emailHandler.touched)"
+                             class="text-danger text-center">
+                          <div [hidden]="!emailHandler.errors.required">
+                            Email is required
+                          </div>
+                        </div>
+
+                        <div class="input-group">
+                          <label for="password" class="login-label"></label>
+                          <input [(ngModel)]="password" id="password" minlength="6" required #passwordHandler="ngModel"
+                                 type="password"
+                                 name="password"
+                                 class="form-control" placeholder="Password">
+                        </div>
+                        <div *ngIf="passwordHandler.errors && (passwordHandler.dirty || passwordHandler.touched)"
+                             class="text-danger text-center">
+                          <div [hidden]="!passwordHandler.errors.required">
+                            Password is required
+                          </div>
+                          <div [hidden]="!passwordHandler.errors.minlength">
+                            Password must be at least 6 characters long.
+                          </div>
+                        </div>
+
+                        <div class="col-xs-12 clearPadding">
+                          <div class="col-xs-6 text-left clearPaddingLeft">
+                            <a class="link" [routerLink]="['/auth','signup']">sign up</a>
+                          </div>
+                          <div class="col-xs-6 text-right clearPaddingRight">
+                            <a class="link" [routerLink]="['/auth','forget-password']">Forgot password?</a>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-xs-12 btnContent">
+                            <button type="submit" class="btn btn-success btn-block"
+                                    [disabled]="!mainForm.form.valid || loginLoading">
+                              <span *ngIf="loginLoading"><i class="fa fa-spin fa-spinner"></i></span>
+                              <span *ngIf="!loginLoading">Login</span>
+                            </button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

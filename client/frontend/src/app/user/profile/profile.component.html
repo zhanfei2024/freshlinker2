@@ -1,0 +1,583 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <div class="row profile userProfile">
+    <div class="col-xs-12 profileRight">
+      <div *ngIf="loading" class="text-center loading profileLoading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+
+      <div *ngIf="!loading">
+        <div class="baseInformation">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.base_information' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2 text-left">
+              <a [routerLink]="['/user','user-information']">
+                <i class="fa fa-edit fa-2x"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="content">
+            <div *ngIf="user?.icon !== null" class="text-center img">
+              <img [src]="user?.icon.url['200']" class="img-responsive img-circle">
+            </div>
+            <div *ngIf="user?.icon === null" class="text-center img">
+              <img *ngIf="user?.gender !== null && !gender" src="../../assets/img/user_default_icon_female.jpeg"
+                   class="img-responsive img-circle">
+              <img *ngIf="user?.gender === null || gender" src="../../assets/img/user_default_icon_male.jpeg"
+                   class="img-responsive img-circle">
+            </div>
+            <p class="userName text-center" *ngIf="user?.firstName !== null">
+              {{name}}
+            </p>
+            <ul class="list-inline text-center list">
+              <li *ngIf="user?.gender !== null">{{user?.gender | translate}}</li>
+              <li *ngIf="user?.yearOfExperience !== null">|</li>
+              <li *ngIf="user?.yearOfExperience !== null">{{user?.yearOfExperience}}
+                {{'global.year' | translate}}
+              </li>
+            </ul>
+            <ul class="list-inline text-center list">
+              <li *ngIf="user?.phone !== null">{{user?.phone}}</li>
+              <li *ngIf="user?.phone !== null">|</li>
+              <li>{{user?.email}}</li>
+            </ul>
+            <div class="about row" *ngIf="user?.selfDescription !== null">
+              <div class="col-sm-8 col-sm-offset-2">
+                <div class="row">
+                  <div class="col-sm-2 title">
+                    {{'user.profile.self_description' | translate}}
+                  </div>
+                  <div class="col-sm-9 col-sm-offset-1 content">
+                    <p *ngIf="!descriptionShow">{{user?.selfDescription| htmlToPlaintext: 80}}
+                      <span *ngIf="!descriptionShow && user?.selfDescription.length > 80">...
+                         <span>
+                           <a (click)="descriptionShow = !descriptionShow"
+                              *ngIf="!descriptionShow && user?.selfDescription.length > 80">
+                             {{'global.expand' | translate}}
+                           </a>
+                         </span>
+                      </span>
+                    </p>
+
+                    <span *ngIf="descriptionShow">
+                    <p [innerHtml]="user?.selfDescription"></p>
+                                            <a (click)="descriptionShow = !descriptionShow"
+                                               *ngIf="descriptionShow">{{'global.put_away' | translate}}</a>
+                                      </span>
+                  </div>
+                </div>
+
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="line">
+        <div class="expectJobs">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.expectPosition' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2 text-left">
+              <div class="btn-group profileBtn" dropdown>
+                <div class="btn submit" dropdownToggle id="expect">
+                  <a routerLink="{{url}}">
+                    <i class="fa fa-edit fa-2x expectJobsBtn"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let expect of user?.expectJobs;let i =index;">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List expectJobsContent">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expectPosition' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ expect.expectPosition.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content " *ngIf="expect.location?.name!==Undefined">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expect_location' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ expect.location?.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expect_salary' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            <span class="salaryType">{{expect.salaryType | translate}}</span>
+                            <span *ngIf="expect.minSalary === 0 && expect.maxSalary === 0">
+                                                            {{'position.negotiation' | translate}}
+                                                        </span>
+                            <span *ngIf="expect.minSalary !== 0 && expect.maxSalary !== 0">
+                                                            {{expect.minSalary}} - {{expect.maxSalary}}
+                                                        </span>
+                            <span class="type">/{{expect.type | translate}}</span>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'position.description' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            <p *ngIf="!expectShow[i]">{{expect?.content| htmlToPlaintext: 80}}
+                              <span *ngIf="!expectShow[i] && expect?.content.length > 80">...<span>
+                                  <a (click)="expectShow[i] = !expectShow[i]"
+                                     *ngIf="!expectShow[i] && expect?.content.length > 80">
+                                    {{'global.expand' | translate}}
+                                  </a>
+                                </span>
+                              </span>
+                            </p>
+                            <span *ngIf="expectShow[i]">
+                              <p [innerHtml]="expect?.content"></p>
+                               <a (click)="expectShow[i] = !expectShow[i]" *ngIf="expectShow[i]">{{'global.put_away' | translate}}</a>
+                            </span>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="line">
+        <div class="education">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.education' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2">
+              <a [routerLink]="['/user','education','edit']">
+                <i class="fa fa-plus-square  fa-2x"></i>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let education of user?.educations;let i =index">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.school' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ education.school.name}}
+
+                            <div class="btn-group profileBtn" dropdown>
+                              <button type="button" class="btn submit" dropdownToggle [disabled]="disabled"
+                                      id="education">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <ul class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="experience">
+                                <li role="menuitem">
+                                  <a href="javascript:;" [routerLink]="['/user','education',education.id,'edit']">
+                                    {{'button.edit'| translate}}
+                                  </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li role="menuitem">
+                                  <a (click)="removeEducation(education.id)">
+                                    {{'button.delete'| translate}}
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <!--/.col-->
+                          </div>
+
+                          <div class="row content">
+                            <div class="col-md-3 col-sm-5 name">
+                              {{'global.time' | translate}}
+                            </div>
+                            <!--/.col-->
+                            <div class="col-md-9 col-sm-7 text">
+                              {{education.graduationYear}} {{'global.year' | translate}}
+                            </div>
+                            <!--/.col-->
+                          </div>
+
+
+                          <div class="row content">
+                            <div class="col-md-3 col-sm-5 name">
+                              {{'user.profile.educationLevel' | translate}}
+                            </div>
+                            <!--/.col-->
+                            <div class="col-md-9 col-sm-7 text">
+                              {{education.educationLevel.name}}
+                            </div>
+                            <!--/.col-->
+                          </div>
+
+                          <div class="row content">
+                            <div class="col-md-3 col-sm-5 name">
+                              GPA
+                            </div>
+                            <!--/.col-->
+                            <div class="col-md-9 col-sm-7 text">
+                              {{education.gpa}}
+                            </div>
+                            <!--/.col-->
+                          </div>
+
+                          <div class="row content">
+                            <div class="col-md-3 col-sm-5 name">
+                              {{'user.profile.subject' | translate}}
+                            </div>
+                            <!--/.col-->
+                            <div class="col-md-9 col-sm-7 text">
+                              {{education.subject}}
+                            </div>
+                            <!--/.col-->
+                          </div>
+
+
+                          <div class="row content">
+                            <div class="col-md-3 col-sm-5 name" *ngIf="education.remark !== null">
+                              {{'user.profile.remark' | translate}}
+                            </div>
+                            <!--/.col-->
+
+                            <div class="col-md-9 col-sm-7 text" *ngIf="education.remark !== null">
+                              <p *ngIf="!educationsShow[i]">{{user?.educations[i].remark | htmlToPlaintext: 80}}
+                                <span *ngIf="!educationsShow[i] && user?.educations[i].remark.length > 80">...<span>
+                                  <a (click)="educationsShow[i] = !educationsShow[i]"
+                                     *ngIf="!educationsShow[i] && user?.educations[i].remark.length > 80">
+                                    {{'global.expand' | translate}}
+                                  </a>
+                                </span>
+                              </span>
+                              </p>
+                              <span *ngIf="educationsShow[i]">
+                              <p [innerHtml]="user.educations[i].remark"></p>
+                               <a (click)="educationsShow[i] = !educationsShow[i]" *ngIf="educationsShow[i]">{{'global.put_away' | translate}}</a>
+                            </span>
+                            </div>
+
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </div>
+                  <!--/.col-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="line">
+        <div class="experience">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.experience' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2">
+              <a [routerLink]="['/user','experience','edit']">
+                <i class="fa fa-plus-square  fa-2x"></i>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let experience of user?.experiences;let i = index">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_company_name' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ experience.companyName}}
+                            <div class="btn-group profileBtn" dropdown>
+                              <button type="button" class="btn submit" dropdownToggle [disabled]="disabled"
+                                      id="experience">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <ul class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="experience">
+                                <li role="menuitem">
+                                  <a href="javascript:;" [routerLink]="['/user','experience',experience.id,'edit']">
+                                    {{'button.edit'| translate}}
+                                  </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li role="menuitem">
+                                  <a (click)="removeExperience(experience.id)">
+                                    {{'button.delete'| translate}}
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'global.time' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{experience.startedDate | date: 'yyyy-MM'}} {{'global.to' | translate}} <span
+                            *ngIf="experience.endedDate !== 'toDate'">{{experience.endedDate | date: 'yyyy-MM'}}</span><span
+                            *ngIf="experience.endedDate === 'toDate'">{{'global.toDate' | translate}}</span>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_position' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{experience.title}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_description' | translate}}
+                          </div>
+                          <!--/.col-->
+
+                          <div class="col-md-9 col-sm-7 text">
+                            <p *ngIf="!experiencesShow[i]">{{user?.experiences[i].description | htmlToPlaintext: 80}}
+                              <span *ngIf="!experiencesShow[i] && user?.experiences[i].description.length > 80">...<span>
+                                  <a (click)="experiencesShow[i] = !experiencesShow[i]"
+                                     *ngIf="!experiencesShow[i] && user?.experiences[i].description.length > 80">
+                                    {{'global.expand' | translate}}
+                                  </a>
+                                </span>
+                              </span>
+                            </p>
+                            <span *ngIf="experiencesShow[i]">
+                              <p [innerHtml]="user?.experiences[i].description"></p>
+                               <a (click)="experiencesShow[i] = !experiencesShow[i]" *ngIf="experiencesShow[i]">{{'global.put_away' | translate}}</a>
+                            </span>
+                          </div>
+
+                          <!--/.col-->
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="line">
+        <div class="skill">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.skill' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2">
+              <a (click)="skillShow = !skillShow">
+                <i class="fa fa-plus-square  fa-2x"></i>
+              </a>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12 col-sm-offset-1">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List row">
+                        <ul class="keyList list-inline">
+                          <li class="List clearfix profileSpecial"
+                              *ngFor="let skill of user?.skills">
+                            <a href="javascript:;">{{ skill.name }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!--/.col-->
+
+                    <div class="skillShow row" *ngIf="skillShow">
+                      <div class="col-md-9 col-sm-8 col-xs-12  skillInput">
+                        <ng-select [multiple]="true"
+                                   #select
+                                   id="skill"
+                                   [items]="skills"
+                                   [active]="selectSkills"
+                                   [disabled]="disabled"
+                                   (data)="refreshValue($event,'tags')"
+                                   (typed)="tagChange($event)"
+                                   [placeholder]="'message.skill_input' | translate">
+                        </ng-select>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-md-3 col-sm-4 col-xs-12 skillBtn">
+                        <button class="btn btn-success" (click)="saveSkill(skills);skillShow = !skillShow">
+                          {{'button.save' | translate}}
+                        </button>
+                        <button class="btn btn-default" (click)="skillShow = !skillShow">
+                          {{'button.cancel' | translate}}
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="line">
+        <div class="language" id="language">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.language' | translate}}</span>
+            </div>
+            <div class="icon col-sm-1 col-xs-2">
+              <a>
+                <i [routerLink]="['/user','language','edit']" class="fa fa-plus-square  fa-2x"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let language of user?.languages">
+                <div class="col-md-10 col-sm-10 col-xs-12 col-sm-offset-1">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text">
+                      <div class="List">
+                        {{language.name}} <span class="level">{{language.UserLanguage.level}}</span>
+                        <div class="btn-group profileBtn" dropdown>
+                          <button type="button" class="btn submit" dropdownToggle [disabled]="disabled">
+                            <i class="fa fa-pencil"></i>
+                          </button>
+                          <ul class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="language">
+                            <li role="menuitem">
+                              <a href="javascript:;"
+                                 [routerLink]="['/user','language',language.UserLanguage.id,'edit']">
+                                {{'button.edit'| translate}}
+                              </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li role="menuitem">
+                              <a (click)="removeLanguage(language.id,language.UserLanguage.id)">
+                                {{'button.delete'| translate}}
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+<div class="footer">
+   <div class="container">
+      <div class="row content">
+
+         <div class="col-md-4 col-sm-6 col-xs-12 li signUp">
+            <div class="main">
+               <img src="../../assets/img/footer_logo.png" alt="" class="img-responsive img">
+               <div class="text">
+                  {{'footer.an_experience_unlike_any_other' | translate}}.
+                  <br>
+                  {{'footer.on_a_platform_unlike_another' | translate}}.
+               </div>
+               <ul class="list-inline icon">
+                  <li><a href="http://www.facebook.com/freshlinker" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li ng-show="false"><a href=""><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="https://www.linkedin.com/company/3977474" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                  <li ng-show="false"><a href=""><i class="fa fa-wifi"></i></a></li>
+               </ul>
+            </div>
+
+         </div>
+         <!--/.col-->
+
+         <div class="col-md-2 col-sm-6 col-xs-12 li">
+            <h3>{{'footer.about_us' | translate}}</h3>
+            <ul class="list-unstyled">
+               <li><a [routerLink]="['/about/aboutUs']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.What_is_FreshLinker' | translate}}</a></li>
+               <li><a [routerLink]="['/about/ourStory']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.our_story' | translate}}</a></li>
+               <li><a [routerLink]="['/about/media']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.our_press_coverage' |translate}}</a></li>
+            </ul>
+         </div>
+         <!--/.col-->
+
+         <div class="col-md-2 col-sm-6 col-xs-12 li">
+            <h3>{{'footer.job_seekers' | translate}}</h3>
+            <ul class="list-unstyled">
+               <li><a href="javascript:;" (click)="goState('jobs')">{{'footer.jobs' | translate}}</a></li>
+               <li><a href="javascript:;" [routerLink]="['/article-list/2']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.industry_feed' | translate}}</a></li>
+               <li><a href="https://support.freshlinker.com" target="_blank">{{'footer.faq' | translate}}</a></li>
+               <li><a href="javascript:;" >{{'footer.resources' | translate}}({{'footer.coming_soon' | translate}})</a></li>
+            </ul>
+         </div>
+         <!--/.col-->
+
+         <div class="col-md-2 col-sm-6 col-xs-12 li">
+            <h3>{{'footer.employers' | translate}}</h3>
+            <ul class="list-unstyled">
+               <li><a [routerLink]="['/enterprise/enterprise_show']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.services' | translate}}</a></li>
+               <li><a [routerLink]="['/company/pricing']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.pricing' | translate}}</a></li>
+               <li><a href="https://support.freshlinker.com" target="_blank">{{'footer.faq' | translate}}</a></li>
+               <li><a href="javascript:;">{{'footer.resources' | translate}}({{'footer.coming_soon' | translate}})</a></li>
+               <li><a href="javascript:;">{{'footer.blog' | translate}}({{'footer.coming_soon' | translate}})</a></li>
+            </ul>
+         </div>
+         <!--/.col-->
+
+         <div class="col-md-2 col-sm-6 col-xs-12 li">
+            <h3>{{'footer.legal' | translate}}</h3>
+            <ul class="list-unstyled">
+               <li><a [routerLink]="['/about/terms_conditions']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.terms_conditions' | translate}} & {{'footer.conditions' | translate}}</a></li>
+               <li><a [routerLink]="['/about/privacy']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'footer.privacy_policy' | translate}}</a></li>
+            </ul>
+         </div>
+         <!--/.col-->
+
+
+      </div>
+      <div class="bottom col-xs-12 text-center">
+         <ul class="list-inline">
+            <li>2016 © FreshLinker Limited, All Rights Reserved</li>
+            <li>|</li>
+            <li><a [routerLink]="['/about/contact']">{{'about_us.contact_us' | translate}}</a></li>
+         </ul>
+        <ul class="list-inline">
+          <li>Employment Agency Licence No. 51805</li>
+        </ul>
+      </div>
+   </div>
+</div>

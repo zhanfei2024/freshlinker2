@@ -1,0 +1,1208 @@
+.employeeListRight {
+  .nav-tabs {
+    display: none;
+  }
+}
+
+.companyPictures{
+  .content{
+    .ui-carousel .ui-carousel-prev-button{
+      left: -20px!important;
+      color: #A0A0A0;
+      font-size: 30px;
+    }
+    .ui-carousel .ui-carousel-next-button{
+      color: #A0A0A0;
+      font-size: 30px;
+    }
+  }
+}
+
+.company-video {
+  .upload {
+    width: 160px;
+    height: 160px;
+    background-color: #eeeeee;
+    margin: 15px 20px;
+    padding: 0;
+    button {
+      border: 0;
+      position: relative;
+      background-color: transparent;
+      width: 160px;
+      height: 160px;
+      .uploaderFile {
+        opacity: 0;
+        position: absolute;
+        cursor: pointer;
+        border-radius: 50%;
+        height: 160px;
+        width: 160px;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+.dynamic-list-content {
+  margin-top: 20px;
+  .dynamic {
+    padding: 0 15px;
+    border-bottom: 1px solid $gray-light-2x;
+    .title {
+      font-weight: bold;
+    }
+    .date {
+      color: #999999;
+    }
+    .content {
+      color: #999999;
+    }
+  }
+}
+
+.welfareContent {
+  h4.title:before {
+    position: absolute;
+    left: 20px;
+    border-left: 3px solid #4a80bc;
+    content: '';
+    width: 4px;
+    height: 16px;
+    top: 15px;
+  }
+  h4.title {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0 40px;
+    border-bottom: 1px solid #d9d9d9;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+  }
+  .welfare-list-content {
+    margin-top: 20px;
+    .tagList {
+      padding: 0 0 15px 20px;
+      .tag {
+        padding: 2px 15px;
+        background: $brand-primary;
+        color: #ffffff;
+        display: inline-block;
+        margin: 5px;
+        border-radius: 4px;
+      }
+    }
+  }
+  .awards-list-content {
+    padding: 20px;
+    .list {
+      margin: 10px 0;
+      .name {
+        font-family: $font-family-medium;
+      }
+      .time {
+        font-size: $font-size-small;
+        color: $brand-danger;
+      }
+    }
+  }
+}
+
+// companyHeader
+section.companyHeader {
+  margin-bottom: 20px;
+  div.backgroundImg {
+    position: relative;
+    p.companyName {
+      position: absolute;
+      color: $body-bg;
+      top: 50%;
+      width: 100%;
+      font-size: $font-size-h2;
+      font-weight: bold;
+      height: 40px;
+      margin-top: -20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  fieldset {
+    display: block;
+    position: relative;
+    margin: -25% auto 0 25%;
+    .vip-icon {
+      position: absolute;
+    }
+    a {
+      img {
+        display: block;
+        border: 1px solid $gray-light-2x;
+      }
+    }
+  }
+
+  h4.companyName {
+    padding: 10px 0 5px 0;
+    margin: 0;
+    font-size: $font-size-h3;
+    font-family: $font-family-regular;
+    font-weight: 400;
+    a {
+      color: $gray-dark;
+    }
+  }
+
+  p.companyBrowse {
+    padding-top: 10px;
+    i.fa {
+      font-size: 22px;
+      color: #00b216;
+      margin-right: 15px;
+    }
+    span {
+      font-weight: 500;
+      font-size: 20px;
+      color: #4A80BC;
+      margin-right: 15px;
+    }
+    span.browse {
+      font-style: normal;
+      font-size: 14px;
+      color: #666666;
+    }
+  }
+
+  ul.companyHeaderList {
+    padding-left: 0;
+    font-size: $font-size-h4;
+    font-weight: 200;
+    li {
+      margin-right: 20px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    li.active {
+      border-bottom: 2px solid $brand-info;
+      color: $brand-info;
+      font-family: $font-family-regular;
+      font-weight: 400;
+    }
+
+  }
+
+  .companyAttention {
+    line-height: 50px;
+    padding: 20px 0;
+    i, strong {
+      padding-right: 10px;
+      font-size: $font-size-h4;
+    }
+    i {
+      color: $brand-success;
+    }
+    strong {
+      color: $brand-primary;
+    }
+    span {
+      color: $brand-danger;
+    }
+  }
+
+}
+
+//  companyPage
+
+div.companyPageContent {
+  ul.nav-tabs {
+    display: none;
+  }
+}
+
+div.companyPage {
+  div.companyPageLeft,
+  div.companyPageRight {
+    div.companyAbout,
+    div.companyPosition,
+    div.companyPicture,
+    div.companyArticle,
+    div.otherPosition,
+    div.companyChart {
+      border: 1px solid $gray-light-2x;
+      div.head {
+        color: $gray-dark;
+        height: 55px;
+        line-height: 55px;
+        font-size: $font-size-h4;
+        padding-left: 20px;
+        span.list {
+          font-size: $font-size-large;
+          padding-right: 15px;
+        }
+      }
+
+      div.more {
+        padding: 15px;
+      }
+
+    }
+
+  }
+
+  div.companyPageLeft {
+    div.companyPosition,
+    div.companyPicture,
+    div.companyChart,
+    div.companyAbout,
+    div.companyPagePositions,
+    div.companyPagePictures {
+      border-top: 3px solid $brand-info;
+      div.head {
+        border-bottom: 1px solid $gray-light-2x;
+        i.fa {
+          width: 23px;
+          height: 23px;
+          text-align: center;
+          color: $body-bg;
+          line-height: 23px;
+          background-color: $brand-success;
+          border-radius: 50%;
+          font-size: $font-size-base;
+          position: inherit;
+          top: 0;
+          margin-top: 0;
+        }
+        span {
+          padding-left: 0;
+        }
+      }
+    }
+
+    div.companyPicture,
+    div.companyPosition,
+    div.companyChart {
+      margin-top: 20px;
+    }
+
+    div.companyPicture,
+    div.companyChart {
+      div.content {
+        margin: 0;
+        padding: 0 20px;
+      }
+      .slick-prev, .slick-next {
+        width: 20px;
+        height: 35px;
+      }
+
+      .slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
+        opacity: 1;
+      }
+
+      .slick-prev:before, .slick-next:before {
+        font-size: 24px;
+        opacity: .6;
+      }
+
+      .slick-prev {
+        left: -10px;
+        z-index: 999;
+        top: 50%;
+      }
+
+      .slick-next {
+        right: -10px;
+        z-index: 998;
+        top: 50%;
+      }
+
+      .slick-prev:before, .slick-next:before {
+        color: #000;
+      }
+
+      .slick-prev:before {
+        content: '';
+        width: 20px;
+        height: 35px;
+        display: block;
+        margin: 0 auto;
+        background: url('./~/assets/img/icon.png') 0px -795px no-repeat;
+      }
+
+      .slick-next:before {
+        content: '';
+        width: 20px;
+        height: 35px;
+        display: block;
+        margin: 0 auto;
+        background: url('./~/assets/img/icon.png') 0px -948px no-repeat;
+      }
+    }
+
+    div.companyPicture {
+      div.head {
+        span.list {
+          font-size: $font-size-large;
+          padding-right: 15px;
+        }
+      }
+    }
+
+    div.companyAbout {
+      padding: 0;
+      margin-bottom: 20px;
+      div.content {
+        margin: 0;
+        padding: 15px 0;
+        border-bottom: 1px solid $gray-light-2x;
+        div.labels,
+        div.text {
+          padding-bottom: 20px;
+        }
+
+        div.labels {
+          color: $gray-text-color;
+        }
+        div.text {
+          color: $gray-font-color;
+          font-family: $font-family-medium;
+        }
+
+      }
+
+      div.subhead,
+      p.description,
+      p.background {
+        padding-left: 15px;
+        padding-top: 15px;
+        padding-right: 15px;
+      }
+
+      div.subhead {
+        color: $gray-text-color;
+        font-size: $font-size-h4;
+        font-family: $font-family-medium;
+
+      }
+
+      p.description,
+      p.background {
+        line-height: 1.6;
+        padding-bottom: 20px;
+        color: $gray-font-color;
+        font-family: $font-family-medium;
+        a {
+          color: $brand-success;
+        }
+      }
+
+      p.description {
+        border-bottom: 1px solid $gray-light-2x;
+      }
+    }
+
+    div.companyPosition,
+    div.companyPagePositions {
+      div.list {
+        margin: 0;
+        padding: 15px;
+        border-bottom: 1px solid $gray-light-2x;
+        div.img {
+          a {
+            img {
+              width: 60px;
+              margin: 0 auto;
+              display: block;
+              border: 1px solid $gray-light-2x;
+            }
+          }
+        }
+
+        div.positionName,
+        div.view {
+          margin-top: 10px;
+          p.bg {
+            i.fa-see {
+              display: block;
+              width: 20px;
+              height: 21px;
+              margin: 0 auto;
+              background: url("./~/assets/img/company_position_see.png");
+            }
+          }
+        }
+
+        div.positionName {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-family: $font-family-regular;
+          font-weight: 400;
+          a {
+            color: $gray-dark;
+          }
+          div.salary {
+            padding-top: 5px;
+            color: $brand-danger;
+            font-family: $font-family-regular;
+            font-weight: 400;
+          }
+        }
+
+        div.view {
+          text-align: center;
+          p.bg {
+            margin-bottom: 5px;
+            i {
+              color: $brand-success;
+              font-size: 20px;
+            }
+          }
+          p.text {
+            color: $gray-font-color;
+          }
+        }
+
+      }
+
+      div.list:last-child {
+        border-bottom: 0;
+      }
+
+    }
+
+    div.companyPicture {
+      div.content {
+        margin: 0;
+        div.list {
+          padding: 15px;
+          min-height: 131px;
+          line-height: 131px;
+          text-align: center;
+          a {
+            display: inline-block;
+            vertical-align: middle;
+            img {
+              display: block;
+              margin: 0 auto;
+            }
+          }
+
+        }
+      }
+
+      div.list {
+        padding: 15px;
+      }
+    }
+
+    div.companyChart {
+      padding-bottom: 25px;
+      div.chart {
+        position: relative;
+        div.subhead {
+          padding: 20px;
+          font-size: $font-size-large;
+        }
+        .pie-legend {
+          text-align: left;
+          padding-left: 10px;
+          li {
+            width: 33.3%;
+            //.text-overflow();
+            font-size: 14px;
+            .pie-legend-icon {
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              margin-top: 2px;
+            }
+          }
+        }
+
+      }
+      div.noChart {
+        padding: 30px 0;
+        font-size: $font-size-h4;
+      }
+    }
+
+  }
+
+  div.companyPageRight {
+    div.companyArticle,
+    div.otherPosition {
+      div.head {
+        position: relative;
+        i {
+          width: 5px;
+          height: 18px;
+          background-color: $brand-info;
+          position: absolute;
+          top: 50%;
+          margin-top: -9px;
+        }
+        span {
+          padding-left: 15px;
+        }
+      }
+    }
+
+    div.companyArticle {
+      div.loading {
+        padding: 50px 0;
+        color: $brand-danger;
+      }
+
+      div.noArticle {
+        background-color: #fbfbfb;
+        padding: 50px 0;
+        color: $brand-danger;
+        font-size: $font-size-large;
+      }
+    }
+
+    div.otherPosition {
+      margin-top: 20px;
+    }
+  }
+
+  div.noPosition {
+    padding: 20px 0;
+    font-size: $font-size-h4;
+    background-color: transparent;
+  }
+  div.companyPagePositions,
+  div.companyPagePictures {
+    border: 1px solid $gray-light-2x;
+    div.item {
+      div.picture {
+        min-height: 160px;
+        line-height: 160px;
+        margin-bottom: 10px;
+        text-align: center;
+        a {
+          display: inline-block;
+          vertical-align: middle;
+          img {
+            display: block;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+div.companyContent {
+  margin: 0;
+}
+
+// select company
+.companyContent {
+  div.list {
+    padding: 0 10px;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+    p {
+      padding-top: 5px;
+      max-width: 100%;
+    }
+  }
+}
+
+// enterprise
+div.enterpriseMain {
+  div.content {
+    height: 800px;
+    background-color: $gray-light-2x;
+  }
+
+}
+
+.companySelect {
+  margin: 20px 0;
+  div.companySelectContent {
+    border: 1px solid $gray-light-2x;
+    div.image-wrapper {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto
+    }
+    div.companySelectBtn {
+      border-top: 1px solid $gray-light-2x;
+      margin: 0;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+  }
+  h4.head {
+    border-bottom: 3px solid #185884;
+    color: $brand-info;
+    padding: 10px 0;
+    margin: 0;
+    margin-bottom: 20px;
+    i {
+      padding-right: 10px;
+      color: $brand-success;
+    }
+  }
+
+  .list {
+    text-align: center;
+    padding-top: 20px;
+    max-height: 170px;
+    a {
+      position: relative;
+      display: block;
+      color: $gray;
+      .listBg {
+        width: 100px;
+        position: absolute;
+        margin: 0 auto;
+        height: 100px;
+        top: 0;
+        z-index: 888;
+        background-color: rgba(0, 0, 0, .0);
+        border-radius: 5px;
+        div {
+          width: 100%;
+          height: 100%;
+        }
+        span.removeCompany {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          height: 20px;
+          width: 20px;
+          line-height: 20px;
+          border-radius: 50%;
+          border: 2px solid $body-bg;
+          text-align: center;
+          z-index: 999;
+          color: $body-bg;
+          display: none;
+        }
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100px;
+        height: auto;
+      }
+
+      p {
+        padding: 10px 0;
+      }
+
+    }
+  }
+  .list:hover {
+    div.listBg {
+      background-color: rgba(0, 0, 0, .5);
+      img {
+        opacity: .4;
+      }
+      span.removeCompany {
+        display: block;
+      }
+    }
+  }
+
+  .btn {
+    margin-bottom: 20px;
+  }
+
+  div.noApplied {
+    border: 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0);
+  }
+}
+
+//div.modal{
+//  display: block;
+//  background-color: rgba(0, 0, 0, 0.5);
+//}
+
+// editCompany
+div.editCompanyHead {
+  margin: 15px 0;
+  height: 50px;
+  line-height: 50px;
+  color: $brand-info;
+  border-bottom: 3px solid #185884;
+  font-size: $font-size-h4;
+  font-weight: 500;
+  i {
+    color: $brand-success;
+  }
+}
+
+div.editCompany,
+div.companyPicture {
+  background-color: #fbfbfb;
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+  div.editCompanyLeft,
+  div.companyPictureLeft {
+    padding: 0;
+    div.content {
+      padding: 10px 0;
+      div.button {
+        padding: 20px 30px;
+        border-bottom: 1px solid $gray-light-2x;
+        .sub, .canel {
+          display: block;
+          width: 100%;
+        }
+
+        .companySub {
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+  }
+  div.editCompanyRight,
+  div.companyPictureRight {
+    padding: 0;
+    background-color: $body-bg;
+    div.companyContent {
+      div.baseInformation,
+      div.location,
+      div.about,
+      div.detail {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid $gray-light-2x;
+        h4 {
+          font-weight: normal;
+          padding: 20px 0;
+          margin: 0;
+        }
+        div.content {
+          label {
+            font-weight: normal;
+            text-align: left;
+            padding-bottom: 10px;
+          }
+
+          div.tips {
+            color: $brand-danger;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+
+        }
+        div.countryContent {
+          i.glyphicon-remove {
+            color: transparent;
+          }
+        }
+      }
+
+      div.about {
+        border-bottom: 0;
+      }
+
+      img.coverImg {
+        max-height: 216px;
+      }
+
+      div.cropContent {
+        div.crop {
+          position: relative;
+          .mr_headfile {
+            opacity: 0;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+}
+
+// prompt
+div.prompt {
+  margin-top: 20px;
+  border: 1px solid $gray-light-2x;
+  padding: 30px;
+  p {
+    line-height: 1.8;
+    font-size: $font-size-h3;
+  }
+
+  div.promptBtn {
+    text-align: center;
+    button {
+      background-color: #e9c83b;
+      color: $body-bg;
+    }
+  }
+}
+
+div.companyPicture {
+  div.companyPictureRight {
+    div.list {
+      padding: 15px;
+      min-height: 180px;
+      line-height: 180px;
+      text-align: center;
+      display: block;
+      div.listBg {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: rgba(0, 0, 0, 0);
+        a {
+          display: inline-block;
+          vertical-align: middle;
+          img {
+            display: block;
+            margin: 0 auto;
+          }
+        }
+
+        span.remove {
+          position: absolute;
+          right: 10px;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          border-radius: 50%;
+          border: 1px solid $body-bg;
+          text-align: center;
+          z-index: 999;
+          color: $body-bg;
+          top: 10px;
+          display: none;
+        }
+      }
+    }
+
+    div.list:hover {
+      div.listBg {
+        background-color: rgba(0, 0, 0, .5);
+        img {
+          opacity: .4;
+        }
+        span.remove {
+          display: block;
+        }
+      }
+    }
+
+    div.upload {
+      width: 160px;
+      height: 160px;
+      background-color: $gray-lighter;
+      margin: 15px 20px;
+      padding: 0;
+      button {
+        border: 0;
+        position: relative;
+        background-color: transparent;
+        width: 160px;
+        height: 160px;
+        i {
+          display: block;
+          color: $gray-light;
+        }
+        .uploaderFile {
+          opacity: 0;
+          position: absolute;
+          cursor: pointer;
+          border-radius: 50%;
+          height: 160px;
+          width: 160px;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+
+  }
+
+}
+
+// editPicture
+div.editPicture {
+  div.content {
+    padding-bottom: 20px;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+    .imgCover {
+      max-height: 215px;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  section.companyAbout {
+    background-color: $gray-lighter;
+    padding: 20px;
+    .companyContent {
+      padding: 0 20px;
+      line-height: 1.6;
+      border-left: 2px solid $brand-primary;
+      color: $brand-danger;
+    }
+    .companyDetail {
+      border-left: 0;
+    }
+  }
+
+  section.companyHeader {
+    .companyAttention {
+      padding: 0 0 0 25px;
+    }
+  }
+
+  // editCompany
+  div.editCompany {
+    div.companyContent {
+
+      div.baseInformation,
+      div.location,
+      div.about {
+
+        div.content {
+          margin-bottom: 20px;
+        }
+      }
+
+    }
+  }
+
+  // companyPage
+  div.companyPage {
+    div.companyPageLeft {
+      div.companyPicture,
+      div.companyChart {
+        .slick-prev {
+          left: 5%;
+        }
+        .slick-next {
+          right: 10px;
+        }
+
+      }
+
+      div.companyPicture {
+        div.content {
+          div.list {
+            min-height: 151px;
+          }
+        }
+      }
+
+    }
+
+    div.companyPageRight {
+      margin-top: 20px;
+    }
+
+  }
+
+  // picture
+  div.companyPicture {
+    div.companyPictureRight {
+      div.list {
+        min-height: 151px;
+      }
+    }
+  }
+
+  section.companyHeader {
+
+    ul.companyHeaderList {
+      padding-left: 15px;
+    }
+
+  }
+
+  div.companyPagePictures {
+    div.picture {
+      min-height: 150px;
+    }
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: $screen-phone) {
+  div.companySelect {
+    .listBg {
+      right: 20%;
+    }
+  }
+
+}
+
+@media (max-width: 360px) {
+  div.companySelect {
+    .listBg {
+      right: 16%;
+    }
+  }
+
+}
+
+@media (max-width: 320px) {
+  div.companySelect {
+    .listBg {
+      right: 12%;
+    }
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .vip-icon{
+    right: 0;
+  }
+  div.companyJob {
+    a.link {
+      display: block;
+      text-align: right;
+    }
+  }
+
+  // companyPage
+  div.companyPage {
+    div.companyPageRight {
+      margin-top: 20px;
+    }
+
+  }
+
+  div.companySelect {
+    .listBg {
+      right: 28px;
+    }
+  }
+
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .vip-icon{
+    right: 0;
+  }
+  section.companyAbout {
+    .companyAboutWeb {
+      text-align: right;
+    }
+    .companyDetail {
+      padding-left: 40px;
+    }
+
+  }
+  div.paddingLeft {
+    padding-left: 0;
+  }
+
+  div.paddingRight {
+    padding-right: 0;
+  }
+
+  div.companyJob {
+    a.link {
+      display: block;
+      text-align: right;
+    }
+  }
+
+  div.editCompany,
+  div.companyPicture {
+    div.editCompanyRight,
+    div.companyPictureRight {
+      border-left: 1px solid $gray-light-2x;
+    }
+  }
+
+  div.companySelect {
+    .listBg {
+      right: 26%;
+    }
+  }
+
+}
+
+@media (min-width: $screen-lg-min) {
+  .vip-icon {
+    right: 40px;
+  }
+  section.companyAbout {
+    .companyAboutWeb {
+      text-align: right;
+    }
+    .companyDetail {
+      padding-left: 40px;
+    }
+  }
+
+  div.paddingLeft {
+    padding-left: 0;
+  }
+
+  div.paddingRight {
+    padding-right: 0;
+  }
+
+  div.companyJob {
+    a.link {
+      display: block;
+      text-align: right;
+    }
+  }
+
+  div.editCompany,
+  div.companyPicture {
+    div.editCompanyRight,
+    div.companyPictureRight {
+      border-left: 1px solid $gray-light-2x;
+    }
+  }
+
+  // picture
+  div.companyPicture {
+    div.companyPictureRight {
+      div.list {
+        min-height: 215px;
+      }
+    }
+  }
+
+  div.companyPagePictures {
+    div.picture {
+      min-height: 190px;
+    }
+  }
+
+  div.companySelect {
+    .listBg {
+      right: 81px;
+    }
+  }
+
+}

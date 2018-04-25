@@ -1,0 +1,18 @@
+.toast-top-right {
+  top: 100%;
+  right: 0;
+  margin-top: -50px;
+}
+
+#toast-container {
+  width: 100%;
+}
+
+#toast-container > div {
+  width: 100%;
+  display: block;
+  padding: 0;
+  height: 50px;
+  line-height: 50px;
+  text-align:  center;
+}

@@ -1,0 +1,138 @@
+<div class="dialog">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 clearFloat">
+        <form class="form-horizontal expect"  #PostForm="ngForm" name="Form" (ngSubmit)="save()">
+          <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" [routerLink]="['/user','profile']"><span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title"><i class="fa fa-pencil-square-o"></i>{{ 'user.profile.education' | translate }}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10 clearFloat">
+                <div class="form-group">
+                  <label class="col-sm-3 col-xs-12 control-label"><span class="text-danger">*</span>{{ 'user.profile.education_school_name'
+                    | translate }}</label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+                    <ng-select [allowClear]="true"
+                               [items]="schools"
+                               [active]="selectSchool"
+                               name="school"
+                               required
+                               (selected)="selectedSchools($event)"
+                               (typed)="searchSchools($event)"
+                               placeholder="{{'message.select_school' | translate}}">
+                    </ng-select>
+                    <div class="tips">{{'global.tips' | translate}}: {{'user.profile.education_name_tips' | translate}}
+                      <a [routerLink]="['/about','contact']">{{'user.profile.education_name' |
+                        translate}}</a>
+                    </div>
+                  </div>
+                  <!-- /.col -->
+                  <div class="error col-sm-9 col-xs-12 col-sm-offset-3" *ngIf="schoolErrorShow">
+                    <i class="fa fa-times-circle"></i>
+                    {{'message.user_school_name_error_message' | translate}}
+                  </div>
+                </div>
+                <!-- /.form-group -->
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                  <label for="subject" class="col-sm-3 col-xs-12 control-label"><span class="text-danger">*</span>{{ 'user.profile.education_subject' |
+                    translate }}</label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" required
+                           name="subject" id="subject" [(ngModel)]="education.subject"
+                           placeholder="{{'user.profile.education_subject_input' | translate }}" minlength="2">
+                  </div>
+                  <!--/.col-->
+                </div>
+
+                <div class="form-group">
+                  <label for="education_level" class="col-sm-3 col-xs-12 control-label"><span class="text-danger">*</span>{{
+                    'user.profile.education_education_level' | translate }}: </label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+                    <select class="form-control" name="education_level" id="education_level" required
+                            [(ngModel)]="education.educationLevelId">
+                      <option value="">{{'message.select_position_education' | translate}}</option>
+                      <option *ngFor="let item of educationLevel" [value]="item.id">{{item.name}}</option>
+                    </select>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                  <label for="gpa" class="col-sm-3 col-xs-12 control-label">GPA:</label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+                    <input type="number" class="form-control" name="gpa" id="gpa" #educationGpa
+                           [(ngModel)]="education.gpa"
+                           [placeholder]="'user.profile.education_gpa_input' | translate "
+                           (keyup)="restGpa(educationGpa.value)"
+                           (blur)="restGpa(educationGpa.value)"
+                           min="0" step="0.1" max="5"
+                           (change)="gpaInput()">
+                    <div class="tips">{{'global.tips' | translate}}: {{'message.position_gpa_tips' | translate}}</div>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.form-group -->
+
+
+                <div class="form-group">
+                  <label for="graduationYear" class="col-sm-3 col-xs-12 control-label"><span class="text-danger">*</span>{{
+                    'user.profile.education_graduation_year' | translate }}:</label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+                    <select name="graduationYear" id="graduationYear" class="form-control"
+                            [(ngModel)]="education.graduationYear">
+                      <option value="">{{'message.select_graduation' | translate}}</option>
+                      <option *ngFor="let item of graduationYears" [value]="item">{{item}}</option>
+
+                    </select>
+                  </div>
+                  <!--/.col-->
+                </div>
+
+                <div class="form-group">
+                  <label for="remark" class="col-sm-3 col-xs-12 control-label"><span class="text-danger">*</span>{{'user.profile.remark'
+                    | translate}}:</label>
+                  <!--/.col-->
+                  <div class="col-sm-9 col-xs-12">
+              <textarea style="width: 100%;height: 250px;" id="remark" name="remark" required
+                        [(ngModel)]="education.remark">
+
+              </textarea>
+                  </div>
+                  <div class="tips col-xs-12 text-right">
+                    {{'message.text_input_255_words_message' | translate}}
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!-- /.form-group -->
+
+
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.model-body -->
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [disabled]="!PostForm.form.valid || saveLoading">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.save' | translate }}</span>
+            </button>
+          </div>
+          <!-- /.model-footer -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

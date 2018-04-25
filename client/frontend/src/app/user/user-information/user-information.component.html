@@ -1,0 +1,263 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form class="form-horizontal" #PostForm="ngForm" name="Form" (ngSubmit)="save()" (window:beforeunload)="doSomething($event)">
+    <div class="postUserInformation row">
+      <div class="postUserInformationLeft col-md-3 col-sm-12">
+        <div class="content text-center">
+          <div class="button">
+            <button type="submit" class="btn btn-success sub postUserSub" [disabled]="!PostForm.form.valid || saveLoading">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.publish' | translate }}</span>
+            </button>
+            <a [routerLink]="['/user','profile']" pageScroll href="#awesomePart" [pageScrollDuration]="0"
+               (click)="destroy()"
+               type="button" class="btn btn-default canel">
+              {{ 'button.return' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="postUserInformationRight col-md-9 col-sm-12">
+        <div class="text-center loading" *ngIf="loading">
+          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+        <div *ngIf="!loading">
+          <div class="form-group baseInformation">
+            <div class="row">
+              <div class="title text-left col-xs-12">
+                {{'user.profile.base_information' | translate}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-xs-12 margin">
+                <label for="lastName" class=" control-label"><span class="text-danger">*</span>{{'auth.last_name' | translate}}: </label>
+                <input type="text" id="lastName" name="lastName" required class="form-control" #nameHandler="ngModel"
+                       [(ngModel)]="user.lastName"  placeholder="{{'user.profile.enter_last_name' | translate}}">
+              </div>
+              <!--/.col-->
+
+              <div class="col-sm-6 col-xs-12 margin">
+                <label for="firstName" class="control-label"><span class="text-danger">*</span>{{'auth.first_name' | translate}}: </label>
+                <input type="text" class="form-control"
+                       id="firstName" name="firstName" required [(ngModel)]="user.firstName"
+                       placeholder="{{'user.profile.enter_first_name' | translate}}">
+              </div>
+              <!--/.col-->
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-xs-12 margin">
+                <label for="birth" class="control-label">{{'user.profile.birth' | translate}}: </label>
+                <div class="experienceTime">
+                  <div class="input-group">
+                    <input class="form-control" style="float:none" placeholder="Select a date"
+                           #dp1="ngx-mydatepicker"
+                           ngx-mydatepicker
+                           id="birth"
+                           name="birth"
+                           [(ngModel)]="user.birth" [options]="myOptions"
+                           (dateChanged)="onDateChanged($event,'awards')"/>
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" style="padding: 6px 20px;"  (click)="dp1.toggleCalendar()">
+                          <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+                <div class="tips">
+                  {{'global.tips' | translate}}: {{'position.date' | translate}}
+                </div>
+              </div>
+              <div class="inputRadio col-sm-6 col-xs-12 margin">
+                <label class="control-label text col-xs-12"><span class="text-danger">*</span>{{'global.sex' | translate}}: </label>
+                <div class="col-xs-12 content">
+                  <label>
+                    <input type="radio" name="sex" id="optionsRadios1" value="M" [(ngModel)]="user.gender" [checked]="user.gender">
+                    {{'global.male' | translate}}
+                  </label>
+                  <label>
+                    <input type="radio" name="sex" id="optionsRadios2" value="F" [(ngModel)]="user.gender" [checked]="user.gender">
+                    {{'global.female' | translate}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="country col-sm-6 col-xs-12 margin">
+                <label class="control-label">{{'user.profile.country' | translate}}: </label>
+                <ng-select [allowClear]="true"
+                           [items]="countries"
+                           (data)="refreshValue($event)"
+                           [active]="selectedNationality"
+                           name="country"
+                           (selected)="selectedCountry($event)"
+                           (typed)="readAllCountry($event)"
+                           placeholder="{{'message.select_country' | translate}}">
+                </ng-select>
+              </div>
+
+              <div class="col-sm-6 col-xs-12 margin job">
+                <label for="yearOfExperience" class="control-label"><span class="text-danger">*</span>{{'user.profile.experience' | translate}}: </label>
+                <select class="form-control" name="yearOfExperience" [(ngModel)]="user.yearOfExperience"
+                        id="yearOfExperience">
+                  <option *ngFor="let item of yearOfExperience" value="{{item.value}}">{{item.name}}</option>
+                </select>
+              </div>
+              <!-- /.form-group job-->
+            </div>
+
+            <!--/.form-group base-->
+            <div class="form-group baseInformation">
+              <div class="applyCompany " *ngIf="user?.companies?.length >0 ">
+                <div class=" text-left col-xs-12">
+                  {{'enterprise.joined_enterprise' | translate}}: <span class="text-danger name">{{user.companies[0].name}} <a
+                  (click)="showCompany = !showCompany" *ngIf="!showCompany">{{'button.modify' | translate}}</a> <a
+                  (click)="showCompany = !showCompany" *ngIf="showCompany">{{'button.cancel' | translate}}</a></span>
+                </div>
+              </div>
+              <div *ngIf="showCompany || user?.companies?.length ===0">
+                <div class="row">
+                  <div class="title text-left col-xs-12">
+                    {{'enterprise.apply_enterprise' | translate}}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-xs-12 margin">
+                    <label for="companyName" class="control-label">{{'enterprise.apply_enterprise_name' |
+                      translate}}</label>
+                    <ng-select [allowClear]="true"
+                               [items]="company"
+                               name="company"
+                               id="companyName"
+                               (selected)="selectedCompany($event)"
+                               (typed)="typedCompany($event)"
+                               placeholder="{{'enterprise.please_select_company_name' | translate}}">
+                    </ng-select>
+
+                    <div class="tips">
+                      {{'enterprise.waiting_for_reply' | translate}}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!--/.form-group-->
+
+            <div class="form-group baseInformation">
+              <div class="row">
+                <div class="title text-left col-xs-12">
+                  {{'user.profile.tel' | translate}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xs-12 margin">
+                  <label for="phone" class="control-label"><span class="text-danger">*</span>{{'user.profile.tel' | translate}}: </label>
+                  <!--/.col-->
+                  <input type="tel" class="form-control" name="phone" id="phone"
+                         pattern="[0-9]{8,}"
+                         [(ngModel)]="user.phone"
+                         placeholder="{{'user.profile.phone_input' | translate}}" required>
+                  <div class="tips">
+                    {{'global.tips' | translate}}: {{'message.user_information_phone_message' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+                <div class="col-sm-6 col-xs-12 margin">
+                  <label for="email" class="control-label"><span class="text-danger">*</span>{{'auth.user_email' | translate}}: </label>
+                  <input type="email" class="form-control" required
+                         name="email" id="email" [(ngModel)]="user.email"
+                         placeholder="{{'user.profile.email_input' | translate}}">
+                  <div class="tips">
+                    {{'global.tips' | translate}}: {{'message.user_information_email_message' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+            <!--/.form-group-->
+            <div class="form-group baseInformation">
+              <div class="row">
+                <div class="title text-left col-xs-12">
+                  {{'user.profile.other_information' | translate}}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 margin file">
+                  <label for="icon" class="col-sm-12 col-xs-12 control-label">{{'user.profile.user_icon' |
+                    translate}}: </label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12 uploader">
+                    <input type="file" class="file" id="icon" (change)="fileChangeListener($event)"/>
+                    <span class="text-muted">
+                        <i class="fa fa-cloud-upload fa-5x" *ngIf="user.icon === null && icon === undefined"></i>
+                        <img class="thumb" *ngIf="icon !== undefined" [src]="icon">
+                        <img class="thumb" *ngIf="user.icon !== null && icon === undefined" [src]="user.icon?.url['200']"><br>
+                        <h4>{{'file.Drop_here_to_upload_(or click)' | translate}}</h4>
+                    </span>
+                  </div>
+
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 margin file">
+                  <label for="selfDescription" class="col-sm-12 col-xs-12 control-label">{{'user.profile.self_description'
+                    |translate}}:</label>
+                  <!--/.col-->
+                  <quill-editor [(ngModel)]="user.selfDescription" name="selfDescription"
+                                id="selfDescription"></quill-editor>
+                  <!--/.col-->
+                </div>
+
+              </div>
+              <!--/.form-group-->
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 15px 15px 30px;">
+        <h4 class="modal-title pull-left">
+          {{'file.cut' | translate}}
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+        <br>
+        <span class="result rounded" *ngIf="data.image">
+                          <img [src]="data.image" [width]="cropperSettings.croppedWidth"
+                               [height]="cropperSettings.croppedHeight">
+          </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="cropIcon(data.image)">
+          <i class="fa fa-check"></i>{{ 'button.yes' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,27 @@
+{
+  "fileIsRequired": {
+    "statusCode": 400,
+    "message": "The file field is required.",
+    "code": 20000
+  },
+  "unsupportedFormat": {
+    "statusCode": 400,
+    "message": "File is an unsupported format.",
+    "code": 20001
+  },
+  "fileSizeLimit": {
+    "statusCode": 400,
+    "message": "File is too big.",
+    "code": 20002
+  },
+  "upload2AWS": {
+    "statusCode": 400,
+    "message": "Something get error.",
+    "code": 20003
+  },
+  "writeFail": {
+    "statusCode": 400,
+    "message": "Write fail.",
+    "code": 20004
+  }
+}

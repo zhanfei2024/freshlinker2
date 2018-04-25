@@ -1,0 +1,474 @@
+<section class="search">
+  <div class="container nav-tabs-style1">
+    <div class="row">
+      <div class="col-md-12 searchContent">
+        <tabset class="nav-tabs-style1">
+          <tab heading="{{'search.search_position' | translate}}" [active]="index === 1">
+            <form class="form-horizontal searchPosition" (submit)="searchPosition('search')">
+              <!--<new>-->
+              <div class="form-group">
+                <!--position search text-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="input searchText">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                      <input type="text"
+                             placeholder="{{'search.search_position_input' | translate}}"
+                             [(ngModel)]="asyncSelected"
+                             name="asyncSelected"
+                             [typeahead]="dataSource"
+                             (typeaheadLoading)="changeTypeaheadLoading($event)"
+                             (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                             (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                             typeaheadOptionsLimit="7"
+                             typeaheadOptionField="name"
+                             class="form-control">
+                      <i class="searchRefresh fa fa-refresh" *ngIf="false"></i>
+                    </div>
+                  </article>
+                </div>
+                <!--/.col-->
+
+
+                <!--position category-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('category')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-suitcase"></i>
+                    </div>
+                    <div style="z-index:997;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow">
+                        <span *ngIf="selectedPositionCategories.length === 0">{{ 'search.search_position_category_select' | translate }}</span>
+                        <span *ngFor="let item of selectedPositionCategories">{{item.name}}</span>
+                      </div>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+                  <div class="searchPositionCategoryMain" *ngIf="searchShow.category">
+                    <div class="searchPositionCategory">
+                      <ul class="searchPositionCategoryContent list-unstyled">
+                        <div *ngIf="selectedPositionCategories.length !== 0">
+                          <ul class="list-inline childList">
+                            <li *ngFor="let child of selectedPositionCategories;let index = index;" class="list"
+                                (click)="addSelectedCategoryItem($event, child)">
+                              {{child.name}}
+                              <i class="fa fa-close"></i>
+                            </li>
+                            <li *ngIf="selectedPositionCategories.length === 5" class="limitShow">
+                              {{'search.up_to_five' | translate}}
+                            </li>
+                            <li class="btn" (click)="searchToggle('category')">
+                              <button type="button" class="finish btn">done
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <li class="searchPositionCategoryList" *ngFor="let item of positionCategories">
+                          <a [ngClass]="{'active': item.isShowChildren}" *ngIf="item.children.length > 0"
+                             (click)="toggleItem(item, positionCategories)">
+                            {{item.name}}
+                            <i class="fa fa-angle-right pull-right" *ngIf="item.isShowChildren"></i>
+                          </a>
+
+                          <div *ngIf="item.children.length === 0">
+                            <div (click)="addSelectedCategoryItem(item)" class="category">
+                              <input type="checkbox" value="{{item.name}}" name="category" [(ngModel)]="item.selected"
+                                     [disabled]="selectedItems?.length === 5 && !item.selected">
+                              <span>{{item.name}}</span>
+                            </div>
+                          </div>
+
+                          <ul class="searchPositionCategoryContentRight list-unstyled"
+                              *ngIf="item.children.length > 0 && item.isShowChildren">
+                            <li class="searchPositionCategoryList">
+                              <div class="category parentCategory">
+                                <input type="checkbox" value="{{item.name}}" name="parentCategory"
+                                       [(ngModel)]="item.selected"
+                                       (click)="addSelectedCategoryItem($event, item)">
+                                <span>All {{item.name}}</span>
+                              </div>
+                            </li>
+                            <li *ngFor="let child of item.children" class="searchPositionCategoryList">
+                              <div class="category childCategory">
+                                <input type="checkbox" value="{{child.name}}" name="childCategory"
+                                       [checked]="child.selected"
+                                       (click)="addSelectedCategoryItem($event, child)">
+                                <span>{{child.name}}</span>
+                              </div>
+                            </li>
+
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                <!--position category-->
+                <!--/.col-->
+
+                <!--position salary-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchSalary input-group input clearfix" (click)="searchToggle('salary')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-usd"></i>
+                    </div>
+                    <div style="z-index:998;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow" >
+                        <p *ngIf="filter.salaryType === 'monthly'">
+                          <span>Monthly</span>
+                          <span>${{filter.minSalary}}</span>
+                          <span>to</span>
+                          <span>$
+                                {{filter.maxSalary === 100000 ? filter.maxSalary + '+' : filter.maxSalary }}
+                              </span>
+                        </p>
+                        <p *ngIf="filter.salaryType === 'hourly'">
+                          <span>Hourly</span>
+                          <span>${{filter.minSalary}}</span>
+                          <span>to</span>
+                          <span>$
+                                {{filter.maxSalary === 100 ? filter.maxSalary + '+' : filter.maxSalary}}
+                              </span>
+                        </p>
+                      </div>
+                      <!--<h3>Range: {{rangeValues[0] + ' - ' + rangeValues[1]}}</h3>-->
+                    </div>
+
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+                  <div class="searchPositionSalaryMain" *ngIf="searchShow.salary">
+                    <div class="searchPositionSalaryContent">
+                      <div class="salaryList">
+                        <a class="month" [ngClass]="{'active': filter.salaryType === 'monthly'}" (click)="switchSalaryType('monthly')">
+                          Monthly
+                        </a>
+                        <a class="hour" [ngClass]="{'active': filter.salaryType === 'hourly'}" (click)="switchSalaryType('hourly')">
+                          Hourly
+                        </a>
+                      </div>
+                      <div *ngIf="filter.salaryType === 'monthly'">
+                        <p-slider [(ngModel)]="rangeValues" name="range"  (onChange)="handleChange($event)" [style]="{'width':'100%'}" [range]="true" [step]="1000" max="100000"></p-slider>
+                      </div>
+                      <div *ngIf="filter.salaryType === 'hourly'">
+                        <p-slider [(ngModel)]="rangeValues" name="range" (onChange)="handleChange($event)" [style]="{'width':'100%'}" class="slider" [range]="true" [step]="50" max="500"></p-slider>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--position salary-->
+
+              </div>
+              <!--form-group-->
+
+              <div class="form-group">
+                <!--educationLevel-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('education')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <div style="z-index:994;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow">
+                         <span
+                           *ngIf="selectedEducationLevel.length === 0">{{ 'user.profile.education' | translate }}</span>
+                        <span *ngFor="let list of selectedEducationLevel;let i =index">{{list.name}}</span>
+                      </div>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+
+                  <div class="searchPositionEducationMain" *ngIf="searchShow.education">
+                    <div class="searchPositionEducation">
+                      <ul class="searchPositionEducationContent list-unstyled">
+                        <div *ngIf="selectedEducationLevel.length !== 0">
+                          <ul class="list-inline childList">
+                            <li *ngFor="let child of selectedEducationLevel" class="list"
+                                (click)="addSelectedEducationItem($event,child)">
+                              {{child.name}}
+                              <i class="fa fa-close"></i>
+                            </li>
+                            <li *ngIf="selectedEducationLevel.length === 3" class="limitShow">
+                              {{'search.up_to_three' | translate}}
+                            </li>
+                            <li class="btn" (click)="searchToggle('education')">
+                              <button type="button" class="finish btn">done
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <li class="searchPositionCategoryList" *ngFor="let item of educationLevel">
+                          <a class="category">
+                            <input type="checkbox" value="{{item.name}}" name="educationLevel"
+                                   [checked]="item.selected"
+                                   [disabled]="selectedItems?.length === 3 && !item.selected"
+                                   (click)="addSelectedEducationItem($event,item)">
+                            <span>{{item.name}}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                <!--educationLevel-->
+
+                <!--position type-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('type')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div style="z-index:994;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow">
+                        <span>
+                          {{filter.type === undefined ? ('position.job_type' | translate) : filter.type}}
+                        </span>
+                        <span class="searchTextShow"></span>
+                      </div>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+                  <div class="searchPositionJobTypeMain" *ngIf="searchShow.type">
+                    <div class="searchPositionJobType noBorder">
+                      <ul class="searchPositionEmploymentContent searchPositionCategoryContent list-unstyled">
+                        <li class="searchEducationCategoryList" *ngFor="let type of positionType">
+                          <label for="{{type}}">
+                            <input type="radio" id="{{type}}" name="type" value="{{type}}" [(ngModel)]="filter.type">
+                            {{type}}
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--position type-->
+
+                <!--jobNature-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('jobNature')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-filter"></i>
+                    </div>
+                    <div style="z-index:997;" class="searchCategoryOpened pull-left">
+                      <p class="searchTextShow">
+                        <span>{{filter.jobNatureId === undefined ? ('position.jobNature' | translate) : selectedJobNature?.name}}</span>
+                      </p>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+                  <div class="searchPositionJobNatureMain" *ngIf="searchShow.jobNature">
+                    <div class="searchPositionJobNature noBorder">
+                      <ul class="searchPositionEmploymentContent searchPositionCategoryContent list-unstyled">
+                        <li class="searchEducationCategoryList" *ngFor="let item of jobNatures">
+                          <label for="{{item.id}}">
+                            <input type="radio" id="{{item.id}}" name="jobNatures" value="{{item.id}}"
+                                   (change)="selectJobNature(item.id)"
+                                   [checked]="filter.jobNatureId === item.id">
+                            {{item.name}}
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!--jobNature-->
+              </div>
+              <!--form-group-->
+
+              <div class="form-group" *ngIf="searchShowMore">
+                <!--location-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('location')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-map-marker"></i>
+                    </div>
+                    <div style="z-index:994;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow">
+                        <span *ngIf="selectedLocations.length === 0">{{ 'global.all_location' | translate }}</span>
+                        <span *ngFor="let list of selectedLocations" class="searchTextShow">{{list.name}}</span>
+                      </div>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+
+                  <div class="searchPositionLocationMain" *ngIf="searchShow.location">
+                    <div class="searchPositionCategory">
+                      <ul class="searchPositionCategoryContent list-unstyled">
+                        <div *ngIf="selectedLocations.length !== 0">
+                          <ul class="list-inline childList">
+                            <li *ngFor="let child of selectedLocations" class="list" (click)="addSelectedLocationItem($event,child)">
+                              {{child.name}}
+                              <i class="fa fa-close"></i>
+                            </li>
+                            <li *ngIf="selectedLocations.length === 5" class="limitShow">
+                              {{'search.up_to_five' | translate}}
+                            </li>
+                            <li class="btn" (click)="searchToggle('location')">
+                              <button type="button" class="finish btn" >done
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <li class="searchPositionCategoryList" *ngFor="let item of locations">
+                          <a  [ngClass]="{'active': item.isShowChildren}"  *ngIf="item.children.length > 0" (click)="toggleItem(item, locations)">
+                            {{item.name}}
+                            <i class="fa fa-angle-right pull-right" *ngIf="item.isShowChildren"></i>
+                          </a>
+
+                          <div *ngIf="item.children.length === 0">
+                            <div (click)="addSelectedLocationItem($event,item)" class="category">
+                              <input type="checkbox" value="{{item.name}}" name="location"  [checked]="item.selected" [disabled]="selectedItems.length === 5 && !item.selected">
+                              <span >{{item.name}}</span>
+                            </div>
+                          </div>
+
+                          <ul class="searchPositionCategoryContentRight list-unstyled" *ngIf="item.children.length > 0 && item.isShowChildren">
+                            <li class="searchPositionCategoryList">
+                              <div class="category parentCategory">
+                                <input (click)="addSelectedLocationItem($event, item)" type="checkbox" value="{{item.name}}" name="parentCategory"  [checked]="item.selected">
+                                <span >All {{item.name}}</span>
+                              </div>
+                            </li>
+                            <li *ngFor="let child of item.children" class="searchPositionCategoryList">
+                              <div class="category">
+                                <input (click)="addSelectedLocationItem($event, child)" type="checkbox" value="{{child.name}}" name="childCategory"  [checked]="child.selected">
+                                <span >{{child.name}}</span>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+                <!--location-->
+
+                <!--position experience-->
+                <div class="col-sm-4 col-xs-12">
+                  <article class="searchCategory input-group input clearfix" (click)="searchToggle('experience')">
+                    <div class="input-group-addon">
+                      <i class="fa fa-bookmark"></i>
+                    </div>
+                    <div style="z-index:994;" class="searchCategoryOpened pull-left">
+                      <div class="searchTextShow">
+                        <span>At least</span>
+                        <span>{{filter.experience}}</span>
+                        years
+                      </div>
+                    </div>
+                    <div class="input-group-addon pull-right">
+                      <i class="fa fa-caret-down"></i>
+                    </div>
+                  </article>
+                  <div class="searchPositionExperienceMain" *ngIf="searchShow.experience">
+                    <div class="searchPositionExperienceContent">
+                      <p-slider [(ngModel)]="val" name="experience" (onChange)="changeValue($event)" [style]="{'width':'100%'}" [step]="1" max="5"></p-slider>
+                    </div>
+                  </div>
+                </div>
+
+                <!--position experience-->
+              </div>
+              <!--form-group-->
+
+              <div class="form-group">
+                <span class="col-md-2 col-sm-3 col-md-offset-8 col-xs-12 col-sm-offset-9  text-right more"  (click)="searchToggle('all')">
+                  {{'global.more_options' | translate }}
+                  <i class="fa fa-angle-down" *ngIf="!searchShowMore"></i>
+                  <i class="fa fa-angle-up" *ngIf="searchShowMore"></i>
+                </span>
+                <div class="col-md-2 col-sm-3 col-xs-4 col-xs-offset-8 col-sm-offset-9 col-md-offset-0">
+                  <button type="submit" class="btn submit btn-success" (click)="searchToggle('toggleHide')">{{'search.search_button' | translate}}</button>
+                </div>
+              </div>
+              <!--form-group-->
+
+            </form>
+          </tab>
+
+          <tab heading="{{'search.search_article' | translate}}" [active]="index === 2">
+            <form class="form-horizontal searchArticle"
+                  (ngSubmit)="search('article', article_query)">
+              <div class="form-group">
+                <div class="col-md-10 col-sm-12 col-xs-12 articleSearch">
+                  <input type="text" [(ngModel)]="article_query"
+                         name="text"
+                         placeholder="{{'search.search_article_input' | translate}}"
+                         class="form-control" required>
+                  <i *ngIf="loading" class="fa fa-refresh searchRefresh"></i>
+                  <!--<div *ngIf="noResults" class="noResults">-->
+                  <!--<i class="fa fa-remove"></i>-->
+                  <!--{{'search.no_search_article' | translate}}-->
+                  <!--</div>-->
+                </div>
+                <!--/.col-->
+                <div class="col-md-2 col-sm-3 col-xs-4">
+                  <button type="submit" class="btn submit btn-success" [disabled]="!article_query">
+                    {{'search.search_button' | translate}}
+                  </button>
+                </div>
+                <!--/.col-->
+                <ul class="col-xs-12 hotTag list-inline">
+                  <li><a>{{'global.ation' | translate}}:</a></li>
+                  <li *ngFor="let ation of hotTags">
+                    <a (click)="searchTag('tags',ation.name)">{{ation.name}}</a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </tab>
+
+          <tab heading="{{'search.search_company' | translate}}" [active]="index === 3">
+            <form class="form-horizontal searchArticle"
+                  (ngSubmit)="search('company',company_query)" name="mainForm" #searchCompanyForm="ngForm">
+              <div class="form-group">
+                <div class="col-md-10 col-sm-12 col-xs-12 articleSearch">
+                  <input type="text" [(ngModel)]="company_query"
+                         name="text"
+                         placeholder="{{'search.search_company_input' | translate}}"
+                         class="form-control" required>
+                  <i *ngIf="loading" class="fa fa-refresh searchRefresh"></i>
+                  <!--<div *ngIf="noResults" class="noResults">-->
+                  <!--<i class="fa fa-remove"></i>-->
+                  <!--{{'search.no_search_article' | translate}}-->
+                  <!--</div>-->
+                </div>
+                <!--/.col-->
+                <div class="col-md-2 col-sm-3 col-xs-4">
+                  <button type="submit" class="btn submit btn-success" [disabled]="!company_query">
+                    {{'search.search_button' | translate}}
+                  </button>
+                </div>
+                <!--/.col-->
+              </div>
+            </form>
+          </tab>
+
+
+        </tabset>
+      </div>
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,150 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <form action="">
+    <div class="row employeeList">
+      <div class="col-md-3 col-sm-12 col-xs-12 employeeListLeft">
+        <div class="content">
+
+          <ul class="editConpanyList list-unstyled">
+            <li class="list" *ngFor="let item of employeeStatus"
+                [ngClass]="{'active': item.id === employeeIndex}">
+
+              <a (click)="employeeTab(item.status,item.id)">{{item.name | translate}}</a>
+            </li>
+          </ul>
+
+          <div class="searchForm">
+            <h5>{{'search.dashboard_search_position' | translate}}</h5>
+            <div class="form-group">
+              <input type="text" [placeholder]="'message.position_name_input' | translate" name="search" required
+                     [(ngModel)]="filter.search">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn" (click)="searchEmployee()">{{'button.determine' | translate}}</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!--/.col-->
+      <div class="col-md-9 col-sm-12 col-xs-12 employeeListRight">
+        <div *ngIf="!tabLoading">
+          <div class="text-center loading" [hidden]="!listLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div [hidden]="listLoading">
+            <div [hidden]="!(employees.length === 0 && !listLoading)" class="noAppliedArticle row">
+              <div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2">
+                <img src="../../assets/img/no_position_message.png">
+              </div>
+              <!--/.col-->
+              <div class="col-sm-7 col-xs-12 text">
+                <p>
+                  {{'message.staff_no_publish_message' | translate}}
+                  <br>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+            <div class="articleListRightContent" [hidden]="!(employees?.length > 0 && !listLoading)">
+              <div>
+                <div class="itemList" *ngFor="let employee of employees">
+                  <div class="row item">
+                    <fieldset class="col-sm-2 col-xs-12">
+                      <a ui-sref="main.resume({id: employee.userId})">
+                        <img src="../../assets/img/user_default_icon_male.png" alt=""
+                             *ngIf="employee?.user?.icon === null && employee?.user?.gender ==='M'"
+                             class="img-responsive img-circle">
+                        <img src="../../assets/img/user_default_icon_female.png" alt=""
+                             *ngIf="employee?.user?.icon === null && employee?.user?.gender ==='F'"
+                             class="img-responsive img-circle">
+                        <img [src]="employee?.user?.icon?.url['100']" alt="" class="img-responsive img-circle"
+                             *ngIf="employee?.user?.icon !== null">
+                      </a>
+                    </fieldset>
+                    <div class="col-sm-6 col-xs-6 list">
+                      <h4 class="userName">
+                        {{employee?.user?.lastName}} {{employee?.user?.firstName}}
+                      </h4>
+                      <p class="tips" *ngIf="isPass">
+                        <span>{{employee.updatedAt | date: 'yyyy-MM-dd'}} {{'global.join' | translate}}</span>
+                      </p>
+                      <p class="tips" *ngIf="!isPass">
+                        <span>{{employee.createdAt | date: 'yyyy-MM-dd'}} {{'global.applied' | translate}}</span>
+                      </p>
+                    </div>
+                    <div class="btn-user checkList col-sm-2 col-xs-4" *ngIf="!isPass">
+                      <div class="btn-group" dropdown is-open="status.isopen">
+                        <button id="" type="button" class="btn btn-sucess submit" dropdownToggle
+                                [disabled]="disabled">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <ul class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="single-button">
+                          <li role="menuitem">
+                            <a (click)="update('pass',employee.id)">
+                              {{'company.success' | translate}}
+                            </a>
+                          </li>
+                          <li role="menuitem">
+                            <a (click)="update('fail',employee.id)">
+                              {{'position.not-suitable' | translate}}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <p class="text text-center">
+                        {{'button.edit' | translate}}
+                      </p>
+                    </div>
+
+                    <!--/.col-->
+                    <div class="checkList col-sm-2 col-xs-4">
+                      <div class="btn-group">
+                        <a [routerLink]="['/user',employee.userId,'user-resume']">
+                          <p class="icon">
+                            <span></span>
+                          </p>
+                          <p class="text text-center">
+                            {{'global.check' | translate}}
+                          </p>
+                        </a>
+                      </div>
+                    </div>
+                    <!--/.col-->
+
+                    <div class="btn-user checkList col-sm-2 col-xs-4" dropdown *ngIf="isPass">
+                      <div class="btn-group" dropdown is-open="status.isopen">
+                        <a (click)="destory(employee.id)" class="btn btn-sucess submit">
+                          <i class="fa fa-times-circle-o"></i>
+                        </a>
+                      </div>
+                      <p class="text text-center">
+                        {{'button.Delete_this_Employee' | translate}}
+                      </p>
+                    </div>
+                    <!--/.col-->
+                  </div>
+
+                </div>
+                <!-- page -->
+                <div class="text-center">
+                  <pager [maxSize]="50"
+                         name="CandidatesPage"
+                         [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                         [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                         pageBtnClass="btn btn-link"></pager>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--/.col-->
+    </div>
+  </form>
+</div>
+

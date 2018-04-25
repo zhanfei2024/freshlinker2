@@ -1,0 +1,238 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <form action="">
+    <div class="interview row" >
+      <div class="text-center loading" [hidden]="!positionLoading">
+        <i class="fa fa-spinner fa-pulse fa-3x"></i>
+      </div>
+      <div [hidden]="!(positions.length === 0 && !positionLoading)" class="noPosition row">
+        <div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2">
+          <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+        </div>
+        <!--/.col-->
+        <div class="col-md-5 col-sm-5 col-xs-12 text">
+          <p>
+            {{'message.no_position_message' | translate}}
+            <br>
+            {{'message.no_position_tips_message' | translate}}
+            <br>
+            <span>{{'global.go_ahead' | translate}}</span>
+            <a  (click)="postPosition()">
+              {{ 'company.publish_position' | translate }}
+            </a>
+          </p>
+        </div>
+        <!--/.col-->
+      </div>
+      <div *ngIf="!positionLoading && positions.length > 0">
+        <div class="col-md-3 col-sm-12 col-xs-12 interviewLeft">
+          <div class="text-center loading" [hidden]="!positionPageLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div class="content" [hidden]="positionPageLoading">
+            <ul class="list-unstyled interviewList">
+              <li class="Joblist" *ngFor="let job of positions"
+                  [ngClass]="{'active': job.id === filter.positionId}"
+                  (click)="changeTab(job.id, filter.candidateStatusId)">
+                <a>
+                  <span>{{job.name}}</span>
+                </a>
+              </li>
+            </ul>
+            <!-- page -->
+            <div class="text-center">
+              <pager [maxSize]="50"
+                     name="page"
+                     [itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"
+                     [(ngModel)]="pageNum.page" (pageChanged)="changePage($event)"
+                     pageBtnClass="btn btn-link"></pager>
+            </div>
+
+            <div class="searchForm">
+              <h5>{{'search.dashboard_search_position' | translate}}</h5>
+
+              <div class="form-group">
+                <input type="text" placeholder="{{'message.position_name_input' | translate}}" required name="text" [(ngModel)]="pageNum.search">
+              </div>
+              <div class="form-group">
+                <button type="button" class="btn" (click)="searchInterview()">{{'button.determine' | translate}}</button>
+              </div>
+            </div>
+          </div>
+          <!--/.interviewLeft-->
+        </div>
+
+        <div class="col-md-9 col-sm-12 col-xs-12 interviewRight">
+          <div class="interviewLeft">
+            <ul class="list-unstyled interviewList line_viewlist">
+              <li class="list iline_list" *ngFor="let item of candidateStatus" [ngClass]="{'active': item.id === interviewIndex}">
+                <a (click)="changeTab(filter.positionId, item.id)">
+                  <span>{{ item.name | translate}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div *ngIf="!positionLoading && positions.length > 0">
+              <div class="text-center loading" [hidden]="!candidateLoading">
+                <i class="fa fa-spinner fa-pulse fa-3x"></i>
+              </div>
+              <div [hidden]="!(candidates.length === 0 && !candidateLoading)" class="noPosition row">
+                <div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2">
+                  <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+                </div>
+                <!--/.col-->
+                <div class="col-md-5 col-sm-5 col-xs-12 text">
+                  <p>
+                    {{'message.dashboard_interview_message' | translate}}
+                    <br>
+                    {{'message.dashboard_interview_tips_message' | translate}}
+                    <br>
+                    <span>{{'global.go_ahead' | translate}}</span>
+                    <a (click)="postPosition()">
+                      {{ 'company.publish_position' | translate }}
+                    </a>
+                  </p>
+                </div>
+                <!--/.col-->
+              </div>
+              <div [hidden]="!(candidates.length > 0 && !candidateLoading)">
+                <div *ngFor="let candidate of candidates;let i =index;" class="list row">
+                  <div class="item row">
+                    <fieldset class="col-sm-2 col-xs-12">
+                      <a [routerLink]="['/user',candidate.userId,'user-resume']">
+                        <img src="../../../assets/img/user_default_icon_male.png"   *ngIf="candidate?.user?.icon === null && candidate?.user?.gender ==='M'" class="img-responsive img-circle">
+                        <img src="../../../assets/img/user_default_icon_male.png"   *ngIf="candidate?.user?.icon === null && candidate?.user?.gender ===null" class="img-responsive img-circle">
+                        <img src="../../../assets/img/user_default_icon_female.png" *ngIf="candidate?.user?.icon === null && candidate?.user?.gender ==='F'" class="img-responsive img-circle">
+                        <img [src]="candidate?.user?.icon?.url['100']" alt="" class="img-responsive img-circle"  *ngIf="candidate?.user?.icon !== null ">
+                      </a>
+                    </fieldset>
+                    <div class="col-sm-3 col-xs-6 list">
+                      <p class="userName">
+                        <a [routerLink]="['/user',candidate.userId,'user-resume']">
+                          {{candidate.userName}}
+                        </a>
+                      </p>
+                      <p class="tips">
+
+                        <span>{{candidate.appliedAt | date: 'yyyy-MM-dd'}} {{'global.applied' | translate}}</span>
+                      </p>
+                    </div>
+
+                    <!--/.col-->
+                    <div class="col-sm-3 col-xs-6 list">
+                      <p class="positionName">
+                        <a class="positionName" [routerLink]="['/position/positions',candidate.positionId]">
+                          {{candidate.position?.name}}
+                        </a>
+                      </p>
+                      <p class="tips">
+                        <span *ngIf="candidate.isInvitation">{{'enterprise.company_invitation' | translate}}</span>
+                        <span *ngIf="!candidate.isInvitation">{{'enterprise.user_applied' | translate}}</span>
+                      </p>
+                    </div>
+                    <!--/.col-->
+
+                    <!--/.col-->
+                    <div class="btn-user checkList col-sm-2 col-xs-4">
+                      <div class="btn-group" dropdown >
+                        <button id="" type="button" class="btn btn-sucess submit" dropdownToggle>
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <ul class="dropdown-menu" *dropdownMenu role="menu" aria-labelledby="single-button">
+                          <li role="menuitem" *ngIf="candidate.candidateStatusId === 1 || candidate.candidateStatusId === 3 || candidate.candidateStatusId === 5 || candidate.candidateStatusId === 4">
+                            <a ng-really-message="Are you sure?" (click)="changeInterviewStatus(candidate.id,2)" nodrag>
+                              {{'company.interview' | translate}}
+                            </a>
+                          </li>
+
+                          <li role="menuitem" *ngIf="candidate.candidateStatusId === 2 || candidate.candidateStatusId === 3 || candidate.candidateStatusId === 4">
+                            <a ng-really-message="Are you sure?" (click)="changeInterviewStatus(candidate.id,5)" nodrag>
+                              {{'company.success' | translate}}
+                            </a>
+                          </li>
+
+                          <li role="menuitem" *ngIf="candidate.candidateStatusId === 2 || candidate.candidateStatusId === 3 || candidate.candidateStatusId === 5">
+                            <a ng-really-message="Are you sure?" (click)="changeInterviewStatus(candidate.id,4)" nodrag>
+                              {{'company.finish' | translate}}
+                            </a>
+                          </li>
+
+                          <li role="menuitem" *ngIf="candidate.candidateStatusId === 1 || candidate.candidateStatusId === 2 || candidate.candidateStatusId === 4 || candidate.candidateStatusId === 5">
+                            <a ng-really-message="Are you sure?" (click)="changeInterviewStatus(candidate.id, 3)"
+                               nodrag>
+                              {{'company.improper' | translate}}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <p class="text text-center">
+                        {{'button.edit' | translate}}
+                      </p>
+                    </div>
+
+                    <!--/.col-->
+                    <div class="checkList col-sm-2 col-xs-4">
+                      <a  [routerLink]="['/user',candidate.userId,'user-resume']">
+                        <p class="icon">
+                          <span></span>
+                        </p>
+
+                        <p class="text text-center">
+                          {{'global.check' | translate}}
+                        </p>
+                      </a>
+                      <a class="checkList listDown text-center" (click)="showContent(i)">
+                        <p class="icon">
+                          <i class="fa fa-angle-down" *ngIf="!candidate.selected"></i>
+                          <i class="fa fa-angle-up" *ngIf="candidate.selected"></i>
+                        </p>
+                      </a>
+                    </div>
+                    <!--/.col-->
+
+                    <div class="col-xs-12 problem" *ngIf="candidate.selected">
+                      <div *ngIf="candidate?.candidateQuestions?.length<=0" class="noCandidate row">
+                        <div class=" col-md-2 col-sm-3 col-xs-5 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
+                          <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+                        </div>
+                        <!--/.col-->
+                        <div class="col-md-4 col-sm-5 col-xs-5 text">
+                          <p>
+                            {{'message.no_job_question_answering_msg' | translate}}
+                            <br>
+                          </p>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                      <ol *ngIf="candidate?.candidateQuestions?.length>0">
+                        <li  *ngFor="let problem of candidate?.candidateQuestions;let index=index">
+                          <h5>{{problem?.question}}</h5>
+                          <p class="text" [innerHtml]="problem?.answer"></p>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- page -->
+                <div class="text-center">
+                  <pager [maxSize]="50"
+                         name="CandidatesPage"
+                         [itemsPerPage]="filter.limit" [totalItems]="candidateMeta.pagination.totalCount"
+                         [(ngModel)]="filter.page" (pageChanged)="changeCandidatesPage($event)"
+                         pageBtnClass="btn btn-link"></pager>
+                </div>
+              </div>
+            </div>
+
+            <!--/.positionManage-->
+          </div>
+        </div>
+        <!--/.companyPositionListRight-->
+      </div>
+    </div>
+  </form>
+</div>
+
+

@@ -1,0 +1,49 @@
+{
+  "invalidAppType": {
+    "statusCode": 400,
+    "message": "App type is invalid.",
+    "code": 1000
+  },
+  "youShouldCreateNewApp": {
+    "statusCode": 400,
+    "message": "You should create new app.",
+    "code": 1001
+  },
+  "userAlreadyExists": {
+    "statusCode": 400,
+    "message": "User already exists.",
+    "code": 1002
+  },
+  "repassword": {
+    "statusCode": 400,
+    "message": "Two password input is not consistent.",
+    "code": 1003
+  },
+  "oldPassword": {
+    "statusCode": 400,
+    "message": "Old password enter wrong.",
+    "code": 1004
+  },
+  "registrationFailed": {
+    "statusCode": 400,
+    "message": "Registration failed.",
+    "code": 1005
+  },
+  "tokenDateFailure": {
+    "statusCode": 400,
+    "message": "This Token date is expiration.",
+    "code": 1006
+  },
+  "notFoundOrResetPassword": {
+    "statusCode": 400,
+    "message": "The email or token you entered is incorrect, or you have reset your password.",
+    "code": 1007
+  },
+  "tokenAlreadyExists": {
+    "statusCode": 400,
+    "message": "Token already exists, please complete the password reset within 24 hours.",
+    "code": 1008
+  }
+
+
+}

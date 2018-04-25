@@ -1,0 +1,7 @@
+{
+  "postCategoryNotExists": {
+    "statusCode": 400,
+    "message": "Please choose post category  subcategory",
+    "code": 16000
+  }
+}

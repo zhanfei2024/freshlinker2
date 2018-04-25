@@ -1,0 +1,102 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <div class="row news-center">
+    <div class="col-sm-3 col-md-3 news-left">
+      <ul>
+        <li class="list">
+          <a class="active"><i class="fa fa-commenting-o fa-1x" aria-hidden="true"></i><span>{{'user.news.not_read_message' | translate }}</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-md-9 no-news-right" *ngIf="newsNum === 0">
+      <div class="noAppliedArticle row">
+        <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+          <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-9 news-right" *ngIf="newsNum > 0">
+      <div *ngFor="let new of news">
+        <div class="news-article">
+          <h4 class="article-title" [routerLink]="['/articles',new.postId]">{{new.post.title}}</h4>
+          <!--<p class="article-time">{{new.post.updatedAt | date:'yyyy-MM-dd'}}</p>-->
+          <!--<p class="article-short" *ngIf="!articleShow">{{new.post.content | htmlToPlaintext :30}}</p>-->
+          <!--<p class="article-longe" *ngIf="articleShow" [innerHtml]="new.post.content"></p>-->
+          <!--<p (click)="articleToggle()" *ngIf="!articleShow">查看详情</p>-->
+          <!--<p (click)="articleToggle()" *ngIf="articleShow">收起详情</p>-->
+          <p class="article-debag"><span><i class="fa fa-eye" aria-hidden="true"></i>{{new.post.view}}</span><span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{new.post.totalComment}}</span></p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-head">
+            <div class="comment-avatar">
+              <img src="../../../assets/img/user_default_icon.png" *ngIf="new.user?.icon == null"
+                   class="img-circle pull-left"
+                   width="40" height="40"/>
+              <img [src]="new.user?.icon?.url['100']" *ngIf="new.user?.icon !== null"
+                   class="img-circle pull-left"
+                   width="40" height="40"/>
+            </div>
+            <div class="comment-msg">
+              <p class="comment-user-name">{{new.user.lastName}}{{new.user.firstName}}</p>
+              <p class="comment-time"><span>{{new.createdAt | date:'M月 d日 H:m'}}</span></p>
+            </div>
+            <p class="article-debag"><span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{new.replies.length}}</span></p>
+          </div>
+          <div class="myself-comment" [innerHTML]="new.content">
+          </div>
+          <div *ngFor="let comment of new.replies; let i = index;">
+            <div class="other-comment">
+              <div class="other-comment-list">
+                <p class="other-comment-name">{{comment.user.lastName}}{{comment.user.firstName}}
+                <span class="pull-right other-comment-time">
+                  <span>{{comment.updatedAt | date:'M月 d日 H:m'}}</span> <!--<a (click)="reply(comment)">{{'article.reply' | translate}}</a>-->
+                </span>
+                </p>
+                <p class="other-comment-content">{{comment.content}}</p>
+              </div>
+              <div class="comment-head" id="myself"  *ngIf="myCommentShow">
+                <div class="comment-avatar">
+                  <img src="../../../assets/img/user_default_icon.png" *ngIf="new.user?.icon == null"
+                       class="img-circle pull-left"
+                       width="40" height="40"/>
+                  <img [src]="new.user?.icon?.url['100']" *ngIf="new.user?.icon !== null"
+                       class="img-circle pull-left"
+                       width="40" height="40"/>
+                </div>
+                <div class="comment-msg">
+                  <p class="comment-user-name">{{new.user.lastName}}{{new.user.firstName}}</p>
+                  <p class="comment-time"><span>{{currentDay | date:'M月 d日 H:m'}}</span></p>
+                </div>
+                <div class="myself-comment">{{replyAnswerText}}</div>
+              </div>
+
+              <!--<form *ngIf="comment.textareaShow">-->
+                <!--<div class="text-from">-->
+                    <!--<textarea class="form-control" [(ngModel)]="replyAnswerText"-->
+                              <!--#commentText = "ngModel"-->
+                              <!--maxlength="200"-->
+                              <!--name="text" placeholder="请输入评论"-->
+                              <!--style="height: 80px; width: 100%"></textarea>-->
+                  <!--<div class="btn_content">-->
+                    <!--<button type="submit" [disabled]="!replyAnswerText"-->
+                            <!--class="btn btn-success pull-right" (click)="postAnwer(comment.id,new.id)">-->
+                      <!--{{'user.news.send' | translate }}-->
+                    <!--</button>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</form>-->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

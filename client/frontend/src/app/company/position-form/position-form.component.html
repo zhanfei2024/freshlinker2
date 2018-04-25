@@ -1,0 +1,667 @@
+<div class="container"  >
+  <dashboard-tabs></dashboard-tabs>
+  <!--.postPosition-->
+  <form class="form-horizontal" #PostForm="ngForm" name="Form" (ngSubmit)="save()" (window:beforeunload)="doSomething($event)">
+    <div class="postPosition position row" *ngIf="!isPreview">
+      <div class="col-md-3 col-sm-12 col-xs-12 postPositionLeft">
+        <div class="content">
+          <div class="button">
+            <button type="submit" class="btn btn-success sub positionSub" (click)="noDraft()"  *ngIf="!isPreview && isActiveShow && !expiredPosition">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.release' | translate }}</span>
+            </button>
+            <button type="submit" class="btn btn-primary sub positionSub" (click)="draft()">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.draft' | translate }}</span>
+            </button>
+            <button type="button" (click)="childModal.show()" class="btn btn-success sub positionSub" *ngIf="!isActiveShow">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.repost' | translate }}</span>
+            </button>
+            <!--<button type="button" (click)="check()" class="btn btn-success sub positionSub" *ngIf="isActiveShow &&expiredPosition">-->
+              <!--<span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>-->
+              <!--<span *ngIf="!saveLoading">{{ 'button.repost' | translate }}</span>-->
+            <!--</button>-->
+            <button type="button" class="btn btn-default canel previewSub" *ngIf="!isPreview" (click)="preview()">
+              {{'global.view' | translate}}
+            </button>
+            <a [routerLink]="['/company',companyId,'position-list']"
+               type="button" class="btn btn-default canel" *ngIf="!isPreview">
+              {{ 'button.cancel' | translate }}
+            </a>
+            <a (click)="printOpen()"
+               type="button" class="btn  btn-success sub previewSub" *ngIf="isPreview">
+              {{ 'button.print' | translate }}
+            </a>
+            <a type="button" class="btn btn-default canel" *ngIf="isPreview"
+               (click)="isPreview =isPreview">
+              {{ 'button.return' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="col-md-9 col-sm-12 col-xs-12 postPositionRight">
+        <div class="text-center loading" *ngIf="tableLoading ">
+          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+
+        <div class="postPositionContent" *ngIf="!tableLoading">
+
+          <h2 class="title text-center">
+            {{'message.postPosition_title_message' | translate}}
+          </h2>
+          <h4 class="subTitle text-center">
+            {{'message.postPosition_subTitle_message' | translate}}
+          </h4>
+
+          <div class="form-group item">
+            <div class="content col-xs-12 noMargin">
+              <label class="col-sm-12 col-xs-12 control-label positionCategoryLabel">
+                <i class="headIcon"></i><span class="marginLeft">{{'position.position_category_type' | translate}}</span>
+
+
+              </label>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12 categoryContent clearfix">
+                <div class="categorySelected pull-left">
+
+                  <ul class="list-inline" *ngIf="selectedPositionCategory.length > 0">
+                    <li *ngFor="let select of selectedPositionCategory" class="selectList"
+                        (click)="addSelectedPositionCategory(select)">
+                      <a >{{select.name}}</a>
+                      <i class="fa fa-close"></i>
+                    </li>
+                    <li *ngIf="selectedPositionCategory.length === 5" class="limitShow">
+                      {{'search.up_to_five' | translate}}
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+              <!--/.col-->
+              <!-- position category-->
+              <div class="postPositionCategory clearfix" *ngIf="categoryShow">
+                <div class="postPositionCategoryLeft">
+                  <ul class="postPositionCategoryList list-unstyled">
+                    <li *ngFor="let list of positionCategories"
+                        (click)="togglePositionCategory(list)" [ngClass]="{'active': list.selected}">
+                      <a >{{list.name}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="postPositionCategoryChildren" *ngIf="positionCategoryChildren.length > 0">
+                  <ul class="postPositionCategoryList list-unstyled">
+                    <li class="cursor"
+                        *ngFor="let item of positionCategoryChildren"
+                        (click)="addSelectedPositionCategory(item)">
+                      <input class="cursor"
+                             type="checkbox"
+                             name="checkbox"
+                             [disabled]="selectedPositionCategory.length === 5 && !item.selected"
+                             [checked]="item.selected">
+                      {{item.name}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.position category -->
+            </div>
+            <!--/.col-->
+            <div class="content col-sm-12 col-xs-12 positionName">
+              <label for="name" class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.name' |translate}}</span>
+              </label>
+              <!--/.col-->
+              <div class="col-xs-12">
+                <input type="text" class="form-control" id="name" name="name" required
+                       [(ngModel)]="position.name" [placeholder]="'position.name_input_examplae' | translate"
+                       minlength="2">
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.col-->
+
+
+
+          </div>
+          <!--/.item-->
+          <div class="form-group item">
+            <div class="content col-sm-6 col-xs-12">
+              <label for="email" class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.email' | translate}}</span>
+              </label>
+              <!--/.col-->
+              <div class="col-xs-12">
+                <input type="text" class="form-control" id="email" name="email" required
+                       [(ngModel)]="position.email" [placeholder]="'message.position_email_input' | translate">
+              </div>
+              <!--/.col-->
+            </div>
+
+            <div class="col-sm-6 col-xs-12 content">
+              <label class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{'position.jobNature' | translate}}</span>
+              </label>
+              <div class="col-xs-12">
+                <select class="form-control" name="jobNatureId" [(ngModel)]="position.jobNatureId">
+                  <option value="">{{'message.select_position_jobNature' | translate}}</option>
+                  <option class="cursor" [value]="item.id" *ngFor="let item of jobNatures">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!--form-group-->
+
+          <div class="form-group item">
+            <div class="col-sm-12 col-xs-12 content">
+              <label class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.type' | translate }}</span>
+              </label>
+              <div class="col-xs-12 inputRadio">
+                <label class="noPadding cursor">
+                  <input class="cursor" type="radio" name="type" value="full-time" [(ngModel)]="position.type"> Full-time
+                </label>
+                <label class="cursor">
+                  <input class="cursor" type="radio" name="type" value="part-time" [(ngModel)]="position.type"> Part-time
+                </label>
+                <label class="cursor">
+                  <input class="cursor" type="radio" name="type" value="internship" [(ngModel)]="position.type"> Internship
+                </label>
+                <label class="cursor">
+                  <input class="cursor" type="radio" name="type" value="freelance" [(ngModel)]="position.type"> Freelance
+                </label>
+                <label class="cursor">
+                  <input class="cursor" type="radio" name="type" value="others" [(ngModel)]="position.type"> Others
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group item">
+            <!--/.col-->
+            <div class="col-xs-12 content">
+              <div (click)="locationShow = !locationShow">
+                <label class="col-sm-12 col-xs-12 control-label positionLocationLabel">
+                  <i class="headIcon"></i><span class="marginLeft"> {{ 'global.position_area' | translate }}</span>
+                </label>
+                <!--/.col-->
+
+                <div class="col-sm-12 col-xs-12 locationContent clearfix">
+                  <div class="locationSelected pull-left">
+                    <ul class="list-inline" *ngIf="selectedPositionLocation !== undefined">
+                      <li class="selectList">
+                        <a href="javascript:;">{{selectedPositionLocation.name}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+
+              <!-- position location-->
+              <div class="postPositionLocation clearfix" *ngIf="locationShow">
+                <div class="postPositionLocationLeft">
+                  <ul class="postPositionLocationList list-unstyled">
+                    <li *ngFor="let list of locations" (click)="togglePositionLocation(list)"
+                        [ngClass]="{'active': list.selected}">
+                      <a>{{list.name}}</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="postPositionLocationChildren" *ngIf="positionLocationChildren.length > 0">
+                  <ul class="postPositionLocationList list-unstyled">
+                    <li *ngFor="let item of positionLocationChildren">
+                      <label for="{{item.id}}" (click)="addSelectedPositionLocation(item)">
+                        <input class="cursor" type="radio" name="location" value="{{item.id}}" id="{{item.id}}"
+                               [(ngModel)]="position.locationId"
+                               [checked]="position.locationId === item.id">
+                        {{item.name}}
+                      </label>
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.position location -->
+            </div>
+            <!--./col-->
+            <div class="col-sm-12 col-xs-12 content">
+              <label for="address" class="col-xs-12 control-label address">
+                <i class="headIcon"></i><span class="marginLeft"> {{ 'position.address' | translate}}</span></label>
+              <!--/.col-->
+              <div class="col-xs-12">
+                <input id="address" name="address" type="text" class="form-control"
+                       [(ngModel)]="position.address"
+                       [placeholder]="'message.position_address_input' | translate">
+              </div>
+              <!--/.col-->
+            </div>
+            <!--./col-->
+          </div>
+          <!--&lt;!&ndash;/.item&ndash;&gt;-->
+
+          <div class="form-group item">
+            <div class="col-sm-6 col-xs-12 content">
+              <label class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft"> {{ 'position.experience' | translate }}</span>
+              </label>
+              <!--/.col-->
+
+              <div class="col-xs-12 clearfix">
+                <select class="form-control" name="experience" [(ngModel)]="position.experience">
+                  <option value="">{{'message.select_position_experience' | translate}}</option>
+                  <option [value]="item.value" *ngFor="let item of experience">{{item.name}}</option>
+                </select>
+
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-xs-12 content">
+              <label class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'user.profile.education' | translate }}</span>
+              </label>
+              <!--/.col-->
+              <div class="col-xs-12 educationContent clearfix">
+                <select class="form-control" name="educationLevelId" [(ngModel)]="position.educationLevelId">
+                  <option value="">{{'message.select_position_education' | translate}}</option>
+                  <option [value]="item.id" *ngFor="let item of education">{{item.name}}</option>
+                </select>
+
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.col-->
+
+            <div class="col-sm-12 col-xs-12 content">
+              <label for="skill" class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.skill' | translate}}</span>
+              </label>
+              <!--/.col-->
+              <div class="col-xs-12">
+                <ng-select  [multiple]="true"
+                            id="skill"
+                            #select
+                            [items]="skills"
+                            [active]="selectedSkill"
+                            [disabled]="disabled"
+                            (data)="refreshValue($event,'tags')"
+                            (typed)="tagChange($event)"
+                            [placeholder]="'user.profile.skill_name_input' | translate">
+                </ng-select>
+              </div>
+              <!--/.col-->
+            </div>
+            <!--&lt;!&ndash;/.col&ndash;&gt;-->
+
+            <div class="col-sm-12 col-xs-12 content">
+              <label class="col-xs-12 control-label salaryType">
+                <i class="headIcon"></i><span class="marginLeft">{{'position.salary_type' | translate}}</span>
+              </label>
+              <div class="col-xs-12">
+                <label class="noPadding cursor" *ngIf="!negotiable">
+                  <input class="cursor" type="radio" name="salary" value="hourly" [(ngModel)]="position.salaryType">
+                  {{'position.hourly' | translate }}
+                </label>
+                <label class="cursor" *ngIf="!negotiable">
+                  <input class="cursor" type="radio" name="salary" value="monthly" [(ngModel)]="position.salaryType">
+                  {{'position.monthly' | translate }}
+                </label>
+                <label class="cursor" *ngIf="!negotiable">
+                  <input class="cursor" type="radio" name="salary" value="yearly" [(ngModel)]="position.salaryType">
+                  {{'position.yearly' | translate }}
+                </label>
+                <label class="cursor" for="negotiable" class="salaryTips" [ngClass]="{'noPadding':negotiable}">
+                  <input class="cursor" type="checkbox" [(ngModel)]="negotiable" value="" id="negotiable" name="negotiable"
+                         [checked]="negotiable" (change)="isNegotiable(negotiable)">
+                  {{'message.negotiation_or_not' | translate}}
+                </label>
+              </div>
+            </div>
+            <!--/.col-->
+          </div>
+
+          <!--&lt;!&ndash;/.item&ndash;&gt;-->
+          <div class="form-group item">
+            <div class="col-md-12 col-sm-10 col-xs-12 content" *ngIf="!negotiable">
+              <div class="col-xs-12 col-sm-6 col-md-6 salaryBottom">
+                <div class="col-xs-12 salary">
+                  <label for="minSalary" class="control-label">
+                    <i class="headIcon"></i><span class="marginLeft">{{"position.minSalary" | translate}} </span><span
+                    class="text-danger">{{'position.hkd' | translate}}</span>
+                  </label>
+                </div>
+                <!--/.col-->
+
+                <div class="col-xs-12 salary">
+                  <input id="minSalary" name="minSalary" required type="number" class="form-control"
+                         [(ngModel)]="position.minSalary" min="0">
+                </div>
+                <!--/.col-->
+              </div>
+              <!--/.col-->
+              <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="col-xs-12 salary">
+                  <label for="maxSalary" class="control-label">
+                    <i class="headIcon"></i><span class="marginLeft"> {{'position.maxSalary' | translate}}</span> <span
+                    class="text-danger">{{'position.hkd' | translate}}</span>
+                  </label>
+                </div>
+                <!--/.col-->
+
+                <div class="col-xs-12 salary">
+                  <input id="maxSalary" name="maxSalary" required type="number" class="form-control"
+                         [(ngModel)]="position.maxSalary" min="0" max="10000000">
+                </div>
+                <!--/.col-->
+              </div>
+              <!--/.col-->
+            </div>
+
+            <!--/.col-->
+          </div>
+
+          <div class="form-group item">
+            <div class="col-xs-12 content">
+              <label for="temptation" class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.welfare' | translate}}</span></label>
+              <!--/.col-->
+              <div class="col-xs-12">
+                <ng-select  [multiple]="true"
+                            style="height: auto"
+                            id="temptation"
+                            [items]="temptation"
+                            [active]="selectedTemptation"
+                            [disabled]="disabled"
+                            (data)="refreshValue($event,'temptation')"
+                            [placeholder]="'position.welfare' | translate">
+                </ng-select>
+              </div>
+              <!--/.col-->
+
+            </div>
+
+            <div class="col-sm-12 col-xs-12 content marginTop">
+              <label class="col-xs-12 control-label">
+                <i class="headIcon"></i><span class="marginLeft">{{ 'position.description' | translate }}</span>
+                <span class="text-danger"> ({{'global.tips' | translate}}: {{'message.position_description_tips' | translate}})</span>
+              </label>
+              <div class="col-xs-12 overflowText">
+                <quill-editor [(ngModel)]="position.description" (change)="onContentChanged($event)" name="description"></quill-editor>
+                <!--/.col-->
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.item-->
+
+          </div>
+
+          <div class="form-group item">
+            <h2 class="title text-center">
+              {{'message.position_question_title' | translate}}
+            </h2>
+            <h4 class="subTitle text-center">
+              {{'message.position_question_subtitle' | translate}}
+            </h4>
+            <div class="col-xs-12 content">
+              <!--/.col-->
+              <div class="col-xs-12 categoryContent clearfix">
+                <div class="pull-left">
+                  <i class="headIcon"></i><span class="marginLeft"> {{'position.position_question' | translate}}</span>
+                </div>
+                <div class="pull-left questionAdd" (click)="addQuestion()">
+                  <i class="add fa fa-plus cursor"></i>
+                </div>
+              </div>
+              <!--/.col-->
+            </div>
+
+
+            <!-- position question-->
+            <div class="postPositionQuestion clearfix" *ngIf="positionQuestionShow">
+              <div class="postPositionQuestionMain">
+                <div class="postPositionCategoryList">
+                  <div *ngFor="let list of positionQuestion;let i = index" class="col-xs-12 content">
+                    <div *ngIf="list.deleted === false">
+                      <div class="col-xs-10">
+                        <input type="text" name="text{{i}}" [(ngModel)]="list.question" class="form-control" required
+                               placeholder="{{'message.position_question_example' | translate}}">
+                      </div>
+                      <div class="col-xs-2 minus" (click)="deleteQuestion(i)">
+                        <i class="fa fa-minus cursor"></i>
+                      </div>
+                      <div class="col-xs-6 ">
+                        <label for="question_check{{i}}" class="clearPadding">
+                          <input class="cursor" type="checkbox" name="question{{i}}"  [(ngModel)]="list.isRequired" id="question_check{{i}}">
+                          {{'position.answer_or_not' | translate}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- /.position question -->
+          </div>
+          <!--/.item-->
+        </div>
+        <!--/.col-->
+        <!--/.col-->
+      </div>
+      <!--/.postPositionRight-->
+    </div>
+
+    <div class="previewPosition row"  *ngIf="isPreview">
+      <div class="col-xs-12">
+        <div class="previewButtonContent">
+          <div class="button">
+
+            <a type="button" class="btn btn-default canel pull-left" *ngIf="isPreview"
+               (click)="preview()">
+              {{ 'button.return' | translate }}
+            </a>
+            <a (click)="printOpen()"
+               type="button" class="btn  btn-info sub previewSub pull-right" *ngIf="isPreview">
+              {{ 'button.print' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <div class="positionNameContent">
+          <h4 class="positionName">
+            {{position.name}}
+          </h4>
+        </div>
+
+        <article class="positionKeyList">
+          <h4 class="head">
+            {{'position.skills' | translate}}
+          </h4>
+
+          <ul class="keyList list-inline">
+            <li class="List" *ngFor="let skill of selectedSkill" [ngClass]="active">
+              {{skill.text}}
+            </li>
+          </ul>
+        </article>
+
+        <article class="positionDetail">
+          <ul class="positionDetailOne list-inline">
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                <li class="list">
+                  <dl class="category">
+                    <div class="row">
+                      <div class="col-sm-2 col-xs-12 print-sm-2">
+                        <dt>
+                          {{'position.category' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12 print-sm-10">
+                        <ul class="list-unstyled">
+                          <li>
+                            <span *ngFor="let category of selectedPositionCategory">{{category.name}}/</span>
+                          </li>
+                        </ul>
+
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+
+                  <dl class="experience">
+                    <div class="row">
+                      <div class="col-sm-2 col-xs-12  print-sm-2">
+                        <dt>
+                          {{'user.profile.experience' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12  print-sm-10">
+                        <dd>{{position.experience}}{{'global.year' | translate}}</dd>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+
+
+                  <dl class="pay">
+                    <div class="row">
+                      <div class="col-sm-2 col-xs-12  print-sm-2">
+                        <dt>
+                          {{'user.profile.education' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12  print-sm-10">
+                        <dd>{{educationLevelName}}</dd>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+
+                  <dl class="money">
+                    <div class="row">
+                      <div class="col-sm-2 col-s-12  print-sm-2">
+                        <dt>
+                          {{'position.jobNature' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12  print-sm-10">
+                        <dd>
+                          {{jobNatureName}}
+                        </dd>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+
+                  <dl class="pay">
+                    <div class="row">
+                      <div class="col-sm-2 col-xs-12  print-sm-2">
+                        <dt>
+                          {{'position.pay_type' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12  print-sm-10">
+                        <dd>{{position.type}}</dd>
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+                  <dl class="money">
+                    <div class="row">
+                      <div class="col-sm-2 col-s-12  print-sm-2">
+                        <dt>
+                          {{'position.salary' | translate}}
+                        </dt>
+                      </div>
+                      <!--/.col-->
+                      <div class="col-sm-10 col-xs-12  print-sm-10">
+                        <dd *ngIf="position.minSalary === 0 &&position.maxSalary === 0">
+                          {{'position.negotiation' | translate}}
+                        </dd>
+                        <dd *ngIf="position.minSalary !== 0 &&position.maxSalary !== 0">
+                          {{position.minSalary}}-{{position.maxSalary}}{{'global.money'|translate}}/{{position.salaryType}}
+                        </dd>
+
+                      </div>
+                      <!--/.col-->
+                    </div>
+                  </dl>
+
+                </li>
+
+              </div>
+              <!--/.col-->
+
+              <!--/.col-->
+            </div>
+
+          </ul>
+        </article>
+
+        <div class="temptation">
+          <h4 class="head">{{ 'position.treatment' | translate}}</h4>
+          <ol class="list-unstyled listContent">
+            <li *ngFor="let list of previewTemptation"><i class="icon"></i> <span>{{list}}</span></li>
+          </ol>
+        </div>
+
+        <article class="positionAbout">
+          <h4 class="head">{{'position.job_requirements' | translate}}</h4>
+          <p [innerHtml]="position.description">
+          </p>
+        </article>
+
+        <article class="address" *ngIf="position.address !== undefined && position.address !== null">
+          <h4 class="head"> {{'position.workplace' | translate}}</h4>
+          <!--/.col-->
+          <dd><span *ngIf="position.locations!==null">{{position?.locations?.name}}</span>
+            <span *ngIf="position?.address!==null">{{position.address}}</span>
+          </dd>
+
+          <!--/.col-->
+        </article>
+
+
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+
+<div class="modal fade" bsModal #childModal="bs-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">
+          <i class="fa fa-pencil-square-o"></i>
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="childModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{'enterprise.re_post' | translate}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="backOnlinePosition()">
+          <i class="fa fa-check"></i>{{ 'button.yes' | translate }}
+        </button>
+        <button type="button" class="btn btn-primary" (click)="childModal.hide()">
+          <i class="fa fa-close"></i>{{ 'button.no' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

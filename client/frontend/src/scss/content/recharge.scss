@@ -1,0 +1,551 @@
+div.recharge,
+div.rechargeConfirm,
+div.upgradeDetail {
+  div.heading {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $gray-lighter;
+    margin-bottom: 20px;
+    h3.title {
+      color: $brand-info;
+      font-weight: 400;
+    }
+    p.content {
+      color: $gray;
+    }
+  }
+}
+
+
+
+div.recharge {
+  margin: 0;
+  div.rechargeHead {
+    padding-bottom: 10px;
+    border-bottom: 2px solid $gray-lighter;
+    margin-bottom: 20px;
+    h3.title {
+      color: $brand-info;
+      font-weight: 400;
+    }
+    p.content {
+      color: $gray;
+    }
+  }
+
+  div.rechargeLeft,
+  div.rechargeRight {
+    h4.title,
+    p.subTitle  {
+      padding: 5px 20px;
+    }
+
+    h4.title {
+      margin-bottom: 0;
+    }
+
+    p.subTitle {
+      color: $gray;
+    }
+  }
+
+  div.rechargeLeft {
+    border: 1px solid $gray-light-2x;
+    background-color: #fbfbfb;
+    padding: 0;
+
+    ul.title {
+      border-bottom: 1px solid $gray-light-2x;
+      margin-bottom: 20px;
+      margin-left: 0;
+      z-index: 99;
+      height: 60px;
+      position: relative;
+      li {
+        margin-left: 30px;
+        z-index: 9999;
+        padding: 10px;
+        background-color: $body-bg;
+        border: 1px solid $gray-light-2x;
+        border-bottom: 0;
+        font-size: $font-size-small;
+        padding-bottom: 5px;
+        img {
+          display: block;
+          margin: 0 auto;
+          padding-bottom: 5px;
+          max-width: 40px;
+          height: auto;
+        }
+      }
+      li.active {
+        position: absolute;
+        top: -2px;
+      }
+    }
+
+    div.item {
+      div.content {
+        padding-bottom: 20px;
+        label {
+          font-weight: 500;
+          text-align: left;
+        }
+
+        div.tips {
+          color: $brand-danger;
+          padding: 10px 0;
+        }
+      }
+    }
+
+  }
+
+  div.rechargeRight {
+    padding: 0;
+    padding-left: 20px;
+    div.rechargeRightContent {
+      border: 1px solid $gray-light-2x;
+      background-color: #fbfbfb;
+      p.subTitle {
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray-light-2x;
+      }
+
+
+
+      div.itemMoney,
+      div.itemTotal {
+        margin: 0;
+        div.content {
+          padding-bottom: 20px;
+          div.paddingLeft,
+          label.paddingLeft {
+            padding-left: 10px;
+            text-align: left;
+          }
+
+        }
+      }
+
+      div.itemHead {
+        padding: 0;
+      }
+
+      div.itemTotal {
+        div.content {
+          p.other {
+            color: $gray-light;
+            span {
+              color: $gray-dark;
+            }
+          }
+        }
+      }
+    }
+
+    div.button {
+      margin: 0;
+      margin-top: 20px;
+      .btn {
+        display: block;
+        width: 100%;
+      }
+    }
+
+  }
+
+}
+
+
+// rechargeConfirm
+div.rechargeConfirm {
+  div.rechargeConfirmContent {
+    padding: 40px 0;
+    div.img {
+      img {
+        margin: 0 auto;
+      }
+    }
+    div.content {
+      padding: 20px 0;
+      h4.title,
+      h4.subTitle {
+        color: $gray;
+        font-weight: 400;
+      }
+
+      h4.subTitle {
+        padding-top: 40px;
+        padding-bottom: 10px;
+      }
+
+      p.other {
+        color: $brand-danger;
+      }
+
+      div.button {
+        a.btn {
+          padding: 3px 0;
+          width: 120px;
+        }
+      }
+
+    }
+  }
+
+  div.tips {
+    border-top: 1px solid $gray-lighter;
+    color: $gray-light;
+    padding: 20px 0;
+    a {
+      color: $brand-success;
+    }
+  }
+}
+
+// account
+div.accountHead {
+  padding: 10px 0;
+  border-bottom: 1px solid $gray-light-2x;
+  margin: 0;
+  margin-bottom: 30px;
+  h3.title {
+    color: $brand-info;
+    font-weight: 400;
+  }
+
+  p.content {
+    color: $gray;
+  }
+}
+
+div.account {
+  margin: 0;
+  background-color: #fbfbfb;
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+  div.accountLeft,
+  div.accountRight {
+    padding: 0;
+  }
+
+  div.accountLeft {
+    div.content {
+      padding: 10px 0;
+      div.button {
+        padding: 20px 30px;
+        border-bottom: 1px solid $gray-light-2x;
+        .btn {
+          display: block;
+          width: 100%;
+        }
+
+        .accountSub {
+          margin-bottom: 20px;
+        }
+
+
+      }
+
+      ul.editList {
+        border-bottom: 1px solid $gray-light-2x;
+        padding: 20px 0;
+        li.list {
+          text-align: center;
+          padding: 15px 0;
+          position: relative;
+          a {
+            color: $brand-danger;
+          }
+        }
+
+        li.active {
+          a {
+            color: $brand-success;
+          }
+        }
+
+        li.list:before {
+          position: absolute;
+          content: "";
+          width: 24px;
+          height: 24px;
+          display: block;
+          margin: 0 auto;
+          background: url('./~/assets/img/icon.png')  -67px -673px no-repeat;
+          left: 15%;
+        }
+
+        li.active:nth-of-type(1):before {
+          background: url('./~/assets/img/icon.png')  -200px -673px no-repeat;
+        }
+
+        li.list:nth-of-type(2):before {
+          background: url('./~/assets/img/icon.png')  -67px -550px no-repeat;
+        }
+
+        li.active:nth-of-type(2):before {
+          background: url('./~/assets/img/icon.png')  -200px -550px no-repeat;
+        }
+
+        li.list:nth-of-type(3):before {
+          background: url('./~/assets/img/icon.png')  -67px -610px no-repeat;
+        }
+
+        li.active:nth-of-type(3):before {
+          background: url('./~/assets/img/icon.png')  -200px -610px no-repeat;
+        }
+
+      }
+
+      div.searchForm {
+        padding: 20px;
+        border-bottom: 1px solid $gray-light-2x;
+        h5 {
+          font-weight: normal;
+          padding-bottom: 10px;
+          font-size: $font-size-base;
+        }
+        input[type='text'] {
+          display: block;
+          width: 100%;
+          height: 32px;
+          line-height: 32px;
+          border-radius: 4px;
+          border: 1px solid $gray-light-2x;
+          padding-left: 5px;
+        }
+        button.searchBtn {
+          border: 1px solid $brand-success;
+          color: $brand-success;
+          background-color: $body-bg;
+          padding: 3px 28px;
+        }
+      }
+    }
+  }
+
+  div.accountRight {
+    background-color: $body-bg;
+  }
+
+  div.accountRight {
+    min-height: 550px;
+    div.noAccount {
+      padding: 150px 0;
+      font-size: $font-size-h4;
+    }
+    ul.accountRightUl {
+      li.list {
+        margin: 0;
+        padding: 10px;
+        border-bottom: 1px solid $gray-light-2x;
+      }
+
+      li.title {
+        color: $brand-danger;
+      }
+
+    }
+  }
+
+
+}
+
+// upgradeDetail
+div.upgradeDetail {
+  margin: 0;
+  div.upgradeDetailLeft {
+    border: 1px solid $gray-light-2x;
+    background-color: #fbfbfb;
+    padding: 0;
+    h4.title,
+    p.subTitle {
+      padding: 5px 20px;
+      margin-bottom: 0;
+    }
+    p.subTitle {
+      color: $gray-light;
+    }
+
+    p.otherTitle {
+      padding-bottom: 20px;
+    }
+
+    div.detail {
+      border-top: 1px solid $gray-light-2x;
+      margin: 0;
+      padding: 10px;
+      border-bottom: 1px solid $gray-light-2x;
+      div.detailRight {
+        margin-top: 50px;
+        color: $brand-success;
+        font-size: $font-size-h3;
+        span.em {
+          font-size: $font-size-base;
+        }
+      }
+    }
+
+    div.content {
+      margin: 0;
+      padding: 10px 10px 30px 10px;
+      div.title {
+        padding-left: 10px;
+        padding-bottom: 10px;
+        font-size: $font-size-large;
+        color: $brand-danger;
+      }
+      ul {
+        list-style-type: circle;
+        color: $brand-danger;
+        li {
+          margin: 0;
+          padding: 5px 0 5px 5px;
+          span {
+            color: $gray-dark;
+          }
+        }
+      }
+    }
+
+  }
+  div.upgradeDetailRight {
+    padding: 0;
+    padding-left: 20px;
+
+    div.upgradeDetailRightContent {
+      border: 1px solid $gray-light-2x;
+      h4.title,
+      p.subTitle {
+        padding: 5px 20px;
+        margin-bottom: 0;
+      }
+
+      p.subTitle {
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray-light-2x;
+      }
+
+      div.paddingLeft {
+        padding-left: 5px;
+      }
+
+      div.itemMoney {
+        margin: 0;
+        padding-bottom: 20px;
+        div.title {
+          padding: 10px 0 10px 20px;
+        }
+
+        div.content {
+          margin: 0;
+          padding-bottom: 10px;
+          label {
+            font-weight: normal;
+            padding-left: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+
+      }
+
+      div.itemTotal {
+        padding: 0 10px;
+        margin: 0;
+        p.other {
+          padding: 10px 0;
+          color: $gray-light;
+          span {
+            color: $gray-dark;
+            padding: 0 5px;
+          }
+        }
+      }
+
+      div.itemHead {
+        padding: 0;
+        padding-top: 20px;
+      }
+
+    }
+
+    div.button {
+      margin: 0;
+      margin-top: 20px;
+      a {
+        display: block;
+      }
+    }
+
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  // recharge
+  div.recharge {
+    div.rechargeRight {
+      padding-left: 0;
+      margin-top: 20px;
+      div.button {
+        a {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  // upgradeDetail
+  div.upgradeDetail {
+    div.upgradeDetailRight {
+      padding-left: 0;
+      margin-top: 20px;
+      div.button {
+        a {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  // recharge
+  div.recharge {
+    div.rechargeRight {
+      padding-left: 0;
+      div.button {
+        a {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  // upgradeDetail
+  div.upgradeDetail {
+    div.upgradeDetailRight {
+      padding-left: 0;
+      margin-top: 20px;
+      div.button {
+        a {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  div.accountRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  div.accountRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+}

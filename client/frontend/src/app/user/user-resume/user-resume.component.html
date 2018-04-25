@@ -1,0 +1,420 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs *ngIf="!isCompany"></app-userTabs>
+
+  <div class="row profile resume">
+    <div class="col-md-3 col-sm-12 col-xs-12 profileLeft">
+      <div class="content">
+        <div class="button" *ngIf="isCompany">
+          <a *ngIf="user?.resume!==null" href="{{user?.resume?.url}}"
+             class="btn btn-success sub dashboard">{{'button.download_resume' | translate}}</a>
+          <a (click)="goBack()" class="btn btn-default sub">
+            {{'button.return' | translate}}
+          </a>
+        </div>
+        <div class="button" *ngIf="!isCompany">
+          <a [routerLink]="['/user','dashboard']" class="btn btn-default sub">
+            {{'button.return' | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <div class="col-md-9 col-sm-12 col-xs-12 profileRight userResumeRight">
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="baseInformation">
+          <div class="row heading">
+            <div class="col-sm-10 col-xs-9 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.base_information' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="content">
+            <div *ngIf="user?.icon !== null" class="text-center img">
+              <img [src]="user?.icon.url['200']" class="img-responsive img-circle">
+            </div>
+            <div *ngIf="user?.icon === null" class="text-center img">
+              <img *ngIf="user?.gender !== null && !gender" src="../../assets/img/user_default_icon_female.jpeg" class="img-responsive img-circle">
+              <img *ngIf="user?.gender === null || gender" src="../../assets/img/user_default_icon_male.jpeg" class="img-responsive img-circle">
+            </div>
+            <p class="userName text-center" *ngIf="user?.firstName !== null">
+              {{name}}
+            </p>
+            <ul class="list-inline text-center list">
+              <li *ngIf="user?.gender !== null">{{user.gender | translate}}</li>
+              <li *ngIf="user?.yearOfExperience !== null">|</li>
+              <li *ngIf="user?.yearOfExperience !== null">{{user?.yearOfExperience}} {{'global.year' | translate}}</li>
+            </ul>
+            <ul class="list-inline text-center list">
+              <li *ngIf="user?.phone !== null">{{user.phone}}</li>
+              <li *ngIf="user?.phone !== null">|</li>
+              <li>{{user?.email}}</li>
+            </ul>
+            <div class="about row" *ngIf="user?.selfDescription !== null">
+              <div class="col-sm-9 col-sm-offset-1">
+                <div class="row">
+                  <div class="col-sm-2 title">
+                    {{'user.profile.self_description' | translate}}
+                  </div>
+                  <div class="col-sm-9 col-sm-offset-1 content">
+                    <p *ngIf="!descriptionShow"> {{user?.selfDescription | htmlToPlaintext : 80}}
+                      <span *ngIf="!descriptionShow && user?.selfDescription?.length > 80">...</span>
+                    </p>
+                    <span>
+                        <a (click)="descriptionShow = !descriptionShow" *ngIf="!descriptionShow && user?.selfDescription?.length > 80">
+                          {{'global.expand' | translate}}
+                        </a>
+                    </span>
+                    <span *ngIf="descriptionShow">
+                        {{user?.selfDescription | htmlToPlaintext}}
+                        <a (click)="descriptionShow = !descriptionShow" *ngIf="descriptionShow">{{'global.put_away' | translate}}</a>
+                  </span>
+                  </div>
+                </div>
+
+              </div>
+              <!--/.col-->
+
+            </div>
+          </div>
+        </div>
+        <hr class="line">
+        <div class="expectJobs">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.expectPosition' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let expect of user?.expectJobs">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List expectJobsContent">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expectPosition' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ expect?.expectPosition?.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expect_location' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ expect?.location?.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.expect_salary' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            <span class="salaryType">{{expect.salaryType | translate}}</span>
+                            <span *ngIf="expect.minSalary === 0 && expect.maxSalary === 0">
+                                                          {{'position.negotiation' | translate}}
+                                                      </span>
+                            <span *ngIf="expect.minSalary !== 0 && expect.maxSalary !== 0">
+                                                          {{expect.minSalary}} - {{expect.maxSalary}}
+                                                      </span>
+                            <span class="type">/{{expect.type | translate}}</span>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'position.description' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{expect.content}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.expectJobs-->
+        <hr class="line">
+
+        <div class="education">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.education' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let education of user?.educations;let i =index;">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.school' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ education.school.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'global.time' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{education.graduationYear}} {{'global.year' | translate}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.educationLevel' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{education.educationLevel.name}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            GPA
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{education.gpa}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.subject' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{education.subject}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name" *ngIf="education.remark !== null">
+                            {{'user.profile.remark' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text" *ngIf="education.remark !== null">
+                            <p [innerHtml]="user.educations[i]?.remark"></p>
+                          </div>
+                          <!--/.col-->
+                        </div>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.education-->
+        <hr class="line">
+
+        <div class="experience">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.experience' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let experience of user?.experiences;let i =index;">
+                <div class="col-sm-1 circle">
+                  <i class="fa fa-circle-o circle"></i>
+                </div>
+                <!--/.col-->
+
+                <div class="col-md-10 col-sm-10 col-xs-10 ">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List">
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_company_name' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{ experience.companyName}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'global.time' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{experience.startedDate | date: 'yyyy-MM-dd'}} {{'global.to' | translate}} <span *ngIf="experience.endedDate !== 'toDate'">{{experience.endedDate | date: 'yyyy-MM-dd'}}</span><span *ngIf="experience.endedDate === 'toDate'">{{'global.toDate' | translate}}</span>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_position' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            {{experience.title}}
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                        <div class="row content">
+                          <div class="col-md-3 col-sm-5 name">
+                            {{'user.profile.experience_description' | translate}}
+                          </div>
+                          <!--/.col-->
+                          <div class="col-md-9 col-sm-7 text">
+                            <p [innerHtml]="user?.experiences[i]?.description"></p>
+                          </div>
+                          <!--/.col-->
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.experience-->
+        <hr class="line">
+
+        <div class="skill">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.skill' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" >
+
+                <div class="col-md-12 col-sm-12 col-xs-12 col-sm-offset-1">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="List row" >
+                        <ul class="keyList list-inline">
+                          <li class="List clearfix profileSpecial"
+                              *ngFor="let skill of user?.skills;let i=index">
+                            <a href="javascript:;">{{ skill.name }}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.skill-->
+        <hr class="line">
+
+        <div class="language">
+          <div class="row heading">
+            <div class="col-sm-11 col-xs-10 img clearfix">
+              <i></i>
+              <span class="text">{{'user.profile.language' | translate}}</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="profileContent row" *ngFor="let language of user?.languages">
+                <div class="col-md-10 col-sm-10 col-xs-10 col-sm-offset-1">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text">
+                      <div class="List">
+                        {{language.name}} <span class="level">{{language.UserLanguage.level | translate}}</span>
+                      </div>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.language-->
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

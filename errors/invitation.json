@@ -1,0 +1,43 @@
+{
+  "existPosition": {
+    "statusCode": 400,
+    "message": "You have created that already.",
+    "code": 12000
+  },
+  "maxCostInsufficient": {
+    "statusCode": 400,
+    "message": "You setting max cost insufficient one person.",
+    "code": 12001
+  },
+  "costInsufficient": {
+    "statusCode": 400,
+    "message": "You setting max cost insufficient.",
+    "code": 12002
+  },
+  "choosePosition": {
+    "statusCode": 400,
+    "message": "Please choose one of the position.",
+    "code": 12003
+  },
+  "chooseFilter": {
+    "statusCode": 400,
+    "message": "Please choose filter.",
+    "code": 12004
+  },
+  "enterMaxCost": {
+    "statusCode": 400,
+    "message": "Please enter the max cost.",
+    "code": 12005
+  },
+  "invitationExists": {
+    "statusCode": 400,
+    "message": "Position invitation that already.",
+    "code": 12006
+  },
+  "maxLimit": {
+    "statusCode": 400,
+    "message": "Skills of number don't pass three.",
+    "code": 12007
+  }
+}
+

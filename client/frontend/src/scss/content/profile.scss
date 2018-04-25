@@ -1,0 +1,1291 @@
+// public
+
+.profileTabs, .dashboardTabs {
+  margin: 10px 0 20px 0;
+  text-align: center;
+  li.list {
+    padding: 0 20px;
+    a {
+      display: block;
+      color: $gray;
+      padding: 10px;
+      font-size: $font-size-large;
+    }
+    a.active {
+      color: $brand-info;
+      font-weight: bold;
+      border-bottom: 2px solid $brand-info;
+    }
+  }
+  .positionBtn {
+    padding-left: 20px;
+    a.submit:hover, a.submit:active, a.submit:focus {
+      background-color:  darken($brand-success, 4.5%);
+      color: $body-bg;
+      outline: none;
+    }
+  }
+}
+
+div.profileLoading {
+  min-height: 400px;
+}
+
+.profileLeft {
+  padding: 20px;
+  margin-bottom: 20px;
+  .img {
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .interviewList {
+    padding: 0 20px;
+    li.list {
+      height: 42px;
+      line-height: 42px;
+      a {
+        font-size: 16px;
+        display: block;
+        color: $gray;
+      }
+      a.active {
+        color: $brand-success;
+        border-bottom: 2px solid $brand-success;
+        text-decoration: none;
+      }
+    }
+
+
+  }
+
+}
+
+// public
+article.personInformation,article.profileInformation ul.careerList li.list span {
+  color: $brand-danger;
+  font-size: 15px;
+}
+
+article.other h4,article.aboutMe h4, article.contact h4 {
+  color: $gray;
+  font-size: $font-size-large;
+}
+// public
+
+
+div.postUserInformation {
+  background-color: #fbfbfb;
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+}
+
+
+div.postUserInformationLeft {
+  padding: 0;
+}
+
+div.postUserInformationRight {
+  background-color: $body-bg;
+}
+
+div.postUserInformationLeft {
+  div.content {
+    padding: 10px 0;
+    div.button {
+      padding: 20px 30px;
+      border-bottom: 1px solid $gray-light-2x;
+      .sub,.canel {
+        display: block;
+        width: 100%;
+      }
+
+      .postUserSub {
+        margin-bottom: 20px;
+      }
+
+    }
+    div.searchForm {
+      padding: 20px;
+      border-bottom: 1px solid $gray-light-2x;
+      h5 {
+        font-weight: normal;
+        padding-bottom: 10px;
+        font-size: $font-size-large;
+      }
+      input[type='text'] {
+        display: block;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 4px;
+        border: 1px solid $gray-light-2x;
+        padding-left: 5px;
+      }
+      button {
+        border: 1px solid $brand-success;
+        color: $brand-success;
+        background-color: $body-bg;
+        padding: 3px 28px;
+      }
+    }
+  }
+}
+
+div.postUserInformationRight {
+  min-height: 480px;
+  div.loading {
+    line-height: 480px;
+    text-align: center;
+    color: $brand-danger;
+  }
+  div.noAppliedPosition {
+    padding: 100px 0;
+    text-align: center;
+    div.text {
+      padding-top: 20px;
+      line-height: 2.4;
+      font-size: $font-size-h3;
+      font-weight: normal;
+      color: $gray;
+      text-align: left;
+      span {
+        font-size: $font-size-h4;
+        color: $brand-danger;
+      }
+      a {
+        font-size: $font-size-h4;
+      }
+    }
+  }
+
+  div.experienceTime {
+    padding-left: 0;
+    button {
+      height: 34px;
+    }
+  }
+}
+
+
+
+// profile
+div.profile {
+  background-color: #fbfbfb;
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+}
+
+div.userProfile {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+div.profileLeft, div.profileRight {
+  padding: 0;
+}
+
+div.profileRight {
+  background-color: $body-bg;
+}
+
+// profileLeft
+.profileLeft {
+
+  div.content {
+    padding: 30px 0;
+    ul {
+      li.list {
+        position: relative;
+        padding: 15px 0;
+        text-align: center;
+        a {
+          color: $brand-danger;
+        }
+      }
+
+      li.list:before {
+        position: absolute;
+        content: "";
+        width: 24px;
+        height: 24px;
+        display: block;
+        margin: 0 auto;
+        background: url('./~/assets/img/icon.png') 0px -423px no-repeat;
+        left: 15%;
+      }
+
+      li.active {
+        a {
+          color: $brand-success;
+        }
+      }
+
+      li.list:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png') 0px -485px no-repeat;
+      }
+
+      li.list:nth-of-type(3):before {
+        background: url('./~/assets/img/icon.png') 0px -550px no-repeat;
+      }
+
+      li.list:nth-of-type(4):before {
+        background: url('./~/assets/img/icon.png') 0px -612px no-repeat;
+      }
+
+      li.list:nth-of-type(5):before {
+        background: url('./~/assets/img/icon.png') 0px -672px no-repeat;
+      }
+
+      li.list:nth-of-type(6):before {
+        background: url('./~/assets/img/icon.png') 0px -735px no-repeat;
+      }
+
+      li.active:nth-of-type(1):before {
+        background: url('./~/assets/img/icon.png') -135px -423px no-repeat;
+      }
+
+      li.active:nth-of-type(2):before {
+        background: url('./~/assets/img/icon.png') -135px -485px no-repeat;
+      }
+
+      li.active:nth-of-type(3):before {
+        background: url('./~/assets/img/icon.png') -135px -550px no-repeat;
+      }
+
+      li.active:nth-of-type(4):before {
+        background: url('./~/assets/img/icon.png') -135px -612px no-repeat;
+      }
+
+      li.active:nth-of-type(5):before {
+        background: url('./~/assets/img/icon.png') -135px -672px no-repeat;
+      }
+
+      li.active:nth-of-type(6):before {
+        background: url('./~/assets/img/icon.png') -135px -735px no-repeat;
+      }
+
+    }
+  }
+
+
+  fieldset.img {
+    a img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  article.personInformation {
+    padding: 20px 0;
+    h4.name {
+      color: $brand-success;
+      margin-bottom: 0;
+      a {
+        font-size: 16px;
+        color: $brand-success;
+        i {
+          padding-left: 5px;
+        }
+      }
+    }
+    p.link {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    address {
+      height: 30px;
+      line-height: 30px;
+      margin-bottom: 10px;
+      i {
+        color: $brand-success;
+        padding-right: 10px;
+      }
+    }
+
+  }
+  //  /.personInformation
+
+
+  article.profileInformation {
+    ul.careerList {
+      padding-bottom: 20px;
+      li.list {
+        padding: 5px 0;
+        strong {
+          font-weight: 400;
+          color: $brand-info;
+          font-size: 15px;
+        }
+      }
+    }
+    button.submit {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  //  /.profileInformation
+
+  article.other {
+    padding: 30px 0;
+    ul.keyList {
+      li.List {
+        a {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  //  /.other
+
+  article.aboutMe {
+    p {
+      line-height: 1.7;
+      color: $brand-danger;
+    }
+  }
+  //  /.aboutMe
+
+}
+
+// /.profileLeft
+
+.profileRight {
+  hr.line {
+    border-top-color: $gray-light-2x;
+    margin-top: 0;
+  }
+
+  div.expectJobs,
+  div.baseInformation,
+  div.education,
+  div.experience,
+  div.skill,
+  div.language {
+    margin: 0;
+    padding: 20px 30px;
+    padding-bottom: 0;
+    div.heading {
+      margin-bottom: 10px;
+    }
+    div.img {
+      line-height: 62px;
+      i {
+        float: left;
+        display: block;
+        width: 62px;
+        height: 62px;
+      }
+      span.text {
+        padding-left: 20px;
+        font-size: $font-size-large;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+        a.inner-add {
+          padding-left: 10px;
+        }
+      }
+    }
+
+    div.icon {
+      text-align: left;
+      line-height: 62px;
+      a {
+        color: $brand-success;
+      }
+    }
+  }
+
+  div.profileContent {
+    margin: 0;
+    border-left: 2px solid $gray-light-2x;
+    margin-left: 30px;
+    div.circle {
+      text-align: left;
+      color: $brand-danger;
+      padding-left: 0;
+      margin-left: -7px;
+      margin-top: -5px;
+      background-color: $body-bg;
+      border-radius: 50%;
+    }
+
+    div.List {
+      margin-left: -5px;
+      margin-bottom: 20px;
+      div.content {
+        margin: 0;
+        div.name,
+        div.text {
+          padding-bottom: 10px;
+        }
+
+        div.name {
+          color: $gray-light;
+        }
+      }
+    }
+
+  }
+
+
+  div.baseInformation {
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px -240px no-repeat;
+      }
+    }
+
+    div.content {
+      div.img {
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+
+      p.userName {
+        padding: 20px;
+        margin-bottom: 0;
+        color: $brand-primary;
+        font-size: $font-size-h3;
+      }
+
+      ul.list {
+        padding-bottom: 10px;
+        font-size: $font-size-large;
+      }
+
+      div.about {
+        padding-bottom: 20px;
+        div.title {
+          color: $brand-danger;
+          text-align: right;
+        }
+        div.content {
+          color: $gray-dark;
+          line-height: 1.7;
+        }
+      }
+
+    }
+
+  }
+
+  div.expectJobs {
+    div.upload {
+      width: 160px;
+      height: 160px;
+      background-color: $gray-lighter;
+      margin: 15px 20px;
+      padding: 0;
+      button {
+        border: 0;
+        position: relative;
+        background-color: transparent;
+        width: 160px;
+        height: 160px;
+        i {
+          display: block;
+          color: $gray-light;
+        }
+        .uploaderFile {
+          opacity: 0;
+          position: absolute;
+          cursor: pointer;
+          border-radius: 50%;
+          height: 160px;
+          width: 160px;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+    i.expectJobsBtn {
+      color: $brand-success;
+    }
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px 0px no-repeat;
+      }
+    }
+  }
+
+  div.education {
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px -360px no-repeat;
+      }
+    }
+  }
+
+  div.experience {
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px -480px no-repeat;
+      }
+    }
+  }
+
+  div.language {
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px -600px no-repeat;
+      }
+      i.video,i.prize,i.welfare{
+        background: #00C216;
+        border-radius: 50%;
+        u.icon{
+          display: block;
+          text-align: center;
+          margin-top: 25%;
+          font-size: 28px;
+          color: #fff;
+        }
+      }
+      i.prize{
+          background: #FF6C00;
+      }
+      i.welfare{
+        background: #006DC0;
+      }
+      i.video{
+        background: #D13E2F;
+      }
+    }
+  }
+
+  div.skill {
+    div.profileContent {
+      border-left: 0;
+      ul.keyList {
+        margin-left: -15px;
+      }
+      div.skillShow {
+        padding-bottom: 20px;
+        margin: 0;
+        div.skillInput {
+          .dropdown-menu {
+            left: 0 !important;
+            div.active {
+              position: relative;
+              height: 26px;
+              .dropdown-item:hover {
+                background-color: #428bca;
+              }
+              .dropdown-item {
+                background-color: transparent;
+                position: absolute;
+                padding-left: 20px;
+                left: 0px;
+                top: 0px;
+                z-index: -99;
+                color: white;
+                width: 100%;
+                line-height: 26px;
+                background-color: #428bca;
+              }
+            }
+
+          }
+          padding-left: 0;
+          .btn {
+            border-radius: 4px;
+            padding: 2px 10px;
+          }
+        }
+        div.skillBtn {
+          .btn {
+            padding: 3px 20px;
+          }
+        }
+      }
+    }
+    div.img {
+      i {
+        background: url('./~/assets/img/user-icon.png') 0px -120px no-repeat;
+      }
+    }
+  }
+
+  div.language {
+    div.profileContent {
+      border-left: 0;
+      div.text {
+        padding-left: 5px;
+      }
+    }
+  }
+
+
+
+  .profile {
+    padding: 20px 30px;
+    .title {
+      button.experienceBtn,
+      button.educationBtn,
+      button.languageBtn,
+      button.specialBtn,
+      button.skillBtn,
+      button.expectJobsBtn {
+        i {
+          color: $body-bg;
+        }
+      }
+      p {
+        color: $gray;
+        font-size: $font-size-large;
+        line-height: 75px;
+        i {
+          color: $brand-success;
+          padding-left: 10px;
+        }
+      }
+
+    }
+    .profileContent {
+      margin-left: 30px;
+      border-left: 2px solid $gray-light-2x;
+      padding-bottom: 30px;
+      i.circle {
+        color: $gray-light-2x;
+        font-size: $font-size-large;
+        background-color: $body-bg;
+        transform: translate(-5px, 0);
+        position: relative;
+      }
+      .content {
+        margin-left: -20px;
+        .title, time {
+          color: $gray;
+        }
+
+        h4.title,
+        h3.companyName,
+        h3.schoolName,
+        h3.category {
+          margin-bottom: 0;
+          padding-bottom: 10px;
+        }
+
+        h4.title {
+          font-weight: normal;
+          font-size: 15px;
+        }
+
+        h3.companyName,
+        h3.schoolName,
+        h3.category {
+          margin-top: 0;
+          font-weight: normal;
+          font-size: $font-size-h4;
+        }
+
+        p.text {
+          padding-top: 10px;
+          color: $brand-danger;
+        }
+      }
+    }
+
+    div.expectJobsContent {
+      h3.category {
+        margin: 0;
+        font-size: $font-size-large;
+        font-weight: normal;
+        padding-bottom: 10px;
+      }
+      div.content {
+        padding-top: 10px;
+        span {
+          color: $brand-danger;
+        }
+      }
+    }
+
+  }
+
+  article.experience {
+    .experienceTitle {
+      button.experienceBtn {
+        background-color: #e9c83b;
+      }
+    }
+  }
+
+  // /.experience
+
+  article.education {
+    .educationTitle {
+      button.educationBtn {
+        background-color: #0195d3;
+      }
+    }
+  }
+
+  // /.education
+
+  article.special {
+    .specialTitle {
+      button.specialBtn {
+        background-color: #e89c3a;
+      }
+    }
+    .profileSpecial {
+      float: left;
+    }
+
+    div.skillShow {
+      margin-top: 20px;
+      .skillInput {
+        .btn {
+          border-radius: 4px;
+          padding: 2px 10px;
+        }
+      }
+      .skillBtn {
+        .btn {
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // .special
+
+  article.language {
+    .languageTitle {
+      button.languageBtn {
+        background-color: #fe7b9a;
+      }
+    }
+    dl {
+      dt {
+        padding-bottom: 10px;
+        font-weight: normal;
+        span.level {
+          background-color: $gray-light-2x;
+          color: $gray-light;
+          border-radius: 15px;
+          padding: 5px 15px;
+          margin-left: 10px;
+          font-size: $font-size-small;
+        }
+      }
+    }
+  }
+
+  // .expectJobs
+  article.expectJobs {
+    .expectJobsTitle {
+      button.expectJobsBtn {
+        background-color: $brand-success;
+      }
+    }
+  }
+  //  /.expectJobs
+
+
+
+
+}
+
+
+// post user information
+
+div.postUserInformation {
+  div.postUserInformationRight {
+    padding: 0;
+    div.baseInformation {
+      padding: 20px;
+      margin: 0;
+      border-bottom: 1px solid $gray-light-2x;
+      div.title {
+        font-size: $font-size-large;
+        font-weight: 400;
+        padding-bottom: 20px;
+      }
+      .margin {
+        padding-bottom: 20px;
+        label {
+          font-weight: normal;
+          padding-bottom: 10px;
+        }
+        div.tips {
+          color: $brand-danger;
+          padding-top: 10px;
+        }
+      }
+      .inputRadio {
+        margin-bottom: 10px;
+        label {
+          padding-bottom: 0;
+          padding-left: 0;
+        }
+        label.text {
+          text-align: left;
+          padding-bottom: 10px;
+        }
+        div.content {
+          padding-left: 0;
+        }
+      }
+
+      div.file {
+        label {
+          text-align: left;
+        }
+        #editor-trigger{
+          width: 100%;
+          height: 440px;
+        }
+
+      }
+      div.appCompany{
+        margin-top: 35px;
+      }
+      div.applyCompany{
+        margin-bottom: 35px;
+        div.text-left{
+          padding-left: 0;
+          span.name{
+            margin-right: 20px;
+          }
+        }
+      }
+      div.country {
+        i.glyphicon-remove {
+          color: transparent;
+        }
+      }
+    }
+
+
+
+    div.baseInformation:last-child {
+      border-bottom: 0;
+    }
+
+  }
+}
+
+.postExpectJobsLocation,.postExpectJobsCategory, .postPositionLocation, .postPositionCategory {
+  padding-bottom: 20px;
+  //position: relative;
+  .postPositionLocationLeft,
+  .postPositionLocationChildren,
+  .postPositionCategoryLeft,
+  .postPositionCategoryChildren{
+    border: 1px solid $gray-light-2x;
+    float: left;
+    width: 50%;
+    height: 200px;
+    overflow-y: auto;
+    ul.postPositionCategoryList, ul.postPositionLocationList{
+      li {
+        margin: 20px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        a {
+          text-decoration: none;
+        }
+        label {
+          font-weight: normal;
+          display: block;
+          text-align: left;
+        }
+      }
+
+      li:first-child {
+        margin-top: 0;
+      }
+
+      li.active {
+        background-color: $brand-info;
+        padding: 10px 0;
+        a {
+          color: $body-bg;
+        }
+
+      }
+
+      li.expectList {
+        padding-left: 10px;
+      }
+
+    }
+
+  }
+}
+
+// position category select
+
+form.education {
+  div.dropdown {
+    padding: 0;
+    border: 0;
+  }
+  span.btn {
+    padding: 5px 10px;
+  }
+}
+
+
+
+
+@media (max-width: $screen-xs-max) {
+  // profileLeft
+  .profileLeft {
+    article.personInformation {
+      text-align: center;
+    }
+  }
+
+  .profileRight {
+    .profile {
+      .title {
+        div.img {
+          width: 60px;
+          height: 60px;
+          text-align: center;
+          background-color: $brand-success;
+          i {
+            color: $body-bg;
+            text-align: center;
+            transform: translate(0, 40%);
+          }
+        }
+        p {
+          color: $gray;
+          font-size: $font-size-large;
+          line-height: 60px;
+        }
+
+      }
+      .profileContent {
+        margin-left: 20px;
+        border-left: 2px solid $gray-light-2x;
+        padding-bottom: 30px;
+        i.circle {
+          color: $gray-light-2x;
+          font-size: $font-size-large;
+          background-color: $body-bg;
+          transform: translate(-5px, 0);
+          position: relative;
+        }
+        .content {
+          .title, time {
+            color: $brand-danger;
+          }
+          h4 {
+            color: $gray-light;
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+    div.baseInformation {
+      div.content {
+        div.about {
+          div.title {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+  //  companyPositionList
+  div.companyPositionList {
+    div.profileTabs {
+      .positionBtn {
+        padding-left: 20px;
+      }
+    }
+  }
+
+  // profileTabs
+  .profileTabs, .dashboardTabs {
+    text-align: left;
+    li.list {
+      padding: 0;
+    }
+  }
+
+
+  div.skill {
+    div.profileContent {
+      div.skillShow {
+        div.skillBtn {
+          padding: 0;
+          padding-top: 5px;
+        }
+      }
+    }
+
+  }
+
+
+}
+
+
+
+
+
+
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .profileTabs, .dashboardTabs {
+    text-align: left;
+  }
+  .profileRight {
+    .profile {
+      .title {
+        div.img {
+          i {
+            transform: translate(0, 40%);
+            font-size: 36px;
+          }
+        }
+        p {
+          line-height: 60px;
+        }
+
+      }
+    }
+  }
+
+
+  //  companyPositionList
+  div.companyPositionList {
+    div.profileTabs {
+      padding-left: 5px;
+      .positionBtn {
+        text-align: right;
+        padding-top: 20px;
+        padding-right: 25px;
+      }
+    }
+  }
+
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  // profile
+  div.profile {
+    div.profileRight {
+      //border-left: 1px solid $gray-light-2x;
+      div.profileContent {
+        div.List {
+          div.name,
+          div.text {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // /.profile
+
+  article.profileInformation {
+    ul.careerList {
+      li.list {
+        .col-xs-8 {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  //  /.profileInformation
+
+  //  companyPositionList
+  div.companyPositionList {
+    div.profileTabs {
+      padding-left: 5px;
+      .positionBtn {
+        text-align: right;
+        padding-top: 20px;
+        padding-right: 25px;
+      }
+    }
+  }
+  // userAppliedPosition
+  article.userAppliedPosition {
+    div.content {
+      ul.appliedPosition {
+        li.List {
+          .time {
+            text-align: right;
+          }
+          .text {
+            padding-left: 10px;
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  // postUserInformation
+  div.postUserInformation {
+    div.postUserInformationRight {
+      border-left: 1px solid $gray-light-2x;
+
+    }
+  }
+
+
+
+}
+
+
+@media (min-width: $screen-lg-min) {
+
+  // profile
+  div.profile {
+    div.profileRight {
+      //border-left: 1px solid $gray-light-2x;
+      div.profileContent {
+        div.List {
+          div.name,
+          div.text {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // /.profile
+
+  article.profileInformation {
+    ul.careerList {
+      li.list {
+        .col-xs-8 {
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
+
+  //  /.profileInformation
+  //  /.profileContent
+  //  companyPositionList
+  div.companyPositionList {
+    div.profileTabs {
+      padding-left: 5px;
+      .positionBtn {
+        text-align: right;
+        padding-top: 20px;
+        padding-right: 25px;
+      }
+    }
+  }
+
+  // userAppliedPosition
+  article.userAppliedPosition {
+    div.content {
+      ul.appliedPosition {
+        li.List {
+          .time {
+            text-align: right;
+          }
+          .text {
+            padding-left: 10px;
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  .expectJobsLocation {
+    .locationSelected {
+      ul {
+        li.selectList {
+          background-color: $gray-light-2x;
+          border-radius: 15px;
+          padding: 5px 15px;
+          color: $gray-light;
+          font-size: $font-size-small;
+          margin: 0 0 10px 0;
+          a {
+            color: $gray-light;
+          }
+        }
+        li.selectList:hover {
+          text-decoration: line-through;
+        }
+        li.btn {
+          button.finish {
+            background-color: #3f96e3;
+            color: #fff;
+            border: 0;
+            outline: none;
+            padding: 3px 12px;
+            border-radius: 20px;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  // postUserInformation
+  div.postUserInformation {
+    div.postUserInformationRight {
+      border-left: 1px solid $gray-light-2x;
+    }
+  }
+
+
+}
+
+.rzslider span {
+  text-align: center;
+  white-space: normal;
+  line-height: 1.1;
+}
+
+.rzslider .rz-pointer {
+  top: -10px;
+  z-index: 3;
+  width: 22px;
+  height: 22px;
+}
+
+.rzslider .rz-pointer:after {
+  top: 8px;
+  left: 8px;
+  width: 6px;
+  height: 6px;
+}
+
+div.languageSlider {
+  .rzslider .rz-ticks .rz-tick .rz-tick-value {
+    top: -35px;
+    width: 75px;
+    overflow: visible;
+  }
+
+}
+
+
+
+
+

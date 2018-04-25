@@ -1,0 +1,41 @@
+{{#extend "mail/layouts/main"}}
+  {{#content "headerTitle"}}
+      【FreshLinker】Your Job【{{position.name}}】position is about to expire.<br/>
+      【FreshLinker】你發布的職位 【{{position.name}}】職位即將過期。
+  {{/content}}
+
+  {{#content "content"}}
+      <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+              <td class="content-block">
+                  <span style="font-size: 18px; display: inline-block; margin-top: 15px;">
+                     <h2 style="text-align: left;">Hi {{email}} user:</h2>
+                  </span><br/>
+                  <span style="font-size: 18px; display: inline-block; margin-top: 15px;">
+                  The Job Ad【{{position.name}}】 position will expire on after 7 days, please click the below link to manage your current active jobs.<br/>
+                  你好！你發布的【{{position.name}}】職位 即將於 7日后 過期，請點擊下方按鈕前往查看並管理職位。<br/>
+                  <a href="{{siteUrl}}/positions/{{position.id}}/show"
+                     style="font-size: 18px; display: inline-block; margin-top: 15px; margin-bottom: 15px;">View Jobs(前往查看)</a><br/>
+                  Need help along the way? Please feel free to contact us at +852 3547 2513 or email us at support@freshlinker.com.<br/>
+                  如果你有任何問題，請立即致電+852 3547 2513或電郵至support@freshlinker.com聯絡我們。
+                  </span>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <span style="font-size: 18px; display: inline-block; margin-top: 15px;">
+                      Cheers,<br/>
+                      FreshLinker
+                  </span>
+              </td>
+          </tr>
+
+          <tr>
+              <td class="content-block" style="display: inline-block; margin-top: 40px;">
+                  *This is an automatically generated email, please do not reply.<br/>
+                  *此為系統自動發送的電郵，請勿直接回覆。
+              </td>
+          </tr>
+      </table>
+  {{/content}}
+{{/extend}}

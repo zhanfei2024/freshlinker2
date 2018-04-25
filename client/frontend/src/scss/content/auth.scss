@@ -1,0 +1,382 @@
+.headerBorder{
+  border-bottom:1px solid $gray-light-2x;
+}
+.loginNav{
+  li{
+    display: inline-block;
+    height: 70px;
+    line-height: 70px;
+    margin-right: 20px;
+    a{
+      color: #A0A0A0;
+    }
+  }
+  li.active{
+    a{
+      color: $brand-primary;
+      padding-bottom: 10px;
+      border-bottom: 2px solid $brand-primary;
+      font-weight: bold;
+    }
+  }
+}
+.EinputBg{
+  margin: 10% 0!important;
+}
+.inputBg,.EinputBg{
+  margin: 20% 0;
+  .border-left {
+    padding-left: 0;
+  }
+  .return {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    a {
+      color: #ffffff;
+    }
+  }
+
+  .logo {
+    img {
+      margin: 0 auto;
+    }
+  }
+  .sigin {
+    cursor: pointer;
+    margin: 35px 0;
+    color: $brand-primary;
+    font-weight: bold;
+  }
+  .title {
+    font-weight: bold;
+    font-family: $font-family-medium;
+  }
+  .liginInputRight {
+    .input-group {
+      width: 100%;
+      margin: 5px 0 20px;
+      .form-control {
+        height: 50px;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+      }
+    }
+    .login-label {
+      display: block;
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: $font-size-h4;
+      color: $gray-font-color;
+      font-weight: normal;
+    }
+    .clearPadding {
+      padding: 0;
+    }
+    .clearPaddingLeft {
+      padding-left: 0;
+    }
+    .clearPaddingRight {
+      padding-right: 0;
+    }
+    .link {
+      color: $gray-font-color;
+    }
+    .btnContent {
+      margin-top: 25px;
+      .btn {
+        padding: 13px 20px;
+      }
+    }
+  }
+}
+
+section.authNav {
+  border-bottom: 4px solid $brand-primary;
+  .navLanguage {
+    padding: 10px 0;
+  }
+}
+
+section.register {
+  h4 {
+    height: 50px;
+    line-height: 50px;
+    color: $brand-success;
+  }
+}
+
+section.loginMain, section.registerMain {
+  padding: 20px 40px;
+  margin-top: 25px;
+  .col-sm-2, .col-sm-3, .col-sm-10, .col-sm-8, .col-xs-3, .col-sm-6, .col-xs-6 {
+    padding-left: 0;
+  }
+  .form-group {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+    label {
+      text-align: left;
+      color: $brand-danger;
+    }
+    input {
+      border: 0;
+      outline: none;
+    }
+    .forget {
+      padding: 7px 0 0 0;
+      text-align: right;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 40px;
+      margin-top: 30px;
+    }
+  }
+
+  article.loginLeft, article.registerLeft {
+    padding-right: 50px;
+    border-right: 1px solid $gray-light-2x;
+    h4 {
+      color: $brand-success;
+      padding-bottom: 30px;
+    }
+  }
+  article.registerLeft {
+    padding-right: 40px;
+  }
+
+  article.loginLeft {
+    .loginBtn:hover, .loginBtn:active, .loginBtn:focus {
+      background-color: darken($brand-success, 4.5%);
+      color: $body-bg;
+      outline: none;
+    }
+  }
+
+  article.registerLeft {
+    .registerBtn:hover, .registerBtn:active, .registerBtn:focus {
+      background-color: darken($brand-success, 4.5%);
+      color: $body-bg;
+      outline: none;
+    }
+  }
+
+  article.loginRight, article.registerRight {
+    text-align: center;
+    div.line {
+      padding-top: 60px;
+      span {
+        color: $brand-info;
+        font-size: 17px;
+        height: 50px;
+        line-height: 50px;
+      }
+
+    }
+    div.yoov {
+      span {
+        color: $brand-info;
+        font-size: 16px;
+      }
+      fieldset {
+        padding-top: 30px;
+        text-align: center;
+      }
+      fieldset, fieldset a, fieldset a img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    .buttonRegister {
+      background-color: $brand-primary;
+      border-radius: 40px;
+      border: 0;
+      display: block;
+      width: 100%;
+      height: 38px;
+      margin-top: 30px;
+      color: $body-bg;
+    }
+
+    .buttonRegister:hover {
+      background-color: darken($brand-primary, 4.5%);
+    }
+
+  }
+}
+
+section.registerMain {
+  margin-top: 0;
+}
+
+section.authFooter {
+  padding-top: 100px;
+  .bgcolor, ul li a {
+    color: $body-bg;
+  }
+  .bgcolor {
+    background-color: $brand-primary;
+    p {
+      margin-bottom: 0;
+      padding: 10px 0 10px 10px;
+    }
+    ul {
+      padding: 10px 0;
+      li {
+        text-align: right;
+        font-size: 16px;
+        padding: 0 20px;
+        height: 16px;
+        line-height: 16px;
+        border-right: 1px solid $body-bg;
+      }
+      li:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+}
+
+@media (max-width: $screen-xs-max) {
+  .liginInputRight{
+    margin-top: 30px;
+  }
+  section.loginContainer {
+    overflow: auto;
+    .loginBackground {
+      .inputBg {
+        margin: 0 15px;
+      }
+    }
+  }
+  section.loginMain {
+    article.loginLeft {
+      border-right: 0;
+      padding-right: 0;
+      .forget {
+        font-size: 12px;
+      }
+    }
+  }
+
+  section.registerMain {
+    article.registerRight {
+      padding-bottom: 60px;
+    }
+
+    article.registerLeft {
+      border-right: 0;
+    }
+
+  }
+
+  section.authNav .navLanguage {
+    padding: 10px;
+  }
+  section.authFooter {
+    ul {
+      text-align: center;
+    }
+    .bgcolor {
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .liginInputRight{
+    margin-top: 30px;
+  }
+  section.loginMain {
+    article.loginLeft {
+      border-right: 0;
+      padding-right: 0;
+      .forget {
+        font-size: 12px;
+      }
+    }
+  }
+
+  section.authFooter {
+    ul {
+      text-align: center;
+    }
+    .bgcolor {
+      p {
+        text-align: center;
+      }
+    }
+  }
+
+  section.registerMain {
+    article.registerRight {
+      padding-bottom: 60px;
+    }
+
+    article.registerLeft {
+      border-right: 0;
+    }
+
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .borderRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+  .contentInput,.label {
+    padding-left: 40px;
+  }
+
+  section.authNav .navLanguage {
+    padding: 20px 0;
+  }
+  section.authFooter {
+    ul {
+      text-align: right;
+    }
+  }
+  section.registerMain {
+    article.registerRight {
+      padding-bottom: 60px;
+    }
+
+    article.registerLeft {
+      border-right: 0;
+    }
+
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .EliginInputRight{
+    padding-top: 165px!important;
+  }
+  .liginInputRight {
+    padding-top: 40px;
+    .contentInput,.label {
+      padding-left: 40px;
+    }
+  }
+  .borderRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+
+  section.authNav .navLanguage {
+    padding: 25px 0;
+  }
+  section.authFooter {
+    ul {
+      text-align: right;
+    }
+  }
+}

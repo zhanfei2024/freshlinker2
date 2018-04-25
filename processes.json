@@ -1,0 +1,26 @@
+{
+  "apps": [
+    {
+      "merge_logs": true,
+      "name": "www",
+      "instances": 2,
+      "script": "bin/www.js",
+      "out_file": "/tmp/www.log",
+      "log_date_format": "MM/DD/YYYY HH:mm:ss",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "merge_logs": true,
+      "name": "queue",
+      "instances": 1,
+      "script": "bin/queue.js",
+      "out_file": "/tmp/queue.log",
+      "log_date_format": "MM/DD/YYYY HH:mm:ss",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

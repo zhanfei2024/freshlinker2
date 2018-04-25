@@ -1,0 +1,21 @@
+<div *ngIf="control.errors">
+  <div *ngIf="control.dirty || control.touched">
+    <div class="alert alert-danger" [hidden]="!control.errors.required">
+      {{ 'validation.required' | translate: {field : fieldName} }}
+    </div>
+    <div class="alert alert-danger" [hidden]="!control.errors.minlength">
+      {{ 'validation.minlength' | translate:{field : fieldName, value: control.errors.minlength?.requiredLength } }}
+    </div>
+    <div class="alert alert-danger" [hidden]="!control.errors.maxlength">
+      {{ 'validation.maxlength' | translate:{field : fieldName, value: control.errors.maxlength?.requiredLength } }}
+    </div>
+  </div>
+
+  <div class="alert alert-danger" [hidden]="!control.errors.ng2SelectRequired">
+    {{ 'validation.required' | translate: {field : fieldName} }}
+  </div>
+
+  <div class="alert alert-danger" [hidden]="!control.errors.minDate">
+    min date
+  </div>
+</div>

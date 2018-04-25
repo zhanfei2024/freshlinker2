@@ -1,0 +1,58 @@
+<hr class="userHr">
+<div class="container">
+<app-userTabs></app-userTabs>
+  <div class="loading text-center" *ngIf="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+  </div>
+  <div class="row articleShow articlePreview" *ngIf="!loading">
+    <div class="col-md-3 col-sm-12 col-xs-12 articlePreviewLeft">
+      <div class="content">
+        <div class="button">
+          <a [routerLink]="editUrl" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-success sub articleSub">
+            {{ 'button.modify' | translate}}
+          </a>
+          <a [routerLink]="returnUrl" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-default sub">
+            {{ 'button.return' | translate}}
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <!--/.col-->
+
+    <div class="col-md-9 col-sm-12 col-xs-12 articlePreviewRight">
+      <h4 class="title">
+        {{article?.title}}
+        <span class="text text-center" *ngIf="article?.isApproved && article?.active" [ngClass]="{'isApproved': article?.isApproved}">
+                    {{'enterprise.article_isApproved' | translate}}
+                </span>
+        <span class="text text-center" *ngIf="!article?.isApproved && article?.active" [ngClass]="{'unApproved': !article?.isApproved}">
+                    {{'enterprise.article_unApproved' | translate}}
+                </span>
+        <span class="text text-center" *ngIf="!article?.active" [ngClass]="{'offline': !article?.active}">
+                    {{'enterprise.article_offline' | translate}}
+                </span>
+      </h4>
+      <div class="about">
+                <span class="writer">
+                    {{'article.author' | translate}}: {{article?.userName}}
+                </span>
+        <span class="time">{{article?.createdAt | date: 'yyyy-MM-dd'}}</span>
+        <span class="click">{{'global.people_num' | translate}}{{article?.view}}</span>
+      </div>
+      <ul class="keyList list-inline">
+        <li class="List" *ngFor="let list of article?.tags">
+          <a >{{list.name}}</a>
+        </li>
+      </ul>
+      <div>
+        <img *ngIf="article?.cover !==null" [src]="article?.cover?.url['200']" class="img-responsive">
+      </div>
+
+      <div [innerHtml]="article?.content" class="articlePreviewContent"></div>
+
+    </div>
+    <!--/.col-->
+
+  </div>
+</div>

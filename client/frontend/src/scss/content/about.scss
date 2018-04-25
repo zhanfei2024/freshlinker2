@@ -1,0 +1,1651 @@
+div.aboutUsLeft, div.aboutUsContent {
+  margin: 20px 0;
+}
+
+div.aboutUsLeft {
+  ul.List {
+    li {
+      text-align: center;
+      padding: 15px 0;
+      border-bottom: 1px solid $gray-lighter;
+      a {
+        color: $gray;
+        display: block;
+        font-size: $font-size-large;
+      }
+    }
+    li:last-child {
+      border: 0;
+    }
+
+    li.active, li:hover {
+      color: $brand-success;
+      border-left: 3px solid $brand-success;
+      a {
+        color: $brand-success;
+      }
+    }
+  }
+}
+
+div.aboutUsContent {
+  padding: 20px;
+  h2.aboutUsTitle, h4.subtitle {
+    margin: 0;
+  }
+
+  h2.aboutUsTitle {
+    padding-bottom: 20px;
+  }
+
+  h4.subtitle {
+    padding: 20px 0;
+    color: $brand-success;
+  }
+
+  h5 {
+    color: $gray-base;
+  }
+
+  div.text {
+    line-height: 1.7;
+    color: $gray;
+    padding-bottom: 20px;
+    p {
+      i {
+        color: $brand-success;
+        padding-right: 5px;
+      }
+    }
+    div.block {
+      p {
+        span {
+          a {
+            color: $brand-success;
+          }
+          color: $brand-success;
+        }
+
+      }
+
+    }
+  }
+
+  div.address {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  div.privacy {
+    padding-top: 10px;
+  }
+
+  div.privacyContent, div.termsContent {
+    p {
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+  }
+
+  div.termsContent {
+    h4.subtitle {
+      line-height: 1.7;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+  }
+
+}
+
+// contact
+hr.contactHr {
+  margin: 0;
+}
+
+div.contact {
+  margin: 0;
+  div.contactHead {
+    padding: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $gray-light-2x;
+    h3.title {
+      font-weight: 400;
+      color: $brand-info;
+    }
+    p.text {
+      font-size: $font-size-large;
+      color: $gray-light;
+    }
+  }
+
+  div.contactContent {
+    h3.title {
+      font-weight: 400;
+    }
+
+    div.contactList {
+      padding-top: 20px;
+      div.list {
+        padding: 30px 20px;
+        border: 1px solid $gray-light-2x;
+        background-color: #fbfbfb;
+        height: 350px;
+        margin-bottom: 20px;
+        h3.title {
+          margin-top: 0;
+          padding-bottom: 20px;
+        }
+        i.img {
+          display: block;
+          width: 74px;
+          height: 74px;
+          margin: 0 auto;
+          margin-bottom: 20px;
+        }
+        i.first {
+          background: url('./~/assets/img/contact.png') no-repeat -43px  -234px;
+        }
+        i.second {
+          background: url('./~/assets/img/contact.png') no-repeat 0  -122px;
+          width: 112px;
+          height: 74px;
+          line-height: 74px;
+        }
+        i.third {
+          background: url('./~/assets/img/contact.png') no-repeat -44px  0;
+        }
+        div.text {
+          color: $gray-light;
+          font-size: $font-size-large;
+          padding-bottom: 20px;
+        }
+
+        div.phone,
+        div.address {
+          line-height: 1.8;
+        }
+
+        div.time {
+          padding-top: 20px;
+          color: $gray-light;
+        }
+
+        a.button {
+          margin-top: 30px;
+        }
+
+      }
+    }
+
+  }
+}
+
+// aboutUs
+div.aboutUs {
+  div.aboutUsContentOne {
+    background-color: $brand-info;
+    color: $body-bg;
+    padding: 65px 0;
+    font-size: $font-size-large;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  div.aboutUsContentTwo,
+  div.aboutUsContentThree,
+  div.aboutUsContentNine {
+    div.heading {
+      padding-bottom: 100px;
+      p.subtitle, p.title {
+        color: $brand-info;
+        margin: 0;
+      }
+      p.subtitle {
+        font-size: $font-size-h4;
+      }
+      p.title {
+        padding-top: 10px;
+        font-size: $font-size-h3;
+        font-weight: 500;
+      }
+    }
+    div.aboutUsContentNineText {
+      font-size: $font-size-h3;
+      padding-top: 80px;
+      color: $brand-primary;
+    }
+  }
+
+  div.aboutUsContentTwo {
+    padding: 100px 0;
+    div.item {
+      padding: 0 45px;
+      div.title, img {
+        padding-bottom: 30px;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+      div.title {
+        font-size: $font-size-h4;
+        font-weight: 500;
+      }
+      div.content {
+        line-height: 1.8;
+      }
+    }
+  }
+
+  div.aboutUsContentThree,
+  div.aboutUsContentFour,
+  div.aboutUsContentFive,
+  div.aboutUsContentSix,
+  div.aboutUsContentSeven,
+  div.aboutUsContentEight,
+  div.aboutUsContentNine {
+    padding: 100px 0;
+    div.Content {
+      p.title {
+        margin: 0;
+        font-size: $font-size-h4;
+        padding-bottom: 35px;
+        font-weight: 500;
+        a {
+          color: $gray-dark;
+        }
+      }
+      div.content {
+        font-size: $font-size-large;
+        line-height: 1.8;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        padding-top: 30px;
+      }
+    }
+  }
+}
+
+div.aboutUsContentFour,
+div.aboutUsContentSix,
+div.aboutUsContentEight {
+  background-color: #f8f8f8;
+}
+
+div.aboutUsContentNine {
+  div.item {
+    img {
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+    button {
+      border-radius: 4px;
+      padding: 7px 35px;
+    }
+  }
+}
+
+// ourStory
+
+div.ourStory {
+
+  .slick-dots {
+    bottom: -50px;
+  }
+
+  .slick-dots li button {
+    width: 12px;
+    height: 12px;
+  }
+
+  .slick-dots li button:before,
+  .slick-dots li:visited button:before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .carousel-control.right {
+    .carousel-control .icon-next {
+      width: 68px;
+      height: 162px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+
+  div.contentTwo {
+      .carousel-control {
+        background-image: none;
+        width: 68px;
+        display: block;
+        .icon-next:before, .icon-prev:before {
+          content: '';
+        }
+      }
+  }
+
+
+  div.contentOne,
+  div.contentTwo {
+    padding-bottom: 30px;
+  }
+
+  div.contentOne {
+    padding-top: 30px;
+    div.main {
+      h3 {
+        font-size: $font-size-h2;
+        padding-bottom: 30px;
+      }
+      p {
+        font-size: $font-size-h4;
+        padding-bottom: 20px;
+        line-height: 2.4;
+        color: $gray;
+        a {
+          color: $brand-success;
+        }
+      }
+    }
+  }
+
+  div.contentTwo {
+    div.img {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+}
+
+// jobFlatform
+div.jobFlatform_bg {
+  background: url("./~/assets/img/jobFlatform_banner.png") 100% 100%;
+  height: 620px;
+  form {
+    margin-top: 100px;
+    background-color: $body-bg;
+    border-radius: 5px;
+    padding: 40px 40px;
+    .input {
+      border-bottom: 1px solid $gray-light-2x;
+      label {
+        font-weight: normal;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: left;
+      }
+      input {
+        border: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+      }
+    }
+    div.createBtn {
+      margin-top: 30px;
+      div.tips {
+        padding-top: 20px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+div.jobFlatform {
+  div.contentOne,
+  div.contentTwo,
+  div.contentThree,
+  div.contentFour {
+    padding: 100px 0;
+    div.text {
+      h4.title {
+        font-weight: normal;
+        color: $brand-info;
+        font-size: 20px;
+        padding-bottom: 30px;
+      }
+      p.content {
+        color: $gray;
+        line-height: 2.4;
+        font-size: 15px;
+      }
+    }
+
+    div.img {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+  div.contentTwo,
+  div.contentFour {
+    background-color: #f8f8f8;
+  }
+
+  div.contentFive {
+    padding: 100px 0;
+    h3 {
+      color: $brand-info;
+      font-weight: normal;
+      padding-bottom: 50px;
+    }
+    div.item {
+      a.img {
+        height: 165px;
+        display: block;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      a.title {
+        padding-top: 30px;
+        display: block;
+        color: $gray-dark;
+        font-size: $font-size-large;
+      }
+    }
+  }
+}
+
+div.career {
+  h2.careerTitle {
+    font-size: $font-size-h2;
+    color: $brand-info;
+    padding-bottom: 20px;
+  }
+  p.subTitle {
+    font-size: 20px;
+    color: $gray-dark;
+    border-bottom: 1px solid $gray-light-2x;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+
+  div.header {
+    border-bottom: 1px solid $gray-light-2x;
+  }
+
+  div.careerList {
+    padding: 20px 0;
+    .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group {
+      border: 0;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+    }
+
+    .panel-default {
+      border: 0;
+    }
+
+    .panel-default > .panel-heading {
+      background-color: $body-bg;
+    }
+
+    .panel-body, .panel {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+      border-bottom: 1px solid $gray-light-2x;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .panel-group {
+      margin-bottom: 0;
+    }
+
+    div.careerListName {
+      font-size: $font-size-h3;
+    }
+
+    div.heading {
+      div.title {
+        font-size: $font-size-h3;
+        color: $brand-info;
+        padding-left: 0;
+        font-weight: 400;
+        font-family: $font-family-regular;
+      }
+      div.icon {
+        font-size: $font-size-h3;
+      }
+    }
+
+    div.careerListContent {
+      //border-bottom: 1px solid $gray-light-2x;
+      p.title {
+        font-size: 20px;
+        color: $gray;
+        padding-bottom: 20px;
+      }
+
+      ul.list {
+        li.item {
+          padding-bottom: 20px;
+          p.subtitle {
+            font-size: 20px;
+            color: $gray-base;
+            i {
+              padding: 0 10px;
+              color: $brand-success;
+              font-size: $font-size-base;
+            }
+          }
+
+          p.text {
+            font-size: 20px;
+            color: #666;
+            padding-left: 36px;
+            line-height: 1.7;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+@media (max-width: $screen-xs-max) {
+  div.aboutUsContentTwo {
+    div.item {
+      margin-bottom: 60px;
+    }
+    div.item:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  div.aboutUsContentFour,
+  div.aboutUsContentSix,
+  div.aboutUsContentEight {
+    div.Content {
+      img {
+        padding-bottom: 60px;
+      }
+    }
+  }
+
+  // jobFlatform
+  div.jobFlatform {
+    div.contentOne,
+    div.contentThree {
+      div.img {
+        padding-top: 30px;
+      }
+    }
+
+    div.contentTwo,
+    div.contentFour {
+      div.img {
+        padding-bottom: 30px;
+      }
+    }
+
+    div.contentFive {
+      div.item {
+        padding-bottom: 30px;
+      }
+    }
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  div.aboutUsContentTwo {
+    div.item {
+      height: 500px;
+    }
+    div.item:last-child {
+      margin-top: 60px;
+    }
+  }
+
+  // jobFlatform
+  div.jobFlatform {
+    div.contentTwo {
+      div.text {
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  // ourStory
+  div.ourStory {
+    div.contentTwo {
+      .carousel-control {
+        background-image: none;
+        width: 68px;
+        display: block;
+        .icon-next {
+          right: 0;
+          margin-left: -34px;
+          z-index: 998;
+          top: 50%;
+          margin-top: -81px;
+        }
+        .icon-prev {
+          left: 0;
+          margin-left: -34px;
+          z-index: 999;
+          top: 50%;
+          margin-top: -81px;
+        }
+        .icon-next:before {
+          content: '';
+          width: 68px;
+          height: 162px;
+          display: block;
+          margin: 0 auto;
+          background: url('./~/assets/img/our_story_arrow.png') 0px 0px no-repeat;
+        }
+        .icon-prev:before {
+          content: '';
+          width: 68px;
+          height: 162px;
+          display: block;
+          margin: 0 auto;
+          background: url('./~/assets/img/our_story_arrow.png') 0px -219px no-repeat;
+        }
+
+      }
+
+    }
+
+  }
+
+  // jobFlatform
+  div.jobFlatform {
+    div.contentTwo {
+      div.text {
+        padding-top: 100px;
+      }
+    }
+    div.contentThree {
+      div.text {
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  // ourStory
+  div.ourStory {
+    div.contentTwo {
+      .carousel-control {
+        background-image: none;
+        width: 68px;
+        display: block;
+         .icon-next {
+           right: 0;
+           margin-left: -34px;
+           z-index: 998;
+           top: 50%;
+           margin-top: -81px;
+        }
+        .icon-prev {
+          left: 0;
+          margin-left: -34px;
+          z-index: 999;
+          top: 50%;
+          margin-top: -81px;
+        }
+        .icon-next:before {
+          content: '';
+          width: 68px;
+          height: 162px;
+          display: block;
+          margin: 0 auto;
+          background: url('./~/assets/img/our_story_arrow.png') 0px 0px no-repeat;
+        }
+        .icon-prev:before {
+          content: '';
+          width: 68px;
+          height: 162px;
+          display: block;
+          margin: 0 auto;
+          background: url('./~/assets/img/our_story_arrow.png') 0px -219px no-repeat;
+        }
+
+      }
+
+    }
+
+  }
+
+  // jobFlatform
+  div.jobFlatform {
+    div.contentTwo {
+      div.text {
+        padding-top: 100px;
+      }
+    }
+    div.contentThree {
+      div.text {
+        padding-top: 50px;
+      }
+    }
+  }
+}
+
+// jobs
+div.jobs {
+  h4.title {
+    color: $brand-info;
+    font-size: $font-size-h3;
+    padding-bottom: 12px;
+    padding-top: 40px;
+    font-style: normal;
+    line-height: 1.6;
+  }
+  p.content {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  div.contentOne {
+    h3.title {
+      padding: 80px 0 48px 0;
+    }
+  }
+
+  div.contentOne, div.contentTwo, div.contentThree, div.contentFour, div.contentFive {
+    border-bottom: 1px solid $gray-light-2x;
+  }
+
+  div.containerRow {
+    padding: 50px 0;
+  }
+
+  div.contentThree {
+    div.containerRow {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  div.contentFive {
+    div.item {
+      margin-bottom: 20px;
+      a.img {
+        display: block;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+
+      p.title {
+        padding-top: 40px;
+        display: block;
+        font-size: $font-size-large;
+        a {
+          color: $brand-info;
+        }
+        span.submit {
+          font-size: $font-size-small;
+          padding: 3px 10px;
+        }
+      }
+
+    }
+
+    div.item:nth-of-type(2) {
+      p.title {
+        padding-top: 25px;
+      }
+    }
+    h3.title {
+      padding: 50px 0 50px 0;
+    }
+  }
+
+  div.contentSix {
+    //background: #f8f8f8;
+    h5.subtitle {
+      font-size: 20px;
+      color: $brand-info;
+      padding-top: 30px;
+      border-top: 1px solid $gray-light-2x;
+    }
+    padding: 100px 0 50px 0;
+    h3.title {
+      padding-bottom: 40px;
+    }
+    div.contentSixBtn {
+      margin-bottom: 20px;
+      a {
+        font-size: $font-size-h4;
+        padding: 8px 25px;
+      }
+    }
+  }
+
+  div.contentSeven {
+    margin: 0 auto;
+
+    h3.title {
+      padding-top: 80px;
+    }
+
+    img {
+      margin-right: 3%;
+    }
+
+    ul.icon {
+      li.list {
+        padding-right: 20px;
+        a {
+          color: $brand-success;
+        }
+      }
+    }
+
+  }
+
+}
+
+//industry_feed
+div.industry_feed {
+  div.contentOne {
+    padding: 80px 0;
+    border-bottom: 1px solid $gray-light-2x;
+    h3.title {
+      color: $brand-info;
+      padding: 30px 0;
+    }
+    p.text {
+      font-size: $font-size-large;
+      line-height: 1.8;
+    }
+  }
+  div.contentTwo {
+    padding: 100px 0 50px 0;
+    div.list {
+      padding-right: 20px;
+      div.pic {
+        img {
+          margin: 0 auto;
+        }
+      }
+      div.text {
+        h4.title {
+          padding: 20px 0;
+          line-height: 1.4;
+          color: $brand-info;
+          font-size: 20px;
+        }
+        p.text {
+          line-height: 1.8;
+          font-size: $font-size-large;
+        }
+      }
+    }
+  }
+  div.contentThree {
+    h3.title {
+      line-height: 1.8;
+      color: $brand-info;
+      font-size: $font-size-h3;
+    }
+    p.text {
+      font-size: $font-size-large;
+      line-height: 1.8;
+    }
+    img {
+      display: block;
+      padding: 40px 0 40px 0;
+      margin: 0 auto;
+    }
+  }
+  div.contentFour {
+    div.item {
+      margin-bottom: 20px;
+      a.img {
+        display: block;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+
+      p.title {
+        padding-top: 40px;
+        display: block;
+        font-size: $font-size-large;
+        a {
+          color: $brand-info;
+        }
+        span {
+          padding: 3px 10px;
+          font-size: $font-size-small;
+        }
+      }
+    }
+
+    div.item:nth-of-type(2) {
+      p.title {
+        padding-top: 25px;
+      }
+    }
+    h3.title {
+      padding: 50px 0 50px 0;
+    }
+  }
+
+  div.contentFive {
+    padding: 80px 0 50px 0;
+    h3.title {
+      padding-bottom: 30px;
+    }
+    div.contentFiveBtn {
+      margin-bottom: 20px;
+      a {
+        font-size: $font-size-h4;
+        padding: 8px 25px;
+      }
+    }
+
+    h5.subtitle {
+      font-size: 20px;
+      color: $brand-info;
+      padding-top: 30px;
+      border-top: 1px solid $gray-light-2x;
+    }
+  }
+}
+
+//industry_feed
+@media (max-width: $screen-sm-max) {
+  div.industry_feed {
+    div.contentOne {
+      div.img {
+        padding-top: 30px;
+      }
+    }
+  }
+}
+
+//pricing
+div.pricing {
+  .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border: 0;
+  }
+
+  div.contentTwo,
+  div.contentFour,
+  div.contentTen {
+    h3,h4 {
+      color: $gray-darker;
+    }
+  }
+
+  div.contentOne {
+    background: $brand-info;
+    padding: 40px 0;
+    color: $body-bg;
+    margin-top: 20px;
+    h3.title {
+      padding-bottom: 30px;
+    }
+    p.subtitle {
+      font-size: $font-size-h4;
+      line-height: 1.7;
+    }
+
+    div.contentOneContent {
+      padding-top: 60px;
+      div.contentOneLeft {
+        padding-bottom: 20px;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    div.contentOneText {
+      h3.title {
+        font-size: $font-size-h4;
+      }
+      div.list {
+        padding-bottom: 20px;
+        div.content {
+          h3.title {
+            padding-bottom: 10px;
+            margin-top: 0;
+          }
+          p.text {
+            line-height: 1.7;
+          }
+        }
+
+      }
+    }
+
+    div.contentOne_bot {
+      font-size: $font-size-h4;
+      padding: 30px 0;
+      a {
+        color: $body-bg;
+      }
+    }
+  }
+  div.contentTwo {
+    padding-bottom: 100px;
+    h4.subtitle {
+      padding-top: 80px;
+    }
+    h3.title {
+      margin-top: 10px;
+    }
+    p.contentTwoBtn {
+      color: $body-bg;
+      padding: 10px 0;
+      border-radius: 8px;
+      font-size: $font-size-h4;
+      background: rgba(75, 201, 163, 1);
+      margin: 30px 0;
+    }
+
+    div.contentTwoContent {
+      div.contentTwoContentLeft {
+        h2.title,
+        h2.and {
+          font-size: $font-size-h3;
+        }
+
+        h2.title {
+          span {
+            color: #4BC9A3;
+          }
+        }
+
+        h2.and {
+          color: $brand-danger;
+        }
+
+        div.contentTwoContentLeftText {
+          margin: 0;
+          margin: 20px 0 30px 0;
+          div.icon {
+            i {
+              color: #4BC9A3;
+              padding-top: 15px;
+            }
+          }
+          div.content {
+            h4.title {
+              padding-bottom: 10px;
+              line-height: 1.2;
+            }
+            p.text {
+              font-size: $font-size-large;
+              line-height: 1.7;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  div.contentThree {
+    padding: 20px 0;
+    background: rgba(117, 86, 175, 1);
+    div.contentThreeContent {
+      color: $body-bg;
+      div.contentThreeContentHead {
+        h3.title {
+          padding-top: 30px;
+        }
+      }
+      p.contentThreeText {
+        font-size: $font-size-large;
+        padding: 30px 0;
+        line-height: 1.7;
+      }
+    }
+  }
+
+  div.contentFour {
+    padding: 30px 0;
+    div.contentFourOne,
+    div.contentFourTwo {
+      padding-bottom: 20px;
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+      div.contentFourOneRight,
+      div.contentFourTwoLeft {
+        padding: 0 20px;
+        h3.title {
+          padding: 20px 0;
+        }
+        p.text {
+          font-size: $font-size-large;
+          line-height: 1.7;
+        }
+      }
+    }
+  }
+
+  div.contentFive {
+    background: rgb(248, 182, 68);
+    padding: 60px 0;
+    div.contentFiveContent {
+      p.contentFivep {
+        font-size: 30px;
+        font-weight: bold;
+        color: #494E55;
+      }
+      h2.contentFiveh3 {
+        color: #fff;
+        font-size: 70px;
+        font-weight: bolder;
+      }
+    }
+  }
+
+  div.contentSix {
+    padding: 60px 0;
+    h4.title{
+      font-weight: bold;
+      color: #494E55;
+      font-size: 28px;
+    }
+    h1.contentSixTitle {
+      padding-bottom: 50px;
+      font-weight: bold;
+      font-size: 50px;
+    }
+    p.content{
+      padding: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #494E55;
+    }
+    div.contentSix_img {
+      margin: 0 auto;
+    }
+    p.contentSixText {
+      font-size: 20px;
+    }
+    .contentSevenTitle{
+      margin-top: 65px;
+      font-weight: bold;
+      font-size: 40px;
+    }
+  }
+ div.contentPrice{
+   background: #ffffff;
+   .priceTitle{
+     color: #494E55;
+     margin-top: 50px;
+     .bold{
+       font-weight: bold;
+       cursor: pointer;
+     }
+   }
+   .itemBtn{
+     border: 1px solid;
+     margin-top: 15px;
+   }
+ }
+  div.contentSeven,.contentPrice{
+    background: rgba(67, 98, 187, 1);
+    padding-bottom: 50px;
+    div.contentSevenContent {
+      padding: 30px;
+      div.contentSevenContentRow {
+        border-bottom: 1px solid #fff;
+        padding: 14px 0;
+        margin: 0;
+        div.contentSevenContentTitle {
+          font-size: 20px;
+          color: #fff;
+          font-weight: bolder;
+        }
+        div.contentSevenContentYes {
+          font-size: $font-size-h3;
+          color: #FFFA03;
+          font-weight: bolder;
+        }
+        div.contentSevenContentNo {
+          font-size: $font-size-h3;
+          color: #FFF;
+          font-weight: bolder;
+        }
+      }
+      div.contentSevenContentBtn {
+        border: 2px solid #fff;
+        font-size: 22px;
+        padding: 12px 0;
+        margin-top: 30px;
+        color: #fff;
+        border-radius: 25px;
+      }
+      h1.contentSevenTitle {
+        color: #fff;
+        font-weight: bolder;
+      }
+      p.contentSevenTxt {
+        font-size: 20px;
+        color: #FFFA03;
+        font-weight: bolder;
+      }
+      li {
+        font-size: 20px;
+        color: #fff;
+        font-weight: bolder;
+        padding-bottom: 10px;
+        a {
+          color: #FFFA03;
+          text-decoration: underline;
+        }
+      }
+      div.contentSevenRow {
+        border-bottom: 1px solid #fff;
+      }
+    }
+    div.contentSevenPrice {
+      background: #ffffff;
+      div.contentSevenPriceText {
+        border-top: 1px solid $gray-light-2x;
+        border-right: 1px solid $gray-light-2x;
+        padding-bottom: 40px;
+      }
+      div.contentSevenPriceTextLast {
+        border-right: none;
+        border-top: 1px solid $gray-light-2x;
+      }
+      h1.contentSevenPriceTitle {
+        line-height: 2.0;
+      }
+      p.title {
+        font-size: 26px;
+        padding-top: 16px;
+      }
+      span.blueBig {
+        font-size: 40px;
+        color: $brand-info;
+      }
+      span.blueSmall {
+        font-size: $font-size-h4;
+        color: $brand-info;
+      }
+      span.redBig {
+        font-size: 40px;
+        color: #FF0000;
+      }
+      span.redSmall {
+        font-size: $font-size-h4;
+        color: #FF0000;
+      }
+      div.contentSevenPriceMidden {
+        padding: 35px 0;
+        span.blueBlue {
+          color: rgba(248, 248, 248, 1);
+        }
+      }
+    }
+  }
+
+  div.contentEight {
+    background: $brand-info;
+    padding: 30px 0;
+    div.contentEightContent {
+      div.contentEightContentLeft {
+        color: $body-bg;
+        h3.title {
+          padding-bottom: 30px;
+        }
+        em.yellow {
+          color: #E5C539;
+        }
+        p.text {
+          font-size: $font-size-large;
+          padding-bottom: 20px;
+          line-height: 1.7;
+        }
+        span.contentEightBtn {
+          display: inline-block;
+          font-size: $font-size-large;
+          border: 1px solid $body-bg;
+          color: $body-bg;
+          border-radius: 4px;
+          padding: 6px 0;
+          padding: 6px 20px;
+        }
+      }
+    }
+  }
+
+  div.contentNine {
+    background: rgba(248, 248, 248, 1);
+    padding: 20px 0;
+    div.contentNineContent {
+      h4.subtitle {
+        padding-bottom: 20px;
+      }
+      div.contentNineContentRow {
+        border-top: 1px solid $gray-light-2x;
+        border-bottom: 1px solid $gray-light-2x;
+        padding: 20px 0;
+        margin: 0;
+        li.list {
+          font-size: $font-size-large;
+          line-height: 2.0;
+        }
+        h4.contentNineTitleh4 {
+          font-size: 20px;
+          line-height: 2.0;
+        }
+      }
+
+      h4.text {
+        padding: 20px 0;
+      }
+
+      a.contentNineContentBtn {
+        border: 2px solid $gray-dark;
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: $font-size-h4;
+        color: $gray-dark;
+      }
+
+      div.contentNineContentText {
+        padding-top: 30px;
+        font-size: $font-size-large;
+        color: $brand-danger;
+      }
+    }
+  }
+
+  div.contentTen {
+    div.contentTenContent {
+      border-bottom: 1px solid $gray-light-2x;
+      padding: 80px 0;
+      h3.title {
+        padding-bottom: 30px;
+      }
+      div.contentTenImg {
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+    div.contentTenText {
+      padding: 30px 0;
+      div.contentTenTextLeft {
+        padding: 20px 0;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+      div.contentTenTextRight {
+        h3.title {
+          padding-bottom: 30px;
+        }
+        p.text {
+          font-size: $font-size-large;
+          line-height: 1.7;
+          padding-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  div.contentEleven {
+    background: rgba(75, 201, 163, 1);
+    color: $body-bg;
+    padding: 80px 0;
+    div.contentElevenLeft {
+      h3.title {
+        padding-bottom: 20px;
+      }
+      p.text {
+        font-size: $font-size-large;
+        line-height: 1.6;
+      }
+      a.link {
+        display: inline-block;
+        font-size: $font-size-large;
+        border: 1px solid $body-bg;
+        color: $body-bg;
+        border-radius: 4px;
+        padding: 6px 20px;
+        margin: 30px 0;
+      }
+    }
+
+    div.contentElevenRight {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+  }
+
+  div.contentTwelve {
+    padding-bottom: 50px;
+    div.contentTwelveContent {
+      padding: 20px 0;
+      h3.title {
+        padding: 20px 0;
+        color: $gray-darker;
+      }
+      ul.nav {
+        padding-bottom: 30px;
+        padding-left: 10px;
+        li {
+          a {
+            font-size: $font-size-h4;
+            padding: 5px 10px;
+            background-color: rgba(221, 221, 221, 1);
+            color: $brand-danger;
+          }
+        }
+        li.active {
+          a {
+            background-color: rgba(74, 128, 188, 1);
+            color: $body-bg;
+          }
+        }
+
+        li:first-child {
+          padding-left: 0;
+        }
+
+      }
+      .contentTwelveContentList {
+        border: 0;
+        border-bottom: 1px solid $gray-light-2x;
+        padding-top: 10px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0);
+        h4.panel-title {
+          background-color: $body-bg;
+        }
+        div.heading {
+          padding: 10px;
+          div.title {
+            font-size: $font-size-h4;
+            color: $gray-darker;
+            font-weight: 400;
+            line-height: 1.6;
+          }
+          i {
+            color: $brand-info;
+          }
+        }
+
+        ul.text {
+          color: $gray-dark;
+          li.list {
+            font-size: $font-size-large;
+            padding-bottom: 10px;
+            color: $gray;
+            line-height: 1.7;
+          }
+        }
+      }
+    }
+  }
+
+  div.contentThirteen {
+    a.contentThirteenBtn {
+      padding: 8px 25px;
+      border: 2px solid $gray-light-2x;
+      border-radius: 4px;
+      font-size: $font-size-h4;
+      color: $gray;
+    }
+    h3.title {
+      padding: 10px 0;
+      font-size: $font-size-h4;
+      color: $gray;
+      font-weight: 400;
+    }
+
+    h3.contact {
+      font-size: $font-size-h4;
+      margin-top: 10px;
+      font-weight: 400;
+      a {
+        color: $brand-success;
+      }
+    }
+    div.contentThirteenContent {
+      padding: 30px 0;
+      h3.title {
+        font-size: $font-size-h3;
+        padding-bottom: 20px;
+        color: $gray-darker;
+        font-weight: 500;
+      }
+      div.content {
+        padding-bottom: 30px;
+        div.list {
+          padding-bottom: 20px;
+          img {
+            display: block;
+            margin: 0 auto;
+            padding-bottom: 20px;
+          }
+        }
+      }
+      a.backToTop {
+        border: 2px solid $gray-light-2x;
+        color: $brand-danger;
+        border-radius: 4px;
+        padding: 5px 15px;
+        font-size: $font-size-h4;
+      }
+    }
+  }
+  .panel-heading {
+    padding: 0;
+  }
+  .nav-link {
+    font-size: 22px;
+    color: #999999;
+  }
+}
+
+//media
+div.mediaContentOne {
+  padding-bottom: 30px;
+  color: #777777;;
+  div.mediaBorderContainer {
+    border: solid 1px #d9d9d9;
+    margin-top: 50px;
+    img.mediaTitle {
+      width: 100%;
+    }
+    div.caption {
+      padding: 0 30px 15px 30px;
+      height: 230px;
+      h4 {
+        font-family: 'PingFangSC-Regular', 'PingFang SC';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 18px;
+        color: #333333;
+        height: 38px;
+      }
+
+      div.mediaPic {
+        border-right: 1px solid #d9d9d9;
+        height: 100px;
+        padding-right: 10px;
+        img {
+          padding-top: 24px;
+        }
+      }
+      div.tileDetails {
+        padding-right: 0 !important;
+        max-height:100px;
+        overflow: hidden;
+        a{
+          color: $brand-danger;
+        }
+      }
+      div.details {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: $screen-xs-max) {
+  div.aboutUs {
+    div.aboutUsContentNine {
+      div.item {
+        img {
+          padding-bottom: 30px;
+        }
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  div.pricing {
+    div.contentTwelve {
+      div.contentTwelveContent {
+        ul.nav {
+          li {
+            margin-left: 0;
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+
+}
+
+
+

@@ -1,0 +1,635 @@
+
+
+.search .form-group, .search .form-group input[type='text'], .search .form-group .submit {
+  border: 0;
+  outline: none;
+}
+
+.search {
+  background-color: $brand-primary;
+  padding: 20px 0;
+  div.searchContent {
+    padding: 0;
+  }
+  .form-group {
+    padding: 0 0 0 10px;
+    margin: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+    article.input {
+      border: 2px solid rgba(0, 140, 214, .7);
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      margin-bottom: 10px;
+      background-color: $body-bg;
+      color: $gray;
+      .form-control {
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+        border-radius: 0 4px 4px 0;
+        height: 38px;
+      }
+      .input-group-addon {
+        background-color: $body-bg;
+        border: 0;
+        i {
+          color: $brand-info;
+          font-size: $font-size-large;
+        }
+      }
+    }
+
+    div.articleSearch {
+      position: relative;
+      margin-bottom: 15px;
+      input {
+        border: 2px solid rgba(0, 140, 214, .7);
+        height: 38px;
+      }
+      .noResults {
+        position: absolute;
+        top: 100%;
+        z-index: 1000;
+        border: 1px solid rgba(0, 140, 214, .7);
+        background-color: $body-bg;
+        border-radius: 4px;
+        color: $brand-info;
+        height: 34px;
+        line-height: 34px;
+        padding: 0 10px;
+      }
+    }
+
+
+
+
+    .btn {
+      height: 38px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .submit {
+      border-radius: 4px;
+      font-weight: 200;
+    }
+
+    .btn-default {
+      background-color: $body-bg;
+      border: 0;
+      outline: none;
+      border-radius: 40px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .btn-default-focus {
+      box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(255, 255, 255, 0);
+      background-color: transparent;
+      outline: none;
+    }
+
+    .searchTextShow {
+      height: 40px;
+      margin-bottom: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 0;
+      padding-left: 10px;
+    }
+
+    .searchCategory, .searchSalary, .searchEducation, .searchLocation,.searchExperience {
+      height: 38px;
+      line-height: 38px;
+      padding-left: 0;
+      padding-right: 0;
+      position: relative;
+      border-radius: 4px;
+      div.input-group-addon {
+        padding: 10px;
+        margin-right: 25px;
+      }
+
+      p {
+        margin: 0;
+      }
+
+    }
+
+    .searchSalary {
+      span {
+        font-size: $font-size-small;
+      }
+    }
+
+    .searchPositionCategoryMain, .searchPositionLocationMain {
+      position: absolute;
+      z-index: 1000;
+      .searchPositionCategory, .searchPositionLocation, .searchPositionJobNature {
+        position: static;
+        z-index: 999;
+        top: 100%;
+        height: 300px;
+        overflow-y: auto;
+        border: 2px solid rgba(0, 140, 214, .7);
+        background-color: $body-bg;
+      }
+
+      .noBorder {
+        height: auto;
+        border: 0;
+        background-color: transparent;
+      }
+    }
+
+    .searchPositionSalaryMain,
+    .searchPositionExperienceMain,
+    .searchPositionEducationMain,
+    .searchPositionEmploymentMain,
+    .searchPositionJobNatureMain,
+    .searchPositionJobTypeMain {
+      z-index: 999;
+      top: 100%;
+      position: absolute;
+      width: auto;
+      left: 10px;
+      right: 10px;
+    }
+
+    .searchPositionCategory,
+    .searchPositionSalaryMain,
+    .searchPositionExperienceMain,
+    .searchPositionEducationMain,
+    .searchPositionLocation,
+    .searchPositionEmploymentMain,
+    .searchPositionJobNatureMain,
+    .searchPositionJobTypeMain {
+      div.salaryList {
+        margin: 10px;
+        a {
+          color: $gray;
+          display: inline;
+          border: 1px solid $brand-info;
+          padding: 4px 6px;
+          font-size: $font-size-small;
+          text-decoration: none;
+        }
+        a.active {
+          color: $body-bg;
+          background-color: $brand-info;
+        }
+        a:hover {
+          cursor: pointer;
+        }
+        a.hour {
+          border-radius: 0 4px 4px 0;
+        }
+        a.month {
+          border-radius: 4px 0 0 4px;
+        }
+      }
+
+      .searchPositionCategoryContent:before,
+      .searchPositionSalaryContent:before,
+      .searchPositionExperienceContent:before,
+      .searchPositionEducationContent:before,
+      .searchPositionLocationContent:before,
+      .searchPositionEmploymentContent:before {
+        position: absolute;
+        content: '';
+        border: 8px solid transparent;
+        width: 0px;
+        height: 0px;
+        border-bottom-width: 8px;
+        border-bottom-color: $body-bg;
+        top: -15px;
+        z-index: 100;
+        left: 20px;
+      }
+
+      .searchPositionSalaryContent,
+      .searchPositionExperienceContent,
+      .searchPositionEducationContent,
+      .searchPositionEmploymentContent {
+        border: 2px solid rgba(0, 140, 214, .7);
+        background-color: $body-bg;
+        border-radius: 4px;
+        height: auto;
+      }
+
+      .searchPositionCategoryContent,
+      .searchPositionSalaryContent,
+      .searchPositionExperienceContent,
+      .searchPositionEducationContent,
+      .searchPositionLocationContent,
+      .searchPositionEmploymentContent {
+        li.active {
+          background-color: $gray-light-2x;
+          z-index: 999;
+          border-right: 0;
+        }
+        li.searchPositionCategoryList, li.searchEducationCategoryList, li.searchEmploymentCategoryList {
+          width: 100%;
+          border-bottom: 1px solid $gray-lighter;
+          background-color: $body-bg;
+          div.category {
+            line-height: 30px;
+            padding: 0 10px;
+            display: block;
+            a {
+              color: $gray;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              display: block;
+            }
+            div {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              input[type='checkbox'] {
+                margin-right: 5px;
+              }
+              input[type = 'radio'] {
+                margin-left: 5px;
+              }
+            }
+          }
+          div.parentCategory {
+            background-color: #bbe3f6;
+          }
+          div.childCategory {
+            padding-left: 30px;
+          }
+          label {
+            font-weight: normal;
+            display: block;
+          }
+          a {
+            padding: 5px 10px;
+            display: block;
+            color: $gray;
+            text-decoration: none;
+            i {
+              font-size: $font-size-h3;
+            }
+
+          }
+          a.active {
+            background-color: $brand-info;
+            color: #fff;
+            text-decoration: none;
+          }
+          .searchPositionCategoryContentRight {
+            width: 100%;
+            background-color: $body-bg;
+            left: 100%;
+            top: 0;
+            z-index: 100;
+            border: 2px solid rgba(0, 140, 214, .7);
+            border-left: 0;
+            height: 300px;
+            position: absolute;
+            overflow-y: auto;
+            li:hover {
+              cursor: pointer;
+            }
+            ul {
+              height: 100%;
+              background-color: $body-bg;
+              left: 100%;
+              position: absolute;
+            }
+          }
+        }
+
+        li.searchEducationCategoryList, li.searchEmploymentCategoryList {
+          padding: 5px 10px;
+        }
+
+        .childList {
+          margin-right: 10px;
+          li.list {
+            background-color: $gray-light-2x;
+            border-radius: 15px;
+            padding: 2px 10px;
+            color: $gray-light;
+            font-size: $font-size-small;
+            margin: 5px 8px;
+          }
+          li.list:hover {
+            cursor: pointer;
+            text-decoration: line-through;
+          }
+          li.list {
+            i {
+              color: $body-bg;
+            }
+          }
+          li.limitShow {
+            background-color: transparent;
+            color: $brand-info;
+          }
+          li.btn {
+            margin-left: 5px;
+            button.finish {
+              background-color: $brand-info;
+              color: $body-bg;
+              border: 0;
+              outline: none;
+              padding: 3px 12px;
+              height: auto;
+            }
+
+          }
+        }
+      }
+    }
+
+
+    //
+    .noBorder {
+      border: 0;
+    }
+
+    .ui-select-bootstrap .ui-select-toggle > .caret {
+      color: $brand-success;
+    }
+
+    .submit {
+      float: right;
+      display: block;
+      width: 100%;
+      color: $body-bg;
+    }
+
+    span.more {
+      display: block;
+      line-height: 38px;
+      color: $body-bg;
+      cursor: pointer;
+      font-weight: 200;
+      i {
+        font-size: $font-size-large;
+      }
+    }
+
+    .rz-pointer  {
+      width: 20px;
+      height: 20px;
+      top: -8px;
+    }
+
+    .rzslider .rz-pointer:after {
+      top: 7px;
+      left: 7px;
+      width: 6px;
+      height: 6px;
+    }
+
+    .rz-pointer-max {
+      position: absolute;
+      right: 0;
+
+    }
+
+  }
+
+  .showInvalidMessage {
+    color: $body-bg;
+    padding-top: 10px;
+  }
+
+  ul.hotTag {
+    li {
+      a {
+        color: $body-bg;
+        font-weight: 200;
+      }
+    }
+  }
+
+}
+
+@media (max-width: $screen-xs-max) {
+  .search {
+    .form-group {
+      .btn {
+        padding: 5px;
+      }
+      .submit {
+        height: 2em;
+      }
+      .searchPositionCategory {
+        position: static;
+        z-index: 999;
+        top: 100%;
+      }
+
+      .searchCategory, .searchSalary, .searchEducation, .searchLocation,.searchExperience {
+        .searchTextShow {
+          padding-left: 10px;
+          width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .searchPositionCategoryContent,
+      .searchPositionSalaryContent,
+      .searchPositionExperienceContent,
+      .searchPositionEducationContent,
+      .searchPositionLocationContent,
+      .searchPositionEmploymentContent {
+        background-color: $body-bg;
+        border-radius: 4px;
+        height: auto;
+        li.searchPositionCategoryList {
+          .searchPositionCategoryContentRight {
+            left: 0;
+            top: 100%;
+          }
+          div.category {
+            display: block;
+            height: auto;
+          }
+        }
+      }
+    }
+
+    ul.hotTag {
+      li {
+        padding-top: 10px;
+      }
+    }
+
+  }
+
+
+  .searchPositionSalaryMain,
+  .searchPositionExperienceMain,
+  .searchPositionEducationMain,
+  .searchPositionEmploymentMain,
+  .searchPositionJobNatureMain,
+  .searchPositionJobTypeMain {
+    width: 100%;
+  }
+
+  .searchPositionCategoryMain,
+  .searchPositionLocationMain {
+    width: 48%;
+  }
+
+}
+
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .search {
+    .form-group {
+      .searchCategory, .searchSalary, .searchEducation, .searchLocation,.searchExperience {
+        .searchTextShow {
+          padding-left: 10px;
+          width: 120px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    ul.hotTag {
+      li {
+        padding-top: 10px;
+      }
+    }
+
+  }
+
+  .searchPositionCategoryMain,
+  .searchPositionSalary,
+  .searchPositionExperience,
+  .searchPositionEducation,
+  .searchPositionLocationMain,
+  .searchPositionEmployment{
+    width: 100%;
+  }
+
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .searchPositionCategoryMain,
+  .searchPositionSalary,
+  .searchPositionExperience,
+  .searchPositionEducation,
+  .searchPositionLocationMain,
+  .searchPositionEmployment {
+    position: absolute;
+    z-index: 1000;
+    width: auto;
+    left: 10px;
+    right: 10px;
+  }
+
+  .search {
+
+    .form-group {
+      .searchCategory,.searchLocation {
+        .searchTextShow {
+          padding-left: 10px;
+          width: 150px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      span.more {
+        padding-right: 0;
+      }
+    }
+  }
+
+}
+
+@media (min-width: $screen-lg-min) {
+  .search {
+    .form-group {
+      .searchPositionCategoryMain,
+      .searchPositionSalary,
+      .searchPositionExperience,
+      .searchPositionEducation,
+      .searchPositionLocationMain,
+      .searchPositionEmployment {
+        position: absolute;
+        z-index: 1000;
+        width: auto;
+        left: 10px;
+        right: 10px;
+      }
+
+      .searchCategory,.searchLocation {
+        .searchTextShow {
+          padding-left: 10px;
+          width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      span.more {
+        padding-right: 0;
+      }
+    }
+  }
+
+}
+
+.search .nav-tabs {
+  border-bottom: 0;
+}
+
+.search {
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: transparent;
+    border: 0;
+    border-top: 2px solid $brand-success;
+    border-radius: 0;
+    color: $body-bg;
+  }
+  .nav-tabs > li {
+    margin: 0 0 0 20px;
+    > a {
+      color: $body-bg;
+      font-size: $font-size-large;
+      font-weight: 200;
+    }
+  }
+
+  .nav > li > a {
+    padding: 8px 10px;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+    border: 0;
+    border-top: 2px solid $brand-success;
+    border-radius: 0;
+    color: $body-bg;
+  }
+
+  .searchRefresh {
+    color: $body-bg;
+  }
+
+}
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+{
+  "existUserLanguage": {
+    "statusCode": 400,
+    "message": "You have created that already.",
+    "code": 11000
+  },
+  "existUserExpecJob": {
+    "statusCode": 400,
+    "message": "You have created that already.",
+    "code": 11001
+  },
+  "existRole": {
+    "statusCode": 400,
+    "message": "You have defined role already.",
+    "code": 11002
+  },
+  "chooseRole": {
+    "statusCode": 400,
+    "message": "You must be choose an role.",
+    "code": 11003
+  },
+  "notEnoughBalance":{
+    "statusCode": 400,
+    "message": "Do not have enough balance.",
+    "code": 11004
+  },
+  "rechargeFail": {
+    "statusCode": 400,
+    "message": "Recharge failed.",
+    "code": 11005
+  },
+  "categoryNotExists": {
+    "statusCode": 400,
+    "message": "Please choose expect position category subcategory",
+    "code": 11006
+  },
+  "locationNotExists": {
+    "statusCode": 400,
+    "message": "Please choose location subcategory",
+    "code": 11007
+  }
+}

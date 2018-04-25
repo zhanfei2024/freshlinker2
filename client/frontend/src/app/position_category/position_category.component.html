@@ -1,0 +1,158 @@
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="row positionCategory">
+    <div class="col-xs-12 positionCategoryLeft">
+      <div class="header">
+        <div class="row">
+          <div class="col-sm-9 col-xs-8 headerLeft">
+            <h4>
+              <i class="fa fa-info"></i>
+              {{'position.position_category_type' | translate}}
+            </h4>
+          </div>
+          <!--/.col-->
+        </div>
+      </div>
+
+      <article class="positionCategoryLeftContent">
+        <div class="hotContent text-center" *ngIf="categoryLoading">
+          <div class="row loading">
+            <div class="col-sm-12">
+              <i class="fa fa-spinner fa-pulse fa-3x"></i>
+            </div>
+            <!--/.col-->
+          </div>
+        </div>
+
+        <ul class="row categoryUl" *ngIf="!categoryLoading">
+          <li class="categoryList col-lg-3 col-md-4 col-sm-4 col-xs-12" *ngFor="let list of positionCategories">
+            <a (click)="search(list.id)" class="categoryListLink">
+              <span class="text">{{list.name}}</span>
+            </a>
+            <ul class="categoryChildren list-inline row" *ngIf="list.children.length > 0">
+              <li class="list col-xs-12 col-sm-6" *ngFor="let child of list.children">
+                <a (click)="search(child.id)">
+                  {{child.name}}
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--/.col-->
+        </ul>
+      </article>
+    </div>
+  </div>
+
+  <!--.hotKey-->
+  <div class="row positionCategoryKeywords">
+    <div class="hotContent text-center" *ngIf="hotTagsLoading">
+      <div class="row loading">
+        <div class="col-sm-12">
+          <i class="fa fa-spinner fa-pulse fa-3x"></i>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <div class="col-xs-12" *ngIf="!hotTagsLoading">
+      <div class="title">
+        {{'global.hotKeyword' | translate}}
+      </div>
+      <ul class="keyList list-inline">
+        <li class="List" *ngFor="let position of hotTags" >
+          <a (click)="searchPosition(position.name)">{{position.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.hotKey-->
+
+
+  <!--.hotPosition-->
+  <section class="hotPosition">
+    <div class="header">
+      <div class="row">
+        <div class="col-sm-9 col-xs-8 headerLeft">
+          <h4>
+            <i class="fa fa-navicon"></i> {{'article.hot_position' | translate}}
+          </h4>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-3 col-xs-4 text-right headerRight">
+          <a [routerLink]="['/position-list']"  pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'position.show_more_position' | translate}}</a>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <div class="hotPositionContent">
+      <div class="loading text-center" *ngIf="positionLoading">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <!--/.col-->
+        </div>
+      </div>
+      <div class="hotPositionContentList">
+        <div class="noPosition text-center" *ngIf="hotPosition.length === 0 && !positionLoading">
+          <img src="../../assets/img/no_position.png">
+          {{'message.company_no_publish_positions' | translate}}
+        </div>
+        <div class="List text-center pull-left"  *ngFor="let item of hotPosition">
+          <img src="../../assets/img/JobInvitation.png" alt="" *ngIf="item.isJobInvitation" class="JobInvitation">
+          <a [routerLink]="['/positions',item.id]"  pageScroll href="#awesomePart" [pageScrollDuration]="0">
+            <fieldset>
+              <div *ngIf="item.company?.icon !== null" class="imgContent">
+                <img class="vip-icon img-responsive JobInvitation imgWidth" src="../../assets/img/featured.png" *ngIf="item.company?.isVIP"/>
+                <img [src]="item.company?.icon?.url['100']" class="img-responsive Img">
+              </div>
+              <div *ngIf="item.company?.icon === null" class="imgContent">
+                <img class="vip-icon img-responsive JobInvitation imgWidth" src="../../assets/img/featured.png" *ngIf="item.company?.isVIP"/>
+                <img src="../../assets/img/default_company_icon.png" class="img-responsive">
+              </div>
+            </fieldset>
+            <!--/fieldset-->
+            <h4 class="positionName">
+              {{item.name}}
+            </h4>
+            <ul class="list-inline detail text-left">
+              <li>
+                <p>
+                  <i class="fa fa-star-half-full"></i>
+                  {{item.experience}}{{'global.year' | translate}}
+                </p>
+                <p *ngIf="item.maxSalary > 0">
+                  <i class="fa fa-dollar"></i>
+                  {{item.minSalary/1000}}K - {{item.maxSalary/1000}}K
+                </p>
+                <p *ngIf="item.minSalary === 0 && item.maxSalary === 0">
+                  <i class="fa fa-dollar"></i>
+                  {{'position.negotiation' | translate}}
+                </p>
+              </li>
+              <li>
+                <p>
+                  <i class="fa fa-suitcase"></i>
+                  {{item.type}}
+                </p>
+                <p>
+                  <i class="fa fa-graduation-cap"></i>
+                  {{item.educationLevel.name}}
+                </p>
+              </li>
+            </ul>
+          </a>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <p class="showMore text-center" *ngIf="hotPosition.length > 0 && !positionLoading">
+        <a [routerLink]="['/position-list']"  pageScroll href="#awesomePart" [pageScrollDuration]="0" class="btn btn-success">
+          {{'position.show_more_position' | translate}}
+        </a>
+      </p>
+    </div>
+  </section>
+  <!--/.hotPosition-->
+
+</div>

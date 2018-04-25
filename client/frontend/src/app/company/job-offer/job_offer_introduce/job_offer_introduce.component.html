@@ -1,0 +1,20 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <div>
+    <div class="noJobOffer row">
+      <div class="col-xs-12">
+        <img src="../../assets/img/EasyBoost_{{'global.lang' | translate}}.png" alt="" class="img-responsive">
+      </div>
+      <!--/.col-->
+      <div class="tips col-xs-12 text-center">{{'message.job_offer_experience_new_recruitment_function' | translate}} -
+        EasyBoost
+      </div>
+      <div class="button text-center col-xs-12">
+        <a [routerLink]="['/company',companyId,'job-offer']"  pageScroll href="#awesomePart" [pageScrollDuration]="0"
+           type="button" class="btn btn-success">
+          {{ 'enterprise.send_position_offer' | translate}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

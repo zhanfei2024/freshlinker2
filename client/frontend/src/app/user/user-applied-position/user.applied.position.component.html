@@ -1,0 +1,121 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form action="">
+    <div class="row userPositions">
+      <div class="col-md-3 col-sm-12 col-xs-12 userPositionsLeft">
+        <ul class="editList list-unstyled">
+          <li class="list active">
+            <a [routerLink]="['/user','user-positions']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'user.profile.applied_position' | translate}}</a>
+          </li>
+          <li class="list">
+            <a [routerLink]="['/user','bookmark']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{'user.profile.bookmark' | translate}}</a>
+          </li>
+        </ul>
+        <div class="searchForm">
+          <h5>{{'search.dashboard_search_position' | translate}}</h5>
+          <div class="form-group">
+            <input type="text" name="text" placeholder="{{'message.position_name_input' | translate}}" required   [(ngModel)]="filter.search">
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn" (click)="searchPosition()">{{'button.determine' | translate}}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9 col-sm-12 col-xs-12 userPositionsRight">
+        <div class="userAppliedPosition" *ngIf="!changeLoading">
+          <div class="loading text-center" *ngIf="positionLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div>
+            <div  class="noPosition row" *ngIf="positions.length === 0 && !positionLoading">
+              <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+                <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+              </div>
+              <!--/.col-->
+              <div class="col-md-5 col-sm-5 col-xs-12 text">
+                <p>
+                  {{'message.no_user_applied_position' | translate}}
+                  <br>
+                  {{'message.user_applied_position' | translate}}!
+                  <br>
+                  <span>{{'global.go_ahead' | translate}}</span>
+                  <a [routerLink]="['/position-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+                    {{ 'position.position_list' | translate }}
+                  </a>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+            <div *ngIf="positions.length > 0 && !positionLoading" class="content">
+              <div class="item row" *ngFor="let position of positions" >
+                <div class="col-md-2 col-sm-2 col-xs-4 img">
+                  <a [routerLink]="['/positions',position.position.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="img">
+                    <img src="https://placehold.it/100x100" alt="" class="img-responsive" *ngIf="position.company.icon === null">
+                    <img [src]="position.company.icon.url['100']" alt="" class="img-responsive" *ngIf="position.company.icon !== null">
+                  </a>
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-6 col-xs-8 positions">
+                  <a [routerLink]="['/positions',position.position.id]" pageScroll href="#awesomePart" [pageScrollDuration]="0" class="positionName">
+                    {{position.position.name}}
+                  </a>
+                  <a [routerLink]="['/company-position',position.company.id,'position']" class="companyName">
+                    {{position.company.name}}
+                  </a>
+
+                </div>
+                <!--/.col-->
+
+                <div class="checkList border col-sm-2 col-xs-4">
+                  <a [routerLink]="['/positions',position.position.id]">
+                    <p class="icon">
+                      <span class="check"></span>
+                    </p>
+                    <p class="text text-center">
+                      {{'global.check' | translate}}
+                    </p>
+                  </a>
+                </div>
+
+                <div class="checkList col-sm-2 col-xs-4">
+                  <div class="status">
+                    <p class="icon" >
+                      <span [ngClass]="{'unprocessed': position.candidateStatus.code === 'unprocessed'}"></span>
+                      <span [ngClass]="{'shortlist': position.candidateStatus.code === 'shortlist'}"></span>
+                      <span [ngClass]="{'not-suitable': position.candidateStatus.code === 'not-suitable'}"></span>
+                      <span [ngClass]="{'complete': position.candidateStatus.code === 'complete'}"></span>
+                      <span [ngClass]="{'success': position.candidateStatus.code === 'success'}"></span>
+                    </p>
+                    <p class="text text-center">
+                      {{position.candidateStatus.name | translate}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <!--<pager itemsPerPage="10"-->
+                 <!--name="page"-->
+                 <!--[itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"-->
+                 <!--[(ngModel)]="filter.page"-->
+                 <!--(pageChanged)="changePage($event)"-->
+                 <!--pageBtnClass="btn btn-link"></pager>-->
+          <pager [maxSize]="50"
+                 [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                 name="page"
+                 [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                 pageBtnClass="btn btn-link"></pager>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+</div>

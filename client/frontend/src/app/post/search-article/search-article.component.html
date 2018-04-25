@@ -1,0 +1,130 @@
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <!-- .article -->
+  <div class="article">
+    <!-- .articleContentList -->
+    <div class="articleContentList row" style="padding-top: 0">
+      <div class="col-md-8 col-sm-12 col-xs-12 articleContentListLeft">
+        <div class="articleContentListLeftContent">
+          <div class="loading text-center" *ngIf="searchArticleLoading">
+            <div class="row">
+              <div class="col-sm-12">
+                <i class="fa fa-spinner fa-pulse fa-3x"></i>
+              </div>
+              <!--/.col-->
+            </div>
+          </div>
+          <div>
+            <div class="noArticle text-center" *ngIf="searchArticles.length === 0 && !searchArticleLoading">
+              {{'article.no_search_article' | translate}}
+            </div>
+            <ul class="list list-unstyled" *ngIf="searchArticles.length > 0 && !searchArticleLoading">
+              <li class="row item" *ngFor="let list of searchArticles">
+                <div class="col-sm-4 col-xs-12 img">
+                  <a [routerLink]="[list?.path,list.id]"  target="_blank">
+                    <img src="../../../assets/img/250x150.png" class="img-responsive" *ngIf="list?.cover === null">
+                    <img [src]="list?.cover?.url['240']" class="img-responsive" alt="" *ngIf="list?.cover !== null">
+                  </a>
+                </div>
+                <!--/.img-->
+                <div class="content col-sm-8 col-xs-12">
+                  <p class="title">
+                    <a [routerLink]="[list?.path,list.id]" target="_blank">
+                      {{list.title}}
+                    </a>
+                  </p>
+                  <p class="other">
+                          <span class="author">
+                            {{'article.author' | translate}}: {{list.userName}}
+                          </span>
+                    <span class="time">
+                            {{list.createdAt | date: 'yyyy-MM-dd'}}
+                          </span>
+                  </p>
+                  <ul class="tags list-inline">
+                    <li class="tag" *ngFor="let tag of list.tags">
+                      <span>{{tag.name}}</span>
+                    </li>
+                  </ul>
+                  <p class="text">{{list.content | htmlToPlaintext : 50}}<span
+                    *ngIf="list.content.length > 50">...</span></p>
+
+                </div>
+                <!--/.content-->
+              </li>
+              <!--page-->
+              <div class="text-center">
+                <pager [maxSize]="50"
+                       [itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"
+                       [(ngModel)]="pageNum.page" (pageChanged)="changePage($event)"
+                       pageBtnClass="btn btn-link"></pager>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/.articleContentListLeft-->
+      <div class="col-md-4 col-sm-12 col-xs-12 articleContentListRight">
+        <div class="articleContentListRightArticle relatedActivity">
+          <div class="head">
+            <i></i>
+            <span>{{'article.newest_article' | translate}}</span>
+          </div>
+          <div class="loading text-center" *ngIf="newLoading">
+            <div class="row">
+              <div class="col-sm-12">
+                <i class="fa fa-spinner fa-pulse fa-3x"></i>
+              </div>
+              <!--/.col-->
+            </div>
+          </div>
+
+          <div class="noArticle text-center" *ngIf="!newLoading && newArticles.length === 0">
+            {{'message.company_no_publish_articles' | translate}}
+          </div>
+
+          <ul class="newArticle list-unstyled" *ngIf="!newLoading && newArticles.length > 0">
+            <li class="row" *ngFor="let relate of newArticles">
+              <div class="col-sm-5 col-xs-5 img">
+                <a [routerLink]="['/articles',relate.id]">
+                  <img src="../../../assets/img/240x160.png" class="img-responsive" *ngIf="relate.cover === null">
+                  <img [src]="relate.cover?.url['240']" class="img-responsive" *ngIf="relate.cover !== null">
+                </a>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-7 col-xs-7 content">
+                <h4 class="title">
+                  <a [routerLink]="['/articles',relate.id]">
+                    {{relate.title}}
+                  </a>
+                </h4>
+                <p class="time">
+                  {{relate.createdAt | date: 'yyyy-MM-dd'}}
+                </p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+        <!--/.articleContentListRight-->
+
+        <div class="articleContentListRightTag">
+          <div class="head">
+            <i></i>
+            <span>{{'article.hostTags' | translate}}</span>
+          </div>
+
+          <ul class="tags list-inline">
+            <li *ngFor="let tag of hotTags">
+              <a (click)="searchArticle(tag.name)">{{tag.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!-- /.articleContentList -->
+    <!--/.col-->
+  </div>
+  <!--/.article-->
+</div>

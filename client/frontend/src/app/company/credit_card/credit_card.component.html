@@ -1,0 +1,79 @@
+<div class="container">
+  <form class="form-horizontal">
+    <div class="row credit">
+      <div class="head" style="height: auto">
+        <h3 class="title">
+          {{'credit.credit_card_anagement' | translate}}
+        </h3>
+        <p class="content">
+          FreshLinker {{'message.credit_card_each_account_ensure_absolute_security' | translate}}
+          <a [routerLink]="['/about','contact']">{{'message.credit_card_contact_us' | translate}}</a>
+        </p>
+      </div>
+      <div class="creditLeft col-md-7 col-sm-12 col-xs-12">
+        <h4 class="title">{{'credit.now_credit_card' | translate}}</h4>
+        <p class="subTitle">
+          {{'message.credit_card_set_default_card' | translate}}
+        </p>
+        <div class="loading text-center" *ngIf="loading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+
+        <ul class="creditLeftList list-unstyled" *ngIf="!loading">
+          <li class="row list" *ngFor="let credit of credits">
+            <div class="img col-md-2 col-sm-2 col-xs-3">
+              <img src="../../assets/img/Credit_Card.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="text col-md-6 col-sm-6 col-xs-9">
+              <strong>{{credit.name}}</strong>
+              <div class="time">{{credit.country}} Express ending in {{credit.exp_month}}/{{credit.exp_year}}</div>
+            </div>
+            <!--/.col-->
+            <div class="button col-md-3 col-sm-3 col-xs-6 text-right">
+              <a class="btn" [ngClass]="{'btn-success': !credit.default_source, 'btn-default': credit.default_source}" type="button" (click)="setDefaultCredit(credit.id)">{{'credit.set_default' | translate}}</a>
+            </div>
+            <!--/.col-->
+            <div class="closed col-md-1 col-sm-1 col-xs-2">
+              <a class="btn" type="button" (click)="destory(credit.id)">
+                <i class="fa fa-close"></i>
+              </a>
+            </div>
+            <!--/.col-->
+          </li>
+          <li class="button text-right">
+            <a [routerLink]="['/company',companyId,'dashboard']" type="button" class="btn btn-default">{{'button.return' | translate}}</a>
+            <a [routerLink]="['/company',companyId,'recharge']"  type="button" class="btn btn-success">{{'credit.go_recharge' | translate}}</a>
+          </li>
+        </ul>
+
+      </div>
+      <!--/.col-->
+      <div class="col-md-5 col-sm-12 col-xs-12 creditRight">
+        <div class="creditRightContent">
+          <h4 class="title">{{'credit.add_credit_card' | translate}}</h4>
+          <p class="subTitle">
+            {{'message.credit_card_will_not_be_charged' | translate}}
+          </p>
+          <div class="form-group row item">
+            <div class="col-xs-12 button text-center">
+              <button class="btn btn-success"
+                      (click)="openCheckout()">
+                <span *ngIf="!addLoading">
+                    {{'button.add' | translate}}
+                </span>
+                <span *ngIf="addLoading">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </span>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+  </form>
+</div>

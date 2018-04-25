@@ -1,0 +1,306 @@
+div.enterpriseMain,
+div.enterpriseDashboardShow,
+div.enterpriseCompanyPageShow {
+  font-family: $font-family-light;
+
+  h3 {
+    color: #20507f;
+    padding: 40px 0;
+    margin: 0;
+  }
+
+
+  div.contentOne,
+  div.contentTwo,
+  div.contentThree,
+  div.contentFour,
+  div.contentFive {
+    padding-bottom: 30px;
+    border-bottom: 2px solid $gray-lighter;
+  }
+
+  div.contentOne,
+  div.contentTwo,
+  div.contentThree,
+  div.contentFour {
+    padding: 50px 0;
+    border-bottom: 2px solid $gray-lighter;
+    .contentImg {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+    div.contentText {
+      p.head {
+        font-size: $font-size-h3;
+        line-height: 1.7;
+        font-family: $font-family-regular;
+        color: $brand-info;
+        font-weight: 400;
+
+      }
+      p.text {
+        color: $brand-danger;
+        font-size: $font-size-large;
+        font-family: $font-family-light;
+      }
+      ul.text {
+        color: $brand-success;
+        li {
+          padding-bottom: 20px;
+          font-size: $font-size-large;
+          span {
+            color: $brand-danger;
+            font-family: $font-family-light;
+            font-weight: 200;
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+
+
+
+  div.contentFive {
+    div.item {
+      a {
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+
+      p {
+        padding: 10px 0;
+        a {
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  div.contentSix {
+    padding-bottom: 20px;
+    background-color: #F5F5F5;
+    p {
+      a.btn {
+        font-weight: bold;
+        font-size: $font-size-large;
+      }
+      padding-bottom: 20px;
+    }
+    a.link {
+      font-size: $font-size-large;
+    }
+  }
+
+  div.contentSeven {
+    padding: 60px 0;
+    h3 {
+      padding-bottom: 20px;
+    }
+    ul.icon {
+      li {
+        padding: 0 15px;
+        a {
+          font-size: $font-size-h2;
+          color: $brand-success;
+        }
+      }
+    }
+
+  }
+
+
+
+}
+
+// div.enterpriseMain
+div.enterpriseMain {
+  div.contentOne,
+  div.contentTwo,
+  div.contentThree {
+
+    div.contentText {
+      ul.text {
+        list-style-type: circle;
+        padding-left: 20px;
+      }
+
+      p.more {
+        margin: 20px 0 0 20px;
+        a.btn {
+          font-weight: 200;
+          font-size: $font-size-large;
+        }
+      }
+
+    }
+  }
+
+  div.contentOne {
+    div.contentText {
+      p.head {
+        a.link {
+          color: $gray-dark;
+          font-size: $font-size-large;
+        }
+      }
+    }
+  }
+
+  div.contentThree {
+    border-bottom: 0;
+    div.contentText {
+      p.text {
+        line-height: 1.8;
+        font-size: $font-size-large;
+        color: $brand-danger;
+        a.open,a.closed {
+          color: $brand-success;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  div.contentFour{
+    border: 0;
+    div.contentFourRow{
+      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      padding: 20px 0 40px 0;
+      h3.title{
+        color: #4a80bc;
+      }
+      p.text{
+        font-size: $font-size-large;
+
+      }
+      img{
+        margin: 0 auto;
+        padding-top: 20px;
+      }
+    }
+    p.text1{
+      font-size: $font-size-large;
+      padding: 30px 0;
+    }
+    span.sign{
+      color: #4a80bc;
+    }
+  }
+
+}
+
+
+// enterpriseDashboardShow
+
+div.enterpriseDashboardShow,
+div.enterpriseCompanyPageShow {
+  div.contentFour {
+    border-bottom: 0;
+    div.contentImg {
+      border-bottom: 1px solid $gray-light-2x;
+      padding: 30px 0;
+    }
+    div.contentText {
+      font-size: 20px;
+      font-family: $font-family-regular;
+      p.head {
+        padding-bottom: 30px;
+      }
+    }
+
+    div.other {
+      padding: 30px 0;
+    }
+
+    p.more {
+      margin: 20px 0 0 20px;
+      a{
+        padding: 5px 15px;
+        font-size: $font-size-h4;
+        font-family: $font-family-light;
+      }
+    }
+  }
+}
+
+
+@media (max-width: $screen-xs-max) {
+
+  div.enterpriseMain,
+  div.enterpriseDashboardShow,
+  div.enterpriseCompanyPageShow {
+    div.contentOne {
+      padding-top: 20px;
+    }
+
+    div.contentOne, div.contentThree {
+      .contentImg {
+        margin-bottom: 20px;
+      }
+    }
+
+    div.contentTwo {
+      .contentImg {
+        margin-top: 20px;
+      }
+      .contentText {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+  div.contentTwo {
+    .contentText {
+      margin-bottom: 20px;
+    }
+  }
+
+  div.contentThree {
+    div.contentText {
+      padding: 40px 30px 0 0;
+    }
+  }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  div.contentOne {
+    div.contentText {
+      padding-left: 20px;
+    }
+  }
+
+  div.contentThree {
+    div.contentText {
+      padding-left: 20px;
+    }
+  }
+}
+@media (min-width: $screen-lg-min) {
+  div.contentOne {
+    div.contentText {
+      padding-left: 20px;
+    }
+  }
+
+  div.contentTwo {
+    div.contentText {
+      padding: 0 60px;
+    }
+  }
+
+  div.contentThree {
+    div.contentText {
+      padding-left: 20px;
+    }
+  }
+}

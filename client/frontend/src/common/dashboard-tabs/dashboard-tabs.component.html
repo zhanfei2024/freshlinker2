@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-inline dashboardTabs">
+      <li class="list" ><a routerLinkActive="active" [routerLink]="['/company',companyId,'dashboard']" pageScroll href="#awesomePart" [pageScrollDuration]="0">{{ 'enterprise.dashboard' | translate }}</a>
+      </li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/company',companyId,'news']">{{'user.news.new_message' | translate }}</a>
+        <span class="redPoint" [hidden]="!isRead"></span>
+      </li>
+      <li class="list" >
+        <a  routerLinkActive="active" [routerLink]="['/company',companyId,'interview']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{ 'enterprise.resume_management' | translate }}</a>
+      </li>
+      <li class="list" >
+        <a routerLinkActive="active" [routerLink]="['/company',companyId,'position-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{ 'enterprise.position_management' | translate }}
+        </a>
+      </li>
+      <li class="list">
+        <a routerLinkActive="active" [routerLink]="['/company',companyId,'job-offer-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          EasyBoost
+        </a>
+      </li>
+
+      <li class="list">
+        <a routerLinkActive="active" [routerLink]="['/company',companyId,'employee-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{'enterprise.staff_management' | translate}}
+        </a>
+      </li>
+      <li class="list" [hidden]="company.isVIP">
+        <a routerLinkActive="active" [routerLink]="['/company',companyId,'company-list']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{ 'enterprise.company_page' | translate}}
+        </a>
+      </li>
+      <li class="list"  [hidden]="!company.isVIP">
+        <a routerLinkActive="active" [routerLink]="['/upgrade_company',companyId,'profile']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{ 'enterprise.company_page' | translate}}
+        </a>
+      </li>
+      <li class="list"  [hidden]="!company.isVIP">
+        <a id="importance" routerLinkActive="active" [routerLink]="['/company',companyId,'welfare-awards','1']" pageScroll href="#awesomePart" [pageScrollDuration]="0">
+          {{ 'enterprise.vip' | translate}}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!--/.col-->
+</div>
+<company-root *ngIf="company.isVIP"></company-root>

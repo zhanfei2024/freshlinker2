@@ -1,0 +1,201 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form class="form-horizontal" #PostForm="ngForm" name="Form" (ngSubmit)="post()" (window:beforeunload)="doSomething($event)">
+    <div class="row articleEdit">
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="col-md-3 col-sm-12 col-xs-12 articleEditLeft">
+          <div class="content">
+            <div class="button">
+              <button type="submit" class="btn btn-success sub articleSub" [disabled]="!(PostForm.form.valid && cover)">
+                <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+                <span *ngIf="!saveLoading">{{ 'button.release' | translate }}</span>
+              </button>
+              <a [routerLink]="['/user','activity']" type="button" class="btn btn-default canel">
+                {{ 'button.cancel' | translate }}
+              </a>
+            </div>
+
+            <div class="pic col-xs-12">
+              <label for="name" class="col-sm-12 col-xs-12 control-label"><span class="text-danger">*</span>
+                {{ 'article.cover' |translate}} ({{'activity.activity_category_select_msg' | translate}})
+              </label>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12">
+                <div class="col-sm-12 col-xs-12 uploader">
+                  <input type="file"  class="file" (change)="fileChangeListener($event)" required/>
+                  <span class="text-muted">
+                    <i class="fa fa-cloud-upload fa-5x" *ngIf="cover === ''"></i>
+                    <img class="thumb img-responsive" *ngIf="cover !== ''" [src]="cover">
+                    <!--<img class="thumb img-responsive" [src]="cover">-->
+                    <br>
+                    <h4>{{'file.Drop_here_to_upload_(or click)' | translate}}</h4>
+                  </span>
+                  <p>{{filesName}}</p>
+                </div>
+              </div>
+              <!--/.col-->
+            </div>
+            <div class="tags col-xs-12">
+              <label for="name" class="col-sm-12 col-xs-12 control-label">
+                {{ 'article.activity_tag_input' |translate}}
+              </label>
+              <!--/.col-->
+
+              <div class="col-sm-12 col-xs-12">
+                <ng-select [multiple]="true"
+                           id="tags"
+                           #select
+                           [items]="items"
+                           (typed)="tagChange($event)"
+                           (data)="refreshValue($event)"
+                           [active]="selectedTags"
+                           [disabled]="disabled"
+                           [placeholder]="'article.activity_tag_input' | translate"></ng-select>
+                <div class="tips">
+                  {{'global.tips' | translate}}: {{'article.article_tags_input_msg' | translate}}
+                </div>
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.col-->
+
+          </div>
+
+        </div>
+        <!--/.col-->
+        <div class="col-md-9 col-sm-12 col-xs-12 articleEditRight">
+          <div class="form-group item">
+            <div class="content col-xs-12">
+              <div class="input">
+                <label class="col-sm-2 col-xs-12 control-label">{{'article.category' | translate}}</label>
+                <!--/.col-->
+                <div class="col-sm-10 col-xs-12 categoryContent clearfix">
+                  <div class="categorySelected pull-left">
+                    <p *ngIf="selectedArticleCategory?.length === 0" class="message"
+                       (click)="categoryShow = !categoryShow">{{'activity.activity_category_select_msg' | translate}}</p>
+
+                    <ul class="list-inline" *ngIf="selectedArticleCategory?.length > 0">
+                      <li *ngFor="let select of selectedArticleCategory" class="selectList"
+                          (click)="addSelectedArticleCategory(select, $event); $event.stopPropagation()">
+                        <a href="javascript:;">{{select.name}}</a>
+                        <i class="fa fa-close"></i>
+                      </li>
+                      <li *ngIf="selectedArticleCategory?.length === 3" class="limitShow">
+                        {{'search.up_to_three' | translate}}
+                      </li>
+                    </ul>
+
+                  </div>
+                  <div class="pull-right" (click)="categoryShow = !categoryShow">
+                    <i class="add fa fa-plus"></i>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+              <!-- /.form-group -->
+              <!-- article category-->
+              <div class="row">
+                <div class="postArticleCategory clearfix col-sm-offset-2" *ngIf="categoryShow">
+                  <div class="postArticleCategoryLeft">
+                    <ul class="postArticleCategoryList list-unstyled">
+                      <li *ngFor="let list of category">
+                        <label for="checkbox{{list.id}}">
+                          <input type="checkbox" [(ngModel)]="list.selected"
+                                 [disabled]="selectedArticleCategory?.length === 3 && !list.selected"
+                                 [checked]="list.selected" id="checkbox{{list.id}}" name="checkbox{{list.id}}"
+                                 (click)="addSelectedArticleCategory(list)">
+                          {{list.name}}
+                        </label>
+
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- /.article category -->
+
+            </div>
+            <!--/.col-->
+            <div class="content title col-xs-12">
+              <label for="name" class="col-sm-12 col-xs-12 control-label"><span class="text-danger">*</span>
+                {{ 'article.name' |translate}}
+              </label>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12">
+                <input type="text" class="form-control" id="name" name="name" required
+                       [(ngModel)]="article.title" placeholder="{{'article.activity_name_input' | translate}}">
+              </div>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12 tips">
+                {{'article.article_name_input_msg' | translate}}
+              </div>
+            </div>
+            <!--/.col-->
+
+            <div class="content title col-xs-12">
+              <label for="url" class="col-sm-12 col-xs-12 control-label">
+                {{ 'article.url' |translate}}
+              </label>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12">
+                <input type="url" class="form-control" id="url" name="url" required
+                       [(ngModel)]="article.url" placeholder="{{'article.article_url_input' | translate}}">
+              </div>
+              <!--/.col-->
+              <div class="col-sm-12 col-xs-12 tips">
+                <a href="https://www.google.com/forms/about/" target="_blank">{{'message.click_here' | translate}}</a>
+              </div>
+            </div>
+            <!--/.col-->
+
+            <div class="content text col-xs-12">
+              <label class="col-sm-12 col-xs-12 control-label">
+                {{ 'activity.text' |translate}}
+              </label>
+              <!--/.col-->
+              <quill-editor [(ngModel)]="article.content" name="content" id="content"></quill-editor>
+
+
+            </div>
+            <!--/.item-->
+          </div>
+          <!--/.col-->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" style="min-width: 700px" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 15px 15px 30px;">
+        <h4 class="modal-title pull-left">
+          {{'file.cut' | translate}}
+        </h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+        <br>
+        <span class="result rounded" *ngIf="data.image">
+                          <img class="img-responsive" [src]="data.image" [width]="cropperSettings.croppedWidth"
+                               [height]="cropperSettings.croppedHeight">
+          </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="cropIcon(data.image)">
+          <i class="fa fa-check"></i>{{ 'button.yes' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

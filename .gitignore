@@ -1,0 +1,8 @@
+node_modules/
+.tmp/
+.env.development
+.env.test
+.idea/
+langs/en-us.json
+langs/zh-hk.json
+/package-lock.json

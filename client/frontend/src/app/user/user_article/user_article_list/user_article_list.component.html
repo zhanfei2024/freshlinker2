@@ -1,0 +1,155 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form action="">
+    <div class="row articleList">
+      <div class="col-md-3 col-sm-12 col-xs-12 articleListLeft">
+        <div class="content">
+          <div class="button">
+            <a [routerLink]="['/user','article','edit']" class="btn btn-success sub">
+              {{ 'enterprise.article_publish' | translate}}
+            </a>
+          </div>
+
+          <ul class="editList list-unstyled">
+            <li class="list" *ngFor="let item of articleStatus" [ngClass]="{'active': item.id === articleIndex}">
+              <a (click)="articleTab(item.id)">{{item.name | translate}}</a>
+            </li>
+          </ul>
+
+          <div class="searchForm">
+            <h5>{{'article.article_search_title' | translate}}</h5>
+            <div class="form-group">
+              <input type="text" name="text" placeholder="{{'article.article_title_input' | translate}}" required="true"
+                     [(ngModel)]="filter.search">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn" (click)="searchArticle()">{{'button.determine' |
+                translate}}
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-md-9 col-sm-12 col-xs-12 articleListRight">
+        <div *ngIf="!changeTabLoading">
+          <div class="text-center loading" *ngIf="tableLoading && articleLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div *ngIf="!tableLoading">
+            <div *ngIf="articles.length === 0 && !articleLoading" class="noAppliedArticle row">
+              <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+                <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+              </div>
+              <!--/.col-->
+              <div class="col-md-5 col-sm-5 col-xs-12 text">
+                <p>
+                  {{'message.article_no_publish_message' | translate}}
+                  <br>
+                  {{'message.article_need_to_fill_published' | translate}}!
+                  <br>
+                  <span>{{'global.go_ahead' | translate}}</span>
+                  <a [routerLink]="['/user','article','edit']">
+                    {{ 'enterprise.article_publish' | translate }}
+                  </a>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+            <div class="articleListRightContent" *ngIf="articles.length > 0 && !articleLoading">
+              <div *ngIf="articles.length > 0">
+                <div class="row articleListRightItem" *ngFor="let article of articles">
+                  <div class="col-sm-12 col-xs-12 content">
+                    <p class="articleName clearfix">
+                                        <span class="name pull-left">
+                                            {{article.title}}
+                                        </span>
+
+                      <span class="text text-center pull-left" *ngIf="article.isApproved && article.active"
+                            [ngClass]="{'isApproved': article.isApproved}">
+                                            {{'enterprise.article_isApproved' | translate}}
+                                        </span>
+                      <span class="text text-center pull-left" *ngIf="article.isApproved === false && article.active"
+                            [ngClass]="{'unApproved': article.isApproved === false}">
+                                            {{'enterprise.article_unApproved' | translate}}
+                                        </span>
+                      <span class="text text-center pull-left" *ngIf="!article.active"
+                            [ngClass]="{'offline': !article.active}">
+                                            {{'enterprise.article_offline' | translate}}
+                                        </span>
+                    </p>
+                    <p class="writer">
+                      {{'article.author' | translate}}: {{article.userName}}
+                    </p>
+                    <p class="tags">
+                                        <span *ngFor="let tag of article.tags">
+                                            {{tag.name}}
+                                        </span>
+                    </p>
+                    <p class="text">
+                      {{article.content | htmlToPlaintext : 100}}<span
+                      *ngIf="article.content.length > 100">...</span>
+                    </p>
+                  </div>
+                  <ul class="col-sm-12 col-xs-12 checkList list-inline">
+                    <li class="list">
+                      <a [routerLink]="['/user','article',article.id,'preview']">
+                        {{'global.view' | translate}}
+                      </a>
+                    </li>
+                    <li>|</li>
+                    <li class="list">
+                      <a [routerLink]="['/user','article',article.id,'edit']">
+                        {{'button.modify' | translate}}
+                      </a>
+                    </li>
+                    <li>|</li>
+                    <li class="list">
+                      <a (click)="destory(article.id)">
+                        {{'button.delete' | translate}}
+                      </a>
+                    </li>
+                    <li>|</li>
+                    <li class="list">
+                      <a (click)="editArticle(article.id, 'offline')" *ngIf="article.active">
+                        {{'global.offline' | translate}}
+                      </a>
+
+                      <a (click)="editArticle(article.id, 're-publish')" *ngIf="!article.active">
+                        {{'global.re-publish' | translate}}
+                      </a>
+
+                    </li>
+                    <li>|</li>
+                    <li class="time">
+                      {{article.updatedAt | date: 'yyyy-MM-dd'}} {{'button.publish' | translate }}
+                    </li>
+
+                  </ul>
+                  <!--/.col-->
+                </div>
+
+
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- page -->
+        <div class="text-center">
+          <pager [maxSize]="50"
+                 [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                 name="page"
+                 [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                 pageBtnClass="btn btn-link"></pager>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+</form>
+
+</div>

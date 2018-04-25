@@ -1,0 +1,488 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <form class="form-horizontal" name="Form" (ngSubmit)="postOffer()"  (window:beforeunload)="doSomething($event)">
+    <div class="row jobOffer">
+      <div class="col-md-3 col-sm-12 col-xs-12 jobOfferLeft">
+        <div class="text-center content">
+          <div class="button">
+            <button type="button" class="btn btn-success sub jobOfferSub" *ngIf="!isNext" (click)="checkNext()">
+              <span>next</span>
+            </button>
+            <button type="submit" class="btn btn-success sub jobOfferSub" *ngIf="isNext">
+              <span *ngIf="saveLoading"><i class="fa fa-spinner fa-pulse"></i></span>
+              <span *ngIf="!saveLoading">Boost</span>
+            </button>
+            <a [routerLink]="['/company',jobOffer.companyId,'job-offer-list']" type="button" class="btn btn-default canel" *ngIf="!isNext">
+              {{ 'button.return' | translate }}
+            </a>
+            <a type="button" class="btn btn-default canel" *ngIf="isNext" (click)="isNext = !isNext">
+              {{ 'button.return' | translate }}
+            </a>
+          </div>
+          <div class="loading text-center" *ngIf="loading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div *ngIf="!loading">
+            <div class="item" *ngFor="let item of price">
+              <div *ngIf="!isNext">
+                <div *ngIf="item.name === 'skill'">
+                  <p class="price">
+                    $ {{item.price}}
+                  </p>
+                  <span>{{'user.profile.skill' | translate}}:</span>
+                  <span>{{item.value}}</span>
+                </div>
+                <div *ngIf="item.name === 'education'" >
+                  <p class="price">
+                    $ {{educationPrice.totalPrice}}
+                  </p>
+                  <p *ngIf="educationPrice.educationLevel !== '' && educationPrice.educationLevel !== undefined">
+                    <span>{{'user.profile.education' | translate}}: </span>
+                    <span>{{educationPrice.educationLevel}}</span>
+                    <span>$ {{educationPrice.price}}</span>
+                  </p>
+
+                  <p *ngIf="educationPrice.gpa !== undefined && educationPrice.gpa !== null">
+                    <span>gpa: </span>
+                    <span>{{educationPrice.gpa}}</span>
+                    <span>$ {{educationPrice.price}}</span>
+                  </p>
+                </div>
+
+                <div *ngIf="item.name === 'language'" >
+                  <p class="price">
+                    $ {{item.price}}
+                  </p>
+                  <p>
+                    {{'user.profile.language' | translate}}
+                  </p>
+                  <p *ngFor="let list of item.value;let i = index">
+                    <span>{{list.name}}:</span>
+                    <span>{{list.level}}</span>
+                  </p>
+                </div>
+                <div *ngIf="item.name === 'experience'" >
+                  <p class="price">
+                    $ {{item.price}}
+                  </p>
+                  <p>
+                    {{'user.profile.experience' | translate}}: {{item.value}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="item" *ngIf="totalPrice !== undefined">
+              <p class="price">
+                $ {{totalPrice}}
+              </p>
+              <span>{{'position.total_price' | translate}}</span>
+            </div>
+
+            <div class="item" *ngIf="jobOffer.maxPerPrice !== undefined">
+              <p class="price">
+                $ {{jobOffer.maxPerPrice}}
+              </p>
+              <span>{{'message.job_offer_maximum_price_each_invited_applicants' | translate}}</span>
+            </div>
+
+            <div class="item" *ngIf="jobOffer.maxPersonNum !== undefined && jobOffer.maxPersonNum !== null">
+              <p class="price">
+                {{jobOffer.maxPersonNum}}
+              </p>
+              <span>{{'message.job_offer_get_up_number_applicants' | translate}}</span>
+            </div>
+
+            <div class="item" *ngIf="maxCost !== undefined">
+              <p class="price">
+                $ {{maxCost}}
+              </p>
+              <span>{{'message.job_offer_budget_max' | translate}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="col-md-9 col-sm-12 col-xs-12 jobOfferRight" *ngIf="!isNext">
+        <div class="jobOfferText">
+          <p class="title text-center">
+            {{'message.job_offer_choose_position_maxCost' | translate}}
+          </p>
+          <p class="subTitile text-center">
+            {{'message.job_offer_correct_people_num' | translate}}
+          </p>
+        </div>
+        <div class="jobOfferContent">
+          <div class="loading text-center" *ngIf="loading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div *ngIf="!loading">
+            <div class="form-group contentOne">
+              <div class="col-md-12 col-xs-12">
+                <label class="control-label col-md-12">
+                  {{ 'position.select_position' | translate}}
+                </label>
+                <div class="col-md-8 col-xs-12 select">
+                  <select class="form-control" [(ngModel)]="jobOffer.positionId" name="positionId" required (change)="getPosition(jobOffer.positionId)">
+                    <option value="">{{ 'position.select_position' | translate}}</option>
+                    <option [value]="item.id" *ngFor="let item of positions">{{item.name}}</option>
+                  </select>
+                </div>
+                <div class="addPosition col-md-4 col-xs-12">
+                  <a (click)="postPosition()"><i class="fa fa-plus-square"></i>{{'position.add_position' | translate}}</a>
+                </div>
+                <div class="tips col-md-12 col-xs-12">
+                  {{'global.example' | translate}}: {{'position.web_frontend' | translate}}
+                </div>
+              </div>
+              <!--/col-->
+
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group contentTwo" *ngIf="jobOffer.positionId">
+              <div class="jobOfferText">
+                <p class="title text-center">
+                  {{'message.job_offer_select_condition' | translate}}
+                </p>
+                <p class="subTitile text-center">
+                  {{'message.job_offer_select_condition_input' | translate}}
+                </p>
+              </div>
+              <label class="col-xs-12 col-md-12  control-label">
+                {{ 'global.choose_filters' | translate}}
+              </label>
+              <!--/.col-->
+              <div class=" col-xs-12 col-md-12">
+                <ul class="list-inline checkList">
+                  <li *ngFor="let key of types | keys;let i =index;">
+                    {{key.type}}
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="selected{{i}}" [value]="key.key" [(ngModel)]="key.value.selected" (click)="check(key.value)">
+                        {{key.value.name | translate}}
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!--/.col-->
+              <div class="col-md-12 col-xs-12 other">
+                {{'global.tips' | translate}}: {{'message.job_offer_select_condition_finish' | translate}}
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <div class="form-group contentThree" *ngIf="types.education.selected">
+              <div class="col-md-6 col-xs-12">
+                <label class="control-label">
+                  {{'user.profile.education' | translate}}
+                </label>
+                <select class="form-control" [(ngModel)]="types.education.educationLevelId" name="educationLevelId" required (change)="check(types.education)">
+                  <option value="">{{ 'message.select_position_education' | translate}}</option>
+                  <option [value]="item.id" *ngFor="let item of educations">{{item.name}}</option>
+                </select>
+              </div>
+              <!--/.col-->
+              <div class="col-md-6 col-xs-12 gpa">
+                <label class="control-label">
+                  GPA
+                </label>
+                <input type="text" class="form-control"  placeholder="{{'message.position_gpa_input' | translate}}" name="gpa"
+                       #educationGpa
+                       [(ngModel)]="types.education.gpa"
+                       (keyup)="restGpa(educationGpa.value)"
+                       (blur)="restGpa(educationGpa.value)"
+                       min="0" step="0.1" max="5"
+                       (change)="check(types.education)">
+                <div class="tips">{{'global.tips' | translate}}: {{'message.job_offer_digital_0-5' | translate}}</div>
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.form-group-->
+
+            <!--skill-->
+            <div class="form-group contentThree" *ngIf="types.skill.selected">
+              <label class="col-xs-12 col-sm-12  control-label">
+                {{'user.profile.skill' | translate}}
+              </label>
+              <!--/.col-->
+              <div class="col-md-8  col-xs-12 skillInput">
+                <ng-select  [multiple]="true"
+                            id="skill"
+                            [items]="skill"
+                            [active]="skills"
+                            #select
+                            [disabled]="disabled"
+                            (data)="check(types.skill,$event)"
+                            (typed)="tagChange($event)"
+                            [placeholder]="'user.profile.skill_name_input' | translate">
+              </ng-select>
+              </div>
+              <!--/.col-->
+              <div class="error col-md-4 col-xs-12" *ngIf="skillError">
+                <i class="fa fa-times-circle"></i>
+                {{'message.job_offer_three_skills_error_msg' | translate}}
+              </div>
+
+            </div>
+            <!-- /.form-group -->
+
+
+            <!--language-->
+            <div class="contentFour" *ngIf="types.languages.selected">
+              <div class="form-group languageTips">
+                <label class="col-xs-12 col-sm-12  control-label">
+                  {{'user.profile.language' | translate}}
+                  <a (click)="addLanguage()" class="icon">
+                    <i class="fa fa-plus-square"></i>
+                  </a>
+
+                </label>
+                <!--/.col-->
+              </div>
+
+
+
+              <div *ngIf="languageShow">
+                <div class="row item" *ngFor="let list of language;let i = index" >
+                  <div *ngIf="!list.deleted">
+                    <div class="col-sm-10  col-xs-10">
+                      <select class="form-control" [(ngModel)]="list.languageId" name="languageId{{i}}" required (change)="getLanguageName(list.languageId,i,types.languages)">
+                        <option value="">{{ 'message.position_language_select' | translate}}</option>
+                        <option [value]="item.id" *ngFor="let item of languages">{{item.name}}</option>
+                      </select>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-sm-2 col-xs-2 minus" (click)="deleteLanguage(i, types.languages)">
+                      <i class="fa fa-minus "></i>
+                    </div>
+                    <div class="col-sm-12 col-xs-12">
+                      <label *ngFor="let item of languageLevel;let index =index;">
+                        <input type="radio" value="{{item.level}}" name="languageLevel{{i}}" [(ngModel)]="list.level" (change)="check(types.languages)">
+                        {{item.name}}
+                      </label>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </div>
+              </div>
+              <div class="row other">
+                <div class="col-md-12 col-xs-12 ">
+                  {{'global.tips' | translate}}: {{'message.job_offer_add_language_condition' | translate}}
+                </div>
+              </div>
+            </div>
+            <!-- /.form-group -->
+
+            <!--experience-->
+            <div class="form-group contentFour" *ngIf="types.experience.selected">
+              <div class="col-md-6 col-xs-12">
+                <label class="control-label">
+                  {{ 'user.profile.experience' | translate}}
+                </label>
+                <br>
+                <label for="expeirence01">
+                  <input type="radio" value="0-2" name="expeirence01" id="expeirence01" [(ngModel)]="jobOffer.experience" (change)="check(types.experience)">
+                  {{'message.job_offer_experience_0-2' | translate}}
+                </label>
+                <label for="expeirence02">
+                  <input type="radio" value="3-5" name="expeirence02" id="expeirence02" [(ngModel)]="jobOffer.experience" (change)="check(types.experience)">
+                  {{'message.job_offer_experience_3-5' | translate}}
+                </label>
+                <div class="tips">
+                  {{'global.example' | translate}}: {{'message.job_offer_experience_0-2' | translate}}
+                </div>
+              </div>
+              <!--/col-->
+
+            </div>
+            <!-- /.form-group -->
+
+            <div class="maxCost" *ngIf="jobOffer.positionId">
+              <div class="jobOfferText">
+                <p class="title text-center">
+                  {{'message.job_offer_determine_cost_expectations' | translate}}
+                </p>
+                <p class="subTitile text-center">
+                  {{'message.job_offer_determine_number_invitation' | translate}}
+                </p>
+              </div>
+              <div class="form-group">
+                <div class=" col-xs-12 col-md-12">
+                  <label class="control-label col-xs-12">
+                    {{'message.job_offer_budget_max' | translate}}
+                  </label>
+                  <div class="maxCostInput row">
+                    <div class="col-xs-12 col-sm-8 input">
+                      <input type="number" [(ngModel)]="maxCost" name="maxCost" class="form-control" (blur)="checkMaxCost()" min=8>
+                    </div>
+                    <!--/.col-->
+                    <!--<div class="col-sm-4 col-xs-12">-->
+                      <!--<button type="button" class="btn btn-success" (click)="checkMaxCost()">{{'button.determine' | translate}}</button>-->
+                    <!--</div>-->
+                    <!--/.col-->
+                  </div>
+
+                  <div class="tips">
+                    {{'global.tips' | translate}}：{{'message.job_offer_budget_max_no_input' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--/.col-->
+
+      <div class="col-md-9 col-xs-12 col-xs-12 jobOfferRight" *ngIf="isNext">
+        <div class="jobOfferText">
+          <p class="title text-center">
+            {{'message.job_offer_confirm_order_information' | translate}}
+          </p>
+          <p class="subTitile text-center">
+            {{'message.job_offer_confirm_contents_billing_information' | translate}}
+          </p>
+        </div>
+        <div class="jobOfferContent">
+          <div class="loading text-center" *ngIf="loading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div *ngIf="!loading">
+            <div class="itemOne">
+              <p class="title">{{'position.name' | translate}}: <span>{{jobOffer.positionName}}</span></p>
+              <ul class="content list-unstyled">
+                <li class="row list title">
+                  <div class="col-xs-4">
+                    {{'message.job_offer_item_condition' | translate}}
+                  </div>
+                  <!--/.col-->
+                  <div class="col-xs-4">
+                    {{'message.job_offer_details' | translate}}
+                  </div>
+                  <!--/.col-->
+                  <div class="col-xs-4 text-right">
+                    {{'message.job_offer_price_quantity' | translate}}
+                  </div>
+                  <!--/.col-->
+                </li>
+                <li class="list" *ngFor="let item of price">
+                  <div *ngIf="item.name === 'skill'" class="row">
+                    <div class="col-xs-4">
+                      {{'user.profile.skill' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4">
+                      {{item.value}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      $ {{item.price}}
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <div *ngIf="item.name === 'education'" class="row">
+                    <div class="col-xs-4">
+                      {{'user.profile.education' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4">
+                      <p *ngIf="educationPrice.educationLevel !== '' && educationPrice.educationLevel !== undefined">
+                        {{educationPrice.educationLevel}}
+                      </p>
+                      <p *ngIf="educationPrice.gpa !== undefined && educationPrice.gpa !== null">
+                        gpa: {{educationPrice.gpa}}
+                      </p>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      <p *ngIf="educationPrice.educationLevel !== '' && educationPrice.educationLevel !== undefined">
+                        $ {{educationPrice.price}}
+                      </p>
+                      <p *ngIf="educationPrice.gpa !== undefined && educationPrice.gpa !== null">
+                        $ {{educationPrice.price}}
+                      </p>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <div *ngIf="item.name === 'language'" class="row">
+                    <div class="col-xs-4">
+                      {{'user.profile.language' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4">
+                      <p *ngFor="let list of item.value;let i = index">
+                        <span>{{list.name}}:</span>
+                        <span>{{list.level}}</span>
+                      </p>
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      <p *ngFor="let list of item.value;let index = index">
+                        $ {{item.price}}
+                      </p>
+                    </div>
+                    <!--/.col-->
+                  </div>
+
+                  <div *ngIf="item.name === 'experience'" class="row">
+                    <div class="col-xs-4">
+                      {{'user.profile.experience' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4">
+                      {{item.value}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      $ {{item.price}}
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="row item">
+                    <div class="col-xs-8">
+                      {{'message.job_offer_maximum_price_each_invited_applicants' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      $ {{jobOffer.maxPerPrice}}
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <div class="row item">
+                    <div class="col-xs-8">
+                      {{'message.job_offer_get_up_number_applicants' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      {{jobOffer.maxPersonNum}}
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <div class="row item">
+                    <div class="col-xs-8">
+                      {{'message.job_offer_budget_max' | translate}}
+                    </div>
+                    <!--/.col-->
+                    <div class="col-xs-4 text-right">
+                      $ {{maxCost}}
+                    </div>
+                    <!--/.col-->
+                  </div>
+                </li>
+              </ul>
+              <p class="title subTitle">{{'position.expiredDate' | translate}}: <span>30{{'global.days' | translate}}</span></p>
+              <p class="tips">{{'message.job_offer_charge_appropriate_fees' | translate}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!--/.col-->
+
+    </div>
+  </form>
+</div>

@@ -1,0 +1,9 @@
+<!doctype html><html ng-app=backend ng-strict-di ng-controller="AppController as appCtrl"><head><meta charset=utf-8><title ng-bind="(appCtrl.metaService.getPageTitle() !== '' ? appCtrl.metaService.getPageTitle() + ' - ': '') + 'Freshlinker Admin Panel'"></title><meta name=author content="DevMark & YOOV TEAM"><base href=/shyboys/ ><meta name=fragment content=!><meta name=description content=""><meta name=viewport content="width=device-width"><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><link rel=stylesheet href=styles/vendor-2b72ee2e6c.css><link rel=stylesheet href=styles/app-18b60f34b5.css></head><body class="sidebar-mini skin-blue" ng-controller="ThemeController as themeCtrl" ng-class="{
+  'sidebar-collapse': !themeCtrl.isOpenSidebar,
+  'fixed' :themeCtrl.isFixedLayout ,
+  'layout-boxed' : themeCtrl.isBoxedLayout,
+  'login-page': themeCtrl.fullscreen
+  }"><toaster-container></toaster-container><!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]--><div ui-view></div><script src=scripts/vendor-41a9e79116.js></script><script src=scripts/app-fa721e3d65.js></script></body></html>

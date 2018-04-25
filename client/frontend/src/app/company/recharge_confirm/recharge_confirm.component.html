@@ -1,0 +1,36 @@
+<div class="container rechargeConfirm">
+  <div class="head">
+    <h3 class="title">
+      {{'message.credit_card_successful_recharge' | translate}}
+    </h3>
+    <p class="content">
+      {{'message.credit_card_we_will_do_better' | translate}}
+    </p>
+  </div>
+  <div class="rechargeConfirmContent row">
+    <div class="col-md-3 col-sm-12 col-xs-12 col-md-offset-2 img">
+      <img src="../../assets/img/recharge-confirm.png" alt="" class="img-responsive">
+    </div>
+    <!--/.col-->
+    <div class="col-md-5 col-sm-12 col-xs-12 content text-center">
+      <h4 class="title">{{'message.credit_card_get_more_priority' | translate}}</h4>
+      <p class="other">{{'message.credit_card_active_recruitment_advertising_show' | translate}}</p>
+      <div class="button">
+        <a [routerLink]="['/company','pricing']" class="btn btn-success">{{'message.credit_card_purchase_package' | translate}}</a>
+      </div>
+
+      <h4 class="subTitle">
+        EasyBoost，{{'message.looking_for_talent_easily' | translate}}
+      </h4>
+      <div class="button">
+        <a [routerLink]="['/company',companyId,'job-offer']"  class="btn btn-success">Boost it !</a>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+  <div class="tips text-center">
+    {{'message.credit_card_immediately_went_to_bills_check_history' | translate}}<a [routerLink]="['/company',companyId,'account']">{{'message.click_here' | translate}}</a>
+  </div>
+
+</div>

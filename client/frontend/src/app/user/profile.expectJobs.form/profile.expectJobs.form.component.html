@@ -1,0 +1,203 @@
+<div class="dialog">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 clearFloat">
+        <form class="form-horizontal expect" #PostForm="ngForm" name="Form" (ngSubmit)="save()">
+          <div class="modal-header">
+            <h4><i class="fa fa-pencil-square-o"></i>{{'user.profile.expectPosition' |
+              translate}}
+              <button type="button" class="close pull-right" aria-label="Close" [routerLink]="['/user','profile']">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-10 clearFloat">
+                <div class="form-group expectJobsCategory">
+                  <label class="col-sm-2 col-xs-12 control-label textLeft"><span class="text-danger">*</span>
+                    {{ 'user.profile.expectPosition' | translate }}
+                  </label>
+                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12 locationContent clearfix">
+                    <div class="locationSelected pull-left">
+                      <p *ngIf="selectedPositionCategory  === undefined" class="message">
+                        {{'user.profile.expect_job_input' |
+                        translate}}</p>
+                      <ul class="list-inline" *ngIf="selectedPositionCategory !== undefined">
+                        <li class="selectList">
+                          <a href="javascript:;">{{selectedPositionCategory.name}}</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="pull-right">
+                      <i class="add fa fa-plus" (click)="categoryShow = !categoryShow"></i>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- /.form-group -->
+                <!-- position category-->
+                <div class="postExpectJobsCategory clearfix" *ngIf="categoryShow">
+                  <div class="postPositionCategoryLeft">
+                    <ul class="postPositionCategoryList list-unstyled">
+                      <li *ngFor="let list of positionCategory" (click)="togglePositionCategory(list)"
+                          [ngClass]="{'active': list.selected}" class="expectList">
+                        <a href="javascript:;">{{list.name}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="postPositionCategoryChildren" *ngIf="positionCategoryChildren.length > 0">
+                    <ul class="postPositionCategoryList list-unstyled">
+                      <li *ngFor="let item of positionCategoryChildren" class="expectList">
+                        <label for="category{{item.id}}" (click)="addSelectedPositionCategory(item)">
+                          <input type="radio" name="category" id="category{{item.id}}" value="{{item.id}}"
+                                  [checked]="expect.expectPositionId===item.id">
+                          {{item.name}}
+                        </label>
+
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /.position category -->
+                <div class="form-group">
+                  <label for="salary_type" class="col-sm-2 col-xs-12 control-label textLeft"><span class="text-danger">*</span>{{'position.salary_type' |
+                    translate}}:</label>
+                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12">
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_type" id="salary_type" value="yearly"
+                             [(ngModel)]="expect.salaryType">
+                      yearly
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_type" value="monthly" [(ngModel)]="expect.salaryType"
+                             [checked]="true">
+                      monthly
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_type" value="hourly" [(ngModel)]="expect.salaryType">
+                      hourly
+                    </label>
+                  </div>
+                  <!--/.col-->
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 col-xs-12 control-label textLeft"><span class="text-danger">*</span>{{'user.profile.expect_salary' | translate}}:</label>                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12">
+                    <input type="number" class="form-control salary"
+                           name="expect_job_minSalary" [(ngModel)]="expect.minSalary" required
+                           placeholder="{{'message.position_minSalary_input' | translate}}" min=0>
+                    <span class="line"></span>
+                    <input type="number" class="form-control salary"
+                           name="expect_job_maxSalary" [(ngModel)]="expect.maxSalary" required
+                           placeholder="{{'message.position_maxSalary_input' | translate}}" min=0 max=1000000>
+                    {{'global.money' | translate}}
+                    <div class="negotiation">
+                      <label for="negotiation">
+                        <input type="checkbox" id="negotiation" (change)="Checked($event)"> {{'position.negotiation' |
+                        translate}}
+                      </label>
+                    </div>
+                  </div>
+                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12 col-sm-offset-2 tips">
+                    {{'global.tips' | translate}}: {{'message.position_salary_tips_message' | translate}}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 col-xs-12 control-label textLeft">
+                    {{'position.jobNature' | translate}}
+                  </label>
+                  <div class="col-sm-10 col-xs-12">
+                    <select class="form-control" name="jobNatureId" [(ngModel)]="expect.jobNatureId">
+                      <option value="">{{'message.select_position_jobNature' | translate}}</option>
+                      <option *ngFor="let item of jobNatures" [value]="item.id">{{item.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <!--/.form-group-->
+
+                <div class="form-group expectJobsLocation">
+                  <label class="col-sm-2 col-xs-12 control-label textLeft">
+                    <span class="text-danger">*</span>{{ 'global.position_area' | translate }}
+                  </label>
+                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12 locationContent clearfix">
+                    <div class="locationSelected pull-left">
+                      <p *ngIf="selectedPositionLocation  === undefined" class="message">
+                        {{'user.profile.expect_location_input'
+                        | translate}}</p>
+                      <ul class="list-inline" *ngIf="selectedPositionLocation !== undefined">
+                        <li class="selectList" >
+                          <a href="javascript:;">{{selectedPositionLocation.name}}</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="pull-right" (click)="locationShow = !locationShow">
+                      <i class="add fa fa-plus"></i>
+                    </div>
+                  </div>
+                  <!--/.col-->
+
+                </div>
+                <!-- /.form-group -->
+
+                <!-- position location-->
+                <div class="postExpectJobsLocation clearfix" *ngIf="locationShow">
+                  <div class="postPositionLocationLeft">
+                    <ul class="postPositionLocationList list-unstyled">
+                      <li *ngFor="let list of locations" (click)="togglePositionLocation(list)"
+                          [ngClass]="{'active': list.selected}" class="expectList">
+                        <a href="javascript:;">{{list.name}}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="postPositionLocationChildren" *ngIf="positionLocationChildren.length > 0">
+                    <ul class="postPositionLocationList list-unstyled">
+                      <li *ngFor="let item of positionLocationChildren" class="expectList">
+                        <label for="location{{item.id}}" (click)="addSelectedPositionLocation(item)">
+                          <input type="radio" name="location" id="location{{item.id}}" value="{{item.id}}"
+                                 [checked]="expect.locationId === item.id">
+                          {{item.name}}
+                        </label>
+
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /.position location -->
+
+                <div class="form-group">
+                  <label for="expect_job_decription" class="col-sm-2 col-xs-12 control-label textLeft"><span class="text-danger">*</span>{{'user.profile.expect_job_decription'
+                    | translate}}:</label>
+                  <!--/.col-->
+                  <div class="col-sm-10 col-xs-12">
+        <textarea class="form-control" required
+                  cols="15" rows="5"
+                  maxlength="3000"
+                  name="expect_job_decription" id="expect_job_decription" [(ngModel)]="expect.content"
+                  placeholder="{{'user.profile.expect_job_decription_input' | translate}}"></textarea>
+                  </div>
+                  <!--/.col-->
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [disabled]="!PostForm.form.valid || saveLoading">
+              <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+              <span *ngIf="!saveLoading">{{ 'button.save' | translate }}</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

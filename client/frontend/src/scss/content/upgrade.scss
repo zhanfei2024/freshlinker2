@@ -1,0 +1,252 @@
+div.upgrade {
+  padding: 0 20px;
+  p.subTitle {
+    color: $gray;
+    font-size: $font-size-large;
+    padding: 10px 0 30px 0;
+  }
+  div.item {
+    width: 19%;
+    float: left;
+    margin-right: 1.2%;
+    div.itemMain {
+      height: 350px;
+    }
+    div.itemContent {
+      div.content {
+        text-align: center;
+        padding-top: 20px;
+        border-radius: 10px;
+        h3 {
+          color: #f5d328;
+          margin-top: 0;
+        }
+        p.price {
+          color: $body-bg;
+          font-size: $font-size-h2;
+          font-weight: bold;
+          margin-bottom: 0;
+          span {
+            font-size: $font-size-large;
+          }
+        }
+        div.tip {
+          background-color: #ff2600;
+          padding: 4px 0;
+          border-radius: 12px;
+          color: $body-bg;
+          font-size: $font-size-large;
+          font-style: italic;
+          font-weight: bold;
+          em {
+            font-style: italic;
+          }
+        }
+      }
+      p.enterpriseText {
+        font-size: $font-size-base;
+      }
+    }
+
+    a.btn {
+      display: block;
+      margin: 20px 0;
+      padding: 5px 0;
+    }
+
+    a.itemBtn {
+      color: $body-bg;
+      font-size: $font-size-large;
+      border-radius: 12px;
+    }
+
+    a.checked {
+      color: $body-bg;
+      font-size: $font-size-large;
+      background-color: $brand-success;
+    }
+
+
+    div.itemAbout {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      h3 {
+        font-size: $font-size-large;
+      }
+    }
+
+    ul.itemList {
+      list-style: circle;
+      font-size: 13px;
+      line-height: 1.4rem;
+      padding-left: 15px;
+      li {
+        margin-bottom: 20px;
+        span {
+          color: $gray;
+          strong {
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+
+  }
+
+  div.item:last-child {
+    margin-right: 0;
+    div.itemContent {
+      div.content {
+        padding: 20px 0 15px 0;
+        border: 3px solid $gray;
+        p.text {
+          font-weight: 400;
+          padding: 0 10px;
+        }
+      }
+    }
+
+    a.itemBtn {
+      background-color: $gray;
+    }
+
+    div.itemMain {
+      div.itemAbout {
+        color: $gray;
+        border-bottom: 1px solid $gray;
+      }
+    }
+
+  }
+
+  div.lite {
+    div.itemContent {
+      div.content {
+        background-color: #8A74B9;
+      }
+    }
+
+    a.itemBtn {
+      background-color: #8A74B9;
+    }
+
+    div.itemMain {
+      div.itemAbout {
+        color: #8A74B9;
+        border-bottom: 1px solid #8A74B9;
+      }
+    }
+  }
+
+  div.standard {
+    div.itemContent {
+      div.content {
+        background-color: #4CB993;
+
+      }
+    }
+
+    a.itemBtn {
+      background-color: #4CB993;
+    }
+
+    div.itemMain {
+      div.itemAbout {
+        color: #4CB993;
+        border-bottom: 1px solid #4CB993;
+      }
+    }
+  }
+
+  div.professional {
+    div.itemContent {
+      position: relative;
+      div.priceIcon {
+        display: block;
+        position: absolute;
+        top: 0;
+        background: url('./~/assets/img/price_icon.png') no-repeat 100% 100%;
+        width: 63px;
+        height: 61px;
+        z-index: 9999;
+        margin-top: -30px;
+        right: -10px;
+
+      }
+      div.content {
+        background-color: #3499E0;
+
+      }
+    }
+
+    a.itemBtn {
+      background-color: #3499E0;
+    }
+
+    div.itemMain {
+      div.itemAbout {
+        color: #3499E0;
+        border-bottom: 1px solid #3499E0;
+      }
+    }
+  }
+
+  div.premium {
+    div.itemContent {
+      div.content {
+        background-color: #F48F18;
+
+      }
+    }
+
+    a.itemBtn {
+      background-color: #F48F18;
+    }
+
+    div.itemMain {
+      div.itemAbout {
+        color: #F48F18;
+        border-bottom: 1px solid #F48F18;
+      }
+    }
+  }
+
+}
+
+@media (max-width: $screen-xs-max) {
+  div.upgrade {
+    div.item {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  div.upgrade {
+    div.item {
+      width: 32.1%;
+      div.itemMain {
+        height: 350px;
+      }
+    }
+    div.item:nth-of-type(4),div.item:nth-of-type(5) {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  div.upgrade {
+    div.item {
+      width: 32.1%;
+    }
+
+    div.item:nth-of-type(5),
+    div.item:nth-of-type(4) {
+      margin-top: 20px;
+    }
+  }
+}
+

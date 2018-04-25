@@ -1,0 +1,32 @@
+{
+  "positionCategoryNotExists": {
+    "statusCode": 400,
+    "message": "Please choose positionCategory  subcategory",
+    "code": 18001
+  },
+  "LocationNotExists": {
+    "statusCode": 400,
+    "message": "Please choose location subcategory",
+    "code": 18002
+  },
+  "InsufficientQuantity": {
+    "statusCode": 400,
+    "message": "Active jobs account insufficient quantity.",
+    "code": 18003
+  },
+  "exceedMaxQuestion": {
+    "statusCode": 400,
+    "message": "exceeded maximum question.",
+    "code": 18004
+  },
+  "invalid": {
+    "statusCode": 400,
+    "message": "This is a position invalid.",
+    "code": 18005
+  },
+  "confirmBuyPlan": {
+    "statusCode": 400,
+    "message": "The lack of a number of position can be published, please purchase plans or recharge.",
+    "code": 18006
+  }
+}

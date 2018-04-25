@@ -1,0 +1,106 @@
+<div>
+  <div class="col-md-3 col-sm-12 col-xs-12 dashboardLeft">
+    <div *ngIf="!dashboardLoading">
+      <div class="personInformation text-center">
+        <div class="text-left dashboardEdit">
+          <a [routerLink]="['/company',companyId,'company-edit']">
+            <i class="fa fa-edit"></i>
+            {{'button.edit' | translate}}
+          </a>
+        </div>
+        <fieldset class="img">
+          <a  routerLink]="['/company',companyId,'company-edit']">
+            <div *ngIf="company?.icon?.url !== undefined">
+              <img [src]="company?.icon?.url['200']" class="img-responsive img-circle">
+            </div>
+            <div *ngIf="company?.icon?.url === undefined">
+              <img src="https://placehold.it/200x200" class="img-responsive img-circle">
+            </div>
+          </a>
+        </fieldset>
+        <!--/.img-->
+        <h4 class="name">
+          {{company.name}}
+        </h4>
+        <p class="text">
+                    <span>
+                    {{company.description | htmlToPlaintext : 100}}
+                    <span *ngIf="!descriptionShow && company.description.length > 100">...</span>
+                    <a (click)="descriptionShow = !descriptionShow" *ngIf="!descriptionShow && company.description.length > 100">{{'global.expand' | translate}}</a>
+                  </span>
+          <span *ngIf="descriptionShow">
+                    {{company.description | htmlToPlaintext : 255 }}
+                    <a (click)="descriptionShow = !descriptionShow" *ngIf="descriptionShow">{{'global.put_away' | translate}}</a>
+                  </span>
+        </p>
+      </div>
+      <!--/.information-->
+      <div class="baseInformation">
+        <p class="head">
+          基本信息
+        </p>
+        <ul class="careerList list-unstyled">
+          <li class="list row">
+            <div class="col-xs-3 col-md-5">
+              <span>{{'company.scale' | translate}}</span>
+            </div>
+            <!--/.col-->
+            <div class="col-xs-9 col-md-7">
+              {{company.scale}}
+            </div>
+            <!--/.col-->
+          </li>
+          <li class="list row">
+            <div class="col-xs-3 col-md-5">
+              <span>{{'company.field' | translate}}</span>
+            </div>
+            <!--/.col-->
+            <div class="col-xs-9 col-md-7">
+              {{company.field}}
+            </div>
+            <!--/.col-->
+          </li>
+          <li class="list row">
+            <div class="col-xs-3 col-md-5">
+              <span>{{'company.stage' | translate}}</span>
+            </div>
+            <!--/.col-->
+            <div class="col-xs-9 col-md-7">
+              {{company.stage}}
+            </div>
+            <!--/.col-->
+          </li>
+          <li class="list row">
+            <div class="col-xs-3 col-md-5">
+              <span>{{'company.url' | translate}}</span>
+            </div>
+            <!--/.col-->
+            <div class="col-xs-9 col-md-7">
+              <a href="{{company.url}}" target="_blank">{{company.url}}</a>
+            </div>
+            <!--/.col-->
+          </li>
+
+          <li class="list row">
+            <div class="col-xs-3 col-md-5">
+              <span>{{'company.address' | translate}}</span>
+            </div>
+            <!--/.col-->
+            <div class="col-xs-9 col-md-7">
+              {{company.address}}
+            </div>
+            <!--/.col-->
+          </li>
+        </ul>
+        <!--/.careerList-->
+
+      </div>
+      <!--profileInformation-->
+    </div>
+    <div *ngIf="dashboardLoading" class="text-center tableLoading">
+      <i class="fa fa-2x fa-spinner fa-spin"></i>
+    </div>
+
+  </div>
+  <!--/.col-->
+</div>

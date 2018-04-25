@@ -1,0 +1,390 @@
+
+div.interlocutionShow{
+  div.interlocutionShowLeft{
+    div.interlocutionShowContentLeft{
+      border:1px solid $gray-light-2x;
+      border-top: 2px solid $brand-info;
+      margin-right: 0;
+      div.problemContent{
+        padding: 20px 15px 15px 15px;
+        border-bottom: 1px solid $gray-light-2x;
+
+        div.problem{
+          padding-left: 0;
+          h4.title{width: 100%}
+        }
+        div.share{
+          font-family: $font-family-light;
+          font-size: $font-size-large;
+          color: $brand-danger;
+          margin: 20px 0 10px;
+          padding-left: 0;
+          button{
+            margin-right: 25px;
+          }
+          span.time{
+            margin-right: 20px;
+          }
+          span.browse{
+            color: $brand-info;
+          }
+          button.answer{
+            margin-top: -5px;
+          }
+          ul{
+            margin-left: 90px;
+            li{
+              display: inline-block;
+              margin-left: 10px;
+              a{
+                i.fa{
+                  display: inline-block;
+                  width: 20px;
+                  height: 20px;
+                  background: #3B5998;
+                  color: #ffffff;
+                  text-align: center;
+                  border-radius: 3px;
+                  line-height: 20px;
+                }
+                i.fa-twitter{
+                  background: $brand-info;
+                }
+                i.fa-linkedin{
+                  background: #006DC0;
+                }
+              }
+            }
+          }
+        }
+        ul.tags{
+          li.tag{
+            span{
+              padding: 1px 13px;
+              border-radius: 4px;
+              background-color: #d9d9d9;
+              color: #666;
+              display: block;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              max-width: 100px;
+              font-size: 12px;
+              font-weight: 200;
+            }
+          }
+        }
+        div.textContent{
+          margin-top: 15px;
+          img{
+            max-width: 100%;
+            height: auto;
+          }
+        }
+      }
+      div.replyList{
+        border-bottom: 1px solid $gray-light-2x;
+        padding: 15px;
+        position: relative;
+        div.media{
+          overflow: inherit;
+          div.media-left{
+            padding-right: 20px;
+            padding-left: 15px;
+            button{
+              display: inline-block;
+              margin-top: 10px;
+              height: 40px;
+              background: inherit;
+              border: none;
+              border-radius: 4px;
+              -moz-box-shadow: none;
+              -webkit-box-shadow: none;
+              box-shadow: none;;
+              color: #999;
+              i.active{
+                color: $brand-success;
+              }
+              span.active{
+                color: $brand-success;
+              }
+            }
+          }
+          .media-body{
+            width: 100%;
+          }
+
+          span.nameContent:hover{
+            span.companyName{
+              color:$brand-success;
+            }
+            div.user_card_float{
+              display: block;
+            }
+          }
+          span.nameContent {
+            color: $brand-info;
+            font-size: $font-size-h4;
+            display: inline-block;
+            margin-bottom: 10px;
+            span.companyName{
+              color: #cccccc;
+              font-size: 14px;
+            }
+            div.user_card_float {
+              display: none;
+              top: 35px;
+              position: absolute;
+              left: 82px;
+              padding-top: 13px;
+              overflow: hidden;
+              div.user_card_float_box {
+                position: relative;
+                width: 232px;
+                padding: 20px;
+                border: 1px solid #ededed;
+                border-radius: 4px;
+                background-color: #fff;
+                z-index: 999;
+                img.user_icon {
+                  border: 1px solid $gray-dark;
+                }
+                p.userinfo_base {
+                  height: 24px;
+                  margin-left: 68px;
+                  margin-bottom: 0;
+                }
+                p.userinfo_job, p.userinfo_intro {
+                  height: 24px;
+                  margin-left: 68px;
+                  margin-bottom: 0;
+                  font-size: 14px;
+                  line-height: 24px;
+                  color: $gray-dark;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  word-wrap: normal;
+                  white-space: pre;
+                }
+                p.userinfo_intro {
+                  color: $brand-danger;
+                  margin-left: 0;
+                  width: 100%;
+                }
+                ul.user_problem {
+                  overflow: hidden;
+                  li.item {
+                    border-right: 1px solid $gray-light-2x;
+                    color: $gray-base;
+                    span.article_text {
+                      font-size: $font-size-h6;
+                    }
+                  }
+                  li.item:nth-child(3) {
+                    border-right: none;
+                  }
+                }
+
+                span.deck_in {
+                  width: 0;
+                  height: 0;
+                  border-width: 9px 10px 10px;
+                  border-style: solid;
+                  border-color: transparent transparent #ededed;
+                  position: absolute;
+                  left: 10px;
+                  top: -20px;
+                  em {
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-width: 0 10px 10px;
+                    border-style: solid;
+                    border-color: transparent transparent #fff;
+                    position: absolute;
+                    top: 1px;
+                    left: -10px;
+                  }
+                }
+              }
+            }
+          }
+
+          span.likes{
+            font-size:$font-size-large ;
+            color: #4A80BC;
+            margin-right: 35px;
+            cursor:pointer;
+          }
+
+          p.textContent{
+            padding-top: 20px;
+            cursor:pointer;
+          }
+          p.time{
+            span{
+              color: $brand-danger;
+            }
+          }
+          div.btn_content{
+            margin-top: 20px;
+            button{
+              margin-bottom: 20px;
+            }
+          }
+          div.comment-list{
+            position: relative;
+            border: 1px solid #ededed;
+            border-radius: 3px;
+            background-color: #fafafa;
+            span.deck_in{
+              width:0;
+              height:0;
+              border-width: 9px 10px 10px;
+              border-style:solid;
+              border-color:transparent transparent #ededed;
+              position:absolute;
+              right: 10px;
+              top: -20px;
+              em{
+                display:block;
+                width:0;
+                height:0;
+                border-width:0 10px 10px;
+                border-style:solid;
+                border-color:transparent transparent #fafafa;
+                position:absolute;
+                top:1px;
+                right:-10px;
+              }
+            }
+            ul.c-list{
+              padding: 20px 20px 15px;
+              li.c-item{
+                border-bottom: 1px dashed #ededed;
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                img.user_icon{
+                  border: 1px solid $gray-dark;
+                }
+                span.name{
+                  font-size: $font-size-base;
+                  color: $brand-danger;
+                }
+                p.content{
+                  margin-top: 10px;
+                }
+              }
+            }
+            div.text-from{
+              padding: 0 20px;
+            }
+
+            div.btn_content{
+              overflow: hidden;
+              margin-bottom: 15px;
+            }
+
+
+          }
+        }
+        #editor-trigger{
+          height: 250px;
+        }
+      }
+
+      div.replyList:last-child{
+        border-bottom: none;
+        border-top: 1px solid $gray-light-2x;
+      }
+
+    }
+
+  }
+}
+div.interlocutionShowRight{
+
+  div.positions,div.newArticle,.relatedActivity{
+    border:1px solid $gray-light-2x;
+    padding-right: 0;
+  }
+  div.newArticle,.positions{
+    margin-bottom: 20px;
+  }
+}
+
+
+@media (max-width: $screen-xs-max) {
+  div.interlocutionContent{
+    div.interlocutionLeft{
+      padding-right: 0;
+      div.issues{
+        div.issuesTab{
+          ul{
+            border-bottom:1px solid $gray-light-2x;
+            li{
+              display: inline-block;
+              width: 31.5%;
+              border-bottom:0;
+              border-right:1px solid $gray-light-2x;
+            }
+            li:nth-child(3){
+              border-right:0;
+            }
+          }
+        }
+      }
+    }
+
+    div.interlocutionRight{
+      margin-top: 20px;
+      padding-left: 0;
+    }
+  }
+  div.interlocutionContentList{
+    div.interlocutionContentListRight {
+      padding-left: 15px;
+    }
+    div.interlocutionContentListRightActivity{
+      margin-top: 15px;
+    }
+  }
+  div.interlocutionShowRight{
+    margin-top: 15px;
+  }
+  div.interlocutionShowContentLeft{
+    margin-left: 0;
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  div.interlocutionContent{
+    div.interlocutionLeft{
+      padding-right: 0;
+    }
+  }
+  div.interlocutionShowRight{
+    margin-top: 20px;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  div.interlocutionContent{
+    div.interlocutionLeft{
+      height: 375px;
+    }
+    div.interlocutionRight{
+      div.interlocutionContenRight{
+        height: 375px;
+        div.list{
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+}
+
+

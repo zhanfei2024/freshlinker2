@@ -1,0 +1,167 @@
+<hr class="userHr">
+<div class="container">
+  <app-userTabs></app-userTabs>
+  <form action="">
+    <div class="row userJobOffer">
+      <div class="col-md-3 col-sm-12 col-xs-12 userJobOfferLeft">
+        <div class="content">
+          <ul class="editList list-unstyled">
+            <li class="list" *ngFor="let item of inviteStatus" [ngClass]="{'active': item.id === inviteIndex}">
+              <a  (click)="inviteTab(item.id)">{{item.name | translate}}</a>
+            </li>
+          </ul>
+
+          <div class="searchForm">
+            <h5>{{'search.dashboard_search_position' | translate}}</h5>
+            <div class="form-group">
+              <input type="text" name="text" placeholder="{{'message.position_name_input' | translate}}" required="true" [(ngModel)]="fliter.search">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn" (click)="searchPosition()">{{'button.determine' | translate}}</button>
+            </div>
+          </div>
+
+          <div class="other">
+            {{'button.press' | translate}} <span class="btn">{{'position.accept_job_interview' | translate}}</span> {{'message.we_send_resume_information_mailbox' | translate}}
+          </div>
+
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="col-md-9 col-sm-12 col-xs-12 userJobOfferRight">
+        <div *ngIf="!changeTabLoading">
+          <div [hidden]="!positionLoading" class="text-center loading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div [hidden]="positionLoading">
+            <div class="noPosition row" [hidden]="!(positions.length === 0 && !positionLoading)">
+              <div class="col-md-2 col-sm-3 col-xs-12 col-sm-offset-3">
+                <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+              </div>
+              <!--/.col-->
+              <div class="col-md-5 col-sm-5 col-xs-12 text">
+                <p>
+                  {{'message.no_job_offer_message' | translate}}
+                  <br>
+                  {{'message.perfect_cv_message' | translate}}
+                  <br>
+                  <span>{{'global.go_ahead' | translate}}</span>
+                  <a [routerLink]="['/user','profile']">
+                    {{'user.profile.my_profile' | translate}}
+                  </a>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+            <div [hidden]="!(positions.length > 0 && !positionLoading)">
+              <div class="item row" *ngFor="let position of positions">
+                <div class="img col-md-2 col-sm-3 col-xs-3">
+                  <a [routerLink]="['/position/positions',position.position.id]">
+                    <img src="https://placehold.it/100x100" alt="" class="img-responsive" *ngIf="position.company?.icon === null">
+                    <img [src]="position.company?.icon?.url['100']" alt="" class="img-responsive" *ngIf="position.company?.icon !== null">
+                  </a>
+                </div>
+                <!--/.col-->
+                <div class="content col-md-3 col-sm-3 col-xs-5">
+                  <p class="position">
+                    <a [routerLink]="['/position/positions',position.position.id]">
+                      {{position.position.name}}
+                    </a>
+                  </p>
+                  <p class="company">
+                    <a  [routerLink]="['/position/company-position',position.company.id,'position']">
+                      {{position.company?.name}}
+                    </a>
+                  </p>
+                </div>
+                <!--/.col-->
+                <div class="address col-md-2 hidden-sm hidden-xs">
+                  <i class="fa fa-map-marker"></i>
+                  {{position.company?.address}}
+                </div>
+                <!--/.col-->
+                <div class="list applier col-md-2 col-sm-3 col-xs-4 hidden-xs text-center">
+                  <p class="num">
+                    {{position.candidateNum}}
+                  </p>
+                  <p class="text">
+                    {{'position.have_applier' | translate}}
+                  </p>
+                </div>
+                <!--/.col-->
+                <div class="list button col-md-3 col-sm-3 col-xs-4 text-center"  [ngClass]="{'reject': position.status === 'rejected' || position.status === 'accepted'}">
+                  <button type="button" class="btn" (click)="setCandidate(position.position.id, position.id)" [ngClass]="{'btn-success': position.status === 'pending'}" *ngIf="position.status === 'pending'">{{'position.accept_job_interview' | translate}}</button>
+                  <button type="button" class="btn"  *ngIf="position.status === 'accepted'" [ngClass]="{'accepted': position.status === 'accepted'}">{{'position.posted_job_invite' | translate}}</button>
+                  <p class="text-center" *ngIf="position.status === 'pending' ">
+                    <a (click)="rejectPositionInvite(position.id)">{{'position.reject_job_interview' | translate}}</a>
+                  </p>
+                  <p class="text-center" *ngIf="position.status === 'rejected'">
+                    <button  class="btn">{{'position.rejected' | translate}}</button>
+                  </p>
+
+                </div>
+                <!--/.col-->
+              </div>
+
+              <div class="text-center">
+                <pager [maxSize]="50"
+                       name="CandidatesPage"
+                       [itemsPerPage]="fliter.limit" [totalItems]="meta.pagination.totalCount"
+                       [(ngModel)]="fliter.page" (pageChanged)="changePage($event)"
+                       pageBtnClass="btn btn-link"></pager>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<div bsModal #childApplyModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <form class="modal-dialog modal-lg" (ngSubmit)="checkApply()">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="childApplyModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>{{'position.apply_position' | translate}}</h4>
+      </div>
+      <div class="modal-body positionAnswer">
+        <div class="row" *ngIf="!questionLoading">
+          <div class="col-md-12 text-center" *ngIf="position?.positionQuestion?.length === 0">
+            <p class="head">{{'position.applied_position_title' | translate}}</p>
+          </div>
+          <!--/.col-->
+          <div *ngIf="position?.positionQuestion?.length > 0" class="col-md-12">
+            <p class="text-center title">{{'position.applied_position_title' | translate}}----{{'position.answer_question' | translate}}</p>
+            <div class="content">
+              <div *ngFor="let item of position?.positionQuestion">
+                <div class="row">
+                  <span class="col-sm-12 questionTitle">{{item.question}}</span>
+                  <textarea name="answer" id="answer" cols="30" rows="2" required="{{item.isRequired}}" class="answer" [(ngModel)]="item.answer"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!--/.col-->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.model-body -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">
+          <span><i class="fa fa-check"></i> {{ 'button.yes' | translate }}</span>
+        </button>
+        <button type="button" class="btn btn-default" (click)="childApplyModal.hide()"><i
+          class="fa fa-close"></i>
+          {{ 'button.no' | translate }}
+        </button>
+      </div>
+      <!-- /.model-footer -->
+    </div>
+  </form>
+</div>
+

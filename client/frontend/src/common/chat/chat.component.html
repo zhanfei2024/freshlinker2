@@ -1,0 +1,202 @@
+<div id="intercom-container"
+     style="position: fixed; width: 0px; height: 0px; bottom: 0px; right: 0px; z-index: 2147483647;">
+  <div data-reactroot="" class="intercom-app intercom-app-launcher-enabled">
+    <span>
+      <div class="intercom-messenger-frame userChat" [hidden]="!show">
+          <div id="intercom-container-body">
+            <div id="intercom-container">
+              <div data-reactroot="" class="intercom-messenger">
+                <div class="intercom-messenger-background"></div>
+              <span>
+                <!--消息列表-->
+                <div [ngClass]="{'active': !open}" class="intercom-conversations">
+                  <div class="intercom-conversations-header">
+                    <div class="intercom-header-buttons">
+                      <div class="intercom-header-buttons-close" (click)="close('close')">
+                        <div class="intercom-header-buttons-close-contents"></div>
+                      </div>
+                    </div>
+                    <div class="intercom-conversations-header-body">
+                      <div class="intercom-conversations-header-title" *ngIf="chatCompany === undefined">
+                        Conversations
+                      </div>
+                      <div class="intercom-conversations-header-app-name"
+                           *ngIf="chatCompany === undefined">Freshlinker</div>
+                      <div class="intercom-admin-profile-compact-avatar" *ngIf="chatCompany !== undefined">
+                        <div class="intercom-avatar">
+                          <img class="img-rounded" src="../../assets/img/default_company_icon.png"
+                               *ngIf="chatCompany?.icon === null">
+                          <img [src]="chatCompany?.icon?.url['100']" *ngIf="chatCompany?.icon !== null"/>
+                        </div>
+                      </div>
+                      <div class="intercom-conversations-header-app-name" *ngIf="chatCompany !== undefined">{{chatCompany?.name}}</div>
+                    </div>
+                  </div>
+                  <div class="intercom-conversations-body">
+                    <div class="intercom-conversations-body-conversations">
+                        <div class="intercom-conversation-summary intercom-conversation-summary-{{i}}"
+
+                             *ngFor="let list of userChat;let i = index;">
+                          <div class="intercom-conversation-summary-avatar"  (click)="clickUserChat(list?.another?.company?.id,i)">
+                            <div class="intercom-avatar">
+                              <img [src]="list?.another?.company?.icon?.url['100']"
+                                   *ngIf="list?.another?.company?.icon !== null"/>
+                              <img class="img-rounded" src="../../assets/img/default_company_icon.png"
+                                   *ngIf="list?.another?.company?.icon === null">
+                            </div>
+                          </div>
+                          <div class="intercom-conversation-summary-body"  (click)="clickUserChat(list?.another?.company?.id,i)">
+                            <div class="intercom-conversation-summary-meta clearfix">
+                              <div
+                                class="intercom-conversation-summary-body-author">{{list?.another?.company?.name}}</div>
+                              <div class="intercom-conversation-summary-timestamp"><!-- react-text: 405 -->
+                                <!-- /react-text -->
+                              </div>
+                            </div>
+                            <div class="intercom-conversation-summary-content">
+                              <div class="intercom-conversation-summary-content-container">
+                                <div class="intercom-conversation-summary-content-text">{{list?.message?.message}}</div>
+                              </div>
+                              <span [hidden]="!list?.isUserNews" class="intercom-conversation-summary-user-icon">{{list?.readNum}}</span>
+                            </div>
+                          </div>
+                          <!-- 下面注释代码，请调试正确，并且企业版与求职版都可使用  -->
+                          <div class="intercom-conversation-summary-footer" (click)="deletedList(list?.another?.company?.id);"></div>
+                        </div>
+
+                    </div>
+                </div>
+              </div>
+
+                <!--聊天列表-->
+                <div [hidden]="!open" class="intercom-conversation">
+                  <div class="intercom-header-buttons" (click)="close('back')">
+                    <div class="intercom-header-buttons-back">
+                      <div class="intercom-header-buttons-back-contents"></div>
+                    </div>
+                    <div class="intercom-header-buttons-close" (click)="close('close')">
+                      <div class="intercom-header-buttons-close-contents"></div>
+                    </div>
+                  </div>
+                  <div class="intercom-conversation-body-container">
+                    <div class="intercom-conversation-backgrounds">
+                      <div class="intercom-conversation-background"></div>
+                    </div>
+                    <div class="intercom-conversation-body intercom-conversation-body-snapped"
+                         style="transform: translateY(0px); bottom: -241px;">
+                      <div #chatlist class="intercom-conversation-body-parts" style="background:#fff;bottom: 313px; top: 75px;">
+                        <div class="sk-circle" [hidden]="!chatLoading" >
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                      <div class="intercom-conversation-body-parts-wrapper" [hidden]="chatLoading">
+                        <div class="intercom-conversation-parts intercom-conversation-parts-scrolled" style="transform: translateY(0px);">
+                          <span>
+                            <div *ngFor="let list of chatUserContent;let i = index;" id="last{{i}}">
+                              <div class="intercom-conversation-part intercom-conversation-part-user"
+                                   *ngIf="list.senderId === userInterlocutor">
+                                <div class="intercom-comment-container intercom-comment-container-user">
+                                  <div class="intercom-comment">
+                                    <div class="intercom-blocks">
+                                      <div class="intercom-block intercom-block-paragraph">{{list.message}}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <span>
+                                  <div class="intercom-conversation-part-metadata">
+                                    <div class="intercom-conversation-part-metadata-save-state">{{list.createdAt | date:'y-MM-dd H:mm:ss'}}</div>
+                                  </div>
+                                </span>
+                              </div>
+
+                              <div
+                                class="intercom-conversation-part intercom-conversation-part-admin intercom-conversation-part-grouped"
+                                *ngIf="list.senderId !== userInterlocutor">
+                                <div class="intercom-comment-container intercom-comment-container-admin">
+                                  <div class="intercom-comment-container-admin-avatar">
+                                    <div class="intercom-avatar">
+                                       <img [src]="chatCompany?.icon?.url['100']" *ngIf="chatCompany?.icon !== null"/>
+                                       <img class="img-rounded" src="../../assets/img/default_company_icon.png"
+                                            *ngIf="chatCompany?.icon === null">
+                                    </div>
+                                  </div>
+                                  <div class="intercom-comment">
+                                    <div class="intercom-blocks">
+                                      <div class="intercom-block intercom-block-paragraph">{{list.message}}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                               <span>
+                                  <div class="intercom-conversation-part-metadata">
+                                    <div class="intercom-conversation-part-metadata-save-state">{{list.createdAt | date:'y-MM-dd H:mm:ss'}}</div>
+                                  </div>
+                                </span>
+                              </div>
+                              </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <span>
+                      <div class=""></div>
+                    </span>
+                  </div>
+
+                  <div class="intercom-conversation-footer" id="another">
+                    <div class="intercom-composer"><pre><!-- react-text: 155 -->
+                      <!-- /react-text --><br></pre>
+                      <textarea placeholder="Send a message…" (keyup.enter)="enterEvent()"
+                                [(ngModel)]="content"></textarea><span></span><span></span>
+                      <div class="intercom-composer-buttons">
+                        <button class="intercom-composer-gif-button" type="submit" (click)="sendUserMsg()">Send</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+     </span>
+</div>
+
+
+
+              </div>
+          </div>
+      </div>
+    </span>
+    <div class="intercom-launcher-frame">
+      <i class="circle news" *ngIf="isUserNews && !open">{{num}}</i>
+      <div id="intercom-container-body">
+        <div id="intercom-container">
+          <div class="intercom-launcher" (click)="showChat()">
+            <div class="intercom-launcher-open-icon" *ngIf="!show"></div>
+            <div class="intercom-launcher-close-icon" *ngIf="show"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

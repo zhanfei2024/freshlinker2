@@ -1,0 +1,56 @@
+div.error404 {
+  margin: 0;
+  display: table;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 999;
+  background-color: #f8f8f8;
+  div.errorContent {
+    margin-top: 5%;
+    padding: 3% 10%;
+    background-color: $body-bg;
+    box-shadow:  0 1px 1px rgba(0,0,0,.085), 0 0 8px rgba(0,0,0,.085);
+    div.header {
+      margin-bottom: 20px;
+      a {
+        display: block;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    div.errorLeft {
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    div.errorRight {
+      h1.title {
+        color: $gray;
+        font-size: 75px;
+        padding-bottom: 2%;
+      }
+      div.text {
+        font-size: $font-size-h4;
+        color: $gray-light;
+        padding-bottom: 5%;
+      }
+      div.button {
+        a:first-child {
+          margin-right: 4%;
+        }
+      }
+    }
+
+  }
+}

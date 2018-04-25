@@ -1,0 +1,153 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <form action="">
+    <div class="row jobOfferList">
+      <div class="col-md-3 col-sm-12 col-xs-12 jobOfferListLeft">
+        <div class="content">
+          <div class="button">
+            <a [routerLink]="['/company',companyId,'job-offer']"
+               class="btn btn-success sub">
+              {{ 'enterprise.send_position_offer' | translate}}
+            </a>
+          </div>
+
+          <div class="searchForm">
+            <h5>{{'search.dashboard_search_position' | translate}}</h5>
+            <div class="form-group">
+              <input type="text" [placeholder]="'message.position_name_input' | translate" required
+                     name="search" [(ngModel)]="filter.search" (ngChange)="changeSearch()">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn" (click)="searchJobOffer()">{{'button.determine' | translate}}
+              </button>
+            </div>
+          </div>
+
+          <div class="other">
+            {{'message.job_offer_how_to_do_width_easy_boost' | translate}} ?
+            <span>
+                                <a [routerLink]="['/company',companyId,'job_offer_introduce']">
+                                    {{'global.hit' | translate}}
+                                </a>
+                            </span>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col-md-9 col-sm-12 col-xs-12 jobOfferListRight">
+        <div class="jobOfferListRightContent">
+          <div *ngIf="changeTabLoading">
+            <div class="text-center loading">
+              <i class="fa fa-spinner fa-pulse fa-3x"></i>
+            </div>
+          </div>
+          <div *ngIf="!changeTabLoading">
+            <div class="text-center loading" [hidden]="!joblistLoading">
+              <i class="fa fa-spinner fa-pulse fa-3x"></i>
+            </div>
+            <div [hidden]="joblistLoading">
+              <div [hidden]="!(jobOffers.length === 0 && !jobOfferLoading)"
+                   class="noPosition row">
+                <div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2">
+                  <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+                </div>
+                <!--/.col-->
+                <div class="col-md-5 col-sm-5 col-xs-12 text">
+                  <p>
+                    {{'message.no_search_job_offer_msg' | translate}}
+                    <br>
+                    {{'message.job_offer_publish_tips_message' | translate}}
+                    <br>
+                    <span>{{'global.go_ahead' | translate}}</span>
+                    <a [routerLink]="['/company',companyId,'job-offer']">
+                      EasyBoost
+                    </a>
+                  </p>
+                </div>
+                <!--/.col-->
+              </div>
+              <!--/.col-->
+
+              <div [hidden]="!(jobOffers.length > 0 && !jobOfferLoading)">
+                <div class="row jobOfferListRightItem"*ngFor="let position of jobOffers;let i = index">
+                  <div class="col-sm-3 col-xs-6 left">
+                    <p class="positionName">
+                      {{position.position?.name}}
+                    </p>
+                    <time>{{position.position?.jobNatures?.name}}</time>
+                  </div>
+
+                  <div class="col-sm-3 col-xs-6 left">
+                    <p>
+                      {{'position.expiredDate' | translate}}{{'global.to' | translate}}{{position.position?.expiredDate |
+                      date: 'yyyy-MM-dd'}}
+                    </p>
+                    <time>{{position.createdAt | date: 'yyyy-MM-dd'}} {{'button.publish' | translate }}</time>
+                  </div>
+                  <div class="col-sm-2 col-xs-4 checkList num">
+                    <strong>{{position.inviteNum}}</strong>
+                    <p>{{'message.job_offer_have_invited_persons' | translate}}</p>
+                  </div>
+
+                  <div class="col-sm-2 col-xs-4 checkList">
+                    <a [routerLink]="['/positions', position.position?.id]">
+                      <p class="icon">
+                        <span></span>
+                      </p>
+                      <p class="text text-center">
+                        {{'global.check' | translate}}
+                      </p>
+                    </a>
+
+                  </div>
+                  <!--/.col-->
+                  <div class="col-sm-2 col-xs-4 checkList btn-user" dropdown>
+                    <div class="btn-group" dropdown is-open="status.isopen">
+                      <button id="" type="button" class="btn" dropdownToggle
+                              [disabled]="disabled">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <ul class="dropdown-menu" *dropdownMenu role="menu"
+                          aria-labelledby="education-button">
+                        <li role="menuitem">
+                          <a [routerLink]="['/company', position.companyId,position.id,'job-offer-edit']">{{'button.modify'
+                            | translate}}</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li role="menuitem">
+                          <a ng-really-message="Are you sure?" nodrag (click)="deleteJobOffer(i); $event.stopPropagation()">
+                            <i class="fa fa-times"></i>
+                            {{ 'button.remove' | translate }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <p class="text text-center">
+                      {{'button.edit' | translate}}
+                    </p>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <div class="text-center">
+                  <pager [maxSize]="50"
+                         name="CandidatesPage"
+                         [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                         [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                         pageBtnClass="btn btn-link"></pager>
+                </div>
+                <!-- page -->
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <!--/.profileRight-->
+
+      </div>
+      <!--/.col-->
+    </div>
+  </form>
+</div>
+

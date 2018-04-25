@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <ul class="profileTabs list-inline">
+
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','dashboard']">{{'navbar.user_person' | translate}}</a></li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','user-news']">{{'user.news.new_message' | translate }}</a>
+        <span class="redPoint" [hidden]="!isRead"></span>
+      </li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','profile']">{{'user.profile.my_profile' | translate}}</a></li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','user-positions']" >{{'enterprise.position_management' | translate}}</a></li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','user-resume']" >{{'user.profile.preview_resume' | translate}}</a></li>
+      <li class="list newsRedPoint"><a  routerLinkActive="active" [routerLink]="['/user','job-invite']">{{'user.profile.job_invitation' | translate}}</a></li>
+      <li class="list newsRedPoint"><a routerLinkActive="active"  [routerLink]="['/user','article']">{{'enterprise.article' | translate}}</a></li>
+      <li class="list newsRedPoint"><a routerLinkActive="active"  [routerLink]="['/user','activity']">{{'enterprise.activity' | translate}}</a></li>
+      <li class="list newsRedPoint"><a routerLinkActive="active"  [routerLink]="['/user','qa']">{{'enterprise.Q & A' | translate}}</a></li>
+    </ul>
+  </div>
+  <!--/.col-->
+</div>

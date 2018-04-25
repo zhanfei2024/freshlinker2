@@ -1,0 +1,139 @@
+<div class="container">
+  <form action="">
+    <div class="row accountHead">
+      <div class="col-xs-12">
+        <h3 class="title">
+          {{'account.bill' | translate}}
+        </h3>
+        <p class="content">
+          FreshLinker {{'message.credit_card_each_account_ensure_absolute_security' | translate}}
+          <a [routerLink]="['/about','contact']">{{'message.credit_card_contact_us' | translate}}</a>
+        </p>
+      </div>
+      <!--/.col-->
+    </div>
+    <div class="account row">
+      <div class="accountLeft col-md-3 col-sm-12 col-xs-12">
+        <div class="content">
+          <div class="button">
+            <a class="btn btn-success accountSub" [routerLink]="['/company',companyId,'dashboard']">
+              {{ 'enterprise.dashboard' | translate }}
+            </a>
+
+            <a href="" type="button" class="btn btn-default" *ngIf="false">
+              {{'global.download' | translate}}
+            </a>
+          </div>
+          <ul class="editList list-unstyled">
+            <li class="list active">
+              <a [routerLink]="['/company',companyId,'account']">{{'account.recharge_record' | translate}}</a>
+            </li>
+            <li class="list">
+              <a [routerLink]="['/company',companyId,'consume']">{{'account.expenses_record' | translate}}</a>
+            </li>
+          </ul>
+          <div class="searchForm">
+            <h5>{{'search.dashboard_search_date' | translate}}</h5>
+
+            <div class="form-group experienceTime">
+              <p class="input-group">
+                <input class="form-control" style="float:none" name="startedDate" [(ngModel)]="filter.startedDate" placeholder="{{'account.account_started_time' | translate}}" ngx-mydatepicker
+                       [options]="myOptions" #dp1="ngx-mydatepicker"
+                       (dateChanged)="onDateChanged($event,'startedDate')"/>
+                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default" style="padding: 6px 20px;"  (click)="dp1.toggleCalendar()">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                </span>
+              </p>
+            </div>
+            <div class="form-group experienceTime">
+              <p class="input-group">
+                <input class="form-control" style="float:none" name="endedDate" [(ngModel)]="filter.endedDate" placeholder="{{'account.account_ended_time' | translate}}" ngx-mydatepicker
+                       [options]="myOptions" #dp2="ngx-mydatepicker"
+                       (dateChanged)="onDateChanged($event,'endedDate')"/>
+                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default" style="padding: 6px 20px;"  (click)="dp2.toggleCalendar()">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                </span>
+              </p>
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn searchBtn" (click)="searchAccount()">{{'button.determine' | translate}}</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <!--/.col-->
+      <div class="accountRight col-md-9 col-sm-12 col-xs-12">
+        <div *ngIf="!changeTabLoading">
+          <div class="loading text-center" [hidden]="!accountLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div [hidden]="accountLoading">
+            <ul class="list-unstyled accountRightUl" [hidden]="accountLoading && accounts.length > 0">
+              <li class="row list title text-center">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                  {{'account.created_time' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                  {{'account.bill_num' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                  {{'account.bill_price' | translate}}
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                  {{'account.bill_status' | translate}}
+                </div>
+                <!--/.col-->
+              </li>
+              <div class="loading text-center" [hidden]="!loading">
+                <i class="fa fa-spinner fa-pulse fa-3x"></i>
+              </div>
+              <div [hidden]="loading">
+                <li class="row list text-center" *ngFor="let item of accounts">
+                  <div class="col-md-3 col-sm-3 col-xs-6">
+                    {{item.created}}
+                  </div>
+                  <!--/.col-->
+                  <div class="col-md-3 col-sm-3 col-xs-6">
+                    {{item.description}}
+                  </div>
+                  <!--/.col-->
+                  <div class="col-md-3 col-sm-3 col-xs-6">
+                    {{item.currency}} {{item.amount / 100}}
+                  </div>
+                  <!--/.col-->
+                  <div class="col-md-3 col-sm-3 col-xs-6">
+                    {{item.paid}}
+                  </div>
+                  <!--/.col-->
+                </li>
+                <!-- page -->
+                <div class="text-center">
+                  <pager [maxSize]="50"
+                         name="page"
+                         [itemsPerPage]="params.limit" [totalItems]="meta.pagination.totalCount"
+                         [(ngModel)]="params.page" (pageChanged)="changePage($event)"
+                         pageBtnClass="btn btn-link"></pager>
+                </div>
+              </div>
+            </ul>
+            <div class="noAccount text-center" *ngIf="!accountLoading && accounts.length === 0">
+              {{'message.credit_card_no_recharge_account' | translate}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+  </form>
+</div>
+

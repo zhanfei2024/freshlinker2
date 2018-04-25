@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="row upgradeDetail">
+    <div class="heading">
+      <h3 class="title">
+        {{'credit.packages_later' | translate}}
+      </h3>
+      <p class="content">
+        FreshLinker {{'message.credit_card_each_account_ensure_absolute_security' | translate}}
+        <a href="#" [routerLink]="['/company','contact']">{{'message.credit_card_contact_us' | translate}}</a>
+      </p>
+    </div>
+    <div class="upgradeDetailLeft col-md-7 col-sm-12 col-xs-12">
+      <h4 class="title">{{'credit.package_information' | translate}}</h4>
+      <p class="subTitle">
+        {{'message.credit_card_learn_more_about_package_price' | translate}}
+      </p>
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div class="row detail" *ngIf="!loading">
+        <div class="col-xs-6 col-sm-9 detailLeft">
+          <h2>{{planInfo.displayName}}</h2>
+          <p>{{'credit.list' | translate}}：HKD {{planInfo.oldPrice}}</p>
+        </div>
+        <!--/.col-->
+        <div class="col-xs-6 col-sm-3 detailRight">
+          <span class="em">HKD</span>
+          <span>{{planInfo.price}}</span>
+        </div>
+        <!--/.col-->
+      </div>
+
+      <div class="content row" *ngIf="!tableLoading">
+        <div class="col-xs-12 title">
+          {{planInfo.displayName}} {{'price.includes' | translate}}{{'price.features' | translate}}
+        </div>
+        <ul class="row">
+          <li class="col-sm-6 col-xs-12">
+                        <span>
+                            <strong>{{planInfo.positionQuota}}</strong> {{'price.active_jobs_advertisements' | translate}}
+                        </span>
+          </li>
+          <!--/.col-->
+
+          <!--<li class="col-sm-6 col-xs-12" *ngIf="planInfo.facebookPage !== 0">-->
+                        <!--<span>-->
+                            <!--<strong>{{planInfo.facebookPage}}</strong> {{'price.featured_job_slots' | translate}}-->
+                        <!--</span>-->
+          <!--</li>-->
+          <!--<li class="col-sm-6 col-xs-12"  *ngIf="planInfo.interview !== 0">-->
+                        <!--<span>-->
+                            <!--<strong>{{planInfo.interview}}</strong> {{'price.interview' | translate}}-->
+                        <!--</span>-->
+          <!--</li>-->
+
+          <!--<li class="col-sm-6 col-xs-12">-->
+                        <!--<span>-->
+                           <!--{{'price.complementary_company_page' | translate}}-->
+                        <!--</span>-->
+          <!--</li>-->
+          <!--&lt;!&ndash;/.col&ndash;&gt;-->
+          <!--<li class="col-sm-6 col-xs-12">-->
+                        <!--<span>-->
+                           <!--{{'price.applicant_tracking' | translate}}-->
+                        <!--</span>-->
+          <!--</li>-->
+          <!--&lt;!&ndash;/.col&ndash;&gt;-->
+          <li class="col-sm-6 col-xs-12">
+                        <span>
+                           {{'price.support' | translate}}: {{'price.standard' | translate}}
+                        </span>
+          </li>
+          <!--/.col-->
+          <li class="col-sm-6 col-xs-12">
+                        <span>
+                            {{'price.validity' | translate}}: {{planInfo.planEffectiveDay}} {{'price.days' | translate}}
+                        </span>
+          </li>
+          <!--/.col-->
+        </ul>
+      </div>
+    </div>
+    <!--/.col-->
+    <div class="upgradeDetailRight col-md-5 col-sm-12 col-xs-12">
+      <div class="upgradeDetailRightContent">
+        <h4 class="title">{{'credit.order_details' | translate}}</h4>
+        <p class="subTitle">
+          {{'message.credit_card_confirm_buy_packages' | translate}}
+        </p>
+        <div class="itemMoney itemHead row">
+          <div class="col-xs-12 content">
+            <div class="col-md-9 col-sm-8 col-xs-6 paddingLeft">
+              {{'credit.account_balance' | translate}}
+            </div>
+            <!--/.col-->
+            <div class="col-md-3 col-sm-4 col-xs-6 paddingLeft">
+              HKD
+              <span class="loading text-center" *ngIf="tableLoading">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+              <span *ngIf="!tableLoading">
+                                {{enterprise.balance}}
+                            </span>
+            </div>
+            <!--/.col-->
+          </div>
+          <!--/.col-->
+        </div>
+        <div class="loading text-center" *ngIf="loading">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!loading">
+          <div class="itemMoney row">
+            <div class="col-xs-12 paddingLeft title">
+              {{'credit.package_plan' | translate}}
+            </div>
+            <div class="col-xs-12 paddingLeft title" *ngIf="planInfo.displayName !== undefined">
+              {{planInfo.displayName}}
+            </div>
+            <!--/.col-->
+            <div class="col-xs-12 content" *ngFor="let item of plans">
+              <label for="{{item.name}}" class="col-xs-6 control-label paddingLeft" (click)="setPlan(item.id)">
+                <input type="radio" value="{{item.name}}" id="{{item.name}}" name="price" [checked]="planInfo.displayName === item.name">
+                {{item.name}}
+              </label>
+              <!--/.col-->
+              <div class="col-xs-6 paddingLeft">
+                HKD {{item.price}}
+              </div>
+              <!--/.col-->
+            </div>
+            <!--/.col-->
+          </div>
+          <div class="itemTotal row" *ngIf="!tableLoading">
+            <div class="content col-xs-12">
+              <div class="col-md-9 col-sm-8 col-xs-6 paddingLeft">
+                {{'position.total_price' | translate}}
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-6 paddingLeft">
+                HKD {{planInfo.price}}
+              </div>
+              <!--/.col-->
+            </div>
+            <!--.col-->
+            <div class="content col-xs-12">
+              <p class="other col-xs-12 paddingLeft">
+                {{'message.credit_card_will_charged' | translate}}<span>HKD {{planInfo.price}}</span>{{'message.credit_card_enable_package_plan' | translate}}<span>{{planInfo.displayName}}</span>,{{'global.here' | translate}}<span>{{myDate | date: 'yyyy-MM-dd'}}</span>{{'message.credit_card_with_immediate_effect' | translate}}。
+              </p>
+            </div>
+            <!--/.col-->
+
+          </div>
+        </div>
+      </div>
+      <div class="row button">
+        <div class="col-sm-6 col-xs-12">
+          <a [routerLink]="['/company','pricing']" type="button" class=" btn btn-default">
+            {{'button.return' | translate}}
+          </a>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-6 col-xs-12">
+          <a (click)="submit(planInfo.price)" type="button" class="btn btn-success">
+                        <span *ngIf="saveLoading">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </span>
+            <span *ngIf="!saveLoading">
+                            {{'credit.confirm_payment' | translate}}
+                        </span>
+
+          </a>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

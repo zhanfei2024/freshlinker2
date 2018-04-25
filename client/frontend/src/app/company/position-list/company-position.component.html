@@ -1,0 +1,402 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <form action="">
+    <div class="companyPositionList row">
+      <div class="col-md-3 col-sm-12 col-xs-12 companyPositionListLeft">
+        <div class="content">
+          <div class="button">
+            <a class="btn btn-success sub" (click)="postPosition()">
+              {{ 'company.publish_position' | translate }}
+            </a>
+          </div>
+          <ul class="editList list-unstyled">
+            <li class="list" *ngFor="let item of positionStatus" [ngClass]="{'active': item.id === positionIndex}">
+              <a (click)="positionTab(item.id)">{{item.name | translate}}</a>
+            </li>
+          </ul>
+          <div class="searchForm">
+            <h5>{{'search.dashboard_search_position' | translate}}</h5>
+
+            <div class="form-group">
+              <input type="text" [placeholder]="'message.position_name_input' | translate" required name="text"
+                     [(ngModel)]="filter.search">
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn" (click)="searchPosition()">{{'button.determine' | translate}}</button>
+            </div>
+          </div>
+
+        </div>
+        <!--/.companyPositionListLeft-->
+      </div>
+      <div class="col-md-9 col-sm-12 col-xs-12 companyPositionListRight">
+        <div *ngIf="!changeTabLoading">
+          <div class="text-center loading" [hidden]="!positionLoading">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+          <div [hidden]="positionLoading">
+            <div [hidden]="!(positions.length === 0 && !positionLoading)" class="noPosition row">
+              <div class="col-md-3 col-sm-3 col-xs-12 col-sm-offset-2">
+                <img src="../../../assets/img/no_position_message.png" alt="" class="img-responsive">
+              </div>
+              <!--/.col-->
+              <div class="col-md-5 col-sm-5 col-xs-12 text">
+                <p>
+                  {{'message.no_position_message' | translate}}
+                  <br>
+                  {{'message.no_position_tips_message' | translate}}
+                  <br>
+                  <span>{{'global.go_ahead' | translate}}</span>
+                  <a (click)="postPosition()">
+                    {{ 'company.publish_position' | translate }}
+                  </a>
+                </p>
+              </div>
+              <!--/.col-->
+            </div>
+
+            <div [hidden]="!(positions.length > 0 && !positionLoading)">
+              <div class="itemList" *ngFor="let row of positions;let index = index">
+                <div class="row item">
+                  <div class="list col-sm-2 col-xs-4" *ngIf="row.active && !row.isExpired">
+                    <p class="positionName">
+                      <a [routerLink]="['/positions',row.id]">{{row.name}}</a>
+                    </p>
+                    <p class="positionName" *ngIf="!row.active">
+                      {{row.name}}
+                    </p>
+                    <p class="time">{{row.updatedAt | date: 'yyyy-MM-dd'}}</p>
+                  </div>
+                  <!--/.col-->
+                  <div class="list col-sm-3 col-xs-5" *ngIf="!row.active || row.isExpired">
+                    <p class="positionName">
+                      {{row.name}}
+                    </p>
+                    <p class="time">{{row.createdAt | date: 'yyyy-MM-dd'}}</p>
+                  </div>
+                  <!--/.col-->
+                  <div class="list col-sm-2 col-xs-4">
+                    <p class="salary">
+                              <span class="positionSalary" *ngIf="row.minSalary === 0 && row.maxSalary === 0">
+                              {{'position.negotiation' | translate}}
+                              </span>
+                      <span class="positionSalary" *ngIf="row.minSalary > 0 && row.maxSalary > 0">
+                              {{row.minSalary}}-{{row.maxSalary}}
+                              </span>
+                    </p>
+                    <p class="tips">
+                      {{row.salaryType}} ({{'global.money' | translate}})
+                    </p>
+                  </div>
+                  <!--/.col-->
+                  <div class="list col-sm-2 col-xs-4">
+                    <p class="expiredDate">
+                      {{row.expiredDate | date: 'yyyy-MM-dd'}}
+                    </p>
+                    <p class="tips">
+                      {{'position.expiredDate' | translate}}
+                    </p>
+                  </div>
+                  <!--/.col-->
+
+                  <div class="btn-user checkList col-sm-2 col-xs-4">
+                    <div class="btn-group" dropdown>
+                      <button id="" type="button" class="btn btn-sucess submit" dropdownToggle>
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <ul class="dropdown-menu" *dropdownMenu role="menu"
+                          aria-labelledby="education-button">
+                        <li role="menuitem">
+                          <a [routerLink]="['/company', row.companyId,row.id,'positions_create']" *ngIf="!row.active">
+                            <i class="fa fa-pencil">{{'button.edit' | translate}}</i>
+                          </a>
+                        </li>
+                        <li role="menuitem" *ngIf="row.active && !row.isExpired">
+                          <a ng-really-message="Are you sure?" (click)="downlinePosition(row.id)"
+                             nodrag>
+                            {{'global.offline' | translate}}
+                          </a>
+                        </li>
+
+                        <li class="divider" *ngIf="!row.isExpired"></li>
+                        <!--<li role="menuitem" *ngIf="row.isExpired">-->
+                        <!--<a ng-really-message="Are you sure?" (click)="check(($index))"  >-->
+                        <!--{{'position.repost' | translate}}</i>-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <li role="menuitem">
+                          <a ng-really-message="Are you sure?" nodrag (click)="deletePosition(row.id)"
+                          >
+                            <i class="fa fa-times"></i>
+                            {{ 'button.remove' | translate }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <p class="text text-center">
+                      {{'button.edit' | translate}}
+                    </p>
+                  </div>
+                  <!--/.col-->
+                  <div class="boost col-sm-2 col-xs-4 checkList" *ngIf="row.active && !row.isExpired">
+                    <a [routerLink]="['/company',row.companyId,'job-offer']">
+                      <p class="boost">
+                        <span></span>
+                      </p>
+                      <p class="text text-center">
+                        Boost it
+                      </p>
+                    </a>
+                  </div>
+                  <!--/.col-->
+                  <div class="checkList last col-md-2 col-sm-2 col-xs-4">
+                    <a [routerLink]="['/positions',row.id]" *ngIf="row.active && !row.isExpired">
+                      <p class="icon">
+                        <span></span>
+                      </p>
+                      <p class="text text-center">
+                        {{'global.check' | translate}}
+                      </p>
+                    </a>
+                    <a *ngIf="!row.active || row.isExpired" (click)="showChart(index)">
+                      <p class="icon">
+                        <span></span>
+                      </p>
+                      <p class="text text-center">
+                        {{'global.check' | translate}}
+                      </p>
+                    </a>
+                    <a class="checkList listDown text-center" (click)="showChart(index)">
+                      <p class="icon">
+                        <i class="fa fa-angle-down" *ngIf="!row.selected"></i>
+                        <i class="fa fa-angle-up" *ngIf="row.selected"></i>
+                      </p>
+                    </a>
+                  </div>
+                  <!--/.col-->
+                </div>
+
+                <div *ngIf="row.selected">
+                  <div class="text-center chartLoading col-xs-12" *ngIf="chartLoading">
+                    <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                  </div>
+                  <div *ngIf="row.candidateNum === 0 && !chartLoading" class="noCandidate row">
+                    <div class=" col-md-2 col-sm-3 col-xs-5 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
+                      <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+                    </div>
+                    <!--/.col-->
+                    <div class="col-md-4 col-sm-5 col-xs-5 text">
+                      <p>
+                        {{'message.no_candidate_message' | translate}}
+                        <br>
+                        {{'message.no_candidate_tips_message' | translate}}
+                        <br>
+                        <span>{{'global.go_ahead' | translate}}</span>
+                        <a (click)="postPosition()">
+                          {{ 'company.publish_position' | translate }}
+                        </a>
+                      </p>
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <div *ngIf="row.candidateNum > 0 && !chartLoading">
+                    <carousel  *ngIf="row.experienceChartData.length > 0">
+                      <slide>
+                        <div class="positionChart">
+                          <div class="row educationChart">
+                            <div class="col-sm-2 col-md-2 col-xs-12">
+                              <div class="positionChartContentLeft text-center">
+                                <p class="text-center">
+                                  {{'user.profile.experience' | translate}}
+                                </p>
+                                <p class="text-center hidden-xs hidden-sm" style="color: #00b216;font-size: 16px;">
+                                  <span><strong>{{row.candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                                </p>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                            <div class="col-sm-6 col-xs-12 chartContent">
+                              <div class="chart-pie">
+                                <canvas baseChart class="chart chart-pie"
+                                        [data]="row.experienceChartData"
+                                        [labels]="row.experienceChartLabels"
+                                        [colors] = "backgroundColor"
+                                        [legend]="polarAreaLegend"
+                                        [options] = "options"
+                                        [chartType]="pieChartType"></canvas>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </slide>
+
+                      <slide>
+                        <div class="positionChart">
+                          <div class="row educationChart">
+                            <div class="col-sm-2 col-md-2 col-xs-12">
+                              <div class="positionChartContentLeft text-center">
+                                <p class="text-center">
+                                  {{'user.profile.education' | translate}}
+                                </p>
+                                <p class="text-center hidden-xs hidden-sm" style="color: #00b216;font-size: 16px;">
+                                  <span><strong>{{row.candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                                </p>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                            <div class="col-sm-6 col-xs-12 chartContent">
+                              <div class="chart-pie">
+                                <canvas baseChart class="chart chart-pie"
+                                        [data]="row.educationChartData"
+                                        [labels]="row.educationChartLabels"
+                                        [colors] = "backgroundColor"
+                                        [legend]="polarAreaLegend"
+                                        [options] = "options"
+                                        [chartType]="pieChartType"></canvas>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </slide>
+
+                      <slide>
+                        <div class="positionChart">
+                          <div class="text-center chartLoading col-xs-12" *ngIf="chartLoading ">
+                            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                          </div>
+                          <div class="row educationChart" *ngIf="!chartLoading">
+                            <div class="noChart text-center col-xs-12" *ngIf="!isSkill">
+                              {{'message.company_no_accept_skill' | translate}}
+                            </div>
+                            <div *ngIf="isSkill">
+                              <div class="col-sm-2 col-md-2 col-xs-12">
+                                <div class="positionChartContentLeft text-center">
+                                  <p class="text-center">
+                                    {{'user.profile.skill' | translate}}
+                                  </p>
+                                  <p class="text-center hidden-xs hidden-sm" style="color: #00b216;font-size: 16px;">
+                                    <span><strong>{{row.candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                                  </p>
+                                </div>
+                              </div>
+                              <!--/.col-->
+                              <div class="col-sm-6 col-xs-12 chartContent">
+                                <div class="chart-pie">
+                                  <canvas baseChart class="chart chart-pie"
+                                          [data]="row.skillChartData"
+                                          [labels]="row.skillChartLabels"
+                                          [colors] = "backgroundColor"
+                                          [legend]="polarAreaLegend"
+                                          [options] = "options"
+                                          [chartType]="pieChartType"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </slide>
+
+                      <slide>
+                        <div class="positionChart">
+                          <div class="text-center chartLoading col-xs-12" *ngIf="chartLoading ">
+                            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                          </div>
+                          <div class="row educationChart" *ngIf="!chartLoading">
+                            <div class="noChart text-center col-xs-12" *ngIf="!isSchool">
+                              {{'message.company_no_accept_school' | translate}}
+                            </div>
+                            <div *ngIf="isSchool">
+                              <div class="col-sm-2 col-md-2 col-xs-12">
+                                <div class="positionChartContentLeft text-center">
+                                  <p class="text-center">
+                                    {{'user.profile.school' | translate}}
+                                  </p>
+                                  <p class="text-center hidden-xs hidden-sm" style="color: #00b216;font-size: 16px;">
+                                    <span><strong>{{row.candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                                  </p>
+                                </div>
+                              </div>
+                              <!--/.col-->
+                              <div class="col-sm-6 col-xs-12 chartContent">
+                                <div class="chart-pie">
+                                  <canvas baseChart  class="chart chart-pie"
+                                          [data]="row.schoolChartData"
+                                          [labels]="row.schoolChartLabels"
+                                          [colors] = "backgroundColor"
+                                          [legend]="polarAreaLegend"
+                                          [options] = "options"
+                                          [chartType]="pieChartType"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </slide>
+
+                      <slide>
+                        <div class="positionChart">
+                          <div class="text-center chartLoading col-xs-12" *ngIf="chartLoading ">
+                            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+                          </div>
+                          <div class="row educationChart" *ngIf="!chartLoading">
+                            <div class="noChart text-center col-xs-12" *ngIf="!isSubject">
+                              {{'message.company_no_accept_subject' | translate}}
+                            </div>
+                            <div *ngIf="isSubject">
+                              <div class="col-sm-2 col-md-2 col-xs-12">
+                                <div class="positionChartContentLeft text-center">
+                                  <p class="text-center">
+                                    {{'user.profile.subject' | translate}}
+                                  </p>
+                                  <p class="text-center hidden-xs hidden-sm" style="color: #00b216;font-size: 16px;">
+                                    <span><strong>{{row.candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                                  </p>
+                                </div>
+                              </div>
+                              <!--/.col-->
+                              <div class="col-sm-6 col-xs-12 chartContent">
+                                <div class="chart-pie">
+                                  <canvas baseChart
+                                          class="chart chart-pie"
+                                          [data]="row.subjectChartData"
+                                          [labels]="row.subjectChartLabels"
+                                          [colors] = "backgroundColor"
+                                          [legend]="polarAreaLegend"
+                                          [options] = "options"
+                                          [chartType]="pieChartType"></canvas>
+                                </div>
+                              </div>
+                            </div>
+                            <!--/.col-->
+                          </div>
+                        </div>
+                      </slide>
+                    </carousel>
+                  </div>
+                </div>
+              </div>
+              <!--/.col-->
+              <!-- page -->
+              <div class="text-center">
+                <pager [maxSize]="50"
+                       name="CandidatesPage"
+                       [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                       [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                       pageBtnClass="btn btn-link"></pager>
+              </div>
+            </div>
+
+          </div>
+          <!--/.positionManage-->
+        </div>
+      </div>
+      <!--/.companyPositionListRight-->
+    </div>
+  </form>
+
+</div>

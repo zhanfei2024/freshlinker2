@@ -1,0 +1,358 @@
+<div class="container">
+  <div class="editCompanyHead">
+    <i class="fa fa-edit"></i>
+    <span>{{'company.edit_company' | translate}}</span>
+  </div>
+  <form (ngSubmit)="save()" #PostForm="ngForm" name="Form" class="form-horizontal" (window:beforeunload)="doSomething($event)">
+    <div class="row editCompany">
+      <div class="loading text-center" *ngIf="loading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div *ngIf="!loading">
+        <div class="col-md-3 col-sm-3 col-xs-12 editCompanyLeft">
+          <div class="content">
+            <div class="button">
+              <button type="submit" class="btn btn-success sub companySub" [disabled]="!PostForm.form.valid || saveLoading">
+                <span *ngIf="saveLoading"><i class="fa fa-spin fa-spinner"></i></span>
+                <span *ngIf="!saveLoading">{{ 'button.determine' | translate }}</span>
+              </button>
+              <a *ngIf="companyId!==null" [routerLink]="back" type="button"
+                 class="btn btn-default canel">
+                {{ 'button.return' | translate }}
+              </a>
+
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+        <div class="col-md-9 col-sm-9 col-xs-12 editCompanyRight">
+          <div class="companyContent">
+            <div class="baseInformation">
+              <h4>
+                {{'global.base_infomartion' | translate}}
+              </h4>
+              <div class="form-group">
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="name" class="col-sm-12 col-xs-12 control-label">* {{ 'company.name' | translate
+                    }}</label>
+
+                  <div class="col-sm-12 col-xs-12">
+                    <input type="text" class="form-control" id="name" name="name" required #nameHandler="ngModel"
+                           [(ngModel)]="company.name">
+                  </div>
+                  <!--/.col-->
+                  <div class="tips col-sm-12 col-xs-12">
+                    {{'global.tips' | translate}}: {{'message.company_name_input_message' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="foundingTime" class="col-sm-12 col-xs-12 control-label">* {{ 'company.founding_time' |
+                    translate}}</label>
+
+                  <div class="col-sm-12 col-xs-12">
+                    <input type="text" class="form-control" id="foundingTime" name="foundingTime" required #TimeHandler="ngModel"
+                           [(ngModel)]="company.foundingTime">
+                  </div>
+                  <div *ngIf="TimeHandler.errors && (TimeHandler.dirty || TimeHandler.touched)"
+                       class="text-danger text-center">
+                    <div [hidden]="!TimeHandler.errors.required">
+                      fFundingTime is required
+                    </div>
+                  </div>
+                  <!--/.col-->
+                  <div class="tips col-sm-12 col-xs-12">
+                    {{'global.tips' | translate}}: {{'message.company_foundingTime_select_message' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+              <!-- /.form-group -->
+              <div class="form-group">
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="url" class="col-sm-12 col-xs-12 control-label"> * {{ 'company.url' | translate
+                    }}</label>
+
+                  <div class="col-sm-12 col-xs-12">
+                    <input type="text" class="form-control" id="url" name="url" required #urlHandler="ngModel"
+                           [(ngModel)]="company.url">
+                  </div>
+
+                  <div *ngIf="urlHandler.errors && (urlHandler.dirty || urlHandler.touched)"
+                       class="text-danger text-center">
+                    <div [hidden]="!urlHandler.errors.required">
+                      URL is required
+                    </div>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+              </div>
+
+
+              <div class="form-group">
+                <div class="col-sm-4 col-xs-12 content">
+                  <label for="icon" class=" col-sm-12 col-xs-12 control-label">{{'company.company_icon' |
+                    translate}}</label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12 ">
+                    <div class="pull-left cropContent">
+                      <div class="file-upload crop">
+                        <input class="mr_headfile" id="icon" type="file"
+                               (change)="fileChangeListener($event,'icon')">
+
+                        <span class="text-muted">
+                                                    <i class="fa fa-cloud-upload fa-5x"
+                                                       *ngIf="icon === undefined && company.icon === null"></i>
+
+
+                                                    <img class="thumb img-responsive"
+                                                         *ngIf="(icon !== undefined && icon !== null) "
+                                                         [src]="icon">
+                                                    <img class="thumb img-responsive"
+                                                         *ngIf="icon === undefined && company.icon !== null"
+                                                         [src]="company.icon?.url['100']">
+                                                    <br>
+                                                    <h4>{{'file.Drop_here_to_upload_(or click)' | translate}}</h4>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="error text-left" *ngIf="isIconError">
+                      <i class="fa fa-times-circle"></i>
+                      {{iconError | translate}}
+                    </div>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-8 col-xs-12 content">
+                  <label for="cover" class=" col-sm-12 col-xs-12 control-label">{{'company.cover' | translate}}</label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12 ">
+                    <div class="pull-left cropContent">
+                      <div class="file-upload crop">
+                        <input class="mr_headfile" id="cover" type="file"
+                               (change)="fileChangeListener($event,'cover')">
+
+                        <span class="text-muted">
+                                                    <i class="fa fa-cloud-upload fa-5x"
+                                                       *ngIf="cover === undefined && company.cover === null"></i>
+
+
+                                                    <img class="img-responsive"
+                                                         *ngIf="(cover !== undefined && cover !== null) "
+                                                         [src]="cover">
+                                                    <img class="img-responsive"
+                                                         *ngIf="(cover === undefined && company.cover !== null) "
+                                                         [src]="company.cover?.url['480']">
+                                                    <br>
+                                                    <h4>{{'file.Drop_here_to_upload_(or click)' | translate}}</h4>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+              </div>
+
+            </div>
+            <!--/.baseInformation-->
+
+            <div class="location">
+              <h4>
+                {{'global.company_location' | translate}}
+              </h4>
+              <div class="form-group">
+                <div class="col-sm-6 col-xs-12 content">
+                  <label class="col-sm-12 col-xs-12 control-label">
+                    {{ 'company.countryId' | translate }}
+                  </label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12 countryContent clearfix">
+                    <ng-select [allowClear]="true"
+                               [items]="countries"
+                               [active]="country"
+                               #select
+                               (selected)="selectedCountry($event)"
+                               (typed)="searchCountry($event)"
+                               placeholder="{{'message.select_country' | translate}}">
+                    </ng-select>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="address" class="col-sm-12 col-xs-12 control-label">{{ 'company.address' | translate
+                    }}</label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12">
+                    <input id="address" name="address" required type="text" class="form-control"
+                           [(ngModel)]="company.address">
+                  </div>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12 tips">
+                    {{'global.tips' | translate}}: {{'message.company_address_input_message' | translate}}
+                  </div>
+                </div>
+                <!--/.col-->
+
+              </div>
+            </div>
+
+            <div class="detail">
+              <h4>{{'global.information' | translate}}</h4>
+              <div class="form-group">
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="scale" class="col-sm-12 col-xs-12 control-label">{{ 'company.scale' | translate}}</label>
+                  <!--/.col-->
+
+                  <div class="col-sm-12 col-xs-12">
+                    <select class="form-control" name="scale" id="scale" [(ngModel)]="company.scale">
+                      <option value="">{{'message.company_scale_select_message' | translate}}</option>
+                      <option *ngFor="let item of scale" value="{{item.value}}">{{item.name}}</option>
+                    </select>
+                    <div class="tips">
+                      {{'global.tips' | translate}}: {{'message.company_scale_tips' | translate}}
+                    </div>
+                  </div>
+                  <!--/.col-->
+
+                </div>
+                <!--/.col-->
+
+                <div class="col-sm-6 col-xs-12 content">
+                  <label class="col-sm-12 col-xs-12 control-label">
+                    {{ 'company.company_stage' | translate }}
+                  </label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12">
+                    <select class="form-control" name="stage" [(ngModel)]="company.stage">
+                      <option value="">{{'message.company_stage_select_message' | translate}}</option>
+                      <option *ngFor="let item of stages" value="{{item.value}}">{{item.value}}</option>
+                    </select>
+                    <div class="tips">{{'global.tips' | translate}}: {{'message.company_stage_tips' | translate}}</div>
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+              </div>
+
+              <!--/.form-group-->
+              <div class="form-group">
+                <div class="col-sm-6 col-xs-12 content">
+                  <label for="field" class="col-sm-12 col-xs-12 control-label">
+                    {{ 'company.field' | translate }}
+                  </label>
+                  <!--/.col-->
+
+                  <div class="col-sm-12 col-xs-12">
+                    <input id="field" name="field" required type="text" class="form-control"
+                           [(ngModel)]="company.field"
+                           placeholder="{{'company.apply_for_company_field' | translate}}">
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+              </div>
+
+            </div>
+
+            <div class="about">
+              <h4>{{'global.about' | translate}}</h4>
+              <div class="form-group">
+                <!--/.col-->
+                <div class="col-sm-12 col-xs-12 content">
+                  <label for="background" class="col-sm-12 col-xs-12 control-label">{{ 'company.background' |
+                    translate }}</label>
+                  <!--/.col-->
+                  <div class="col-sm-12 col-xs-12">
+                                    <textarea style="height: 500px;" id="background" name="background" required
+                                              class="form-control"
+                                              [(ngModel)]="company.background" cols="15" rows="5"
+                                              maxlength="3000">
+                                    </textarea>
+                  </div>
+                  <!--/.col-->
+                  <div class="tips col-xs-12 text-right">
+                    {{'message.text_input_255_words_message' | translate}}
+                  </div>
+                  <!--/.col-->
+                </div>
+                <!--/.col-->
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.col-->
+      </div>
+    </div>
+  </form>
+
+
+  <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 15px 15px 30px;">
+          <h4 class="modal-title pull-left">
+            {{'file.cut' | translate}}
+          </h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+          <br>
+          <span class="result rounded" *ngIf="data.image">
+                          <img [src]="data.image" [width]="cropperSettings.croppedWidth"
+                               [height]="cropperSettings.croppedHeight">
+          </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="cropIcon(data.image)">
+            <i class="fa fa-check"></i>{{ 'button.yes' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" bsModal #coverModal="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="padding: 15px 15px 30px;">
+          <h4 class="modal-title pull-left">
+            {{'file.cut' | translate}}
+          </h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="coverModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img-cropper #cropper2 [image]="data2" [settings]="cropperSettings2"></img-cropper>
+          <br>
+          <span class="result rounded" *ngIf="data2.image">
+                          <img class="img-responsive" [src]="data2.image" [width]="cropperSettings2.croppedWidth"
+                               [height]="cropperSettings2.croppedHeight">
+                    </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="cropCover(data2.image)">
+            <i class="fa fa-check"></i>{{ 'button.yes' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,493 @@
+div.dashboard {
+  background-color: #fbfbfb;
+  margin: 0;
+  border: 1px solid $gray-light-2x;
+
+  div.noPosition {
+    padding: 20px 0;
+    font-size: $font-size-h4;
+    background-color: transparent;
+  }
+
+}
+
+div.dashboardLeft,
+div.dashboardRight {
+  padding: 0;
+}
+
+
+// dashboardLeft
+div.dashboardLeft {
+  padding: 0;
+
+  div.baseInformation,
+  div.personInformation {
+    padding: 20px;
+  }
+  div.personInformation {
+    border-bottom: 1px solid $gray-light-2x;
+    .img {
+      a {
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    h4.name {
+      padding: 10px 0;
+      font-size: $font-size-large;
+      font-weight: normal;
+      color: $gray-dark;
+    }
+
+    p.text {
+      text-align: left;
+      color: $gray;
+    }
+  }
+
+
+  div.baseInformation {
+    p.head {
+      font-size: $font-size-large;
+      color: $gray-dark;
+    }
+    ul.careerList {
+      li.list {
+        padding-bottom: 20px;
+        color: $gray;
+        margin: 0;
+      }
+    }
+  }
+
+}
+
+// dashboardRight
+div.dashboardRight {
+  background-color: $body-bg;
+  min-height: 850px;
+
+  div.noAppliedPosition {
+    padding: 50px 0;
+    text-align: center;
+    div.text {
+      padding-top: 20px;
+      line-height: 2.4;
+      font-size: $font-size-h4;
+      font-weight: normal;
+      color: $gray;
+      text-align: left;
+      span {
+        font-size: $font-size-h4;
+        color: $brand-danger;
+      }
+      a {
+        font-size: $font-size-h4;
+      }
+    }
+  }
+
+  div.rolePlan,
+  div.positionStatus,
+  div.companyPictures {
+    border-bottom: 1px solid $gray-light-2x;
+    margin-bottom: 20px;
+    h4.title {
+      font-size: $font-size-base;
+      font-weight: normal;
+      margin: 0;
+      padding: 0 40px;
+      border-bottom: 1px solid $gray-light-2x;
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+    }
+    h4.title:before {
+      position: absolute;
+      left: 20px;
+      border-left: 3px solid $brand-info;
+      content: '';
+      width: 4px;
+      height: 16px;
+      top: 12px;
+    }
+  }
+  div.rolePlan {
+    ul.content {
+      padding: 20px 0;
+      padding-left: 40px;
+      padding-right: 10px;
+      li {
+        padding-bottom: 20px;
+
+        div.content {
+          strong {
+            color: $brand-info;
+            padding-right: 5px;
+            font-size: 20px;
+            font-weight: 400;
+          }
+        }
+
+        i {
+          font-style: normal;
+        }
+
+        a.roleBtn {
+          margin-right: 10px;
+          padding: 3px 0;
+          font-size: $font-size-small;
+          border: 0;
+          width: 85px;
+        }
+
+        a.creditBtn {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+
+  div.positionStatus {
+    div.positionStatusContent {
+      margin: 20px 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed $gray-light-2x;
+      a.positionName {
+        color: $gray-dark;
+        display: block;
+        padding-bottom: 10px;
+      }
+      a.submit, a.finished {
+        padding: 3px 10px;
+        font-size: 12px;
+      }
+      a.submit:hover, a.submit:active, a.submit:focus {
+        background-color: darken($brand-success, 4.5%);
+        color: $body-bg;
+        outline: none;
+      }
+      .address {
+        color: $brand-danger;
+        font-size: $font-size-small;
+        i {
+          color: $brand-success;
+        }
+      }
+      .candidate {
+        text-align: center;
+        border-left: 1px solid $gray-light-2x;
+      }
+      .message {
+        margin: 10px 0;
+        p {
+          margin: 0;
+          text-align: center;
+          color: $brand-danger;
+        }
+
+        p.publishing,p.published,p.pastPublished,p.offline {
+          color: $gray-dark;
+          padding-bottom: 10px;
+        }
+
+        p.noApplied {
+          padding: 20px 0;
+        }
+
+        p.applyNum {
+          font-weight: bold;
+          color: $brand-info;
+          font-size: $font-size-h4;
+        }
+        .messageBorder {
+          border-left: 1px solid $gray-light-2x;
+        }
+      }
+    }
+  }
+
+  div.companyPictures {
+    border-bottom: 0;
+    div.content {
+      margin: 0;
+      padding: 0 20px;
+      div.list {
+        padding: 15px;
+        min-height: 131px;
+        line-height: 131px;
+        text-align: center;
+        a {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+
+      }
+
+    }
+
+    .slick-prev, .slick-next {
+      width: 20px;
+      height: 35px;
+    }
+
+
+    .slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
+      opacity: 1;
+    }
+
+    .slick-prev:before, .slick-next:before {
+      font-size: 24px;
+      opacity: .6;
+    }
+
+    .slick-prev {
+      left: -10px;
+      z-index: 999;
+      top: 50%;
+    }
+
+    .slick-next {
+      right: -10px;
+      z-index: 998;
+      top: 50%;
+    }
+
+    .slick-prev:before, .slick-next:before {
+      color: #000;
+    }
+
+    .slick-prev:before {
+      content: '';
+      width: 20px;
+      height: 35px;
+      display: block;
+      margin: 0 auto;
+      background: url('./~/assets/img/icon.png') 0px -795px no-repeat;
+    }
+
+    .slick-next:before {
+      content: '';
+      width: 20px;
+      height: 35px;
+      display: block;
+      margin: 0 auto;
+      background: url('./~/assets/img/icon.png') 0px -948px no-repeat;
+    }
+
+
+  }
+
+}
+
+// dashboardEdit
+div.dashboardEdit {
+  a {
+    color: $brand-success;
+    i {
+      font-size: $font-size-large;
+    }
+  }
+}
+
+
+
+
+// dashboardChart
+.dashboardChart {
+  margin-bottom: 20px;
+  border-top: 1px solid $gray-light-2x;
+
+  div.noChart {
+    padding: 20px 0;
+    font-size: $font-size-h4;
+  }
+
+  .nav-tabs {
+    display: none;
+  }
+
+  .dashboardChartList {
+    padding: 15px 0 15px 0;
+    margin-left: 0;
+    border-bottom: 2px solid $brand-primary;
+    margin-bottom: 20px;
+    li {
+      padding: 0 20px;
+      cursor: pointer;
+    }
+
+    li.active {
+      color: $brand-info;
+      font-weight: bold;
+    }
+
+  }
+
+}
+
+ul.pie-legend {
+  li {
+    font-size: $font-size-base;
+    span.pie-legend-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      left: 1px;
+    }
+  }
+}
+
+
+@media (max-width: $screen-xs-max) {
+
+  div.dashboardRight {
+    div.companyPictures {
+      .slick-prev {
+        left: 5%;
+      }
+      .slick-next {
+        right: 10px;
+      }
+    }
+
+    div.positionStatus {
+      div.positionStatusContent {
+        .message {
+          p {
+            text-align: left;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+
+
+
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  div.dashboardRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+
+  // dashboardChart
+  div.dashboardChart,
+  div.positionChart {
+    padding-bottom: 50px;
+    .chart-pie {
+      position: relative;
+      margin-left: 15%;
+      ul.pie-legend {
+        position: absolute;
+        right: -50%;
+        top: 0;
+        li {
+          text-align: left;
+          display: block;
+          margin-bottom: 10px;
+        }
+      }
+
+      p {
+        position: absolute;
+        left: 0;
+        top: 25%;
+        span {
+          color: $brand-success;
+          font-size: $font-size-large;
+          strong {
+            font-size: $font-size-h3;
+            padding-right: 5px;
+          }
+        }
+
+        em {
+          color: $gray;
+        }
+      }
+    }
+  }
+
+
+
+}
+
+@media (min-width: $screen-lg-min) {
+  div.dashboardRight {
+    border-left: 1px solid $gray-light-2x;
+  }
+  // dashboardChart
+  div.dashboardChart,
+  div.positionChart {
+    padding-bottom: 50px;
+
+    .chart-pie {
+      position: relative;
+      margin-left: 15%;
+      ul.pie-legend {
+        width: 180px;
+        position: absolute;
+        right: -50%;
+        top: 0;
+        li {
+          text-align: left;
+          display: block;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      p {
+        position: absolute;
+        left: 0;
+        top: 25%;
+        span {
+          color: $brand-success;
+          font-size: $font-size-large;
+          strong {
+            font-size: $font-size-h3;
+            padding-right: 5px;
+          }
+        }
+
+        em {
+          color: $gray;
+        }
+      }
+    }
+    #pie_school_content {
+      ul.pie-legend {
+        right: -70%;
+        width: 320px;
+        li {
+          text-align: left;
+          display: block;
+          margin-bottom: 10px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: 320px;
+        }
+      }
+    }
+  }
+
+
+}

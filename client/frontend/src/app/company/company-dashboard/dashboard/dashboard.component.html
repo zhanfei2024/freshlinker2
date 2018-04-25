@@ -1,0 +1,460 @@
+<div class="container">
+  <dashboard-tabs></dashboard-tabs>
+  <div class="row dashboard">
+    <div class="col-md-3 col-sm-12 col-xs-12 dashboardLeft">
+      <div *ngIf="!dashboardLoading">
+        <div class="personInformation text-center">
+          <div class="text-left dashboardEdit">
+            <a [routerLink]="['/company',companyId,'company-edit']">
+              <i class="fa fa-edit"></i>
+              {{'button.edit' | translate}}
+            </a>
+          </div>
+          <fieldset class="img">
+            <a [routerLink]="['/company',companyId,'company-edit']">
+              <div *ngIf="company.icon !== null">
+                <img [src]="company.icon.url['200']" class="img-responsive img-circle">
+              </div>
+              <div *ngIf="company.icon === null">
+                <img src="../../assets/img/default_company_icon.png" class="img-responsive img-circle">
+              </div>
+            </a>
+          </fieldset>
+          <!--/.img-->
+          <h4 class="name">
+            {{company.name}}
+          </h4>
+          <p class="text" *ngIf="company.background !== null">
+              <span>
+                    {{company.background | htmlToPlaintext : 100}}
+                    <span
+                      *ngIf="!descriptionShow && company?.background?.length > 100">...</span>
+                    <a (click)="descriptionShow = !descriptionShow"
+                       *ngIf="!descriptionShow && company?.background?.length > 100">{{'global.expand' | translate}}</a>
+                  </span>
+            <span *ngIf="descriptionShow">
+                    {{company.background | htmlToPlaintext : 3000 }}
+                    <a (click)="descriptionShow = !descriptionShow"
+                       *ngIf="descriptionShow">{{'global.put_away' | translate}}</a>
+                  </span>
+          </p>
+        </div>
+        <!--/.information-->
+        <div class="baseInformation">
+          <p class="head">
+            {{'global.base_infomartion' | translate}}
+          </p>
+          <ul class="careerList list-unstyled">
+            <li class="list row">
+              <div class="col-xs-3 col-md-5">
+                <span>{{'company.scale' | translate}}</span>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 col-md-7">
+                {{company.scale}}
+              </div>
+              <!--/.col-->
+            </li>
+            <li class="list row">
+              <div class="col-xs-3 col-md-5">
+                <span>{{'company.field' | translate}}</span>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 col-md-7">
+                {{company.field}}
+              </div>
+              <!--/.col-->
+            </li>
+            <li class="list row">
+              <div class="col-xs-3 col-md-5">
+                <span>{{'company.company_stage' | translate}}</span>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 col-md-7">
+                {{company.stage}}
+              </div>
+              <!--/.col-->
+            </li>
+            <li class="list row" *ngIf="company.url !== 'http://'">
+              <div class="col-xs-3 col-md-5">
+                <span>{{'company.url' | translate}}</span>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 col-md-7">
+                <a href="{{company.url}}" target="_blank">{{company.url}}</a>
+              </div>
+              <!--/.col-->
+            </li>
+
+            <li class="list row">
+              <div class="col-xs-3 col-md-5">
+                <span>{{'company.address' | translate}}</span>
+              </div>
+              <!--/.col-->
+              <div class="col-xs-9 col-md-7">
+                {{company.address}}
+              </div>
+              <!--/.col-->
+            </li>
+          </ul>
+          <!--/.careerList-->
+
+        </div>
+        <!--profileInformation-->
+      </div>
+      <div *ngIf="dashboardLoading" class="text-center tableLoading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+
+    </div>
+    <!--/.col-->
+
+    <div class="col-md-9 col-sm-12 col-xs-12 dashboardRight">
+      <!--rolePlan-->
+      <div class="rolePlan">
+        <h4 class="title">{{'role.account_news' | translate}}</h4>
+        <ul class="content list-unstyled">
+          <div *ngIf="dashboardLoading" class="text-center tableLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div *ngIf="!dashboardLoading">
+            <li class="row">
+              <div class="col-sm-2 col-xs-12 title">
+                {{'role.current_account_amount' | translate}}:
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-12 content">
+                <strong>{{enterprise.balance}}</strong>{{'global.money' | translate}}
+              </div>
+              <!--/.col-->
+              <div class="col-md-4 col-sm-6 col-xs-12 button">
+                <a [routerLink]="['/company',companyId,'recharge']" class="roleBtn btn btn-success">{{'role.recharge' |
+                  translate}}</a>
+                <a [routerLink]="['/company',companyId,'account']">{{'role.check_bill' | translate}}>></a>
+                <br>
+                <a [routerLink]="['/company',companyId,'credit_card']" class="roleBtn btn btn-success creditBtn">{{'role.credit'
+                  | translate}}</a>
+              </div>
+              <!--/.col-->
+            </li>
+
+            <li class="row">
+              <div class="col-sm-2 col-xs-12 title">
+                {{'position.expiredDate' | translate}}:
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-12 content">
+                <strong *ngIf="enterprise.planExpiredDate !== null && enterprise.planExpiredDate !== 'Invalid date'">{{enterprise.planExpiredDate
+                  | date: 'yyyy-MM-dd'}}</strong>
+                <strong *ngIf="enterprise.planExpiredDate === null || enterprise.planExpiredDate === 'Invalid date'">{{'message.dashboard_no_purchase_plan'
+                  | translate}}</strong>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-6 col-xs-12 button">
+                <a [routerLink]="['/company','pricing','upgradePage']" class="roleBtn btn btn-success">{{'enterprise.upgrade' |
+                  translate}}</a>
+              </div>
+
+              <!--/.col-->
+            </li>
+
+            <li class="row">
+              <div class="col-sm-2 col-xs-12 title">
+                {{'position.position_expiredDate' | translate}}:
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-12 content">
+                <strong *ngIf="enterprise.positionExpiredDate !== null && enterprise.positionExpiredDate !== 'Invalid date'">{{enterprise.positionExpiredDate
+                  | date: 'yyyy-MM-dd'}}</strong>
+                <strong *ngIf="enterprise.positionExpiredDate === null || enterprise.positionExpiredDate === 'Invalid date'">{{'message.dashboard_no_purchase_plan'
+                  | translate}}</strong>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-6 col-xs-12 button">
+                <a  [routerLink]="['/company','pricing']" class="roleBtn btn btn-success">{{'enterprise.upgrade_position' |
+                  translate}}</a>
+              </div>
+
+              <!--/.col-->
+            </li>
+
+
+            <li class="row">
+              <div class="col-sm-2 col-xs-12 title">
+                {{'role.publish_position_left' | translate}}:
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-12 content">
+                <strong>{{enterprise.positionQuota}}</strong>{{'global.unit' | translate}}
+              </div>
+              <!--/.col-->
+              <div class="col-md-3 col-sm-4 col-xs-12 button">
+                <a (click)="postPosition()" class="roleBtn btn btn-success">{{'role.publish_position' | translate}}</a>
+              </div>
+              <!--/.col-->
+            </li>
+          </div>
+        </ul>
+      </div>
+      <!--rolePlan-->
+
+      <!--position-->
+      <div [hidden]="!tableLoading" class="text-center tableLoading positionStatus">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+      <div [hidden]="tableLoading">
+        <div class="positionStatus">
+          <h4 class="title">
+            {{'position.recruitment_status' | translate}}
+          </h4>
+          <div *ngIf="positions?.length === 0 " class="noAppliedPosition row">
+            <div class="col-sm-2 col-xs-12 col-sm-offset-3">
+              <img src="../../assets/img/no_position_message.png" alt="" class="img-responsive">
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-xs-12 text">
+              <p>
+                {{'message.dashboard_interview_message' | translate}}
+                <br>
+                {{'message.dashboard_interview_tips_message' | translate}}
+                <br>
+                <span>{{'global.go_ahead' | translate}}</span>
+                <a [routerLink]="['/company',companyId,'position-list']">
+                  {{ 'enterprise.position_management' | translate }}
+                </a>
+              </p>
+            </div>
+            <!--/.col-->
+          </div>
+          <div *ngIf="positions?.length > 0">
+            <div class="row positionStatusContent" *ngFor="let position of positions;let i = index;">
+              <div class="col-sm-7 col-xs-12">
+                <a [routerLink]="['/positions',position.id]" class="positionName" *ngIf="position.active && !position.isExpired">{{position.name}}</a>
+                <p class="positionName" *ngIf="!position.active || position.isExpired">
+                  {{position.name}}
+                </p>
+                <div class="address" *ngIf="position.address !== null">
+                  <i class="fa fa-map-marker"></i>
+                  {{position.address}}
+                </div>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-3 col-xs-12 message">
+                <p [ngClass]="{'publishing': currentDate <= position.expiredDate }"
+                   *ngIf="(currentDate <= position.expiredDate) && position.active">{{'position.recruitmenting' |
+                  translate}}</p>
+
+                <p class="offline" *ngIf="!position.active">{{'position.offline' | translate}}</p>
+
+                <p [ngClass]="{'published': currentDate > position.expiredDate }"
+                   *ngIf="currentDate > position.expiredDate">{{'position.have_recruitmented' | translate}}</p>
+                <p class="time">
+                  {{'position.last_date' | translate}}: {{position.expiredDate | date: 'yyyy-MM-dd'}}
+                </p>
+
+              </div>
+              <!--/.col-->
+              <div class="col-sm-2 hidden-xs message candidate">
+                <div *ngIf="position?.candidates?.length === 0">
+                  <p class="noApplied">
+                    {{'position.no_applier' | translate}}
+                  </p>
+                </div>
+                <div *ngIf="position.candidates?.length > 0">
+                  {{position.candidates?.name}}
+                  <p class="applyNum" *ngIf="position.candidates?.length > 0">
+                    {{position.candidates?.length}}
+                  </p>
+                  <p>{{'position.applicant' | translate}}</p>
+                </div>
+              </div>
+              <!--/.col-->
+            </div>
+            <!-- page -->
+            <div class="text-center">
+              <pager [maxSize]="50"
+                     name="page"
+                     [itemsPerPage]="filter.limit" [totalItems]="meta.pagination.totalCount"
+                     [(ngModel)]="filter.page" (pageChanged)="changePage($event)"
+                     pageBtnClass="btn btn-link"></pager>
+            </div>
+            <!-- page -->
+          </div>
+        </div>
+      </div>
+      <!--position-->
+
+      <!--picture-->
+      <div class="text-center tableLoading positionStatus" *ngIf="pictureLoading">
+        <i class="fa fa-3x fa-spinner fa-spin"></i>
+      </div>
+
+      <div *ngIf="!pictureLoading">
+        <div class="companyPictures">
+          <h4 class="title clearfix">
+            {{'enterprise.picture' | translate}}
+            <a class="more pull-right" [routerLink]="['/company',companyId,'pictures']">
+              {{'enterprise.edit_picture' | translate}}
+            </a>
+          </h4>
+          <div class="content row" >
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" *ngIf="pictures?.length > 0"></ngx-gallery>
+            <div class="noPosition text-center" *ngIf="pictures?.length === 0">
+              {{'message.no_publish_company_picture' | translate}}
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!--picture-->
+
+      <!--Chart-->
+      <div class="dashboardChart">
+        <div *ngIf="chartLoading" class="text-center tableLoading positionStatus">
+          <i class="fa fa-3x fa-spinner fa-spin"></i>
+        </div>
+        <div *ngIf="!chartLoading && candidateNum > 0">
+          <ul class="list-inline dashboardChartList">
+            <li (click)="changeTab(chart.id)"
+                [ngClass]="{'active': chart.id === chartIndex}" *ngFor="let chart of chartTabs">
+              {{chart.name | translate}}
+            </li>
+          </ul>
+          <tabset class="nav-tabs-style1" *ngIf="candidateNum > 0">
+            <tab [active]="chartIndex === 1">
+              <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                  <div class="">
+                    <p class="text-center hidden-xs hidden-sm col-xs-2" style="color: #00b216;font-size: 16px;">
+                      <span><strong>{{candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                    </p>
+                    <div class="col-xs-5 chart-pie">
+                      <canvas baseChart
+                              [data]="experienceChartData"
+                              [labels]="experienceChartLabels"
+                              [colors]="backgroundColor"
+                              [legend]="polarAreaLegend"
+                              [options]="options"
+                              [chartType]="pieChartType"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </tab>
+            <tab [active]="chartIndex === 2">
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 ">
+                  <div>
+                    <p class="text-center hidden-xs hidden-sm col-sm-2" style="color: #00b216;font-size: 16px;">
+                      <span><strong>{{candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                      <!--<em>{{'position.apply_position_num' | translate }}</em>-->
+                    </p>
+                    <div class="col-xs-5 chart-pie">
+                      <canvas baseChart
+                              [data]="educationChartData"
+                              [labels]="educationChartLabels"
+                              [colors]="backgroundColor"
+                              [legend]="polarAreaLegend"
+                              [options]="options"
+                              [chartType]="pieChartType">
+
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </tab>
+            <tab [active]="chartIndex === 3">
+              <div class="noChart text-center" *ngIf="!isSkill">
+                {{'message.company_no_accept_skill' | translate}}
+              </div>
+              <div class="row" *ngIf="isSkill">
+                <div class="col-sm-12 col-xs-12">
+                  <div>
+                    <p class="text-center hidden-xs hidden-sm col-sm-2" style="color: #00b216;font-size: 16px;">
+                      <span><strong>{{candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                      <!--<em>{{'position.apply_position_num' | translate }}</em>-->
+                    </p>
+                    <div class="col-xs-5 chart-pie">
+                      <canvas baseChart
+                              [data]="skillChartData"
+                              [labels]="skillChartLabels"
+                              [colors]="backgroundColor"
+                              [legend]="polarAreaLegend"
+                              [options]="options"
+                              [chartType]="pieChartType">
+
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </tab>
+            <tab [active]="chartIndex === 4">
+              <div class="noChart text-center" *ngIf="!isSchool">
+                {{'message.company_no_accept_school' | translate}}
+              </div>
+              <div class="row" *ngIf="isSchool">
+                <div class="col-sm-12 col-xs-12 ">
+                  <div id="pie_school_content">
+                    <p class="text-center hidden-xs hidden-sm col-sm-2" style="color: #00b216;font-size: 16px;">
+                      <span><strong>{{candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                      <!--<em>{{'position.apply_position_num' | translate }}</em>-->
+                    </p>
+                    <div class="col-xs-5 chart-pie">
+                      <canvas baseChart
+                              [data]="schoolChartData"
+                              [labels]="schoolChartLabels"
+                              [colors]="backgroundColor"
+                              [legend]="polarAreaLegend"
+                              [options]="options"
+                              [chartType]="pieChartType">
+
+                      </canvas>
+                    </div>
+
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </tab>
+            <tab [active]="chartIndex===5">
+              <div class="noChart text-center" *ngIf="!isSubject">
+                {{'message.company_no_accept_subject' | translate}}
+              </div>
+              <div class="row" *ngIf="isSubject">
+                <div class="col-sm-12 col-xs-12">
+                  <div>
+                    <p class="text-center hidden-xs hidden-sm col-sm-2" style="color: #00b216;font-size: 16px;">
+                      <span><strong>{{candidateNum}}</strong><i>{{'global.people_num' | translate}}</i></span>
+                      <!--<em>{{'position.apply_position_num' | translate }}</em>-->
+                    </p>
+                    <div class="col-xs-5 chart-pie">
+                      <canvas baseChart
+                              [data]="subjectChartData"
+                              [labels]="subjectChartLabels"
+                              [colors]="backgroundColor"
+                              [legend]="polarAreaLegend"
+                              [options]="options"
+                              [chartType]="pieChartType">
+
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+                <!--/.col-->
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+
+      <!--Chart-->
+    </div>
+  </div>
+</div>

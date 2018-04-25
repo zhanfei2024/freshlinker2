@@ -1,0 +1,350 @@
+<iToaster></iToaster>
+<app-search></app-search>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="row activityShow">
+    <div class="col-md-8 col-sm-12 col-xs-12 activityShowLeft">
+      <div class="row activityShowContentLeft">
+        <div class="col-xs-12 ongoing">
+          <h4>
+            {{activity.title}}
+          </h4>
+        </div>
+        <div class="col-xs-12 preview">
+          <span class="pull-left time">{{activity.createdAt | date: 'yyyy-MM-dd'}} </span>
+          <span class="view">{{activity.view}} {{'button.preview' | translate}}</span>
+        </div>
+        <ul class="keyList list-inline">
+          <li class="List" *ngFor="let list of activity.tags">
+            <a href="javascript:;">{{list.name}}</a>
+          </li>
+        </ul>
+        <div class="col-xs-12 activityImg">
+          <img [src]="activity.cover?.url['1024']" class="img-responsive img-rounded" *ngIf="activity.cover?.url !== null">
+        </div>
+        <div class="col-xs-12 activityText">
+          <h4>
+            {{'activity.text' | translate}}：
+          </h4>
+          <p class="activityTextContent" [innerHtml]="activity.content"></p>
+        </div>
+        <p>
+          <button class="btn-success btn answer" (click)="goToLastHeading()" style="margin-left: 20px;">{{'article.comment' | translate}}</button>
+          <button class="pull-left btn-success btn answer" (click)="openForm()">{{'activity.sign_up_immediately' | translate}}</button>
+        </p>
+        <share-buttons class="withCount" [whatsApp]="false" [reddit]="false" [stumbleUpOn]="false"  [tumblr]="false" [pinterest]="false" [url]="repoUrl" [image]="activity.cover?.url['1024']" [title]="activity.title" ></share-buttons>
+      </div>
+      <div class="loading text-center" [hidden]="!replyLoading">
+        <div class="row">
+          <div class="col-sm-12">
+            <i class="fa fa-spinner fa-pulse fa-3x"></i>
+          </div>
+        </div>
+      </div>
+      <!--loding-->
+      <div class="replyContentList" [hidden]="replyLoading">
+        <!--Comment content-->
+        <div class="replyList list-unstyled" *ngFor="let list of reply;let i =index;">
+          <div class="media">
+            <div class="media-left">
+              <img *ngIf="list.user.icon !== null" [src]="list.user.icon.url['200']"
+                   class="img-circle pull-left  user_icon" width="44" height="44">
+              <img *ngIf="list.user.icon === null" src="../../assets/img/user_default_icon.png"
+                   class="img-circle pull-left user_icon" width="44" height="44"/>
+              <button href="#" (click)="like(list.id)">
+                <i class="fa fa-thumbs-o-up" [ngClass]="{'active': list.like}"> </i>
+                <span class="text-center likeCount" [ngClass]="{'active': list.like}">{{list.totalLike}}</span>
+              </button>
+            </div>
+            <div class="media-body">
+                <span class="media-heading nameContent" (mouseenter)="showUser(list?.user.id)">
+                      <span class="name">{{list?.user.firstName}}</span>
+                      <span class="companyName" *ngIf="list?.user?.companies[0]?.name !== undefined">from&nbsp; {{list?.user?.companies[0]?.name}}</span>
+                       <div class="user_card_float">
+                                  <div class="user_card_float_box">
+                                      <p class="pull-left">
+                                        <img *ngIf="list?.user?.icon !== null" [src]="list?.user?.icon?.url['200']"
+                                             class="img-circle pull-left user_icon" width="44" height="44">
+                                        <img *ngIf="list?.user?.icon === null"
+                                             src="../../assets/img/user_default_icon.png"
+                                             class="img-circle pull-left user_icon" width="44" height="44"/>
+                                      </p>
+                                      <p class="userinfo_base">{{list?.user.firstName}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name !== undefined">{{list?.user?.companies[0]?.name}}</p>
+                                      <p class="userinfo_job" *ngIf="list?.user?.companies[0]?.name === undefined">{{'article.no_application_to_join_the_company_msg' | translate}}</p>
+                                      <p class="userinfo_intro" *ngIf="list?.user?.selfDescription !== null">{{list?.user.selfDescription | htmlToPlaintext : 20}}</p>
+                                      <p class="userinfo_intro" *ngIf="list?.user?.selfDescription === null">{{'article.no_personal_introduction' | translate}}</p>
+
+                                       <ul class="list-unstyled  user_problem">
+                                        <li class="text-center col-xs-4 item">
+                                          {{articleNumber}}<br/>
+                                          <span class="article_text">{{'global.articles' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{qaNumber}}<br/>
+                                          <span class="article_text">{{'article.q_and_a' | translate}}</span>
+                                        </li>
+                                        <li class="text-center col-xs-4 item">
+                                          {{commentsNumber}}<br/>
+                                          <span class="article_text">{{'article.reply' | translate}}</span>
+                                        </li>
+                                      </ul>
+                                      <span class="deck_in"><em></em></span>
+                                  </div>
+                       </div>
+                </span>
+              <p class="textContent" [innerHtml]="list.content"></p>
+              <p class="time"><span>{{list.createdAt | date :'yyyy-MM-dd'}} {{'article.reply' | translate}}</span>
+                <a class="pull-right" *ngIf="!list.selected" (click)="showContent(i,list.id)">{{'article.comment' |
+                  translate}}({{list.totalReply}})</a>
+                <a class="pull-right" *ngIf="list.selected" (click)="showContent(i)">{{'article.wrap_up_comments' |
+                  translate}}</a>
+              </p>
+
+              <div class="comment-list" *ngIf="list.selected">
+                <span class="deck_in"><em></em></span>
+                <ul class="list-unstyled c-list">
+                  <li class="c-item" *ngFor="let c_list of answerText">
+                    <div class="media-left">
+                      <img *ngIf="c_list.user.icon !== null" [src]="c_list?.user?.icon?.url['200']"
+                           class="img-circle pull-left user_icon" width="44" height="44">
+                      <img *ngIf="c_list.user.icon === null" src="../../assets/img/user_default_icon.png"
+                           class="img-circle pull-left user_icon" width="44" height="44"/>
+                    </div>
+                    <div class="media-body">
+                      <span class="name">{{c_list.user.firstName}}</span>
+                      <span class="name pull-right">{{c_list.createdAt | date :'yyyy-MM-dd'}}</span>
+                      <p class="content" [innerHtml]="c_list.content"></p>
+                    </div>
+                  </li>
+                </ul>
+                <form>
+                  <div class="text-from">
+                    <textarea class="form-control" [(ngModel)]="replyAnswerText" maxlength="200"
+                              name="text" placeholder="{{'article.write_a_comment_msg' | translate}}"
+                              style="height: 80px; width: 100%"></textarea>
+                    <div class="btn_content">
+                      <button type="submit" [disabled]="!replyAnswerText"
+                              class="btn btn-success pull-right" (click)="postAnwer(list.id)">
+                        {{'article.submit' | translate}}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Comment content-->
+        <div class="text-center" style="border-top: 1px solid #dddddd;" *ngIf="reply.length > 0">
+          <pager [maxSize]="50"
+                 [itemsPerPage]="pageNum.limit" [totalItems]="meta.pagination.totalCount"
+                 [(ngModel)]="pageNum.page" (pageChanged)="changePage($event)"
+                 pageBtnClass="btn btn-link"></pager>
+        </div>
+
+        <!--Reply comments-->
+        <div id="showComment" class="replyList list-unstyled" *ngIf="isLogin">
+          <div class="media">
+            <div class="media-left">
+              <img *ngIf="user?.icon !== null" [src]="user?.icon?.url['200']" class="img-circle pull-left" width="44"
+                   height="44">
+              <img *ngIf="user?.icon === null" src="../../assets/img/user_default_icon.png" class="img-circle pull-left"
+                   width="44" height="44"/>
+            </div>
+            <div class="media-body">
+                <span class="nameContent">
+                  <span class="media-heading name">{{user?.firstName}}</span>
+                  <span class="companyName" *ngIf="user?.companies[0]?.name !== undefined">from&nbsp; {{user?.companies[0]?.name}}</span>
+                </span>
+              <form>
+                <div></div>
+                <div class="btn_content">
+                  <quill-editor [(ngModel)]="answer" name="content" id="content"></quill-editor>
+                  <button id="btn1" [disabled]="!answer" type="submit" class="btn btn-success pull-right"
+                          (click)="post()">{{'article.answer' | translate}}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--Reply comments-->
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-12 col-xs-12 activityShowRight">
+      <div class="row activityShowContentRight">
+        <div class="facebookPage">
+          <div class="fb-page"
+               data-href="https://www.facebook.com/freshlinker"
+               data-width="500"
+               data-hide-cover="false"
+               data-show-facepile="true">
+          </div>
+        </div>
+        <div class="newestArticle relatedActivity">
+          <div class="head">
+            <i></i>
+            <span>{{'company.article' | translate}}</span>
+          </div>
+          <div class="loading text-center" *ngIf="relatedPostLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div class="noPosition text-center"
+               *ngIf="!relatedPostLoading && relatedPosts.length === 0">
+            <img src="../../assets/img/no_position.png">
+            {{'message.no_related_article_msg' | translate}}
+          </div>
+          <ul class="newArticle list-unstyled" *ngIf="!relatedPostLoading && relatedPosts.length > 0">
+            <li class="row" *ngFor="let relate of relatedPosts">
+              <div class="col-sm-5 col-xs-5 img">
+                <a [routerLink]="['/articles',relate.id]">
+                  <img src="../../../assets/img/240x160.png" class="img-responsive" *ngIf="relate.cover === null">
+                  <img [src]="relate.cover?.url['240']" class="img-responsive" *ngIf="relate.cover !== null">
+                </a>
+              </div>
+              <!--/.col-->
+              <div class="col-sm-7 col-xs-7 content">
+                <h4 class="title">
+                  <a [routerLink]="['/articles',relate.id]">
+                    {{relate.title}}
+                  </a>
+                </h4>
+                <p class="time">
+                  {{relate.createdAt | date: 'yyyy-MM-dd'}}
+                </p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+        <!--/.artcle-->
+
+        <div class="positions">
+          <div class="head">
+            <i></i>
+            <span>{{'position.related_position' | translate}}</span>
+          </div>
+          <div class="loading text-center" *ngIf="relatedPositionsLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div class="noPosition text-center" *ngIf="!relatedPositionsLoading && relatedPositions.length === 0">
+            <img src="../../assets/img/no_position.png">
+            {{'message.no_related_position_message' | translate}}
+          </div>
+          <ul class="list-unstyled relatedPosition" *ngIf="!relatedPositionsLoading && relatedPositions.length > 0">
+            <li class="list row" *ngFor="let position of relatedPositions">
+              <div class="img col-sm-3 col-xs-4">
+                <a [routerLink]="['/positions',position.id]">
+                  <div class="postImgContent">
+                    <img class="vip img-responsive imgWidth" src="../../assets/img/featured.png"
+                         *ngIf="position.company?.isVIP"/>
+                    <img src="../../../assets/img/default_company_icon.png" alt="" class="img-responsive"
+                         *ngIf="position.company?.icon === null">
+                    <img [src]="position.company?.icon?.url['100']" alt="" class="img-responsive"
+                         *ngIf="position.company?.icon !== null">
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-9 col-xs-8 content">
+                <p class="name">
+                  <a [routerLink]="['/positions',position.id]">
+                    {{position.name}}
+                  </a>
+                </p>
+                <p class="salary" *ngIf="position.maxSalary > 0">
+                  <i class="fa fa-dollar"></i>
+                  {{position.minSalary/1000}}K - {{position.maxSalary/1000}}K
+                </p>
+                <p class="salary" *ngIf="position.maxSalary === 0 && position.minSalary === 0">
+                  <i class="fa fa-dollar"></i>
+                  {{'position.negotiation' | translate}}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--/.positions-->
+
+        <!--.relatedActivity-->
+        <div class="relatedActivity">
+          <div class="head">
+            <i></i>
+            <span>{{'article.latest_events' | translate}}</span>
+          </div>
+          <div class="loading text-center" *ngIf="relatedActivityLoading">
+            <i class="fa fa-3x fa-spinner fa-spin"></i>
+          </div>
+          <div class="noPosition text-center"
+               *ngIf="!relatedActivityLoading && relatedActivity.length === 0">
+            <img src="../../assets/img/no_position.png">
+            {{'message.company_no_publish_activity' | translate}}
+          </div>
+          <ul class="list-unstyled" *ngIf="!relatedActivityLoading && relatedActivity.length>0">
+            <li class="row" *ngFor="let activity of relatedActivity">
+              <div class="col-sm-5 col-xs-5 img">
+                <a [routerLink]="['/activity',activity.id]">
+                  <img src="../../../assets/img/240x160.png" class="img-responsive" *ngIf="activity.cover === null">
+                  <img src="{{activity.cover.url['240']}}" class="img-responsive" *ngIf="activity.cover !== null">
+                </a>
+
+              </div>
+              <!--/.col-->
+              <div class="col-sm-7 col-xs-7 content">
+                <h4 class="title">
+                  <a [routerLink]="['/activity',activity.id]">
+                    {{activity.title}}
+                  </a>
+                </h4>
+                <p class="time">
+                  {{activity.createdAt | date: 'yyyy-MM-dd'}}
+                </p>
+              </div>
+              <!--/.col-->
+            </li>
+
+          </ul>
+        </div>
+        <!--/.relatedActivity-->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div bsModal #Modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true" *ngIf="iframe!==undefined">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="Modal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title pull-left"><i class="fa fa-pencil-square-o"></i>Form</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="col-sm-12 col-xs-12">
+                <iframe width="100%" height="800px" [src]="iframe" frameborder="0"></iframe>
+              </div>
+              <!--/.col-->
+            </div>
+            <!-- /.form-group -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="Modal.hide()">
+          {{ 'button.close' | translate }}
+        </button>
+      </div>
+      <!-- /.model-footer -->
+    </div>
+  </div>
+</div>
+
